@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Estimating Services - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        blue: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                        'slide-up': 'slide-up 0.5s ease-out',
+                    },
+                    keyframes: {
+                        'pulse-glow': {
+                            '0%, 100%': { 
+                                boxShadow: '0 0 0 0 rgba(37, 99, 235, 0.7)',
+                                transform: 'scale(1)'
+                            },
+                            '50%': { 
+                                boxShadow: '0 0 0 10px rgba(37, 99, 235, 0)',
+                                transform: 'scale(1.05)'
+                            }
+                        },
+                        'slide-up': {
+                            '0%': { 
+                                opacity: '0',
+                                transform: 'translateY(20px)'
+                            },
+                            '100%': { 
+                                opacity: '1',
+                                transform: 'translateY(0)'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .commercial-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid #3b82f6;
+        }
+        .commercial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .theme-commercial-toggle {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+        .theme-commercial-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+        .gradient-border {
+            position: relative;
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #3b82f6, #60a5fa) border-box;
+        }
+        .dark .gradient-border {
+            background: linear-gradient(#1f2937, #1f2937) padding-box,
+                        linear-gradient(135deg, #3b82f6, #60a5fa) border-box;
+        }
+        .ribbon {
+            position: absolute;
+            top: 20px;
+            right: -30px;
+            background: #2563eb;
+            color: white;
+            padding: 5px 40px;
+            transform: rotate(45deg);
+            font-size: 12px;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Commercial Theme Toggle Button -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="themeToggle" class="theme-commercial-toggle flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all duration-300 animate-pulse-glow">
+            <i id="themeIcon" class="ri-building-line text-lg"></i>
+            <span id="themeText" class="hidden md:inline font-semibold">Commercial</span>
+            <span id="themeIndicator" class="md:hidden">🏢</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400 font-medium">Commercial Estimating Services</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 relative">
+            <div class="ribbon dark:bg-blue-700">SAVE 30%</div>
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-full text-sm font-bold mb-6">
+                <i class="ri-award-line mr-2"></i>
+                Professional Commercial Estimating
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Commercial Estimating Services
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Professional cost estimation services for commercial construction projects with fast turnaround time
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-2xl overflow-hidden mb-12 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Commercial Construction Estimating" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/20 dark:to-gray-800 rounded-2xl p-8 gradient-border animate-slide-up">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-building-line text-blue-600 mr-2"></i>
+                    Drive Your Construction Success in Estimating Commercial Projects
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    Construct Estimates, your trusted partner for accurate and efficient commercial estimating services. Our precise and detailed approach empowers Contractors, Subcontractors, Architects, and commercial zone developers to make informed decisions, win projects, and achieve their business goals.
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <div class="stat-number">30%</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Cost Savings</p>
+                    </div>
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <div class="stat-number">48h</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Fast Turnaround</p>
+                    </div>
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <div class="stat-number">98%</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Accuracy Rate</p>
+                    </div>
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <div class="stat-number">1000+</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Projects</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- For Contractors -->
+            <div class="commercial-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center mb-4">
+                    <div class="service-icon bg-blue-100 dark:bg-blue-900">
+                        <i class="ri-user-star-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 ml-4">For Commercial Contractors</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Streamline your construction projects and enhance your bidding success rate with our professional commercial construction estimating services. With nationwide experience, we understand your challenges in balancing job site management and accurate project estimates.
+                </p>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Accurate Commercial Cost Estimates</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Pre-Construction Final Estimates</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Material, Labor & Equipment Pricing</span>
+                    </li>
+                </ul>
+                <a href="#" class="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center">
+                    Learn More <i class="ri-arrow-right-line ml-1"></i>
+                </a>
+            </div>
+
+            <!-- For Developers -->
+            <div class="commercial-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center mb-4">
+                    <div class="service-icon bg-green-100 dark:bg-green-900">
+                        <i class="ri-building-2-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 ml-4">For Commercial Developers</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Our commercial estimating services help developers make informed investment decisions with precise cost projections and feasibility studies for commercial real estate projects.
+                </p>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Feasibility Studies</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Investment Analysis</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">ROI Projections</span>
+                    </li>
+                </ul>
+                <a href="#" class="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center">
+                    Learn More <i class="ri-arrow-right-line ml-1"></i>
+                </a>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">
+                Why Choose Our Commercial Estimating Services?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-medal-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Experience & Expertise</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Our professional estimators have extensive industry experience and expertise in commercial construction projects.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-global-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Wide Coverage</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Services available throughout USA and Australia, with local knowledge of construction factors.
+                    </p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-time-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Fast Turnaround</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Delivering accurate estimates within 24-48 hours to meet your bid deadlines.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-map-pin-line text-blue-600 mr-2"></i>
+                Our Service Areas
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Australia -->
+                <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-800 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Australia</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div class="text-gray-600 dark:text-gray-300">New South Wales</div>
+                        <div class="text-gray-600 dark:text-gray-300">Sydney</div>
+                        <div class="text-gray-600 dark:text-gray-300">Victoria</div>
+                        <div class="text-gray-600 dark:text-gray-300">Melbourne</div>
+                        <div class="text-gray-600 dark:text-gray-300">Queensland</div>
+                        <div class="text-gray-600 dark:text-gray-300">Brisbane</div>
+                        <div class="text-gray-600 dark:text-gray-300">Western Australia</div>
+                        <div class="text-gray-600 dark:text-gray-300">Perth</div>
+                    </div>
+                </div>
+
+                <!-- USA -->
+                <div class="bg-gradient-to-r from-red-50 to-white dark:from-red-900/10 dark:to-gray-800 rounded-xl p-6 border border-red-200 dark:border-red-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-2-line text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">United States</h3>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm">
+                        Nationwide commercial estimating services with expertise in local building codes, labor rates, and material costs across all states.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-briefcase-line text-blue-600 mr-2"></i>
+                Our Commercial Portfolio
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-colors">
+                    <i class="ri-building-2-line text-blue-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Office Buildings</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+                    <i class="ri-shopping-cart-line text-green-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Retail Centers</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-500 transition-colors">
+                    <i class="ri-restaurant-line text-purple-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Restaurants</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-500 transition-colors">
+                    <i class="ri-hospital-line text-amber-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Medical Facilities</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 mb-12 text-white text-center">
+            <h3 class="text-2xl font-bold mb-4">Get Your Commercial Estimate Now!</h3>
+            <p class="mb-6 opacity-90">30% OFF on your first commercial construction estimate</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-blue-700 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Upload Plans
+                </button>
+                <button class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                    Schedule Call
+                </button>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-blue-600 dark:text-blue-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">US Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(737) 273-3314</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-green-600 dark:text-green-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">AUS Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(048) 862-0354</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-mail-line text-purple-600 dark:text-purple-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Email</h4>
+                <p class="text-gray-600 dark:text-gray-300">info@constructestimates.com</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Commercial Estimating</h3>
+                    <p class="text-gray-400 text-sm">
+                        Professional commercial construction estimating services for contractors, developers, architects, and design-build firms with nationwide coverage.
+                    </p>
+                    <div class="mt-4 flex space-x-3">
+                        <div class="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center">
+                            <i class="ri-building-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <i class="ri-calculator-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center">
+                            <i class="ri-time-line text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Our Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Cost Estimating</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Construction Takeoff</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Commercial Estimating</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Virtual Bid Management</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Coverage Areas</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">United States</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Australia</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Sydney, AUS</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Melbourne, AUS</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Get Started</h3>
+                    <p class="text-gray-400 text-sm mb-4">Upload your plans and get a commercial estimate within 24-48 hours.</p>
+                    <a href="#" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                        <i class="ri-upload-cloud-line mr-2"></i> Upload Plans
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Commercial Estimating Services. Professional construction cost estimation for commercial projects.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const themeIndicator = document.getElementById('themeIndicator');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+                themeIndicator.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+                themeIndicator.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statElements = entry.target.querySelectorAll('.stat-number');
+                    statElements.forEach(stat => {
+                        const target = parseInt(stat.textContent);
+                        let current = 0;
+                        const increment = target / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            stat.textContent = Math.round(current) + (stat.textContent.includes('%') ? '%' : '');
+                        }, 30);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe the stats section
+        const statsSection = document.querySelector('.bg-gradient-to-r');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        console.log('Commercial Estimating Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle: Commercial building themed button');
+        console.log('Features: Service areas, portfolio, contact info');
+    </script>
+</body>
+</html>

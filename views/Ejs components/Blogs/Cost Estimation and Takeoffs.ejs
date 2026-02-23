@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Estimation and Takeoffs - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .estimation-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .estimation-card:hover {
+            transform: translateX(5px);
+            border-left-color: #3b82f6;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .theme-toggle-estimate {
+            background: linear-gradient(135deg, #3b82f6, #f59e0b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        .theme-toggle-estimate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        .service-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .estimation-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+        
+        /* Remove any download buttons */
+        .download-btn {
+            display: none;
+        }
+    </style>
+</head>
+ <%- include('../header.ejs') %>
+<body class="bg-gradient-to-br from-gray-50 to-amber-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 min-h-screen">
+   
+   
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center px-4 py-2 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300 rounded-full text-sm font-medium mb-4">
+                <i class="ri-calculator-line mr-2"></i> Professional Estimating Services
+            </div>
+            <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Cost Estimation & Takeoffs
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Accurate construction cost estimation and quantity takeoff services for residential, commercial, and industrial projects
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-xl overflow-hidden mb-12 shadow-xl border border-gray-200 dark:border-gray-700">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Construction Cost Estimation" 
+                 class="w-full h-64 md:h-80 object-cover">
+        </div>
+
+        <!-- Services Grid - Page 1 -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center">
+                <i class="ri-map-pin-line mr-2 text-primary-600"></i> Regional Estimating Services
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Montana -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">Montana</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-building-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Montana Construction Estimating Services</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Looking for accurate, reliable, and local construction estimating services in Montana? Whether you're planning a residential build in Bozeman, a commercial facility in Billings, or an industrial project in Great Falls, our team provides precise cost estimates tailored to Montana's unique construction market.
+                    </p>
+                    <button onclick="openModal(1)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Get Estimate <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </article>
+
+                <!-- Indiana -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300">Indiana</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-time-line text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Indiana Construction Estimating Services</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Indiana's construction market has its own realities. Relying on national averages or rough estimates often leads to underbidding, change orders, and shrinking margins. Our Indiana estimating services provide detailed, localized cost data for projects across the state, from Indianapolis commercial developments to residential construction in Fort Wayne.
+                    </p>
+                    <button onclick="openModal(2)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        24-Hour Service <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </article>
+
+                <!-- Virginia -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300">Virginia</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flashlight-line text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Construction Estimating Services in Virginia</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Construction projects in Virginia depend on precise, reliable cost estimates to stay on schedule and within budget. Whether you're a general contractor, a developer, or a homeowner planning a renovation, our Virginia estimating services cover everything from Northern Virginia's high-cost urban markets to rural projects.
+                    </p>
+                    <button onclick="openModal(3)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Fast Estimates <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </article>
+
+                <!-- Arizona -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300">Arizona</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-money-dollar-circle-line text-amber-600 dark:text-amber-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Affordable Construction Estimating Services in Arizona</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Construction projects succeed or fail long before ground is broken. In Arizona, rising labor costs, competitive bidding, and climate-driven construction challenges make accurate estimating essential. Our Arizona estimating services provide detailed cost breakdowns for projects in Phoenix, Tucson, Scottsdale, and throughout the state.
+                    </p>
+                    <button onclick="openModal(4)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Affordable Rates <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </article>
+
+                <!-- Alaska -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300">Alaska</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-snowflake-line text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Construction Takeoff Services in Alaska</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Accurate construction takeoff services are crucial to the success of any building project in Alaska, where remote locations, extreme weather, and high logistics costs create unique estimating challenges. Our Alaska estimating services account for barge and air freight costs, seasonal construction windows, and permafrost considerations.
+                    </p>
+                    <button onclick="openModal(5)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Remote Support <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </article>
+
+                <!-- Painting Doors -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-300">Interior</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-pink-100 dark:bg-pink-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-brush-line text-pink-600 dark:text-pink-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Painting Interior Doors – Step-by-Step Guide & Cost</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Painting interior doors is one of the fastest ways to refresh a home's interior, yet it's also one of the easiest projects to get wrong without proper preparation. Our detailed guide covers door removal, surface preparation, primer selection, paint types, and application techniques for professional-looking results.
+                    </p>
+                    <button onclick="openModal(6)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Cost Breakdown <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </article>
+            </div>
+        </div>
+
+        <!-- Garages Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center">
+                <i class="ri-home-gear-line mr-2 text-amber-600"></i> Garage Construction Estimates
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 3 Car Garage -->
+                <div class="bg-gradient-to-r from-amber-50 to-white dark:from-amber-900/20 dark:to-gray-800 rounded-xl p-6 border border-amber-200 dark:border-amber-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-car-line text-amber-600 dark:text-amber-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">3 Car Garage – Sizes, Layout & Costs 2025</h3>
+                            <p class="text-amber-600 dark:text-amber-400 text-sm">Standard Sizes and Cost Guide</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        A 3 car garage is one of the most practical upgrades a homeowner can add, offering space for three vehicles, storage, tools, and a flexible workshop area. Standard dimensions range from 22' x 32' to 24' x 36', with layout options including tandem parking and ceiling heights for lifts.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">Average Cost: $25,000 - $45,000</span>
+                        <button onclick="openModal(7)" class="text-amber-600 dark:text-amber-400 font-medium hover:text-amber-800 dark:hover:text-amber-300 cursor-pointer">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+
+                <!-- 2 Car Garage -->
+                <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/20 dark:to-gray-800 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-home-3-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">2 Car Garage – Dimensions, Layouts and Cost 2025</h3>
+                            <p class="text-blue-600 dark:text-blue-400 text-sm">Complete Planning Guide</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        A 2-car garage is more than just a space to park vehicles; it's a functional asset that significantly impacts property value and home usability. Standard dimensions range from 20' x 20' to 24' x 24', with options for attached or detached construction.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">Average Cost: $18,000 - $30,000</span>
+                        <button onclick="openModal(8)" class="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300 cursor-pointer">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Painting Services -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center">
+                <i class="ri-paint-line mr-2 text-pink-600"></i> Painting Estimation Services
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Interior Painting -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Interior Painting Services</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        A fresh coat of paint can do more than change a room's color. It can transform your space, boost your home's value, and even enhance your mood. Our interior painting estimating service provides detailed cost breakdowns for walls, ceilings, trim, and cabinets.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-pink-600 dark:text-pink-400 text-sm font-medium">Detailed Estimates</span>
+                        <button onclick="openModal(9)" class="text-primary-600 dark:text-primary-400 text-sm font-medium cursor-pointer">Get Quote</button>
+                    </div>
+                </div>
+
+                <!-- Room Painting Cost -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">How Much Does It Cost to Paint a Room?</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        The average cost to paint a room in 2025 ranges from $300 to $800, depending on room size, wall condition, labor rates, and the type of paint used. Our comprehensive guide breaks down costs for different room types and scenarios.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-amber-600 dark:text-amber-400 text-sm font-medium">Cost Calculator</span>
+                        <button onclick="openModal(10)" class="text-primary-600 dark:text-primary-400 text-sm font-medium cursor-pointer">Calculate</button>
+                    </div>
+                </div>
+
+                <!-- Painting Estimator -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Role of a Paint Estimator</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        How do painting projects stay on budget and schedule? This professional determines the cost of a painting project before any work begins, evaluating scope, measuring surfaces, and selecting appropriate materials for accurate quotes.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-green-600 dark:text-green-400 text-sm font-medium">Expert Service</span>
+                        <button onclick="openModal(11)" class="text-primary-600 dark:text-primary-400 text-sm font-medium cursor-pointer">Learn More</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Estimate Form -->
+        <div class="bg-gradient-to-r from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-800 rounded-2xl p-8 mb-12 text-white">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                    <h3 class="text-2xl font-bold mb-3">Get Your Free Estimate</h3>
+                    <p class="opacity-90">Professional cost estimation services for any construction project</p>
+                </div>
+                <a href="mailto:Ben@bennyestimates.com" class="px-8 py-3 bg-white text-primary-700 dark:text-primary-800 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Request Estimate
+                </a>
+            </div>
+        </div>
+
+        <!-- Service Categories -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Specialized Estimation Services</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 dark:hover:border-primary-500 transition-colors">
+                    <i class="ri-water-flash-line text-blue-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Plumbing</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+                    <i class="ri-flashlight-line text-green-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Electrical</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-500 transition-colors">
+                    <i class="ri-tools-line text-amber-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100">HVAC</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-500 transition-colors">
+                    <i class="ri-ruler-line text-purple-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Takeoffs</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Article Title</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Article content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content
+        const articleData = {
+            1: {
+                title: "Montana Construction Estimating Services",
+                content: `<p class="mb-4">Looking for accurate, reliable, and local construction estimating services in Montana? Whether you're planning a residential build in Bozeman, a commercial facility in Billings, or an industrial project in Great Falls, our team provides precise cost estimates tailored to Montana's unique construction market.</p>
+                <p class="mb-4">Montana presents special challenges for construction estimating, including mountain terrain that affects site preparation costs, seasonal construction windows limited by winter weather, and remote locations that increase material transportation expenses. Our estimators understand these factors and incorporate them into every estimate.</p>
+                <p class="mb-4">We provide detailed cost breakdowns for all project phases: site work, foundations, structural framing, exterior finishes, MEP systems, and interior finishes. Each estimate includes material costs with local supplier pricing, labor rates based on Montana's construction workforce, equipment needs, and appropriate contingency allowances.</p>
+                <p>Whether you need a preliminary budget estimate for project feasibility or a detailed bid package for contractor bidding, our Montana estimating services deliver the accuracy and local knowledge your project requires.</p>`
+            },
+            2: {
+                title: "Indiana Construction Estimating Services",
+                content: `<p class="mb-4">Indiana's construction market has its own realities. Relying on national averages or rough estimates often leads to underbidding, change orders, and shrinking margins. Our Indiana estimating services provide detailed, localized cost data for projects across the state.</p>
+                <p class="mb-4">From Indianapolis commercial developments to residential construction in Fort Wayne and South Bend, we account for regional labor rates and material supplier networks. Indiana's varied geography means different foundation requirements, from basement construction in some areas to slab-on-grade in others.</p>
+                <p class="mb-4">Our estimates include comprehensive quantity takeoffs for all materials, detailed labor cost calculations based on current Indiana wage rates, equipment cost projections, and subcontractor quotes for specialized trades. We also factor in local building code requirements and permit fees.</p>
+                <p>With 24-hour turnaround available for qualified projects, our Indiana estimating services help contractors win more bids and homeowners plan realistic budgets for their construction projects.</p>`
+            },
+            3: {
+                title: "Construction Estimating Services in Virginia",
+                content: `<p class="mb-4">Construction projects in Virginia depend on precise, reliable cost estimates to stay on schedule and within budget. Whether you're a general contractor, a developer, or a homeowner planning a renovation, our Virginia estimating services cover the entire state.</p>
+                <p class="mb-4">We account for the significant cost variations between Northern Virginia's high-cost urban markets and rural projects in the Shenandoah Valley. Our estimators understand local building codes, prevailing wage rates, and regional material cost variations that affect project budgets.</p>
+                <p class="mb-4">Virginia's coastal areas present unique challenges including flood zone considerations and soil conditions, while mountain regions require specialized foundation engineering. We incorporate these factors into our estimates, ensuring no hidden costs surprise you during construction.</p>
+                <p>Our fast estimate service delivers preliminary budgets within 24 hours for qualifying projects, with detailed takeoff estimates available for bid preparation and construction financing.</p>`
+            },
+            4: {
+                title: "Affordable Construction Estimating Services in Arizona",
+                content: `<p class="mb-4">Construction projects succeed or fail long before ground is broken. In Arizona, rising labor costs, competitive bidding, and climate-driven construction challenges make accurate estimating essential. Our Arizona estimating services provide detailed cost breakdowns for projects throughout the state.</p>
+                <p class="mb-4">Phoenix, Tucson, Scottsdale, and other Arizona cities have unique construction requirements including desert-specific building techniques, energy efficiency considerations for extreme heat, and local material sourcing networks that affect pricing.</p>
+                <p class="mb-4">Our estimates account for Arizona's challenging climate with appropriate HVAC sizing, insulation requirements, and exterior material selections that withstand intense sun and temperature swings. We also consider water conservation requirements and local building codes specific to desert construction.</p>
+                <p>With competitive pricing and detailed documentation, our Arizona estimating services help contractors win bids while maintaining profitability and help homeowners plan realistic construction budgets.</p>`
+            },
+            5: {
+                title: "Construction Takeoff Services in Alaska",
+                content: `<p class="mb-4">Accurate construction takeoff services are crucial to the success of any building project in Alaska, where remote locations, extreme weather, and high logistics costs create unique estimating challenges. Our Alaska estimating services account for these factors comprehensively.</p>
+                <p class="mb-4">From Anchorage and Fairbanks to Juneau and remote rural communities, we understand Alaska's construction environment. Our estimates include barge and air freight costs for material delivery, seasonal construction windows limited by weather, permafrost considerations for foundations, and the specialized labor market.</p>
+                <p class="mb-4">Alaska projects often require extended lead times for material ordering, specialized equipment for cold weather construction, and additional contingency for weather delays. Our estimators incorporate these factors into every takeoff, ensuring realistic budgets that account for Alaska's unique conditions.</p>
+                <p>With remote support capabilities, we serve clients throughout Alaska's vast geography, providing detailed quantity takeoffs and cost estimates for residential, commercial, and industrial construction projects.</p>`
+            },
+            6: {
+                title: "Painting Interior Doors – Step-by-Step Guide & Cost",
+                content: `<p class="mb-4">Painting interior doors is one of the fastest ways to refresh a home's interior, yet it's also one of the easiest projects to get wrong without proper preparation. Our detailed guide covers everything you need to know for professional-looking results.</p>
+                <p class="mb-4">The process begins with door removal and hardware removal, followed by thorough cleaning and sanding to create a surface that paint will adhere to. Filling holes and imperfections comes next, then applying primer (essential for bare wood or drastic color changes), and finally applying two coats of quality paint with proper drying time between coats.</p>
+                <p class="mb-4">Cost estimates for painting interior doors range from $30-60 per door for DIY projects (materials only) to $100-200 per door for professional painting, depending on door type (hollow core vs. solid wood), condition, and whether both sides and edges are painted. Regional labor rates affect professional costs significantly.</p>
+                <p>Our comprehensive cost breakdown includes paint types (latex vs. oil-based), primer, sandpaper, brushes and rollers, drop cloths, and painter's tape for DIY projects, or detailed quotes from professional painters for those preferring to hire out this task.</p>`
+            },
+            7: {
+                title: "3 Car Garage – Sizes, Layout & Costs 2025",
+                content: `<p class="mb-4">A 3 car garage is one of the most practical upgrades a homeowner can add, offering space for three vehicles, storage, tools, and a flexible workshop area. Our comprehensive guide covers everything you need to know before building.</p>
+                <p class="mb-4">Standard dimensions for a 3 car garage range from 22' x 32' to 24' x 36', providing approximately 700-850 square feet of space. Layout options include three single doors, one double and one single door, or tandem parking where one vehicle parks behind another to maximize depth.</p>
+                <p class="mb-4">Construction costs for 2025 range from $25,000 to $45,000 for a basic attached garage, with factors affecting price including foundation type (slab vs. stem wall), roof style (gable vs. hip), door quality, insulation, electrical work, and finishes. Detached garages cost 20-30% more due to additional foundation and utility runs.</p>
+                <p>Optional features like finished interiors, heating and cooling, workshop benches, and storage systems add $5,000-15,000 to total costs. Our estimate includes detailed breakdowns by region, helping you budget accurately for your specific location and requirements.</p>`
+            },
+            8: {
+                title: "2 Car Garage – Dimensions, Layouts and Cost 2025",
+                content: `<p class="mb-4">A 2-car garage is more than just a space to park vehicles; it's a functional asset that significantly impacts property value, architectural planning, and home usability. Standard dimensions range from 20' x 20' to 24' x 24', providing 400-575 square feet of space.</p>
+                <p class="mb-4">Layout options include side-by-side parking (most common), tandem parking where one vehicle parks behind another (saves width but requires more depth), or a combination with workshop space. Ceiling height typically ranges from 8 to 10 feet, with higher ceilings allowing for lifts or additional storage.</p>
+                <p class="mb-4">2025 construction costs range from $18,000 to $30,000 for attached garages, with variations based on foundation requirements, framing methods, roof styles, door selection, and finish options. Detached garages cost $22,000-38,000 due to additional foundation and utility infrastructure.</p>
+                <p>Our regional cost data accounts for foundation types (slab vs. frost walls), local labor rates, material availability, and building code requirements. We provide detailed estimates including all components: excavation, concrete, framing, roofing, siding, doors, windows, electrical, and finishes.</p>`
+            },
+            9: {
+                title: "Interior Painting Services – Complete Guide",
+                content: `<p class="mb-4">A fresh coat of paint can do more than change a room's color. It can transform your space, boost your home's value, and even enhance your mood. Our interior painting estimating service provides detailed cost breakdowns for any room in your home.</p>
+                <p class="mb-4">Professional interior painting costs typically range from $2.50 to $4.50 per square foot of floor space, with total room costs averaging $300-800 depending on size and complexity. This includes surface preparation, primer (if needed), two coats of quality paint, and cleanup.</p>
+                <p class="mb-4">Factors affecting price include ceiling height (higher ceilings require scaffolding), wall condition (repairs add cost), number of doors and windows (trim work takes time), and special finishes like textures or accent walls. Paint quality significantly impacts both cost and durability, with premium paints costing 50-100% more but lasting years longer.</p>
+                <p>Our detailed estimates break down material costs, labor hours, and provide itemized quotes for every room, helping you compare contractor proposals and budget accurately for your painting project.</p>`
+            },
+            10: {
+                title: "How Much Does It Cost to Paint a Room? 2025 Guide",
+                content: `<p class="mb-4">The average cost to paint a room in 2025 ranges from $300 to $800, depending on room size, wall condition, labor rates, and the type of paint used. This comprehensive guide breaks down costs for different room types and scenarios.</p>
+                <p class="mb-4">Small bedroom (10x10): $300-500 including walls, ceiling, and trim. Master bedroom (12x15): $500-800. Living room (15x20): $600-1,000. Kitchen: $500-900 (cabinet painting extra). Bathroom: $300-600 (moisture-resistant paint required).</p>
+                <p class="mb-4">Cost factors explained: Paint quality ($20-60 per gallon), number of coats (1-3 depending on color change), surface condition (repairs add $50-200 per room), ceiling height (9+ feet adds 25-50%), and regional labor rates ($25-50 per hour).</p>
+                <p>Our cost calculator helps you estimate your specific project by accounting for all variables, providing realistic budgets whether you're painting yourself or hiring professionals. Includes material lists and labor hour estimates for DIY planning.</p>`
+            },
+            11: {
+                title: "Role of a Paint Estimator – Professional Guide",
+                content: `<p class="mb-4">How do painting projects stay on budget and schedule? The paint estimator is the professional who determines the cost of a painting project before any work begins, ensuring accurate quotes that protect both contractor and client.</p>
+                <p class="mb-4">A paint estimator evaluates project scope by visiting the site, measuring all surface areas (walls, ceilings, trim, doors, cabinets), and assessing substrate conditions. They note any repairs needed, such as patching holes, sanding rough surfaces, or priming stains.</p>
+                <p class="mb-4">Material selection is crucial: estimators recommend appropriate paints for each surface (eggshell for walls, semi-gloss for trim), calculate quantities needed, and source pricing from suppliers. They also determine labor requirements based on surface area, accessibility, number of coats, and complexity of the work.</p>
+                <p>The final proposal includes detailed scope of work, material specifications, timeline, and total cost with payment terms. Professional estimators save clients money by identifying efficient approaches and prevent disputes by clearly documenting expectations before work begins.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(articleId) {
+            console.log('Opening modal for article:', articleId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const article = articleData[articleId];
+            if (article) {
+                modalTitle.textContent = article.title;
+                modalBody.innerHTML = article.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Article not found:', articleId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const themeIndicator = document.getElementById('themeIndicator');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText, themeIndicator);
+            } else {
+                document.documentElement.classList.remove('dark');
+                if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText, themeIndicator);
+            }
+            
+            // Add event listener for theme toggle if exists
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    toggleTheme(themeIcon, themeText, themeIndicator);
+                });
+            }
+        });
+
+        // Update theme UI elements
+        function updateThemeUI(theme, themeIcon, themeText, themeIndicator) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+                if (themeIndicator) themeIndicator.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+                if (themeIndicator) themeIndicator.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme(themeIcon, themeText, themeIndicator) {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light', themeIcon, themeText, themeIndicator);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark', themeIcon, themeText, themeIndicator);
+            }
+        }
+
+        console.log('Cost Estimation Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

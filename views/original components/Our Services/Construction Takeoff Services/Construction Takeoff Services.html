@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Takeoff Services - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <!-- Add Tailwind Config for Dark Mode -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Hide scrollbars for consistency */
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Custom theme transitions */
+        .theme-transition {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Hover effects for cards */
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen fade-in">
+    <!-- Theme Toggle Button (Top Right) -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700 theme-transition">
+            <i id="themeIcon" class="ri-moon-line text-lg"></i>
+            <span id="themeText" class="font-medium text-sm">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 pt-20">
+        <!-- Breadcrumb Navigation -->
+        <nav class="mb-8" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-2 text-sm">
+                <li>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">Home</a>
+                </li>
+                <li class="text-gray-400 dark:text-gray-600">
+                    <i class="ri-arrow-right-s-line"></i>
+                </li>
+                <li class="text-primary-600 dark:text-primary-400 font-medium">
+                    Construction Takeoff Services
+                </li>
+            </ol>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Construction Takeoff Services
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl">
+                Boost Your Construction Projects with Expert Takeoff Services
+            </p>
+            
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl mb-8">
+                <!-- Hero Image from Unsplash (Takeoff/Blueprint theme) -->
+                <img 
+                    src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                    alt="Construction blueprint and takeoff analysis" 
+                    class="w-full h-64 md:h-96 object-cover"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                    <div class="p-6 md:p-8">
+                        <p class="text-lg md:text-xl text-white mb-6 max-w-3xl">
+                            Are you looking for accurate and comprehensive construction takeoff services to streamline your projects and enhance your bottom line?
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors">
+                                Get Estimate & Uncover Hidden Profits
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                <p class="text-gray-600 dark:text-gray-300">
+                    At Construct Estimates, we specialize in providing professional quantity estimating solutions tailored to meet the unique needs of construction professionals like you. Our expertise and advanced technology enable us to deliver precise material quantities, cost estimations, and takeoff data, empowering you to make informed business decisions and win more projects.
+                </p>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+                Why Choose Our Construction Takeoff Services?
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-check-double-line text-2xl text-green-600 dark:text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        Accurate Material Takeoffs for Confident Bidding
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our professional estimators excel in producing accurate takeoffs that form a solid foundation for your bidding process. By meticulously analyzing construction drawings, sketches, and project specifications, we ensure that every material quantity is calculated precisely.
+                    </p>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-computer-line text-2xl text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        Enhanced Efficiency with Digital Takeoff Technology
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        We utilize state-of-the-art digital takeoff software to enhance efficiency and accuracy. Our technology allows for faster processing, reduced errors, and seamless integration with your existing systems.
+                    </p>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-team-line text-2xl text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        Experienced Estimators at Your Service
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our team consists of certified estimators with years of industry experience. They bring deep knowledge of construction methodologies, materials, and regional pricing variations.
+                    </p>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-orange-100 dark:bg-orange-900/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-handshake-line text-2xl text-orange-600 dark:text-orange-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        Valuable Negotiating Tool for Contractors
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our detailed takeoffs provide you with solid data for negotiations with suppliers and subcontractors, giving you a competitive edge in securing better prices and terms.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trades Section -->
+        <section class="mb-16 bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                Tailored Solutions for Various Construction Projects
+            </h2>
+            
+            <p class="text-gray-600 dark:text-gray-300 text-center mb-8 max-w-3xl mx-auto">
+                Whether you're involved in residential, commercial, or industrial projects, our accurate construction takeoff services can cater to your specific needs. The trades include:
+            </p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Trade Items -->
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <i class="ri-road-map-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Civil</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <i class="ri-building-4-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Structural</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <i class="ri-tools-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">MEP</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <i class="ri-home-gear-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Architectural</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <i class="ri-barricade-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Steel takeoffs</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <i class="ri-landscape-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Sitework</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <i class="ri-layout-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Drywall</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <i class="ri-tree-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Lumber</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-700 dark:to-primary-900 rounded-2xl p-8 md:p-12 text-center text-white mb-16">
+            <h2 class="text-3xl font-bold mb-4">Accurate Quantity Takeoffs for Your Construction Success</h2>
+            <p class="text-lg mb-8 opacity-90 max-w-3xl mx-auto">
+                When you choose Construct Estimates as your construction material takeoff service provider, you gain a trusted partner committed to your success. We combine the expertise of our experienced estimators with advanced technology to deliver accurate and comprehensive quantity takeoffs that give you a competitive edge.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-primary-600 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Act Now & Get 30% Off
+                </button>
+                <button class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                    Contact Us Today
+                </button>
+            </div>
+            <p class="mt-6 text-lg">
+                Don't let inaccurate or incomplete takeoffs hinder your construction projects. Contact us today to request a consultation and experience the difference our construction takeoff services can make.
+            </p>
+        </section>
+    </main>
+
+    <script>
+        // Theme Toggle Functionality - Fixed Version
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                updateThemeUI('dark');
+                console.log('Applied Dark Theme');
+            } else {
+                document.documentElement.classList.remove('dark');
+                updateThemeUI('light');
+                console.log('Applied Light Theme');
+            }
+        }
+        
+        // Apply the theme immediately
+        applyTheme(currentTheme);
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            if (isDark) {
+                // Switch to Light Mode
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+                console.log('Switched to Light Mode');
+            } else {
+                // Switch to Dark Mode
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+                console.log('Switched to Dark Mode');
+            }
+            
+            // Force a reflow to ensure transitions work
+            document.body.offsetHeight;
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? 'dark' : 'light';
+                applyTheme(newTheme);
+                console.log('System theme changed to:', newTheme);
+            }
+        });
+        
+        // Debug function to check current theme
+        function checkCurrentTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const saved = localStorage.getItem('theme');
+            console.log('Current Theme:', isDark ? 'Dark' : 'Light');
+            console.log('Saved Preference:', saved || 'None (using system)');
+            console.log('System Preference:', prefersDark ? 'Dark' : 'Light');
+        }
+        
+        // Check theme on load
+        window.addEventListener('load', () => {
+            checkCurrentTheme();
+        });
+    </script>
+</body>
+</html>

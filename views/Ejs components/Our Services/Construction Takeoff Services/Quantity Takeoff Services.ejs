@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantity Takeoff Services | Construct Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Custom styling for better dark mode */
+        .dark .gradient-card {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        .light .gradient-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        /* Sticky sidebar effect */
+        @media (min-width: 1024px) {
+            .sticky-sidebar {
+                position: sticky;
+                top: 100px;
+            }
+        }
+        
+        /* Hover effect for service cards */
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .service-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+
+   <%- include('../../header.ejs') %>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+        
+    
+
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                    Quantity Takeoff Services
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-primary-700 dark:text-primary-300">
+                    Quantity Takeoff Services For Construction Projects
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+                        Construct Estimates empower contractors, architects, developers, and homeowners with precise material and labor estimates, enabling you to make informed decisions, secure projects, and achieve success in the construction industry.
+                    </p>
+                    <div class="bg-gradient-to-r from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white p-6 rounded-2xl shadow-xl">
+                        <div class="text-2xl font-bold mb-2">Upload Your Plan & Save 30%</div>
+                        <p class="mb-4">Get accurate quantity takeoffs with substantial savings</p>
+                        <button class="bg-white text-emerald-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300">
+                            Upload Your Plans Now
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <!-- Unsplash Construction Takeoff Image -->
+                    <img src="https://images.unsplash.com/photo-1503387769-00a112127ca0?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Construction quantity takeoff services" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="mb-16">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Why Choose Our Takeoff Services?</h2>
+                <p class="text-lg text-gray-600 dark:text-gray-400 max-w-3xl mx-auto">
+                    At Construct Estimates, we revolutionize the construction industry by offering top-notch Quantity Takeoff Services that set us apart from the competition.
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-10">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md service-card transition duration-300">
+                    <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                        <i class="ri-cpu-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Precision-driven Technology</h3>
+                    <p class="text-gray-700 dark:text-gray-300">We leverage cutting-edge software like Planswift and Bluebeam, ensuring the utmost accuracy in our takeoffs.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md service-card transition duration-300">
+                    <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                        <i class="ri-history-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Experience That Matters</h3>
+                    <p class="text-gray-700 dark:text-gray-300">With over 10 years of experience and 8000+ projects successfully completed, our professional estimators are experts in their field.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md service-card transition duration-300">
+                    <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                        <i class="ri-settings-4-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Tailored Solutions</h3>
+                    <p class="text-gray-700 dark:text-gray-300">We offer a consultative approach, crafting customized takeoffs organized by trades and CSI division format.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md service-card transition duration-300">
+                    <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                        <i class="ri-timer-flash-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Speedy Turnaround</h3>
+                    <p class="text-gray-700 dark:text-gray-300">We deliver takeoffs promptly, with delivery times ranging from 24 to 48 hours, depending on project complexity.</p>
+                </div>
+            </div>
+
+            <div class="text-center">
+                <a href="#" class="inline-flex items-center bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 hover:shadow-lg">
+                    <i class="ri-file-list-3-line mr-2"></i>
+                    View Our Sample Estimates
+                </a>
+            </div>
+        </section>
+
+        <!-- Who Benefits Section -->
+        <section class="mb-16 bg-gradient-to-r from-primary-50 to-primary-100 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Who Benefits from Our Quantity Takeoffs?</h2>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg mr-4">
+                            <i class="ri-building-4-fill text-primary-600 dark:text-primary-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Developers</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300">Gain reliable preliminary estimates to assess project viability. We provide preliminary estimates based on square footage costs.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg mr-4">
+                            <i class="ri-user-star-fill text-primary-600 dark:text-primary-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">General Contractors</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300">Verify subcontractor bids and ensure project profitability with accurate quantity takeoffs.</p>
+                </div>
+
+                <div class="bg-white dark:bg-gray-700 p-6 rounded-xl">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-primary-100 dark:bg-primary-900 p-3 rounded-lg mr-4">
+                            <i class="ri-pencil-ruler-fill text-primary-600 dark:text-primary-400 text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Architects & Designers</h3>
+                    </div>
+                    <p class="text-gray-700 dark:text-gray-300">Stay within budget limits and ensure design feasibility with precise material estimates.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Get Started CTA -->
+        <section class="mb-16 text-center">
+            <div class="bg-gradient-to-r from-purple-600 to-indigo-600 dark:from-purple-700 dark:to-indigo-800 text-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-3xl font-bold mb-6">Get Started Today!</h3>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Ready to streamline your construction estimating and takeoff process? Contact us today to discuss your quantity takeoff requirements.
+                </p>
+                <div class="flex justify-center items-center mb-6">
+                    <div class="bg-white/20 p-4 rounded-full">
+                        <i class="ri-arrow-left-right-fill text-3xl animate-bounce-slow"></i>
+                    </div>
+                </div>
+                <button class="bg-white text-purple-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    Request A Quote with 30% Off
+                </button>
+            </div>
+        </section>
+
+        <!-- Features Grid -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Your Source for Precise and Efficient Quantity Takeoff Services</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Left Column -->
+                <div class="space-y-8">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="text-primary-600 dark:text-primary-400 text-3xl mr-4">
+                                <i class="ri-award-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">1. Unparalleled Expertise</h3>
+                                <p class="text-gray-700 dark:text-gray-300">With over 10 years of experience across the Australian and American construction sector, we have successfully catered to a diverse range of projects.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="text-primary-600 dark:text-primary-400 text-3xl mr-4">
+                                <i class="ri-timer-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">3. Timely Delivery</h3>
+                                <p class="text-gray-700 dark:text-gray-300">We offer rapid turnaround times, often delivering estimates within 24 to 48 hours, reducing downtime and keeping you ahead of the competition.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="text-primary-600 dark:text-primary-400 text-3xl mr-4">
+                                <i class="ri-calculator-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">5. Precision and Accuracy</h3>
+                                <p class="text-gray-700 dark:text-gray-300">We employ the latest takeoff software combined with our extensive location-based pricing database, ensuring spot-on estimates.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="space-y-8">
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="text-primary-600 dark:text-primary-400 text-3xl mr-4">
+                                <i class="ri-layout-masonry-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">2. Wide Coverage of CSI Divisions</h3>
+                                <p class="text-gray-700 dark:text-gray-300">We cover all CSI divisions, offering quantity takeoff services for a wide range of construction materials and trades.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="text-primary-600 dark:text-primary-400 text-3xl mr-4">
+                                <i class="ri-money-dollar-circle-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">4. Cost-effective Solutions</h3>
+                                <p class="text-gray-700 dark:text-gray-300">Our pricing is transparent and competitive, with monthly packages that can save you up to 60% compared to in-house estimators.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-start mb-4">
+                            <div class="text-primary-600 dark:text-primary-400 text-3xl mr-4">
+                                <i class="ri-database-fill"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">6. Exact Cost Database</h3>
+                                <p class="text-gray-700 dark:text-gray-300">We maintain an extensive database with material and labor pricing specific to your location, including zip code constraints.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trades Grid -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Comprehensive Takeoff Services Across All Trades</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-landscape-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Site Work Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-brick-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Masonry Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-building-2-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Concrete Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-layout-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Drywall Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-brush-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Painting Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-home-wifi-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Insulation Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-home-5-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Roofing Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-stack-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Lumber Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Millwork Takeoff</span>
+                </div>
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 transition duration-300">
+                    <i class="ri-cupboard-fill text-primary-600 dark:text-primary-400 text-2xl mb-2 block"></i>
+                    <span class="text-sm font-medium">Cabinet Takeoff</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Steps -->
+        <section class="mb-16 bg-primary-50 dark:bg-gray-800 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">How to Begin with Us For Takeoff Estimates</h2>
+            
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="bg-white dark:bg-gray-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl text-primary-600 dark:text-primary-400">
+                        1
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Submit Your Drawing Plans</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Upload your plans in PDF format or email them to us</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-white dark:bg-gray-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl text-primary-600 dark:text-primary-400">
+                        2
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">We Review The Plans</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Our experts analyze your project requirements</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-white dark:bg-gray-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl text-primary-600 dark:text-primary-400">
+                        3
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Get A Quote</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Receive a transparent, competitive quote</p>
+                </div>
+
+                <div class="text-center">
+                    <div class="bg-white dark:bg-gray-700 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4 text-2xl text-primary-600 dark:text-primary-400">
+                        4
+                    </div>
+                    <h3 class="font-bold text-lg mb-2">Receive an Estimate</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Get detailed takeoff within 24-48 hours</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold transition duration-300 hover:shadow-lg inline-flex items-center">
+                    <i class="ri-upload-cloud-2-line mr-2"></i>
+                    Upload Plans Here!
+                </button>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">Australia</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">New South Wales</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Victoria</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Queensland</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Sydney</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Melbourne</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Brisbane</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white">United States</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3">
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">All 50 States</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Major Cities</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Coastal Regions</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Urban Areas</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Rural Projects</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-map-pin-fill text-gray-400 dark:text-gray-500 mr-2"></i>
+                            <span class="text-gray-700 dark:text-gray-300">Commercial Zones</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+        
+        // Add hover effects to service cards
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // Add click effect to upload button
+        document.querySelector('button:contains("Upload Plans Here!")')?.addEventListener('click', function() {
+            this.classList.add('animate-pulse');
+            setTimeout(() => {
+                this.classList.remove('animate-pulse');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Estimating Consultant - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        purple: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        }
+                    },
+                    animation: {
+                        'slide-in': 'slide-in 0.5s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-consult': 'pulse-consult 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        'slide-in': {
+                            '0%': { 
+                                opacity: '0',
+                                transform: 'translateX(-20px)'
+                            },
+                            '100%': { 
+                                opacity: '1',
+                                transform: 'translateX(0)'
+                            }
+                        },
+                        'pulse-consult': {
+                            '0%, 100%': { 
+                                boxShadow: '0 0 0 0 rgba(147, 51, 234, 0.7)',
+                                transform: 'scale(1)'
+                            },
+                            '50%': { 
+                                boxShadow: '0 0 0 15px rgba(147, 51, 234, 0)',
+                                transform: 'scale(1.02)'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .consultant-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+        }
+        .dark .consultant-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+        }
+        .consultant-card:hover {
+            transform: translateY(-8px);
+            border-color: #9333ea;
+            box-shadow: 0 25px 50px -12px rgba(147, 51, 234, 0.25);
+        }
+        .theme-consultant-toggle {
+            background: linear-gradient(135deg, #9333ea, #2563eb);
+            color: white;
+            box-shadow: 0 10px 25px -5px rgba(147, 51, 234, 0.4);
+        }
+        .theme-consultant-toggle:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px -5px rgba(147, 51, 234, 0.5);
+        }
+        .consultant-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .sector-chip {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 2px;
+            transition: all 0.3s ease;
+        }
+        .sector-chip:hover {
+            transform: scale(1.05);
+        }
+        .highlight-text {
+            background: linear-gradient(135deg, #9333ea, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .benefit-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-purple-50 to-blue-50 dark:from-gray-900 dark:to-purple-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Consultant Theme Toggle Button -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="themeToggle" class="theme-consultant-toggle flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all duration-500 animate-pulse-consult">
+            <i id="themeIcon" class="ri-user-star-line text-lg"></i>
+            <span id="themeText" class="hidden md:inline font-semibold">Consultant</span>
+            <span id="themeEmoji" class="md:hidden">👔</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-purple-600 dark:text-purple-400 hover:text-purple-800 dark:hover:text-purple-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400 font-medium">Construction Estimating Consultant</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-slide-in">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-award-line mr-2 animate-bounce-slow"></i>
+                Expert Consulting Services
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <span class="highlight-text">Construction Estimating</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Consultant Services</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Maximize Your Bids and Minimize Your Worries with Industry-Leading Construction Estimating Consultants
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800">
+            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Construction Estimating Consultant" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-purple-200 dark:border-purple-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-flashlight-line text-purple-600 mr-2"></i>
+                    Revolutionize Your Estimation
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                    Beat the Competition and Generate More Leads with Our Expert Estimator Consultants
+                </p>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Are you tired of the endless struggles and missed opportunities in the construction bidding process? Is the frustration building up as you lose out on opportunities while your bids pile up? It's time to turn the tables and unlock your true potential with our top-notch Estimating Consultant Services.
+                </p>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Our Construction Cost Estimating Consultant Will Help You To:
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="consultant-card rounded-xl p-6 text-center">
+                    <div class="benefit-icon bg-purple-100 dark:bg-purple-900">
+                        <i class="ri-trophy-line text-purple-600 dark:text-purple-400 text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Outperform the Competition</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Fine-tune bidding strategies and implement value engineering techniques
+                    </p>
+                </div>
+                <div class="consultant-card rounded-xl p-6 text-center">
+                    <div class="benefit-icon bg-blue-100 dark:bg-blue-900">
+                        <i class="ri-line-chart-line text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Generate More Leads</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Improve your bidding success rate and attract more clients
+                    </p>
+                </div>
+                <div class="consultant-card rounded-xl p-6 text-center">
+                    <div class="benefit-icon bg-green-100 dark:bg-green-900">
+                        <i class="ri-brain-line text-green-600 dark:text-green-400 text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Comprehensive Expertise</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Deep understanding of current market circumstances and building processes
+                    </p>
+                </div>
+                <div class="consultant-card rounded-xl p-6 text-center">
+                    <div class="benefit-icon bg-amber-100 dark:bg-amber-900">
+                        <i class="ri-shield-check-line text-amber-600 dark:text-amber-400 text-2xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Industry Compliance</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Ensure compliance with all industry standards and regulations
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-service-line text-purple-600 mr-2"></i>
+                Comprehensive Estimating Consulting Services
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Bidding Assistance -->
+                <div class="consultant-card rounded-xl p-6 relative">
+                    <div class="consultant-badge bg-purple-500 text-white">Bidding</div>
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-auction-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Bidding Assistance</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        We create accurate bills of material and bids, provide bid filing advice, and develop strategies for winning and negotiating assignments.
+                    </p>
+                </div>
+
+                <!-- Feasibility Studies -->
+                <div class="consultant-card rounded-xl p-6 relative">
+                    <div class="consultant-badge bg-blue-500 text-white">Analysis</div>
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-file-search-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Feasibility Studies</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Our preliminary estimates and feasibility studies provide valuable insights for decision-making from economic, legal, and financial standpoints.
+                    </p>
+                </div>
+
+                <!-- Litigation Assistance -->
+                <div class="consultant-card rounded-xl p-6 relative">
+                    <div class="consultant-badge bg-red-500 text-white">Legal</div>
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-scales-line text-red-600 dark:text-red-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Litigation Assistance</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        We provide unbiased estimates to support intervention, negotiation, testimony, and trials in construction-related legal disputes.
+                    </p>
+                </div>
+
+                <!-- Pre-construction -->
+                <div class="consultant-card rounded-xl p-6 relative">
+                    <div class="consultant-badge bg-green-500 text-white">Planning</div>
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-calendar-plan-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Pre-construction Management</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Precise material takeoff, labor estimation, and value analysis for optimal project planning.
+                    </p>
+                </div>
+
+                <!-- Project Cost Management -->
+                <div class="consultant-card rounded-xl p-6 relative">
+                    <div class="consultant-badge bg-amber-500 text-white">Budget</div>
+                    <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-money-dollar-circle-line text-amber-600 dark:text-amber-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Project Cost Management</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Estimate, monitor, and control costs throughout the project lifecycle to stay within budget.
+                    </p>
+                </div>
+
+                <!-- CPM Scheduling -->
+                <div class="consultant-card rounded-xl p-6 relative">
+                    <div class="consultant-badge bg-indigo-500 text-white">Scheduling</div>
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-time-line text-indigo-600 dark:text-indigo-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">CPM Scheduling Services</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Critical Path Method experts help achieve on-time project completion through strategic planning.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sectors & Trades -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-purple-50 to-blue-50 dark:from-purple-900/20 dark:to-blue-900/20 rounded-2xl p-8">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                    <i class="ri-building-2-line text-purple-600 mr-2"></i>
+                    Serving Various Sectors and Trades
+                </h2>
+                
+                <div class="mb-6">
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-3">Sectors:</h3>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="sector-chip bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300">Residential</span>
+                        <span class="sector-chip bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">Industrial</span>
+                        <span class="sector-chip bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300">Commercial</span>
+                        <span class="sector-chip bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300">Institutional</span>
+                        <span class="sector-chip bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300">Retail</span>
+                        <span class="sector-chip bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300">Civil</span>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-3">Trades:</h3>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-sm">
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                            <span class="text-gray-600 dark:text-gray-300">Concrete</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                            <span class="text-gray-600 dark:text-gray-300">Masonry</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                            <span class="text-gray-600 dark:text-gray-300">Mechanical</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                            <span class="text-gray-600 dark:text-gray-300">Electrical</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                            <span class="text-gray-600 dark:text-gray-300">Plumbing</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                            <span class="text-gray-600 dark:text-gray-300">Ductwork</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                            <span class="text-gray-600 dark:text-gray-300">HVAC</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                            <span class="text-gray-600 dark:text-gray-300">Sitework</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Who Benefits -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-team-line text-purple-600 mr-2"></i>
+                Who Can Benefit from Our Consultants?
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-purple-200 dark:border-purple-800 hover:border-purple-400 dark:hover:border-purple-500 transition-colors">
+                    <i class="ri-building-2-line text-purple-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Real Estate Developers</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-500 transition-colors">
+                    <i class="ri-user-settings-line text-blue-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">General Contractors</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-green-200 dark:border-green-800 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+                    <i class="ri-home-line text-green-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Homeowners</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-amber-200 dark:border-amber-800 hover:border-amber-400 dark:hover:border-amber-500 transition-colors">
+                    <i class="ri-pencil-ruler-line text-amber-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Architects/Designers</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-red-200 dark:border-red-800 hover:border-red-400 dark:hover:border-red-500 transition-colors">
+                    <i class="ri-group-line text-red-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Subcontractors</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-indigo-200 dark:border-indigo-800 hover:border-indigo-400 dark:hover:border-indigo-500 transition-colors">
+                    <i class="ri-store-line text-indigo-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Vendors</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl">
+            <div class="inline-flex items-center px-4 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-bold mb-4">
+                <i class="ri-fire-line mr-2 animate-pulse"></i>
+                Limited Time Offer
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Ignite Your Projects - Unlock 30% Off!</h3>
+            <p class="mb-6 opacity-90">Ready to take your construction business to new heights? Contact us today!</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-purple-700 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Get Consultation
+                </button>
+                <button class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                    Schedule Call
+                </button>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-purple-600 dark:text-purple-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">US Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(737) 273-3314</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-blue-600 dark:text-blue-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">AUS Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(048) 862-0354</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-mail-line text-green-600 dark:text-green-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Email</h4>
+                <p class="text-gray-600 dark:text-gray-300">info@constructestimates.com</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="ri-user-star-line text-purple-400 mr-2"></i>
+                        Estimating Consultant
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        Professional construction estimating consultant services helping contractors, developers, and architects maximize bids and minimize risks.
+                    </p>
+                    <div class="mt-4 flex space-x-3">
+                        <div class="w-8 h-8 bg-purple-700 rounded-full flex items-center justify-center">
+                            <i class="ri-auction-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <i class="ri-line-chart-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                            <i class="ri-shield-check-line text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Consulting Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-purple-400 transition-colors text-sm">Bidding Assistance</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors text-sm">Feasibility Studies</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors text-sm">Litigation Support</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors text-sm">CPM Scheduling</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Coverage Areas</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">United States</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Australia</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Sydney, AUS</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Melbourne, AUS</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Consultation</h3>
+                    <p class="text-gray-400 text-sm mb-4">Get expert consulting for your construction projects with 30% off first consultation.</p>
+                    <a href="#" class="inline-flex items-center px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg text-sm font-medium transition-colors">
+                        <i class="ri-calendar-schedule-line mr-2"></i> Schedule Call
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Construction Estimating Consultant Services. Expert guidance for successful construction projects.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const themeEmoji = document.getElementById('themeEmoji');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+                themeEmoji.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+                themeEmoji.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Animate sector chips on hover
+        document.querySelectorAll('.sector-chip').forEach(chip => {
+            chip.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+            });
+            chip.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+            });
+        });
+
+        console.log('Construction Estimating Consultant Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle: Consultant themed button with pulse animation');
+        console.log('Features: Services grid, sectors & trades, benefits section');
+    </script>
+</body>
+</html>

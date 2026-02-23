@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Estimating Services - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Hide scrollbars for consistency */
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Smooth loading */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen fade-in">
+   
+    <%- include('../../header.ejs') %>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 pt-20">
+       
+        <!-- Hero Section -->
+        <section class="mb-16">
+            <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                Cost Estimating Services
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl">
+                Cost Estimating Services for Your Construction Projects
+            </p>
+            
+            <!-- Hero Card -->
+            <div class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 md:p-8 shadow-lg border border-primary-100 dark:border-gray-700 mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                    Empower Your Construction Projects with Accurate Cost Estimates and Achieve Success.
+                </h2>
+                <div class="flex flex-col sm:flex-row gap-4 mt-6">
+                    <button onclick="openModal(1)" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg cursor-pointer">
+                        Request a Quote Today
+                    </button>
+                    <button onclick="openModal(2)" class="px-6 py-3 bg-white dark:bg-gray-800 border-2 border-primary-600 text-primary-600 dark:text-primary-400 font-semibold rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 shadow-md hover:shadow-lg cursor-pointer">
+                        Get Estimate With 30% Off
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Hero Image -->
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl mb-8">
+                <img 
+                    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                    alt="Construction cost estimating professionals at work" 
+                    class="w-full h-64 md:h-96 object-cover"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            </div>
+        </section>
+
+        <!-- Construction Cost Estimating Services -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                Construction Cost Estimating Services
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="space-y-4">
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Benny Estimates offers a wide range of construction cost estimating services and cost management solutions tailored to meet the unique needs of the ever-growing construction industry.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        With years of experience in understanding various market conditions, we empower contractors, developers, architects, and project managers to make informed decisions, control budgets, and achieve project success.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our goal is to provide reliable and tailored cost estimating services that help you streamline your bidding process, win more projects, and optimize your budget.
+                    </p>
+                </div>
+                
+                <div class="bg-primary-50 dark:bg-gray-800 p-6 rounded-xl border border-primary-100 dark:border-gray-700 shadow-lg">
+                    <h3 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-4">
+                        Professional Cost Estimating
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Our experienced construction cost estimators have successfully delivered accurate cost estimates for a wide scope of projects. We are committed to providing precise, timely, and detailed pricing information that instills confidence and drives your project forward by avoiding cost overruns.
+                    </p>
+                    <button onclick="openModal(3)" class="w-full px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg cursor-pointer">
+                        View Our Estimate Sample
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comprehensive Services -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+                Comprehensive Construction Cost Estimating Services
+            </h2>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8 mb-8 border border-gray-200 dark:border-gray-700">
+                <p class="text-gray-600 dark:text-gray-300 mb-8">
+                    Our construction cost estimates encompass a wide range of essential components, ensuring a holistic approach to cost management throughout your project's lifecycle.
+                </p>
+                
+                <!-- Services Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Service 1 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600">
+                        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-calculator-line text-2xl text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Cost Estimates</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                            Accurate and itemized cost estimates to assist contractors in bidding and winning projects.
+                        </p>
+                        <button onclick="openModal(4)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600">
+                        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-list-check-2 text-2xl text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Material Takeoffs</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                            Detailed material quantity calculations and comprehensive takeoff services.
+                        </p>
+                        <button onclick="openModal(5)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600">
+                        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-line-chart-line text-2xl text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Budget Estimating</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                            Comprehensive budget development and cost control strategies.
+                        </p>
+                        <button onclick="openModal(6)" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Call to Action -->
+                <div class="p-6 bg-primary-50 dark:bg-gray-800 rounded-xl border border-primary-200 dark:border-gray-700">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-2">
+                                Ready to Get Started?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Call us today at <a href="tel:+12898017224" class="font-bold text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> or upload your plans for a quote with 30% off.
+                            </p>
+                        </div>
+                        <button onclick="openModal(7)" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg whitespace-nowrap cursor-pointer">
+                            Upload Plans and Save 30% Cost
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-700 dark:to-primary-900 rounded-2xl p-8 md:p-12 text-center text-white">
+            <h2 class="text-3xl font-bold mb-4">Take the First Step Today</h2>
+            <p class="text-lg mb-8 opacity-90 max-w-3xl mx-auto">
+                Ready to take your construction business to new heights? Don't let missed opportunities hold you back any longer. Contact us today and let our Construction Cost Estimating Consultants be the catalyst for your success.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openModal(8)" class="px-8 py-3 bg-white text-primary-600 font-bold rounded-lg hover:bg-gray-100 shadow-lg hover:shadow-xl cursor-pointer">
+                    Contact Us Now
+                </button>
+                <a href="/contact-us" class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 shadow-lg hover:shadow-xl">
+                    Get Free Consultation
+                </a>
+            </div>
+            <p class="mt-8 text-xl font-bold">
+                Together, we'll transform your bidding process, generate more leads, and propel your business to new levels of prosperity!
+            </p>
+            <p class="mt-4 text-2xl font-bold text-yellow-300">
+                Ignite Your Projects
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Service Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content
+        const serviceData = {
+            1: {
+                title: "Request a Quote Today",
+                content: `<p class="mb-4">Ready to get started with your construction cost estimate? Our team of expert estimators is here to provide you with accurate, detailed cost estimates for your project.</p>
+                <p class="mb-4">When you request a quote from Benny Estimates, you'll receive a comprehensive breakdown of all project costs including materials, labor, equipment, and contingency allowances. We analyze your project plans and specifications to ensure nothing is overlooked.</p>
+                <p class="mb-4">Our estimating process is thorough and efficient. We typically deliver preliminary estimates within 24-48 hours, with detailed takeoffs and cost breakdowns following shortly after.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to get started.</p>`
+            },
+            2: {
+                title: "Get Estimate With 30% Off",
+                content: `<p class="mb-4">Take advantage of our limited-time offer: 30% off your first construction cost estimate. This special offer gives you access to our professional estimating services at a fraction of the regular cost.</p>
+                <p class="mb-4">Your discounted estimate includes comprehensive material takeoffs, labor cost analysis, equipment requirements, and detailed budget breakdowns. We'll help you identify potential cost savings and value engineering opportunities.</p>
+                <p class="mb-4">This offer is available for new clients and applies to estimates for residential, commercial, and industrial projects of all sizes. Don't miss this opportunity to experience the Benny Estimates difference.</p>
+                <p>To claim your 30% discount, simply upload your plans or contact us at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> and mention this special offer.</p>`
+            },
+            3: {
+                title: "View Our Estimate Sample",
+                content: `<p class="mb-4">Curious about the quality and detail of our cost estimates? We're happy to provide samples that demonstrate the comprehensiveness and accuracy of our work.</p>
+                <p class="mb-4">Our sample estimates include detailed material quantity takeoffs organized by trade and phase, labor hour calculations with current wage rates, equipment cost projections, and clear contingency allowances. Each estimate provides complete transparency in how costs are calculated.</p>
+                <p class="mb-4">You'll see how we break down complex projects into manageable components, making it easy to understand where every dollar is allocated. Our estimates are designed to be useful for bidding, budgeting, and project management.</p>
+                <p>Contact us to request a sample estimate tailored to your project type. We'll show you why contractors trust Benny Estimates for their most important projects.</p>`
+            },
+            4: {
+                title: "Cost Estimates Service",
+                content: `<p class="mb-4">Our cost estimating service provides accurate, itemized cost breakdowns that help contractors bid confidently and win more projects. We analyze every aspect of your construction drawings to ensure comprehensive coverage.</p>
+                <p class="mb-4">Each estimate includes detailed material quantities with current market pricing, labor hours based on industry productivity standards, equipment requirements with rental or ownership costs, and appropriate contingency allowances for project risks.</p>
+                <p class="mb-4">We tailor our estimates to your specific needs, whether you require preliminary budgets for project feasibility, detailed bids for competitive tendering, or cost models for value engineering studies.</p>
+                <p>Our estimates are delivered in clear, organized formats that are easy to understand and present to clients, lenders, or project stakeholders.</p>`
+            },
+            5: {
+                title: "Material Takeoffs Service",
+                content: `<p class="mb-4">Material takeoffs are the foundation of accurate construction estimating. Our takeoff service provides detailed quantity calculations for all materials required in your project, organized by trade and phase for easy procurement.</p>
+                <p class="mb-4">We quantify materials from your drawings with precision, accounting for waste factors, overlaps, and industry standards. Our takeoffs include comprehensive breakdowns of concrete, rebar, structural steel, lumber, drywall, finishes, and specialty materials.</p>
+                <p class="mb-4">Digital takeoffs allow us to quickly update quantities when project changes occur, ensuring your estimates always reflect current scope. We work with digital plans in PDF, CAD, or BIM formats.</p>
+                <p>Accurate material takeoffs prevent costly shortages or overages, help you negotiate better supplier pricing, and provide the foundation for reliable cost estimates.</p>`
+            },
+            6: {
+                title: "Budget Estimating Service",
+                content: `<p class="mb-4">Our budget estimating service helps you develop realistic project budgets from the earliest planning stages. We provide cost models that allow you to make informed decisions about project scope, materials, and design alternatives.</p>
+                <p class="mb-4">Budget estimates are prepared using historical data, industry benchmarks, and current market pricing to provide reliable cost projections before detailed drawings are complete. We help you identify potential cost issues early when changes are easiest and least expensive.</p>
+                <p class="mb-4">As your project develops, we refine budget estimates with increasing detail, providing cost control throughout design and construction. Our budget tracking helps you identify variances early and take corrective action.</p>
+                <p>Whether you're planning a new development, renovation, or capital improvement, our budget estimating services provide the financial clarity you need for successful project delivery.</p>`
+            },
+            7: {
+                title: "Upload Plans and Save 30%",
+                content: `<p class="mb-4">Ready to get started? Upload your construction plans, blueprints, or drawings and receive a comprehensive cost estimate with 30% off your first order.</p>
+                <p class="mb-4">Simply upload your digital files through our secure platform. We accept PDF, CAD, and BIM formats. Once received, our estimators will review your project and provide a detailed cost breakdown within 24-48 hours.</p>
+                <p class="mb-4">Your discounted estimate includes complete material takeoffs, labor cost analysis, equipment requirements, and comprehensive budget documentation. We'll also provide value engineering suggestions to help optimize your project costs.</p>
+                <p>Don't wait – this limited-time offer won't last forever. Upload your plans today and discover why contractors trust Benny Estimates for their most important projects.</p>`
+            },
+            8: {
+                title: "Contact Us Now",
+                content: `<p class="mb-4">Ready to discuss your project? Our team of estimating professionals is ready to help you with any questions about our services, process, or how we can support your specific needs.</p>
+                <p class="mb-4">When you contact Benny Estimates, you'll speak with experienced estimators who understand construction from the ground up. We'll discuss your project requirements, timeline, and how our services can help you achieve your goals.</p>
+                <p class="mb-4">We're available to answer questions about our estimating process, provide references from satisfied clients, and discuss how we can tailor our services to your unique project requirements.</p>
+                <p>Reach out today via email at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call us at <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a>. We're here to help!</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme Toggle Functionality - Fixed Version
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+    </script>
+</body>
+</html>

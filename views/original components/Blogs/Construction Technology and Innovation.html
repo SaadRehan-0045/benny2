@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable and Advanced Construction - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    animation: {
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .tech-card {
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .tech-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            transition: 0.5s;
+        }
+        .tech-card:hover::before {
+            left: 100%;
+        }
+        .gradient-border {
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #3b82f6, #22c55e) border-box;
+        }
+        .dark .gradient-border {
+            background: linear-gradient(#1f2937, #1f2937) padding-box,
+                        linear-gradient(135deg, #3b82f6, #22c55e) border-box;
+        }
+        .theme-toggle-btn {
+            background: linear-gradient(135deg, #3b82f6, #22c55e);
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .theme-toggle-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Animated Theme Toggle Button -->
+    <div class="fixed top-6 right-6 z-50 animate-float">
+        <button id="themeToggle" class="theme-toggle-btn flex items-center gap-2 px-5 py-3 rounded-full font-medium shadow-xl">
+            <i id="themeIcon" class="ri-contrast-line text-lg"></i>
+            <span id="themeText" class="hidden md:inline">Switch Theme</span>
+            <span id="themeEmoji" class="md:hidden">🌓</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-gradient-to-r from-gray-50 to-green-50 dark:from-gray-800 dark:to-green-900/10 border-b border-gray-200 dark:border-gray-700 py-4">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400">Sustainable and Advanced Construction</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-6xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Sustainable & Advanced Construction
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto mb-6">
+                Exploring cutting-edge technologies, sustainable practices, and innovative solutions shaping the future of construction
+            </p>
+            <div class="inline-flex items-center px-4 py-2 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 rounded-full text-sm font-medium">
+                <i class="ri-leaf-line mr-2"></i> Eco-Friendly & Technology Driven
+            </div>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Sustainable Construction Technology" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Technology Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Value Engineering -->
+            <article class="tech-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl gradient-border">
+                <div class="h-48 overflow-hidden bg-gradient-to-br from-blue-500 to-green-500">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="ri-line-chart-line text-white text-6xl"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-xs font-semibold rounded-full">
+                            Sustainability
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm flex items-center">
+                            <i class="ri-time-line mr-1"></i> 10 min
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        Value Engineering Estimation in Construction – Sustainable Savings
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Value Engineering (VE) is a systematic and organized approach designed to achieve the best possible value for money in a construction project...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 group">
+                        Read More <i class="ri-arrow-right-line ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Augmented Reality -->
+            <article class="tech-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl gradient-border">
+                <div class="h-48 overflow-hidden bg-gradient-to-br from-purple-500 to-pink-500">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="ri-augmented-reality-line text-white text-6xl"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs font-semibold rounded-full">
+                            AR/VR
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm flex items-center">
+                            <i class="ri-time-line mr-1"></i> 8 min
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        Augmented Reality in Construction – The Future of Building
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Augmented Reality (AR) blends digital elements with the real world, allowing builders, architects, and engineers to see, interact, and modify designs in real-time...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 group">
+                        Read More <i class="ri-arrow-right-line ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- MEP Drawings -->
+            <article class="tech-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl gradient-border">
+                <div class="h-48 overflow-hidden bg-gradient-to-br from-orange-500 to-red-500">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="ri-braces-line text-white text-6xl"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-orange-100 dark:bg-orange-900 text-orange-800 dark:text-orange-300 text-xs font-semibold rounded-full">
+                            Technical
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm flex items-center">
+                            <i class="ri-time-line mr-1"></i> 7 min
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        What Are MEP Drawings in Construction?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        MEP drawings are detailed plans that guide how these systems work together. They are like the instructions for assembling a complex puzzle...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 group">
+                        Read More <i class="ri-arrow-right-line ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Software Comparison -->
+            <article class="tech-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl gradient-border">
+                <div class="h-48 overflow-hidden bg-gradient-to-br from-cyan-500 to-blue-500">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="ri-code-s-slash-line text-white text-6xl"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-300 text-xs font-semibold rounded-full">
+                            Software
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm flex items-center">
+                            <i class="ri-time-line mr-1"></i> 12 min
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        Bluebeam Revu vs PlanSwift – Which Estimation Software is Right for You?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        In construction, digital tools like Bluebeam Revu and PlanSwift are vital in improving efficiency, accuracy, and collaboration...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 group">
+                        Read More <i class="ri-arrow-right-line ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Mobile Apps -->
+            <article class="tech-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl gradient-border">
+                <div class="h-48 overflow-hidden bg-gradient-to-br from-green-500 to-emerald-500">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="ri-smartphone-line text-white text-6xl"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs font-semibold rounded-full">
+                            Mobile
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm flex items-center">
+                            <i class="ri-time-line mr-1"></i> 6 min
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        Mobile Estimating Apps – Bringing Flexibility and Efficiency to the Field
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        In the dynamic construction world, the advent of mobile estimating apps has marked a significant turning point. These tools bring unparalleled efficiency...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 group">
+                        Read More <i class="ri-arrow-right-line ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- AI in Construction -->
+            <article class="tech-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden shadow-xl gradient-border">
+                <div class="h-48 overflow-hidden bg-gradient-to-br from-violet-500 to-purple-500">
+                    <div class="w-full h-full flex items-center justify-center">
+                        <i class="ri-cpu-line text-white text-6xl"></i>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-violet-100 dark:bg-violet-900 text-violet-800 dark:text-violet-300 text-xs font-semibold rounded-full">
+                            AI/ML
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm flex items-center">
+                            <i class="ri-time-line mr-1"></i> 9 min
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        AI in Construction Estimation – Smarter, Faster, and More Accurate
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Construction cost estimation plays a pivotal role in project success, influencing feasibility, budget, and profitability...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 group">
+                        Read More <i class="ri-arrow-right-line ml-2 group-hover:translate-x-1 transition-transform"></i>
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <!-- Software Tools Section -->
+        <div class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Construction Software Tools
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Takeoff Software -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center mb-4">
+                        <i class="ri-ruler-line text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">What is Takeoff Software?</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        These days, the construction industry is being automated at a rapid pace. While there probably won't be replacements for laborers anytime soon...
+                    </p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-medium text-sm hover:text-blue-800 dark:hover:text-blue-300">
+                        Explore Software →
+                    </a>
+                </div>
+
+                <!-- Best Estimation Software -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center mb-4">
+                        <i class="ri-medal-line text-green-600 dark:text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Best Software For Estimation</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        The success of construction projects lies behind accurate estimates because estimates need keen calculations. It is not easy to tackle it...
+                    </p>
+                    <a href="#" class="text-green-600 dark:text-green-400 font-medium text-sm hover:text-green-800 dark:hover:text-green-300">
+                        View Comparison →
+                    </a>
+                </div>
+
+                <!-- Software Benefits -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-shadow">
+                    <div class="w-14 h-14 bg-purple-100 dark:bg-purple-900 rounded-xl flex items-center justify-center mb-4">
+                        <i class="ri-line-chart-line text-purple-600 dark:text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Benefits of Construction Software</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Construction software marks a significant shift in project management, bringing digital automation to replace manual inefficiencies...
+                    </p>
+                    <a href="#" class="text-purple-600 dark:text-purple-400 font-medium text-sm hover:text-purple-800 dark:hover:text-purple-300">
+                        Learn Benefits →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Technology Comparison -->
+        <div class="bg-gradient-to-r from-blue-50 to-green-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Technology Adoption Timeline</h2>
+            <div class="space-y-4">
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-white font-bold mr-4">1</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Mobile Estimating Apps</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Widespread adoption in field operations</p>
+                    </div>
+                    <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs rounded-full">High Adoption</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold mr-4">2</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">AI & Machine Learning</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Growing implementation in estimation and planning</p>
+                    </div>
+                    <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-xs rounded-full">Medium Adoption</span>
+                </div>
+                <div class="flex items-center">
+                    <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-white font-bold mr-4">3</div>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">AR/VR Technologies</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Emerging technology for design visualization</p>
+                    </div>
+                    <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs rounded-full">Early Stage</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sustainable Practices -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg mb-12">
+            <div class="flex items-center mb-6">
+                <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center mr-4">
+                    <i class="ri-leaf-line text-green-600 dark:text-green-400 text-2xl"></i>
+                </div>
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100">Sustainable Construction Practices</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="ri-checkbox-circle-line text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100">Energy Efficient Materials</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Using sustainable materials that reduce energy consumption</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="ri-checkbox-circle-line text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100">Waste Reduction</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Implementing strategies to minimize construction waste</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-4">
+                    <div class="flex items-start">
+                        <i class="ri-checkbox-circle-line text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100">Smart Resource Management</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Optimizing material usage through technology</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <i class="ri-checkbox-circle-line text-green-500 text-xl mr-3 mt-1"></i>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100">Green Certification</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Following LEED and other environmental standards</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Advanced Construction</h3>
+                    <p class="text-gray-400 text-sm">
+                        Exploring the intersection of technology, sustainability, and innovation in modern construction practices.
+                    </p>
+                    <div class="flex space-x-3 mt-4">
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-primary-600 transition-colors">
+                            <i class="ri-cpu-line"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-green-600 transition-colors">
+                            <i class="ri-leaf-line"></i>
+                        </a>
+                        <a href="#" class="w-8 h-8 bg-gray-700 rounded-full flex items-center justify-center hover:bg-blue-600 transition-colors">
+                            <i class="ri-code-line"></i>
+                        </a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Technologies</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-green-400 transition-colors text-sm">AI & Machine Learning</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">AR/VR Solutions</a></li>
+                        <li><a href="#" class="hover:text-purple-400 transition-colors text-sm">Construction Software</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Sustainability</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-green-400 transition-colors text-sm">Green Building</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors text-sm">Energy Efficiency</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors text-sm">Waste Management</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Innovation Lab</h3>
+                    <p class="text-gray-400 text-sm mb-3">Stay updated with the latest construction technology trends and innovations.</p>
+                    <a href="#" class="inline-flex items-center text-primary-400 hover:text-primary-300 font-medium text-sm">
+                        Explore Innovations <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Advanced Construction Technology Hub. Driving innovation in construction.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const themeEmoji = document.getElementById('themeEmoji');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+                themeEmoji.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+                themeEmoji.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Debug info
+        console.log('Advanced Construction Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle: Animated button with gradient');
+        console.log('Features: Tech cards, software tools, sustainability section');
+    </script>
+</body>
+</html>

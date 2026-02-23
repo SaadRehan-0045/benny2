@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building Estimator Melbourne - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        blue: {
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        gray: {
+                            800: '#1f2937',
+                            900: '#111827',
+                        }
+                    },
+                    animation: {
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'bounce-melbourne': 'bounceMelbourne 2s infinite',
+                        'pulse-australia': 'pulseAustralia 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        slideUp: {
+                            '0%': { opacity: '0', transform: 'translateY(30px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        bounceMelbourne: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        pulseAustralia: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(59, 130, 246, 0.4)' },
+                            '50%': { boxShadow: '0 0 0 15px rgba(59, 130, 246, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .melbourne-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            border-left: 5px solid #2563eb;
+        }
+        .dark .melbourne-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+            border-left: 5px solid #3b82f6;
+        }
+        .melbourne-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .theme-melbourne-toggle {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+        }
+        .theme-melbourne-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(37, 99, 235, 0.4);
+        }
+        .melbourne-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #2563eb;
+            color: white;
+        }
+        .stats-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            border: 3px solid #2563eb;
+        }
+        .gradient-text-melbourne {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .service-pill {
+            display: inline-flex;
+            align-items: center;
+            padding: 8px 16px;
+            border-radius: 25px;
+            font-size: 12px;
+            margin: 4px;
+            transition: all 0.3s ease;
+        }
+        .service-pill:hover {
+            transform: scale(1.05);
+        }
+        .process-step {
+            position: relative;
+            padding-left: 30px;
+        }
+        .process-step::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #2563eb;
+        }
+        .dark .process-step::before {
+            background: #3b82f6;
+        }
+        .flag-icon {
+            width: 30px;
+            height: 20px;
+            background: linear-gradient(90deg, #000 0%, #000 33%, #fff 33%, #fff 66%, #000 66%, #000 100%);
+            position: relative;
+        }
+        .flag-icon::after {
+            content: '★';
+            position: absolute;
+            color: white;
+            font-size: 6px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-50 dark:from-gray-900 dark:to-blue-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Melbourne Theme Toggle Button -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="themeToggle" class="theme-melbourne-toggle flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all duration-300 animate-pulse-australia">
+            <i id="themeIcon" class="ri-building-line text-lg"></i>
+            <span id="themeText" class="hidden md:inline font-semibold">Melbourne</span>
+            <span id="themeEmoji" class="md:hidden">🇦🇺</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-blue-600 dark:text-blue-400 hover:text-blue-800 dark:hover:text-blue-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400 font-medium">Building Estimator Melbourne</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-slide-up">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-map-pin-line mr-2 animate-bounce-melbourne"></i>
+                Melbourne Building Experts
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text-melbourne">Building Estimator</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Melbourne</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Melbourne's Cost-Estimation Experts: Where Vision Meets Precision for Your Construction Projects
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Melbourne Building Construction" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Stats Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-900/20 dark:to-indigo-900/20 rounded-2xl p-8 border border-blue-200 dark:border-blue-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                    Our Track Record Speaks Volumes
+                </h2>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="text-center">
+                        <div class="stats-circle">
+                            <span class="text-2xl font-bold text-blue-600">8K+</span>
+                        </div>
+                        <p class="font-medium text-gray-800 dark:text-gray-100">Projects Completed</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="stats-circle">
+                            <span class="text-2xl font-bold text-blue-600">100%</span>
+                        </div>
+                        <p class="font-medium text-gray-800 dark:text-gray-100">Accuracy</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="stats-circle">
+                            <span class="text-2xl font-bold text-blue-600">25+</span>
+                        </div>
+                        <p class="font-medium text-gray-800 dark:text-gray-100">Qualified Estimators</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="stats-circle">
+                            <span class="text-2xl font-bold text-blue-600">30%</span>
+                        </div>
+                        <p class="font-medium text-gray-800 dark:text-gray-100">Cost Savings</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Your Construction Estimating Trusted Partner In Melbourne
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="melbourne-card p-6 relative">
+                    <div class="melbourne-badge">Expertise</div>
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-medal-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">10+ Years Experience</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Industry experience guaranteeing unparalleled accuracy in cost estimates for Melbourne projects.
+                    </p>
+                </div>
+                
+                <div class="melbourne-card p-6 relative">
+                    <div class="melbourne-badge" style="background: #7c3aed;">Versatility</div>
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-building-2-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">All Project Types</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        From renovations to high-rise developments, equipped to handle Melbourne's unique needs.
+                    </p>
+                </div>
+                
+                <div class="melbourne-card p-6 relative">
+                    <div class="melbourne-badge" style="background: #059669;">Transparency</div>
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-eye-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Transparent Costing</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Concrete data and Melbourne-specific rates for secure budget decisions.
+                    </p>
+                </div>
+                
+                <div class="melbourne-card p-6 relative">
+                    <div class="melbourne-badge" style="background: #dc2626;">ROI Focus</div>
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-line-chart-line text-red-600 dark:text-red-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">ROI-Driven Approach</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Save up to 30% on construction costs with our Melbourne-focused estimates.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-star-line text-blue-600 mr-2"></i>
+                Key Features You Will Get
+            </h2>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="service-pill bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
+                    <i class="ri-time-line mr-2"></i> 24-48 Hr Delivery
+                </span>
+                <span class="service-pill bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300">
+                    <i class="ri-money-dollar-circle-line mr-2"></i> Competitive Rates
+                </span>
+                <span class="service-pill bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300">
+                    <i class="ri-database-line mr-2"></i> Zip-code Based Database
+                </span>
+                <span class="service-pill bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300">
+                    <i class="ri-award-line mr-2"></i> Certified Estimators
+                </span>
+                <span class="service-pill bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300">
+                    <i class="ri-customer-service-line mr-2"></i> 24/7 Support
+                </span>
+                <span class="service-pill bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300">
+                    <i class="ri-file-line mr-2"></i> Marked-Up Plans
+                </span>
+            </div>
+        </div>
+
+        <!-- Melbourne Services -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-service-line text-blue-600 mr-2"></i>
+                Our Melbourne Building Estimating Services
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="melbourne-card p-5">
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-3">New Construction Reports</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Comprehensive cost estimate reports for new building projects across Melbourne.
+                    </p>
+                </div>
+
+                <div class="melbourne-card p-5">
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-3">Renovation Estimates</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Detailed cost analysis for extensions and renovation projects in Melbourne.
+                    </p>
+                </div>
+
+                <div class="melbourne-card p-5">
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-3">Contract Evaluations</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Independent building contract price evaluations for Melbourne projects.
+                    </p>
+                </div>
+
+                <div class="melbourne-card p-5">
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-3">Quantity Surveying</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Professional quantity surveying, monitoring, and reporting services.
+                    </p>
+                </div>
+
+                <div class="melbourne-card p-5">
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-3">Feasibility Studies</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Comprehensive feasibility studies for Melbourne builders and developers.
+                    </p>
+                </div>
+
+                <div class="melbourne-card p-5">
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-3">Cost Disputes</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Expert building cost disputes and reporting for Melbourne construction projects.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center">Our Building Estimation Process</h2>
+                <div class="space-y-6">
+                    <div class="process-step">
+                        <h4 class="font-bold text-lg mb-2">Efficient Planning</h4>
+                        <p class="text-white/90 text-sm">
+                            Comprehensive discussions with your construction team to plan and assign tasks efficiently.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h4 class="font-bold text-lg mb-2">Quantity Estimation</h4>
+                        <p class="text-white/90 text-sm">
+                            Detailed material takeoffs and quantity surveys for Melbourne-specific requirements.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h4 class="font-bold text-lg mb-2">Pricing Evaluation</h4>
+                        <p class="text-white/90 text-sm">
+                            Market-rate analysis using Melbourne-specific cost databases and zip-code data.
+                        </p>
+                    </div>
+                    
+                    <div class="process-step">
+                        <h4 class="font-bold text-lg mb-2">Quality Control</h4>
+                        <p class="text-white/90 text-sm">
+                            Rigorous quality checks ensuring 100% accuracy in all Melbourne building estimates.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Who We Help -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                We Help Melbourne's Construction Industry
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-blue-200 dark:border-blue-800 hover:border-blue-400 dark:hover:border-blue-500 transition-colors">
+                    <i class="ri-pencil-ruler-line text-blue-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Architects</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-green-200 dark:border-green-800 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+                    <i class="ri-user-settings-line text-green-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Builders</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-purple-200 dark:border-purple-800 hover:border-purple-400 dark:hover:border-purple-500 transition-colors">
+                    <i class="ri-home-line text-purple-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Homeowners</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-amber-200 dark:border-amber-800 hover:border-amber-400 dark:hover:border-amber-500 transition-colors">
+                    <i class="ri-building-2-line text-amber-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Developers</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-red-200 dark:border-red-800 hover:border-red-400 dark:hover:border-red-500 transition-colors">
+                    <i class="ri-contract-line text-red-600 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Contractors</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-map-pin-line text-blue-600 mr-2"></i>
+                Service Areas Across Australia
+            </h2>
+            <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-800 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                <div class="flex items-center mb-6">
+                    <div class="flag-icon mr-3"></div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Australia Wide Coverage</h3>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 text-sm">
+                    <div class="text-gray-600 dark:text-gray-300">Melbourne</div>
+                    <div class="text-gray-600 dark:text-gray-300">Sydney</div>
+                    <div class="text-gray-600 dark:text-gray-300">Brisbane</div>
+                    <div class="text-gray-600 dark:text-gray-300">Perth</div>
+                    <div class="text-gray-600 dark:text-gray-300">Adelaide</div>
+                    <div class="text-gray-600 dark:text-gray-300">Darwin</div>
+                    <div class="text-gray-600 dark:text-gray-300">Hobart</div>
+                    <div class="text-gray-600 dark:text-gray-300">Canberra</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-blue-600 to-indigo-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl">
+            <h3 class="text-2xl font-bold mb-4">Get Your Melbourne Building Estimate Now!</h3>
+            <p class="mb-6 opacity-90">Save 30% on your first Melbourne construction estimate</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-blue-700 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Request Estimate
+                </button>
+                <button class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                    Schedule Call
+                </button>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-blue-600 dark:text-blue-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">US Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(737) 273-3314</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-green-600 dark:text-green-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">AUS Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(048) 862-0354</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-mail-line text-purple-600 dark:text-purple-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Email</h4>
+                <p class="text-gray-600 dark:text-gray-300">info@constructestimates.com</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="ri-building-line text-blue-400 mr-2"></i>
+                        Melbourne Estimator
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        Professional building and construction estimating services specifically for Melbourne projects and across Australia.
+                    </p>
+                    <div class="mt-4 flex space-x-3">
+                        <div class="w-8 h-8 bg-blue-700 rounded-full flex items-center justify-center">
+                            <i class="ri-map-pin-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-indigo-600 rounded-full flex items-center justify-center">
+                            <i class="ri-building-2-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                            <i class="ri-calculator-line text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Melbourne Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">New Construction</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Renovation Estimates</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Quantity Surveying</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Feasibility Studies</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Australian Coverage</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors text-sm">Melbourne, VIC</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors text-sm">Sydney, NSW</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors text-sm">Brisbane, QLD</a></li>
+                        <li><a href="#" class="hover:text-indigo-400 transition-colors text-sm">Perth, WA</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Get Melbourne Quote</h3>
+                    <p class="text-gray-400 text-sm mb-4">Get accurate building estimates for Melbourne projects within 24-48 hours.</p>
+                    <a href="#" class="inline-flex items-center px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-lg text-sm font-medium transition-colors">
+                        <i class="ri-mail-send-line mr-2"></i> Request Quote
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Building Estimator Melbourne. Professional construction estimating services for Melbourne and across Australia.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const themeEmoji = document.getElementById('themeEmoji');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+                themeEmoji.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+                themeEmoji.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statCircles = entry.target.querySelectorAll('.stats-circle span');
+                    statCircles.forEach(stat => {
+                        const originalText = stat.textContent;
+                        const target = parseInt(originalText);
+                        let current = 0;
+                        const increment = target / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            stat.textContent = Math.round(current) + (originalText.includes('+') ? '+' : '');
+                        }, 30);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe the stats section
+        const statsSection = document.querySelector('.bg-gradient-to-r');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        // Add hover effects to service pills
+        document.querySelectorAll('.service-pill').forEach(pill => {
+            pill.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) translateY(-2px)';
+                this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            });
+            pill.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        console.log('Building Estimator Melbourne Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle: Melbourne building themed button');
+        console.log('Features: Australian statistics, service areas, process steps');
+    </script>
+</body>
+</html>

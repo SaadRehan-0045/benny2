@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Estimating Services - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Hide scrollbars for consistency */
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Smooth loading */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen fade-in">
+    <!-- Theme Toggle Button (Fixed Top Right) -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="flex items-center gap-2 px-4 py-2 rounded-lg bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl border border-gray-200 dark:border-gray-700">
+            <i id="themeIcon" class="ri-moon-line text-lg"></i>
+            <span id="themeText" class="font-medium text-sm">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 pt-20">
+        <!-- Breadcrumb Navigation -->
+        <nav class="mb-8" aria-label="Breadcrumb">
+            <ol class="flex items-center space-x-2 text-sm">
+                <li>
+                    <a href="#" class="text-gray-600 dark:text-gray-400 hover:text-primary-600 dark:hover:text-primary-400">
+                        Home
+                    </a>
+                </li>
+                <li class="text-gray-400 dark:text-gray-600">
+                    <i class="ri-arrow-right-s-line"></i>
+                </li>
+                <li class="text-primary-600 dark:text-primary-400 font-medium">
+                    Cost Estimating Services
+                </li>
+            </ol>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="mb-16">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
+                Cost Estimating Services
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl">
+                Cost Estimating Services for Your Construction Projects
+            </p>
+            
+            <!-- Hero Card -->
+            <div class="bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 md:p-8 shadow-lg border border-primary-100 dark:border-gray-700 mb-8">
+                <h2 class="text-2xl md:text-3xl font-bold text-gray-900 dark:text-white mb-4">
+                    Empower Your Construction Projects with Accurate Cost Estimates and Achieve Success.
+                </h2>
+                <div class="flex flex-col sm:flex-row gap-4 mt-6">
+                    <button class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg">
+                        Request a Quote Today
+                    </button>
+                    <button class="px-6 py-3 bg-white dark:bg-gray-800 border-2 border-primary-600 text-primary-600 dark:text-primary-400 font-semibold rounded-lg hover:bg-primary-50 dark:hover:bg-gray-700 shadow-md hover:shadow-lg">
+                        Get Estimate With 30% Off
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Hero Image -->
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl mb-8">
+                <img 
+                    src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                    alt="Construction cost estimating professionals at work" 
+                    class="w-full h-64 md:h-96 object-cover"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+            </div>
+        </section>
+
+        <!-- Construction Cost Estimating Services -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">
+                Construction Cost Estimating Services
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <div class="space-y-4">
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Construct Estimates offers a wide range of construction cost estimating services and cost management solutions tailored to meet the unique needs of the ever-growing construction industry.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        With years of experience in understanding various market conditions, we empower contractors, developers, architects, and project managers to make informed decisions, control budgets, and achieve project success.
+                    </p>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our goal is to provide reliable and tailored cost estimating services that help you streamline your bidding process, win more projects, and optimize your budget.
+                    </p>
+                </div>
+                
+                <div class="bg-primary-50 dark:bg-gray-800 p-6 rounded-xl border border-primary-100 dark:border-gray-700 shadow-lg">
+                    <h3 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-4">
+                        Professional Cost Estimating
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        Our experienced construction cost estimators have successfully delivered accurate cost estimates for a wide scope of projects. We are committed to providing precise, timely, and detailed pricing information that instills confidence and drives your project forward by avoiding cost overruns.
+                    </p>
+                    <button class="w-full px-4 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg">
+                        View Our Estimate Sample
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Comprehensive Services -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+                Comprehensive Construction Cost Estimating Services
+            </h2>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8 mb-8 border border-gray-200 dark:border-gray-700">
+                <p class="text-gray-600 dark:text-gray-300 mb-8">
+                    Our construction cost estimates encompass a wide range of essential components, ensuring a holistic approach to cost management throughout your project's lifecycle.
+                </p>
+                
+                <!-- Services Grid -->
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <!-- Service 1 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600">
+                        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-calculator-line text-2xl text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Cost Estimates</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            Accurate and itemized cost estimates to assist contractors in bidding and winning projects.
+                        </p>
+                    </div>
+                    
+                    <!-- Service 2 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600">
+                        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-list-check-2 text-2xl text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Material Takeoffs</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            Detailed material quantity calculations and comprehensive takeoff services.
+                        </p>
+                    </div>
+                    
+                    <!-- Service 3 -->
+                    <div class="bg-gray-50 dark:bg-gray-700 p-6 rounded-xl border border-gray-200 dark:border-gray-600">
+                        <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900/30 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-line-chart-line text-2xl text-primary-600 dark:text-primary-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Budget Estimating</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">
+                            Comprehensive budget development and cost control strategies.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- Call to Action -->
+                <div class="p-6 bg-primary-50 dark:bg-gray-800 rounded-xl border border-primary-200 dark:border-gray-700">
+                    <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-bold text-primary-800 dark:text-primary-300 mb-2">
+                                Ready to Get Started?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300">
+                                Call us today at <span class="font-bold">(737) 273-3314</span> or upload your plans for a quote with 30% off.
+                            </p>
+                        </div>
+                        <button class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg whitespace-nowrap">
+                            Upload Plans and Save 30% Cost
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-700 dark:to-primary-900 rounded-2xl p-8 md:p-12 text-center text-white">
+            <h2 class="text-3xl font-bold mb-4">Take the First Step Today</h2>
+            <p class="text-lg mb-8 opacity-90 max-w-3xl mx-auto">
+                Ready to take your construction business to new heights? Don't let missed opportunities hold you back any longer. Contact us today and let our Construction Cost Estimating Consultants be the catalyst for your success.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-primary-600 font-bold rounded-lg hover:bg-gray-100 shadow-lg hover:shadow-xl">
+                    Contact Us Now
+                </button>
+                <button class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 shadow-lg hover:shadow-xl">
+                    Get Free Consultation
+                </button>
+            </div>
+            <p class="mt-8 text-xl font-bold">
+                Together, we'll transform your bidding process, generate more leads, and propel your business to new levels of prosperity!
+            </p>
+            <p class="mt-4 text-2xl font-bold text-yellow-300">
+                Ignite Your Projects
+            </p>
+        </section>
+    </main>
+
+    <script>
+        // Theme Toggle Functionality - Fixed Version
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        function applyTheme(theme) {
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                updateThemeUI('dark');
+                console.log('Applied Dark Theme');
+            } else {
+                document.documentElement.classList.remove('dark');
+                updateThemeUI('light');
+                console.log('Applied Light Theme');
+            }
+        }
+        
+        // Apply the theme immediately
+        applyTheme(currentTheme);
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            
+            if (isDark) {
+                // Switch to Light Mode
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+                console.log('Switched to Light Mode');
+            } else {
+                // Switch to Dark Mode
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+                console.log('Switched to Dark Mode');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                const newTheme = e.matches ? 'dark' : 'light';
+                applyTheme(newTheme);
+                console.log('System theme changed to:', newTheme);
+            }
+        });
+        
+        // Debug function to check current theme
+        function checkCurrentTheme() {
+            const isDark = document.documentElement.classList.contains('dark');
+            const saved = localStorage.getItem('theme');
+            console.log('Current Theme:', isDark ? 'Dark' : 'Light');
+            console.log('Saved Preference:', saved || 'None (using system)');
+            console.log('System Preference:', prefersDark ? 'Dark' : 'Light');
+        }
+        
+        // Check theme on load
+        window.addEventListener('load', () => {
+            checkCurrentTheme();
+        });
+    </script>
+</body>
+</html>

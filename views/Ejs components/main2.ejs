@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny Estimates - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-in-left': 'slideInLeft 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dark .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Section background */
+        .about-section-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .about-section-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        /* Laptop specific adjustments */
+        @media (min-width: 1024px) {
+            .about-heading {
+                font-size: 3.5rem !important;
+                line-height: 1.2 !important;
+            }
+            .about-text {
+                font-size: 1.1rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- About Us Section -->
+    <section class="about-section-bg py-12 lg:py-20 animate-fade-in">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <!-- Parent Container - Full width centered content -->
+            <div class="flex flex-col items-center">
+                
+                <!-- Content Section - Full width -->
+                <div class="w-full lg:w-4/5 xl:w-3/4 animate-slide-in-left">
+                    <!-- Benny Estimates Logo/Badge -->
+                    <div class="flex justify-center mb-6 lg:mb-8">
+                        <div class="inline-flex items-center bg-white dark:bg-gray-800 px-4 py-2 rounded-full shadow-md border border-gray-200 dark:border-gray-700">
+                            <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl sm:text-2xl mr-2"></i>
+                            <span class="font-bold text-gray-900 dark:text-white text-sm sm:text-base lg:text-lg">BENNY ESTIMATES</span>
+                        </div>
+                    </div>
+
+                    <!-- Section Label -->
+                    <div class="inline-flex items-center mb-4 justify-center w-full">
+                        <div class="w-12 h-0.5 bg-primary-500 dark:bg-primary-400 mr-3"></div>
+                        <span class="text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider text-sm">
+                            <i class="ri-information-line mr-2"></i>
+                            ABOUT US
+                        </span>
+                        <div class="w-12 h-0.5 bg-primary-500 dark:bg-primary-400 ml-3"></div>
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="about-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                        Transform Your Projects into 
+                        <span class="gradient-text block mt-2">Profitable Realities</span>
+                    </h1>
+
+                    <!-- Description Paragraph 1 -->
+                    <div class="mb-6 max-w-3xl mx-auto">
+                        <p class="about-text text-sm sm:text-base md:text-lg text-gray-600 dark:text-gray-300 leading-relaxed text-center">
+                            <i class="ri-checkbox-circle-fill text-primary-500 dark:text-primary-400 mr-2"></i>
+                            <span class="font-bold">Benny Estimates</span> is your trusted partner in construction estimating and material takeoff services to make the bidding process easier for contractors and builders.
+                        </p>
+                    </div>
+
+                    <!-- Description Paragraph 2 -->
+                    <div class="mb-8 max-w-3xl mx-auto">
+                        <p class="about-text text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed text-center">
+                            With our comprehensive services, we specialize in providing accurate local pricing estimates and taking off entire projects. Our goal is to transform contractors' potential projects into profitable realities, allowing them to focus on other aspects of their business.
+                        </p>
+                    </div>
+
+                    <!-- Description Paragraph 3 - Highlighted -->
+                    <div class="mb-12 max-w-4xl mx-auto">
+                        <div class="bg-primary-50 dark:bg-primary-900/20 border-l-4 border-primary-500 dark:border-primary-400 p-4 sm:p-5 rounded-r-lg">
+                            <p class="text-sm sm:text-base text-gray-700 dark:text-gray-300">
+                                <i class="ri-lightbulb-flash-line text-primary-600 dark:text-primary-400 mr-2"></i>
+                                With over <span class="font-bold text-primary-600 dark:text-primary-400">10 years of experience</span> in the construction industry, Benny Estimates has built a solid reputation for delivering accurate material estimates. Residential, commercial, civil, or industrial projects—whatever the scope, our construction managers and quantity surveyors have the expertise and references spanning hundreds of satisfied clients.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Choose Benny Estimates -->
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 sm:p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+            <h2 class="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                Why Choose <span class="text-primary-600 dark:text-primary-400">Benny Estimates</span>?
+            </h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+                <!-- Feature 1 -->
+                <div class="text-center p-4 sm:p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 mx-auto bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+                        <i class="ri-file-copy-line text-primary-600 dark:text-primary-400 text-lg sm:text-xl lg:text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-2 text-sm sm:text-base">Detailed Reports</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">Comprehensive estimating reports with itemized costs</p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="text-center p-4 sm:p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 mx-auto bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+                        <i class="ri-money-dollar-circle-line text-green-600 dark:text-green-400 text-lg sm:text-xl lg:text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-2 text-sm sm:text-base">Cost Savings</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">Reduce estimating costs by up to 40%</p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="text-center p-4 sm:p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 mx-auto bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+                        <i class="ri-global-line text-purple-600 dark:text-purple-400 text-lg sm:text-xl lg:text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-2 text-sm sm:text-base">Global Service</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">Serving clients across US, Canada & Australia</p>
+                </div>
+
+                <!-- Feature 4 -->
+                <div class="text-center p-4 sm:p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 mx-auto bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-3 sm:mb-4">
+                        <i class="ri-customer-service-2-line text-yellow-600 dark:text-yellow-400 text-lg sm:text-xl lg:text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-2 text-sm sm:text-base">Dedicated Support</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-xs sm:text-sm">24/7 customer support for all your queries</p>
+                </div>
+            </div>
+            
+            <!-- Contact CTA -->
+            <div class="text-center mt-8 sm:mt-10">
+                <p class="text-sm sm:text-base text-gray-600 dark:text-gray-400">
+                    Ready to get started? <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400 font-semibold hover:underline">Email us at Ben@bennyestimates.com</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Theme functionality (same as your existing system)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            if (updateThemeUI) updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (updateThemeUI) updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                if (themeIcon) themeIcon.className = 'ri-sun-line mr-2';
+                if (themeText) themeText.textContent = 'Light Mode';
+            } else {
+                if (themeIcon) themeIcon.className = 'ri-moon-line mr-2';
+                if (themeText) themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle if exists
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

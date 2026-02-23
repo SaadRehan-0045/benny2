@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residential Estimating Services - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'bounce-home': 'bounceHome 2s infinite',
+                        'pulse-warm': 'pulseWarm 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        bounceHome: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        pulseWarm: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(245, 158, 11, 0.4)' },
+                            '50%': { boxShadow: '0 0 0 10px rgba(245, 158, 11, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .residential-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+        }
+        .dark .residential-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+        }
+        .residential-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #f59e0b;
+        }
+        .home-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        .gradient-text-residential {
+            background: linear-gradient(135deg, #f59e0b, #16a34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .material-category {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .material-category:hover {
+            transform: scale(1.05);
+        }
+        .software-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            font-size: 11px;
+            margin: 3px;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .dark .software-badge {
+            background: #374151;
+            border-color: #4b5563;
+        }
+        .software-badge:hover {
+            transform: scale(1.05);
+            border-color: #f59e0b;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .residential-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+ <%- include('../header.ejs') %>
+<body class="bg-gradient-to-br from-amber-50 to-green-50 dark:from-gray-900 dark:to-amber-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+ 
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-fade-in-up">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-amber-600 to-green-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-home-heart-line mr-2 animate-bounce-home"></i>
+                Home Construction Estimates
+            </div>
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text-residential">Residential Estimating</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Services</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Accurate Estimates for Residential Construction Projects
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800">
+            <img src="https://images.unsplash.com/photo-1600585154340-043788447eb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Residential Construction Estimating" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-amber-50 to-green-50 dark:from-amber-900/20 dark:to-green-900/20 rounded-2xl p-8 border border-amber-200 dark:border-amber-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-heart-line text-amber-600 mr-2"></i>
+                    Build Your Dream Home with Confidence
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                    Empower Your Residential Building Projects with Affordable Cost Estimation
+                </p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Whether you're a Homeowner, Architect, Contractor, or Builder, Lenders, and Investors, 
+                    our team of professional estimators is here to assist you in achieving your project goals 
+                    efficiently and cost-effectively.
+                </p>
+                <button onclick="openModal(1)" class="mt-2 text-amber-600 dark:text-amber-400 font-medium hover:text-amber-800 dark:hover:text-amber-300 inline-flex items-center cursor-pointer">
+                    Learn More About Our Residential Services <i class="ri-arrow-right-line ml-1"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Residential Services -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Home Building Estimating Services Tailored To Your Needs
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="residential-card p-6 text-center relative">
+                    <div class="home-badge bg-amber-500 text-white" onclick="openModal(2)">New Build</div>
+                    <div class="service-icon bg-amber-100 dark:bg-amber-900 mx-auto" onclick="openModal(2)">
+                        <i class="ri-building-line text-amber-600 dark:text-amber-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">New Construction</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Accurate cost projections for single-family and multi-family residential construction projects.
+                    </p>
+                    <button onclick="openModal(2)" class="text-amber-600 dark:text-amber-400 font-medium hover:text-amber-800 dark:hover:text-amber-300 text-sm cursor-pointer">
+                        Learn More →
+                    </button>
+                </div>
+                
+                <div class="residential-card p-6 text-center relative">
+                    <div class="home-badge bg-green-500 text-white" onclick="openModal(3)">Renovation</div>
+                    <div class="service-icon bg-green-100 dark:bg-green-900 mx-auto" onclick="openModal(3)">
+                        <i class="ri-home-gear-line text-green-600 dark:text-green-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Remodeling & Renovation</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Detailed estimates for home renovations, additions, and remodeling projects.
+                    </p>
+                    <button onclick="openModal(3)" class="text-green-600 dark:text-green-400 font-medium hover:text-green-800 dark:hover:text-green-300 text-sm cursor-pointer">
+                        Learn More →
+                    </button>
+                </div>
+                
+                <div class="residential-card p-6 text-center relative">
+                    <div class="home-badge bg-blue-500 text-white" onclick="openModal(4)">Design</div>
+                    <div class="service-icon bg-blue-100 dark:bg-blue-900 mx-auto" onclick="openModal(4)">
+                        <i class="ri-pencil-ruler-line text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Architectural Estimates</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Precise cost analysis for residential design and architectural planning.
+                    </p>
+                    <button onclick="openModal(4)" class="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300 text-sm cursor-pointer">
+                        Learn More →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Material Categories -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-tools-line text-amber-600 mr-2"></i>
+                Comprehensive Material Quantification
+            </h2>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span onclick="openModal(5)" class="material-category bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300">
+                    <i class="ri-landscape-line mr-2"></i> Sitework
+                </span>
+                <span onclick="openModal(6)" class="material-category bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
+                    <i class="ri-building-2-line mr-2"></i> Concrete
+                </span>
+                <span onclick="openModal(7)" class="material-category bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300">
+                    <i class="ri-water-flash-line mr-2"></i> Plumbing
+                </span>
+                <span onclick="openModal(8)" class="material-category bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300">
+                    <i class="ri-flashlight-line mr-2"></i> Electrical
+                </span>
+                <span onclick="openModal(9)" class="material-category bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300">
+                    <i class="ri-settings-3-line mr-2"></i> Mechanical
+                </span>
+                <span onclick="openModal(10)" class="material-category bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300">
+                    <i class="ri-brush-line mr-2"></i> Painting
+                </span>
+                <span onclick="openModal(11)" class="material-category bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-300">
+                    <i class="ri-ruler-line mr-2"></i> Drywall & Framing
+                </span>
+            </div>
+        </div>
+
+        <!-- Software Tools -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-computer-line text-green-600 mr-2"></i>
+                Precise Estimation with Industry-Leading Tools
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div onclick="openModal(12)" class="software-badge">Bluebeam</div>
+                <div onclick="openModal(13)" class="software-badge">Planswift</div>
+                <div onclick="openModal(14)" class="software-badge">RS Means</div>
+                <div onclick="openModal(15)" class="software-badge">Xactimate</div>
+                <div onclick="openModal(16)" class="software-badge">FastPIPE</div>
+                <div onclick="openModal(17)" class="software-badge">FastDUCT</div>
+                <div onclick="openModal(18)" class="software-badge">Trimble</div>
+                <div onclick="openModal(19)" class="software-badge">IMHS</div>
+                <div onclick="openModal(20)" class="software-badge">Mark Systems</div>
+                <div onclick="openModal(21)" class="software-badge">Quest Estimating</div>
+                <div onclick="openModal(22)" class="software-badge">FastWRAP</div>
+                <div onclick="openModal(23)" class="software-badge">More...</div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-amber-600 to-green-600 rounded-2xl p-8 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center">Why Choose Our Residential Estimating Services?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-calculator-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Accurate & Detailed Estimates</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Meticulous calculations covering labor, materials, permits, and site preparation.
+                        </p>
+                        <button onclick="openModal(24)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-team-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Collaborative Approach</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Working closely with architects, contractors, and homeowners to understand your vision.
+                        </p>
+                        <button onclick="openModal(25)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-time-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Timely Delivery</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            24-48 hour turnaround for most residential estimating projects.
+                        </p>
+                        <button onclick="openModal(26)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-shield-check-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Transparent Pricing</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Competitive pricing with detailed cost breakdowns and no hidden fees.
+                        </p>
+                        <button onclick="openModal(27)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-map-pin-line text-amber-600 mr-2"></i>
+                Our Residential Service Areas
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Australia -->
+                <div class="bg-gradient-to-r from-amber-50 to-white dark:from-amber-900/10 dark:to-gray-800 rounded-xl p-6 border border-amber-200 dark:border-amber-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-line text-amber-600 dark:text-amber-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Australia</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div onclick="openModal(28)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400">New South Wales</div>
+                        <div onclick="openModal(29)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400">Sydney</div>
+                        <div onclick="openModal(30)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400">Victoria</div>
+                        <div onclick="openModal(31)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400">Melbourne</div>
+                        <div onclick="openModal(32)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400">Queensland</div>
+                        <div onclick="openModal(33)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400">Brisbane</div>
+                        <div onclick="openModal(34)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400">Western Australia</div>
+                        <div onclick="openModal(35)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-amber-600 dark:hover:text-amber-400">Perth</div>
+                    </div>
+                    <button onclick="openModal(36)" class="mt-4 text-amber-600 dark:text-amber-400 text-sm hover:text-amber-800 dark:hover:text-amber-300 inline-flex items-center cursor-pointer">
+                        View All Australian Services <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- USA -->
+                <div class="bg-gradient-to-r from-green-50 to-white dark:from-green-900/10 dark:to-gray-800 rounded-xl p-6 border border-green-200 dark:border-green-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-2-line text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">United States</h3>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Nationwide residential estimating services for home construction, renovation, and remodeling projects across all states.
+                    </div>
+                    <button onclick="openModal(37)" class="text-amber-600 dark:text-amber-400 text-sm hover:text-amber-800 dark:hover:text-amber-300 inline-flex items-center cursor-pointer">
+                        View US Services <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                How to Get Started with Us For Home Estimates
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div onclick="openModal(38)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-amber-100 dark:bg-amber-900 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600 dark:text-amber-400 text-2xl font-bold">
+                        1
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Submit Plans</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Upload your residential drawings and specifications</p>
+                </div>
+                
+                <div onclick="openModal(39)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600 dark:text-green-400 text-2xl font-bold">
+                        2
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">We Review</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Experts analyze your home project requirements</p>
+                </div>
+                
+                <div onclick="openModal(40)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 dark:text-blue-400 text-2xl font-bold">
+                        3
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Get Quote</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Receive detailed pricing and timeline</p>
+                </div>
+                
+                <div onclick="openModal(41)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-600 dark:text-purple-400 text-2xl font-bold">
+                        4
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Receive Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Get comprehensive residential estimate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-amber-600 to-green-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl">
+            <h3 class="text-2xl font-bold mb-4">Build Your Dream Home Today!</h3>
+            <p class="mb-6 opacity-90">Professional residential estimating services for your home construction projects</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button onclick="openModal(42)" class="px-8 py-3 bg-white text-amber-700 font-bold rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                    Upload Home Plans
+                </button>
+                <button onclick="openModal(43)" class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+                    Request Quote
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Residential Service Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content (keeping all the same content)
+        const serviceData = {
+            1: {
+                title: "Our Residential Estimating Services",
+                content: `<p class="mb-4">At Benny Estimates, we specialize in providing accurate residential estimating services for homeowners, builders, architects, and contractors. Our team understands the unique requirements of home construction and delivers estimates you can trust.</p>
+                <p class="mb-4">Residential estimating requires attention to detail and understanding of local market conditions. Our estimators have decades of combined experience in residential construction, ensuring your estimates reflect real-world costs.</p>
+                <p class="mb-4">Whether you're planning a new home, renovation, or addition, our estimates provide the foundation for successful project planning and budgeting. We help you make informed decisions throughout your residential project.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to discuss your residential project needs.</p>`
+            },
+            2: {
+                title: "New Construction Residential Estimates",
+                content: `<p class="mb-4">Our new construction estimating service provides accurate cost projections for single-family and multi-family residential construction projects. We analyze your plans and specifications to develop comprehensive estimates that cover all aspects of construction.</p>
+                <p class="mb-4">New home construction estimates include detailed quantities for sitework, foundations, structural framing, exterior finishes, interior finishes, MEP systems, and landscaping. We provide cost breakdowns by trade and project phase.</p>
+                <p class="mb-4">Whether you're building a custom home, spec house, or multi-family development, our estimates help you budget accurately and make informed decisions throughout the construction process.</p>
+                <p>Contact us to learn how our new construction estimating can support your residential project.</p>`
+            },
+            3: {
+                title: "Remodeling & Renovation Estimates",
+                content: `<p class="mb-4">Our remodeling and renovation estimating service provides detailed cost projections for home improvement projects of all sizes. From kitchen and bathroom remodels to whole-house renovations, we help you understand the true costs of your project.</p>
+                <p class="mb-4">Renovation estimates must account for existing conditions, demolition, structural modifications, and finish work. Our estimators have extensive experience with residential renovation projects and understand the unique challenges they present.</p>
+                <p class="mb-4">We provide comprehensive estimates that include all materials, labor, permits, and contingency allowances. Our estimates help you plan your renovation project with confidence and avoid costly surprises.</p>
+                <p>Contact us to discuss your home renovation project and receive a detailed estimate.</p>`
+            },
+            4: {
+                title: "Architectural Estimates for Residential Design",
+                content: `<p class="mb-4">Our architectural estimating service provides precise cost analysis for residential design and architectural planning. We help architects and homeowners understand the cost implications of design decisions during the planning phase.</p>
+                <p class="mb-4">Early-stage estimates allow you to evaluate alternative designs, select materials, and make informed decisions before construction begins. Our estimates help you balance design aspirations with budget realities.</p>
+                <p class="mb-4">We work closely with architects and designers to provide cost feedback throughout the design process, ensuring your project stays within budget from concept to completion.</p>
+                <p>Contact us to learn how our architectural estimating can support your residential design project.</p>`
+            },
+            5: {
+                title: "Sitework Estimation for Residential Projects",
+                content: `<p class="mb-4">Sitework encompasses all activities required to prepare your residential site for construction. Our sitework estimates include clearing, grading, excavation, utilities, and drainage systems.</p>
+                <p class="mb-4">Accurate sitework estimation is essential because site conditions can significantly impact costs. Our estimators account for soil conditions, slope, access, and local requirements in their calculations.</p>
+                <p class="mb-4">We provide detailed quantities for earthwork, utility connections, and site improvements. Our estimates help you budget for the foundation of your residential project.</p>
+                <p>Contact us for specialized sitework estimating for your residential construction project.</p>`
+            },
+            6: {
+                title: "Concrete Estimation for Residential Construction",
+                content: `<p class="mb-4">Concrete is fundamental to residential construction, from foundations and slabs to driveways and patios. Our concrete estimates provide accurate quantities and costs for all concrete work in your residential project.</p>
+                <p class="mb-4">We quantify concrete volumes, reinforcement, formwork, and finishing requirements based on your plans. Our estimates account for concrete mix specifications, placement methods, and curing requirements.</p>
+                <p class="mb-4">Accurate concrete estimates prevent costly shortages or overages and help you negotiate competitive pricing from suppliers and contractors.</p>
+                <p>Let our concrete estimating expertise support your residential construction project.</p>`
+            },
+            7: {
+                title: "Plumbing Estimation for Residential Projects",
+                content: `<p class="mb-4">Plumbing systems are essential for modern homes. Our plumbing estimates provide detailed quantities and costs for all plumbing components in your residential project, including supply piping, fixtures, drains, and specialty systems.</p>
+                <p class="mb-4">We quantify piping materials, fixtures, fittings, and labor requirements based on your plumbing drawings and specifications. Our estimates account for local code requirements and fixture selections.</p>
+                <p class="mb-4">Accurate plumbing estimates help you budget for this critical home system and ensure your project includes all necessary components.</p>
+                <p>Contact us for specialized plumbing estimating for your residential project.</p>`
+            },
+            8: {
+                title: "Electrical Estimation for Residential Construction",
+                content: `<p class="mb-4">Electrical systems are essential for modern home functionality and safety. Our electrical estimates provide detailed quantities and costs for all electrical components in your residential project.</p>
+                <p class="mb-4">We quantify wiring, conduit, panels, outlets, switches, fixtures, and specialty systems based on your electrical drawings. Our estimates account for code requirements, load calculations, and finish selections.</p>
+                <p class="mb-4">Accurate electrical estimates help you budget for this essential home system and ensure your project includes all necessary components for safety and functionality.</p>
+                <p>Contact us for specialized electrical estimating for your residential project.</p>`
+            },
+            9: {
+                title: "Mechanical Estimation for Residential HVAC",
+                content: `<p class="mb-4">HVAC systems are critical for home comfort and energy efficiency. Our mechanical estimates provide detailed quantities and costs for heating, cooling, and ventilation systems in residential projects.</p>
+                <p class="mb-4">We quantify HVAC equipment, ductwork, piping, and controls based on your mechanical drawings and specifications. Our estimates account for system capacity, efficiency requirements, and installation complexity.</p>
+                <p class="mb-4">Accurate HVAC estimates help you select the right systems for your home and budget appropriately for this essential component.</p>
+                <p>Contact us for specialized HVAC estimating for your residential project.</p>`
+            },
+            10: {
+                title: "Painting Estimation for Residential Projects",
+                content: `<p class="mb-4">Painting finishes define the appearance of your home. Our painting estimates provide detailed quantities and costs for all painting work in your residential project, including walls, ceilings, trim, and exterior surfaces.</p>
+                <p class="mb-4">We quantify surface areas, account for multiple coats, and specify paint types based on your finish schedule. Our estimates include preparation work, materials, and labor.</p>
+                <p class="mb-4">Accurate painting estimates help you budget for finishes and select paint qualities that balance appearance and durability with cost.</p>
+                <p>Contact us for specialized painting estimating for your residential project.</p>`
+            },
+            11: {
+                title: "Drywall & Framing Estimation for Residential Projects",
+                content: `<p class="mb-4">Drywall and framing form the structure and interior surfaces of your home. Our estimates provide detailed quantities and costs for all framing and drywall components in your residential project.</p>
+                <p class="mb-4">We quantify lumber or metal studs, sheathing, drywall panels, fasteners, and finishing materials. Our estimates account for waste factors, openings, and special requirements.</p>
+                <p class="mb-4">Accurate framing and drywall estimates are essential for structural integrity and interior finish quality. Let our expertise support your residential project.</p>
+                <p>Contact us for specialized framing and drywall estimating for your home construction project.</p>`
+            },
+            12: {
+                title: "Bluebeam Estimating Software",
+                content: `<p class="mb-4">Bluebeam Revu is a powerful PDF markup and collaboration tool used extensively in construction estimating. Our estimators use Bluebeam for accurate digital takeoffs, document management, and team collaboration.</p>
+                <p class="mb-4">Bluebeam allows us to measure areas, lengths, and counts directly from digital plans, ensuring precise quantities. The software's markup tools enable clear communication about estimate assumptions and scope.</p>
+                <p class="mb-4">With Bluebeam's cloud-based Studio, we can collaborate with clients and team members in real-time, ensuring everyone works from current information.</p>
+                <p>Our proficiency in Bluebeam ensures efficient, accurate estimating for your residential projects.</p>`
+            },
+            13: {
+                title: "Planswift Estimating Software",
+                content: `<p class="mb-4">Planswift is a dedicated takeoff and estimating software that streamlines the quantity takeoff process. Our estimators use Planswift for fast, accurate measurements from digital plans.</p>
+                <p class="mb-4">Planswift's intuitive interface allows us to measure areas, lengths, and counts quickly, with automatic calculations and customizable formulas. The software integrates with cost databases for seamless estimating.</p>
+                <p class="mb-4">With Planswift, we can generate detailed takeoffs that are easy to understand and verify. The software's reporting features provide clear documentation for our estimates.</p>
+                <p>Our Planswift expertise ensures efficient, accurate takeoffs for your residential projects.</p>`
+            },
+            14: {
+                title: "RS Means Cost Data",
+                content: `<p class="mb-4">RS Means provides comprehensive construction cost data that our estimators use to ensure competitive, accurate pricing. The RS Means database includes current material prices, labor rates, and equipment costs.</p>
+                <p class="mb-4">We use RS Means data to benchmark our estimates against industry standards and regional variations. This ensures your residential estimates reflect current market conditions.</p>
+                <p class="mb-4">RS Means data is updated regularly, keeping our estimates current with changing material prices and labor rates. This commitment to current data improves estimate accuracy.</p>
+                <p>Contact us to learn how our use of RS Means data benefits your residential projects.</p>`
+            },
+            15: {
+                title: "Xactimate Estimating Software",
+                content: `<p class="mb-4">Xactimate is industry-standard software for insurance restoration and remodeling estimates. Our estimators are proficient in Xactimate for residential renovation and restoration projects.</p>
+                <p class="mb-4">Xactimate's comprehensive database includes pricing for materials and labor specific to restoration work. The software's sketching tools allow us to create accurate floor plans and measurements.</p>
+                <p class="mb-4">For insurance claims and restoration projects, Xactimate estimates provide the documentation needed for approval and payment. Our expertise ensures your renovation project is properly valued.</p>
+                <p>Contact us for Xactimate estimating for your residential restoration or renovation project.</p>`
+            },
+            16: {
+                title: "FastPIPE Estimating Software",
+                content: `<p class="mb-4">FastPIPE is specialized software for plumbing and piping estimating. Our estimators use FastPIPE to accurately quantify and cost piping systems in residential projects.</p>
+                <p class="mb-4">The software automates pipe measurements, fitting counts, and material calculations based on your plumbing drawings. This ensures consistent, accurate plumbing estimates.</p>
+                <p class="mb-4">FastPIPE's integration with pricing databases provides current material costs, while its labor tables account for installation time based on pipe size and material.</p>
+                <p>Our FastPIPE expertise ensures accurate plumbing estimates for your residential projects.</p>`
+            },
+            17: {
+                title: "FastDUCT Estimating Software",
+                content: `<p class="mb-4">FastDUCT is specialized software for ductwork and HVAC estimating. Our estimators use FastDUCT to accurately quantify and cost duct systems in residential projects.</p>
+                <p class="mb-4">The software automates duct measurements, fitting counts, and material calculations based on your HVAC drawings. This ensures consistent, accurate ductwork estimates.</p>
+                <p class="mb-4">FastDUCT's integration with pricing databases provides current material costs, while its labor tables account for installation time based on duct size and configuration.</p>
+                <p>Our FastDUCT expertise ensures accurate HVAC estimates for your residential projects.</p>`
+            },
+            18: {
+                title: "Trimble Estimating Solutions",
+                content: `<p class="mb-4">Trimble provides comprehensive estimating and project management solutions for construction professionals. Our estimators use Trimble software for accurate quantity takeoffs and cost analysis.</p>
+                <p class="mb-4">Trimble's estimating tools integrate with BIM models, allowing us to extract quantities directly from 3D designs. This improves accuracy and consistency across your project.</p>
+                <p class="mb-4">The software's reporting capabilities provide detailed breakdowns that support informed decision-making and clear communication with stakeholders.</p>
+                <p>Our proficiency with Trimble ensures advanced estimating capabilities for your residential projects.</p>`
+            },
+            19: {
+                title: "IMHS Estimating Software",
+                content: `<p class="mb-4">IMHS (Industrial Material Handling Systems) provides specialized estimating software for construction projects. Our estimators use IMHS for accurate material quantification and cost analysis.</p>
+                <p class="mb-4">The software's comprehensive databases include material specifications, pricing, and labor factors that improve estimate accuracy. Its reporting tools provide clear documentation for our estimates.</p>
+                <p class="mb-4">IMHS software helps us maintain consistency across estimates and ensures all project components are properly accounted for in your residential project.</p>
+                <p>Contact us to learn how our IMHS expertise benefits your residential estimating needs.</p>`
+            },
+            20: {
+                title: "Mark Systems Estimating Software",
+                content: `<p class="mb-4">Mark Systems provides comprehensive estimating solutions for construction professionals. Our estimators use Mark Systems software for accurate quantity takeoffs and cost analysis.</p>
+                <p class="mb-4">The software's intuitive interface streamlines the estimating process, allowing us to work efficiently while maintaining accuracy. Its integration with cost databases ensures current pricing.</p>
+                <p class="mb-4">Mark Systems' reporting capabilities provide detailed breakdowns that support informed decision-making and clear communication with clients and stakeholders.</p>
+                <p>Our proficiency with Mark Systems ensures accurate, efficient estimating for your residential projects.</p>`
+            },
+            21: {
+                title: "Quest Estimating Software",
+                content: `<p class="mb-4">Quest Estimating provides comprehensive estimating solutions for construction projects of all types. Our estimators use Quest software for accurate quantity takeoffs and cost analysis.</p>
+                <p class="mb-4">The software's powerful takeoff tools allow us to measure areas, lengths, and counts quickly from digital plans. Its integration with cost databases ensures current pricing.</p>
+                <p class="mb-4">Quest's reporting features provide clear documentation of quantities and costs, supporting informed decision-making and transparent communication with clients.</p>
+                <p>Our Quest expertise ensures accurate, efficient estimating for your residential projects.</p>`
+            },
+            22: {
+                title: "FastWRAP Estimating Software",
+                content: `<p class="mb-4">FastWRAP is specialized software for estimating fire sprinkler and piping systems. Our estimators use FastWRAP for accurate quantification and costing of fire protection systems in residential projects.</p>
+                <p class="mb-4">The software automates pipe measurements, fitting counts, and sprinkler calculations based on your fire protection drawings. This ensures consistent, accurate estimates for this critical system.</p>
+                <p class="mb-4">FastWRAP's integration with pricing databases provides current material costs, while its labor tables account for installation time based on system configuration.</p>
+                <p>Our FastWRAP expertise ensures accurate fire protection estimates for your residential projects.</p>`
+            },
+            23: {
+                title: "More Estimating Software Tools",
+                content: `<p class="mb-4">Benny Estimates maintains proficiency in a wide range of estimating software tools to ensure we can work with any project requirements. Our team continuously updates skills with new and emerging technologies.</p>
+                <p class="mb-4">Whether your project requires specialized software or you prefer to work with specific tools, we adapt to your needs. Our estimators are skilled in both industry-standard and specialized estimating platforms.</p>
+                <p class="mb-4">This software versatility allows us to provide consistent, accurate estimates regardless of project complexity or client preferences.</p>
+                <p>Contact us to discuss your specific software requirements and how our expertise can benefit your residential project.</p>`
+            },
+            24: {
+                title: "Accurate & Detailed Estimates",
+                content: `<p class="mb-4">Our estimates are known for accuracy and detail. We provide meticulous calculations covering all aspects of residential construction including labor, materials, permits, and site preparation.</p>
+                <p class="mb-4">Accuracy in residential estimating is essential for successful project planning and execution. Our estimates help you avoid cost overruns and make informed decisions throughout your project.</p>
+                <p class="mb-4">We provide detailed breakdowns that make it easy to understand where costs are allocated, supporting transparent communication with clients, lenders, and stakeholders.</p>
+                <p>When you need reliable residential estimates, Benny Estimates delivers the accuracy you can count on.</p>`
+            },
+            25: {
+                title: "Collaborative Approach to Estimating",
+                content: `<p class="mb-4">Our collaborative approach ensures we understand your vision and requirements fully. We work closely with architects, contractors, and homeowners throughout the estimating process.</p>
+                <p class="mb-4">By involving all stakeholders early, we identify potential issues before they become problems and develop solutions that meet everyone's needs. This collaboration improves project outcomes.</p>
+                <p class="mb-4">We value your input and expertise. Our estimators see themselves as partners in your project success, not just service providers.</p>
+                <p>Contact us to experience our collaborative approach to residential estimating.</p>`
+            },
+            26: {
+                title: "Timely Delivery of Estimates",
+                content: `<p class="mb-4">We understand that construction projects operate on tight schedules. That's why we deliver most residential estimates within 24-48 hours of receiving complete project information.</p>
+                <p class="mb-4">Our streamlined estimating process combines experienced estimators with advanced technology to deliver results quickly without sacrificing accuracy. We prioritize urgent projects while maintaining quality.</p>
+                <p class="mb-4">When you need estimates fast, Benny Estimates delivers the speed you need without compromising on accuracy or detail.</p>
+                <p>Contact us for timely residential estimating for your next project.</p>`
+            },
+            27: {
+                title: "Transparent Pricing for Estimates",
+                content: `<p class="mb-4">Our pricing is transparent and competitive. We provide detailed cost breakdowns with no hidden fees, so you know exactly what you're paying for and what you're getting.</p>
+                <p class="mb-4">Before beginning work, we provide clear quotes based on project scope and complexity. Our pricing reflects the value we deliver through accurate, reliable estimates.</p>
+                <p class="mb-4">We believe in building long-term relationships through honest, transparent business practices. Our clients appreciate knowing that our estimates are fair and our pricing is straightforward.</p>
+                <p>Contact us to receive a transparent quote for your residential estimating needs.</p>`
+            },
+            28: {
+                title: "Residential Estimating in New South Wales",
+                content: `<p class="mb-4">Benny Estimates provides comprehensive residential estimating services throughout New South Wales, Australia. Our team understands the local construction market, regulatory requirements, and cost factors specific to NSW.</p>
+                <p class="mb-4">We serve clients across the state, from Sydney's urban developments to regional projects. Our local knowledge ensures accurate residential estimates that reflect NSW market conditions.</p>
+                <p class="mb-4">Whether you're planning a new home, renovation, or multi-family development in New South Wales, our residential estimates provide the early-stage cost insights you need.</p>
+                <p>Contact us to discuss your New South Wales residential project and estimating needs.</p>`
+            },
+            29: {
+                title: "Residential Estimating in Sydney",
+                content: `<p class="mb-4">Sydney's residential construction market is dynamic and competitive. Benny Estimates provides specialized residential estimating services for projects throughout the Sydney metropolitan area.</p>
+                <p class="mb-4">We understand the unique requirements of Sydney projects including local planning regulations, labor markets, and material availability. Our residential estimates reflect Sydney-specific costs and conditions.</p>
+                <p class="mb-4">Whether you're building a custom home, renovating an existing property, or developing multi-family housing in Sydney, our estimates provide the accuracy you need for informed decision-making.</p>
+                <p>Contact us to discuss your Sydney residential project and estimating needs.</p>`
+            },
+            30: {
+                title: "Residential Estimating in Victoria",
+                content: `<p class="mb-4">Victoria's residential construction sector includes diverse housing types and development projects. Benny Estimates provides comprehensive residential estimating services throughout Victoria.</p>
+                <p class="mb-4">We serve clients in Melbourne and regional Victoria, providing accurate residential estimates that reflect local market conditions. Our estimators understand Victorian construction requirements.</p>
+                <p class="mb-4">From new homes to renovations and multi-family developments, our residential estimates support successful project delivery across Victoria.</p>
+                <p>Contact us to discuss your Victorian residential project and estimating needs.</p>`
+            },
+            31: {
+                title: "Residential Estimating in Melbourne",
+                content: `<p class="mb-4">Melbourne is a major center for residential construction and development in Australia. Benny Estimates provides specialized residential estimating services for projects throughout the Melbourne metropolitan area.</p>
+                <p class="mb-4">We understand Melbourne's residential construction markets, labor conditions, and material availability. Our residential estimates reflect local costs and support informed decision-making.</p>
+                <p class="mb-4">Whether you're planning a custom home, renovation, or multi-family development in Melbourne, our residential estimates provide the early-stage cost insights you need.</p>
+                <p>Contact us to discuss your Melbourne residential project and estimating needs.</p>`
+            },
+            32: {
+                title: "Residential Estimating in Queensland",
+                content: `<p class="mb-4">Queensland's residential construction sector includes diverse housing types from coastal homes to urban developments. Benny Estimates provides comprehensive residential estimating services throughout Queensland.</p>
+                <p class="mb-4">We serve clients in Brisbane, the Gold Coast, and regional Queensland, providing accurate residential estimates that reflect local market conditions. Our estimators understand Queensland's construction environment.</p>
+                <p class="mb-4">From new homes to renovations and multi-family projects, our residential estimates support successful project delivery across Queensland.</p>
+                <p>Contact us to discuss your Queensland residential project and estimating needs.</p>`
+            },
+            33: {
+                title: "Residential Estimating in Brisbane",
+                content: `<p class="mb-4">Brisbane's residential construction market is growing rapidly. Benny Estimates provides specialized residential estimating services for projects throughout the Brisbane metropolitan area.</p>
+                <p class="mb-4">We understand Brisbane's residential construction markets, labor conditions, and material availability. Our residential estimates reflect local costs and support informed decision-making.</p>
+                <p class="mb-4">Whether you're planning a new home, renovation, or multi-family development in Brisbane, our residential estimates provide the early-stage cost insights you need.</p>
+                <p>Contact us to discuss your Brisbane residential project and estimating needs.</p>`
+            },
+            34: {
+                title: "Residential Estimating in Western Australia",
+                content: `<p class="mb-4">Western Australia's residential construction sector includes diverse housing types from urban developments to coastal homes. Benny Estimates provides comprehensive residential estimating services throughout WA.</p>
+                <p class="mb-4">We serve clients in Perth and regional Western Australia, providing accurate residential estimates that reflect local market conditions. Our estimators understand WA's unique construction requirements.</p>
+                <p class="mb-4">From new homes to renovations and multi-family projects, our residential estimates support successful project delivery across Western Australia.</p>
+                <p>Contact us to discuss your Western Australian residential project and estimating needs.</p>`
+            },
+            35: {
+                title: "Residential Estimating in Perth",
+                content: `<p class="mb-4">Perth is a major center for residential construction and development in Western Australia. Benny Estimates provides specialized residential estimating services for projects throughout the Perth metropolitan area.</p>
+                <p class="mb-4">We understand Perth's residential construction markets, labor conditions, and material availability. Our residential estimates reflect local costs and support informed decision-making.</p>
+                <p class="mb-4">Whether you're planning a new home, renovation, or multi-family development in Perth, our residential estimates provide the early-stage cost insights you need.</p>
+                <p>Contact us to discuss your Perth residential project and estimating needs.</p>`
+            },
+            36: {
+                title: "Australian Residential Estimating Services",
+                content: `<p class="mb-4">Benny Estimates provides comprehensive residential estimating services throughout Australia, with local expertise in all major housing markets. Our team understands Australian construction standards and practices.</p>
+                <p class="mb-4">We serve clients across New South Wales, Victoria, Queensland, Western Australia, and other states, providing accurate residential estimates that reflect regional market conditions.</p>
+                <p class="mb-4">Australian residential projects have unique requirements including local building codes, material availability, and labor considerations. Our estimators have the local knowledge needed for accurate residential estimates.</p>
+                <p>Contact us to discuss your Australian residential project and learn how our estimating services can support your success.</p>`
+            },
+            37: {
+                title: "US Residential Estimating Services",
+                content: `<p class="mb-4">Benny Estimates provides nationwide residential estimating services across the United States, with expertise in American construction standards, building codes, labor rates, and material costs.</p>
+                <p class="mb-4">From custom homes to renovations and multi-family developments, our estimators understand regional variations that affect residential construction costs across the US.</p>
+                <p class="mb-4">US residential projects must comply with federal, state, and local regulations. Our estimators stay current with requirements across jurisdictions, ensuring your residential estimates reflect all applicable standards.</p>
+                <p>Contact us to discuss your US residential project and discover why American homeowners and builders trust Benny Estimates.</p>`
+            },
+            38: {
+                title: "Step 1: Submit Your Residential Plans",
+                content: `<p class="mb-4">Getting started with your residential estimate is easy. Simply submit your home plans, drawings, or specifications through our secure platform. We accept PDF, CAD, and BIM formats.</p>
+                <p class="mb-4">Include as much information as possible about your project, including scope, materials, and any special requirements. Even preliminary or conceptual drawings can be used for early-stage estimates.</p>
+                <p class="mb-4">Once we receive your plans, we'll acknowledge receipt and provide an estimated timeline for your estimate. Most residential estimates are completed within 24-48 hours.</p>
+                <p>Ready to begin? Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> to submit your plans today.</p>`
+            },
+            39: {
+                title: "Step 2: We Review Your Project",
+                content: `<p class="mb-4">After receiving your residential plans, our expert estimators conduct a thorough review of your project requirements. We analyze drawings, specifications, and any additional information you've provided.</p>
+                <p class="mb-4">During review, we identify key project components, scope assumptions, and potential risk factors. We note any special considerations that might affect costs or require additional information.</p>
+                <p class="mb-4">Our review process ensures we understand your residential project completely before beginning the estimate. This attention to detail results in more accurate and useful estimates.</p>
+                <p>We'll contact you if we have questions or need additional information during the review process.</p>`
+            },
+            40: {
+                title: "Step 3: Get Your Quote",
+                content: `<p class="mb-4">Based on our review, we prepare a detailed quote for your residential estimating services. Our quotes are transparent, with clear pricing based on project scope and complexity.</p>
+                <p class="mb-4">We provide competitive pricing for residential estimates, with options for different levels of detail based on your needs. Our quotes include expected delivery timelines so you know when to expect your estimate.</p>
+                <p class="mb-4">Once you approve the quote, we begin work on your estimate immediately. Most residential estimates are completed within 24-48 hours, with complex projects scheduled accordingly.</p>
+                <p>Contact us to receive your personalized quote for residential estimating services.</p>`
+            },
+            41: {
+                title: "Step 4: Receive Your Estimate",
+                content: `<p class="mb-4">Your completed residential estimate includes comprehensive cost breakdowns for all project components. We provide detailed material quantities, labor estimates, equipment requirements, and cost projections.</p>
+                <p class="mb-4">Estimates are delivered in clear, organized formats that are easy to understand and present to clients, lenders, or project stakeholders. We include supporting documentation and assumptions.</p>
+                <p class="mb-4">After delivery, we're available to answer questions and provide additional information as needed. We stand behind our estimates and support you throughout your project planning process.</p>
+                <p>Contact us today to receive your comprehensive residential estimate.</p>`
+            },
+            42: {
+                title: "Upload Your Residential Plans",
+                content: `<p class="mb-4">Ready to get started with your residential estimate? Upload your home plans, drawings, or specifications and receive a comprehensive estimate for your project.</p>
+                <p class="mb-4">Simply upload your digital files through our secure platform. We accept PDF, CAD, and BIM formats. Once received, our estimators will review your project and provide a detailed cost breakdown within 24-48 hours.</p>
+                <p class="mb-4">Your residential estimate includes comprehensive cost projections, material quantity estimates, and budget recommendations. We'll help you understand the cost implications of your home project at every stage.</p>
+                <p>Upload your residential plans today and discover why homeowners and builders trust Benny Estimates.</p>`
+            },
+            43: {
+                title: "Request Your Residential Quote",
+                content: `<p class="mb-4">Ready to discuss your residential project and request a quote for estimating services? Contact our team today. We'll discuss your project requirements and provide transparent pricing for our services.</p>
+                <p class="mb-4">We offer competitive rates for residential estimates, with options for different levels of detail based on your needs. Our quotes include expected delivery timelines and scope descriptions.</p>
+                <p class="mb-4">Whether you need a preliminary estimate for feasibility analysis or a detailed construction estimate for bidding, we can structure services to meet your needs.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to request your residential quote.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const themeEmoji = document.getElementById('themeEmoji');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText, themeEmoji);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText, themeEmoji) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                        if (themeEmoji) themeEmoji.textContent = '☀️';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                        if (themeEmoji) themeEmoji.textContent = '🌙';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText, themeEmoji);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+
+        // Animate material categories on hover (already handled by CSS)
+        console.log('Residential Estimating Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

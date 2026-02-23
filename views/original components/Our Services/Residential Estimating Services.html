@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Residential Estimating Services - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    },
+                    animation: {
+                        'fade-in-up': 'fadeInUp 0.6s ease-out',
+                        'bounce-home': 'bounceHome 2s infinite',
+                        'pulse-warm': 'pulseWarm 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeInUp: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' }
+                        },
+                        bounceHome: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' }
+                        },
+                        pulseWarm: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(245, 158, 11, 0.4)' },
+                            '50%': { boxShadow: '0 0 0 10px rgba(245, 158, 11, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .residential-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+        }
+        .dark .residential-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+        }
+        .residential-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #f59e0b;
+        }
+        .theme-residential-toggle {
+            background: linear-gradient(135deg, #f59e0b, #16a34a);
+            color: white;
+            box-shadow: 0 8px 20px rgba(245, 158, 11, 0.3);
+        }
+        .theme-residential-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(245, 158, 11, 0.4);
+        }
+        .home-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+        .service-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .gradient-text-residential {
+            background: linear-gradient(135deg, #f59e0b, #16a34a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .savings-bubble {
+            position: absolute;
+            top: -12px;
+            right: -12px;
+            width: 45px;
+            height: 45px;
+            background: #16a34a;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .material-category {
+            display: inline-flex;
+            align-items: center;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 4px;
+            transition: all 0.3s ease;
+        }
+        .material-category:hover {
+            transform: scale(1.05);
+        }
+        .software-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 10px;
+            background: #f3f4f6;
+            border-radius: 12px;
+            font-size: 11px;
+            margin: 3px;
+            border: 1px solid #e5e7eb;
+        }
+        .dark .software-badge {
+            background: #374151;
+            border-color: #4b5563;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-amber-50 to-green-50 dark:from-gray-900 dark:to-amber-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Residential Theme Toggle Button -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="themeToggle" class="theme-residential-toggle flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all duration-300 animate-pulse-warm">
+            <i id="themeIcon" class="ri-home-line text-lg"></i>
+            <span id="themeText" class="hidden md:inline font-semibold">Residential</span>
+            <span id="themeEmoji" class="md:hidden">🏠</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-amber-600 dark:text-amber-400 hover:text-amber-800 dark:hover:text-amber-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400 font-medium">Residential Estimating Services</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-fade-in-up">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-amber-600 to-green-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-home-heart-line mr-2 animate-bounce-home"></i>
+                Home Construction Estimates
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text-residential">Residential Estimating</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Services</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Accurate Estimates for Residential Construction Projects
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800">
+            <img src="https://images.unsplash.com/photo-1600585154340-043788447eb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Residential Construction Estimating" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12 relative">
+            <div class="savings-bubble">30% OFF</div>
+            <div class="bg-gradient-to-r from-amber-50 to-green-50 dark:from-amber-900/20 dark:to-green-900/20 rounded-2xl p-8 border border-amber-200 dark:border-amber-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-heart-line text-amber-600 mr-2"></i>
+                    Build Your Dream Home with Confidence
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                    Empower Your Residential Building Projects with Affordable Cost Estimation
+                </p>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Whether you're a Homeowner, Architect, Contractor, or Builder, Lenders, and Investors, 
+                    our team of professional estimators is here to assist you in achieving your project goals 
+                    efficiently and cost-effectively.
+                </p>
+            </div>
+        </div>
+
+        <!-- Residential Services -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Home Building Estimating Services Tailored To Your Needs
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="residential-card p-6 text-center relative">
+                    <div class="home-badge bg-amber-500 text-white">New Build</div>
+                    <div class="service-icon bg-amber-100 dark:bg-amber-900 mx-auto">
+                        <i class="ri-building-line text-amber-600 dark:text-amber-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">New Construction</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Accurate cost projections for single-family and multi-family residential construction projects.
+                    </p>
+                    <a href="#" class="text-amber-600 dark:text-amber-400 font-medium hover:text-amber-800 dark:hover:text-amber-300 text-sm">
+                        Learn More →
+                    </a>
+                </div>
+                
+                <div class="residential-card p-6 text-center relative">
+                    <div class="home-badge bg-green-500 text-white">Renovation</div>
+                    <div class="service-icon bg-green-100 dark:bg-green-900 mx-auto">
+                        <i class="ri-home-gear-line text-green-600 dark:text-green-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Remodeling & Renovation</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Detailed estimates for home renovations, additions, and remodeling projects.
+                    </p>
+                    <a href="#" class="text-green-600 dark:text-green-400 font-medium hover:text-green-800 dark:hover:text-green-300 text-sm">
+                        Learn More →
+                    </a>
+                </div>
+                
+                <div class="residential-card p-6 text-center relative">
+                    <div class="home-badge bg-blue-500 text-white">Design</div>
+                    <div class="service-icon bg-blue-100 dark:bg-blue-900 mx-auto">
+                        <i class="ri-pencil-ruler-line text-blue-600 dark:text-blue-400 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Architectural Estimates</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Precise cost analysis for residential design and architectural planning.
+                    </p>
+                    <a href="#" class="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300 text-sm">
+                        Learn More →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Material Categories -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-tools-line text-amber-600 mr-2"></i>
+                Comprehensive Material Quantification
+            </h2>
+            <div class="flex flex-wrap gap-3 mb-6">
+                <span class="material-category bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300">
+                    <i class="ri-landscape-line mr-2"></i> Sitework
+                </span>
+                <span class="material-category bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">
+                    <i class="ri-building-2-line mr-2"></i> Concrete
+                </span>
+                <span class="material-category bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300">
+                    <i class="ri-water-flash-line mr-2"></i> Plumbing
+                </span>
+                <span class="material-category bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300">
+                    <i class="ri-flashlight-line mr-2"></i> Electrical
+                </span>
+                <span class="material-category bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300">
+                    <i class="ri-settings-3-line mr-2"></i> Mechanical
+                </span>
+                <span class="material-category bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300">
+                    <i class="ri-brush-line mr-2"></i> Painting
+                </span>
+                <span class="material-category bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-300">
+                    <i class="ri-ruler-line mr-2"></i> Drywall & Framing
+                </span>
+            </div>
+        </div>
+
+        <!-- Software Tools -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-computer-line text-green-600 mr-2"></i>
+                Precise Estimation with Industry-Leading Tools
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <div class="software-badge">Bluebeam</div>
+                <div class="software-badge">Planswift</div>
+                <div class="software-badge">RS Means</div>
+                <div class="software-badge">Xactimate</div>
+                <div class="software-badge">FastPIPE</div>
+                <div class="software-badge">FastDUCT</div>
+                <div class="software-badge">Trimble</div>
+                <div class="software-badge">IMHS</div>
+                <div class="software-badge">Mark Systems</div>
+                <div class="software-badge">Quest Estimating</div>
+                <div class="software-badge">FastWRAP</div>
+                <div class="software-badge">More...</div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-amber-600 to-green-600 rounded-2xl p-8 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center">Why Choose Our Residential Estimating Services?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-calculator-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Accurate & Detailed Estimates</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Meticulous calculations covering labor, materials, permits, and site preparation.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-team-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Collaborative Approach</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Working closely with architects, contractors, and homeowners to understand your vision.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-time-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Timely Delivery</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            24-48 hour turnaround for most residential estimating projects.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-shield-check-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Transparent Pricing</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Competitive pricing with detailed cost breakdowns and no hidden fees.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-map-pin-line text-amber-600 mr-2"></i>
+                Our Residential Service Areas
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Australia -->
+                <div class="bg-gradient-to-r from-amber-50 to-white dark:from-amber-900/10 dark:to-gray-800 rounded-xl p-6 border border-amber-200 dark:border-amber-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-line text-amber-600 dark:text-amber-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Australia</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="text-gray-600 dark:text-gray-300">New South Wales</div>
+                        <div class="text-gray-600 dark:text-gray-300">Sydney</div>
+                        <div class="text-gray-600 dark:text-gray-300">Victoria</div>
+                        <div class="text-gray-600 dark:text-gray-300">Melbourne</div>
+                        <div class="text-gray-600 dark:text-gray-300">Queensland</div>
+                        <div class="text-gray-600 dark:text-gray-300">Brisbane</div>
+                        <div class="text-gray-600 dark:text-gray-300">Western Australia</div>
+                        <div class="text-gray-600 dark:text-gray-300">Perth</div>
+                    </div>
+                </div>
+
+                <!-- USA -->
+                <div class="bg-gradient-to-r from-green-50 to-white dark:from-green-900/10 dark:to-gray-800 rounded-xl p-6 border border-green-200 dark:border-green-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-2-line text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">United States</h3>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm">
+                        Nationwide residential estimating services for home construction, renovation, and remodeling projects across all states.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                How to Get Started with Us For Home Estimates
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-amber-100 dark:bg-amber-900 rounded-full flex items-center justify-center mx-auto mb-4 text-amber-600 dark:text-amber-400 text-2xl font-bold">
+                        1
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Submit Plans</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Upload your residential drawings and specifications</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600 dark:text-green-400 text-2xl font-bold">
+                        2
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">We Review</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Experts analyze your home project requirements</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 dark:text-blue-400 text-2xl font-bold">
+                        3
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Get Quote</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Receive detailed pricing and timeline</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-600 dark:text-purple-400 text-2xl font-bold">
+                        4
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Receive Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Get comprehensive residential estimate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-amber-600 to-green-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl">
+            <h3 class="text-2xl font-bold mb-4">Build Your Dream Home Today!</h3>
+            <p class="mb-6 opacity-90">Save 30% on your first residential construction estimate</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-amber-700 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Upload Home Plans
+                </button>
+                <button class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                    Request Quote
+                </button>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-amber-600 dark:text-amber-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">US Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(737) 273-3314</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-green-600 dark:text-green-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">AUS Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(048) 862-0354</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-mail-line text-blue-600 dark:text-blue-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Email</h4>
+                <p class="text-gray-600 dark:text-gray-300">info@constructestimates.com</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="ri-home-line text-amber-400 mr-2"></i>
+                        Residential Estimating
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        Professional residential construction estimating services for homeowners, builders, architects, and contractors.
+                    </p>
+                    <div class="mt-4 flex space-x-3">
+                        <div class="w-8 h-8 bg-amber-700 rounded-full flex items-center justify-center">
+                            <i class="ri-building-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                            <i class="ri-home-gear-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <i class="ri-pencil-ruler-line text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-amber-400 transition-colors text-sm">New Construction</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors text-sm">Renovation Estimates</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors text-sm">Multi-Family Housing</a></li>
+                        <li><a href="#" class="hover:text-amber-400 transition-colors text-sm">Architectural Plans</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Coverage Areas</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-green-400 transition-colors text-sm">United States</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors text-sm">Australia</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors text-sm">Sydney, AUS</a></li>
+                        <li><a href="#" class="hover:text-green-400 transition-colors text-sm">Melbourne, AUS</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Get Home Estimate</h3>
+                    <p class="text-gray-400 text-sm mb-4">Upload your residential plans and get an estimate within 24-48 hours.</p>
+                    <a href="#" class="inline-flex items-center px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-lg text-sm font-medium transition-colors">
+                        <i class="ri-upload-cloud-line mr-2"></i> Upload Plans
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Residential Estimating Services. Professional cost estimation for home construction and renovation projects.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const themeEmoji = document.getElementById('themeEmoji');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+                themeEmoji.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+                themeEmoji.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Animate material categories on hover
+        document.querySelectorAll('.material-category').forEach(category => {
+            category.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05) translateY(-2px)';
+                this.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.1)';
+            });
+            category.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1) translateY(0)';
+                this.style.boxShadow = 'none';
+            });
+        });
+
+        // Add hover effects to software badges
+        document.querySelectorAll('.software-badge').forEach(badge => {
+            badge.addEventListener('mouseenter', function() {
+                this.style.transform = 'scale(1.05)';
+                this.style.borderColor = '#f59e0b';
+            });
+            badge.addEventListener('mouseleave', function() {
+                this.style.transform = 'scale(1)';
+                this.style.borderColor = '';
+            });
+        });
+
+        console.log('Residential Estimating Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle: Home themed button with warm colors');
+        console.log('Features: Material categories, software tools, service areas');
+    </script>
+</body>
+</html>

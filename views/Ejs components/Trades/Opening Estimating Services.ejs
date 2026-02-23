@@ -1,0 +1,1692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening Estimating Services | BENNY ESTIMATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        opening: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        orange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-open': 'slideOpen 1s ease-in-out',
+                        'swing': 'swing 3s ease-in-out infinite',
+                        'modal-enter': 'modalEnter 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideOpen: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        },
+                        swing: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(2deg)' },
+                            '75%': { transform: 'rotate(-2deg)' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Opening theme styling */
+        .opening-gradient {
+            background: linear-gradient(135deg, #0284c7 0%, #075985 100%);
+        }
+        
+        .dark .opening-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        }
+        
+        /* Door frame pattern */
+        .frame-pattern {
+            background-image: 
+                linear-gradient(90deg, transparent 95%, rgba(2, 132, 199, 0.1) 95%),
+                linear-gradient(transparent 95%, rgba(2, 132, 199, 0.1) 95%);
+            background-size: 50px 50px;
+        }
+        
+        .dark .frame-pattern {
+            background-image: 
+                linear-gradient(90deg, transparent 95%, rgba(56, 189, 248, 0.1) 95%),
+                linear-gradient(transparent 95%, rgba(56, 189, 248, 0.1) 95%);
+            background-size: 50px 50px;
+        }
+        
+        /* Opening card effect */
+        .opening-card {
+            border: 2px solid #bae6fd;
+            border-top: 5px solid #0284c7;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .opening-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+            animation: slideOpen 2s linear infinite;
+        }
+        
+        .opening-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(2, 132, 199, 0.15);
+            border-color: #7dd3fc;
+        }
+        
+        .dark .opening-card {
+            border-color: #075985;
+        }
+        
+        .dark .opening-card:hover {
+            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+        }
+        
+        /* Window pane effect */
+        .window-pane {
+            background-image: 
+                linear-gradient(90deg, transparent 49%, rgba(2, 132, 199, 0.1) 49%, rgba(2, 132, 199, 0.1) 51%, transparent 51%),
+                linear-gradient(transparent 49%, rgba(2, 132, 199, 0.1) 49%, rgba(2, 132, 199, 0.1) 51%, transparent 51%);
+            background-size: 40px 40px;
+        }
+        
+        .dark .window-pane {
+            background-image: 
+                linear-gradient(90deg, transparent 49%, rgba(56, 189, 248, 0.1) 49%, rgba(56, 189, 248, 0.1) 51%, transparent 51%),
+                linear-gradient(transparent 49%, rgba(56, 189, 248, 0.1) 49%, rgba(56, 189, 248, 0.1) 51%, transparent 51%);
+            background-size: 40px 40px;
+        }
+        
+        /* Door handle effect */
+        .handle-effect {
+            position: relative;
+        }
+        
+        .handle-effect:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 6px;
+            height: 12px;
+            background: #f59e0b;
+            border-radius: 3px;
+            transform: translateY(-50%);
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 1rem;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border: 1px solid #374151;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-thumb {
+            background: #fb923c;
+        }
+
+        /* Ensure buttons are clickable */
+        button, .cursor-pointer, [onclick] {
+            cursor: pointer;
+        }
+
+        /* Button color override - Orange theme for all CTAs */
+        .btn-estimate {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+            border: none !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-estimate:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4) !important;
+        }
+        
+        .dark .btn-estimate {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+        
+        .dark .btn-estimate:hover {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        }
+        
+        .btn-estimate i {
+            color: white !important;
+        }
+
+        /* Orange gradient for featured cards */
+        .orange-gradient-card {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+        }
+        
+        .dark .orange-gradient-card {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+
+        /* Orange text for highlights */
+        .text-orange-highlight {
+            color: #f97316 !important;
+        }
+        
+        .dark .text-orange-highlight {
+            color: #fb923c !important;
+        }
+
+        /* Orange border for cards */
+        .border-orange-highlight {
+            border-color: #f97316 !important;
+        }
+        
+        .dark .border-orange-highlight {
+            border-color: #fb923c !important;
+        }
+
+        /* Orange background for icons */
+        .bg-orange-light {
+            background-color: #fff7ed !important;
+        }
+        
+        .dark .bg-orange-light {
+            background-color: #7c2d12 !important;
+        }
+
+        /* Responsive typography */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 1.75rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .card-title {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Header spacing fix */
+        .main-content {
+            padding-top: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                padding-top: 6rem;
+            }
+        }
+    </style>
+</head>
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col">
+    <!-- Main Content with header padding -->
+    <main class="main-content flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        
+        <!-- Hero Section -->
+        <section class="mb-6 sm:mb-8 lg:mb-12">
+            <div class="text-center mb-4 sm:mb-6 lg:mb-8">
+                <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 lg:mb-4 animate-fade-in leading-tight">
+                    Opening Estimating Services
+                </h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-opening-600 dark:text-opening-400 px-2">
+                    Accurate and Affordable Results for Doors, Windows, and Openings
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center mb-4 sm:mb-6 lg:mb-8">
+                <div>
+                    <div class="opening-gradient text-white p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl mb-3 sm:mb-4 lg:mb-6">
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">Get an Estimate Today!</h3>
+                        <p class="mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base">
+                            Tired of inaccurate cost estimations for opening frames, doors, and windows? BENNY ESTIMATES specializes in providing top-notch Opening Estimating Services with unparalleled accuracy and reliability.
+                        </p>
+                        <button onclick="openModal('estimate')" class="btn-estimate px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 cursor-pointer w-full sm:w-auto">
+                            <span class="flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="ri-door-fill"></i>
+                                Request Your Estimate
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div onclick="openModal('expertEstimation')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                        <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                            <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                                <i class="ri-door-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl lg:text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm sm:text-base lg:text-lg">Expert Estimation</h4>
+                                <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Cost-effective solutions for all openings</p>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-300">
+                            Our dedicated team of estimators possesses extensive expertise in assessing expenses, evaluating materials, and calculating precise costs for opening installations.
+                        </p>
+                        <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                            Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 sm:mt-4 lg:mt-0">
+                    <!-- Openings Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Door and window openings in construction" 
+                         class="w-full h-auto rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg object-cover max-h-[250px] sm:max-h-[300px] lg:max-h-none">
+                </div>
+            </div>
+        </section>
+
+        <!-- Comprehensive Solutions -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 frame-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Comprehensive Solutions for Diverse Openings</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+                <div onclick="openModal('doorsFrames')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-door-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Doors & Frames</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('windows')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-window-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Windows</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('slidingDoors')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-sliding-door-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Sliding Doors</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('storefronts')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-store-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Storefronts</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('curtainWalls')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-building-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Curtain Walls</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('skylights')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-sun-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Skylights</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('hangarDoors')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-gate-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Hangar Doors</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('smokeContainment')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-shield-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Smoke Containment</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materials Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Expertise in All Opening Materials</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('aluminum')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm text-center cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                        <i class="ri-cube-fill"></i>
+                    </div>
+                    <h3 class="font-bold text-sm sm:text-base mb-1">Aluminum</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Modern, lightweight openings</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('bronze')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm text-center cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                        <i class="ri-gem-fill"></i>
+                    </div>
+                    <h3 class="font-bold text-sm sm:text-base mb-1">Bronze</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Classic, durable finishes</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('vinyl')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm text-center cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                        <i class="ri-plug-fill"></i>
+                    </div>
+                    <h3 class="font-bold text-sm sm:text-base mb-1">Vinyl</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Energy-efficient solutions</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('fiberglass')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm text-center cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                        <i class="ri-cup-fill"></i>
+                    </div>
+                    <h3 class="font-bold text-sm sm:text-base mb-1">Fiberglass</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Strong, versatile options</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('metal')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm text-center cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                        <i class="ri-hammer-fill"></i>
+                    </div>
+                    <h3 class="font-bold text-sm sm:text-base mb-1">Metal</h3>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Industrial-grade openings</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 window-pane p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md">
+                <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">How Our Services Propel Your Success</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                    <div onclick="openModal('accuracy')" class="text-center p-4 sm:p-5 lg:p-6 border border-opening-200 dark:border-opening-700 rounded-lg cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-checkbox-circle-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Power of Accuracy</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Meticulous calculations and industry insights for confident bidding</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('timeSaving')" class="text-center p-4 sm:p-5 lg:p-6 border border-opening-200 dark:border-opening-700 rounded-lg cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3 animate-swing">
+                            <i class="ri-time-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Time-Saving Solutions</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Efficient processes for agile bidding and project management</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('expertise')" class="text-center p-4 sm:p-5 lg:p-6 border border-opening-200 dark:border-opening-700 rounded-lg cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3 handle-effect">
+                            <i class="ri-user-star-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Expertise That Fuels Success</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Specialized knowledge for all types of openings and materials</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">A Seamless Process to Get Your Openings Estimates</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('submitDrawings')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-upload-cloud-2-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Submit Your Drawings</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">Share your plans and drawings with us effortlessly</p>
+                    <button onclick="event.stopPropagation(); openModal('submitDrawings')" class="btn-estimate text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
+                        Upload Plans Here!
+                    </button>
+                </div>
+                
+                <div onclick="openModal('getQuote')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-price-tag-3-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Get a Quote</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Receive comprehensive pricing within minutes</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('receiveEstimate')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-b-4 hover:border-orange-500 sm:col-span-2 lg:col-span-1">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-file-download-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Receive Your Estimate</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Get detailed opening estimates delivered promptly</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 sm:mt-6 lg:mt-8">
+                <a href="#" onclick="openModal('samples'); return false;" class="inline-flex items-center text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-semibold text-xs sm:text-sm">
+                    <i class="ri-file-list-3-line mr-2"></i>
+                    Check Opening Estimates Samples
+                </a>
+            </div>
+        </section>
+
+        <!-- Global Reach -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Serving Clients Nationwide and Beyond</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('unitedStates')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-12 h-12 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base mb-1">United States</h4>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Nationwide opening estimating</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('australia')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-12 h-12 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base mb-1">Australia</h4>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">Complete coverage across states</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('unitedKingdom')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-12 h-12 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base mb-1">United Kingdom</h4>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">International estimating services</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('canada')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-12 h-12 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3">
+                        <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base mb-1">Canada</h4>
+                    <p class="text-xs text-gray-600 dark:text-gray-400">North American projects</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our Services Areas in Australia</h2>
+            
+            <div class="grid md:grid-cols-2 gap-3 sm:gap-4 lg:gap-8">
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-light rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Complete opening estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div onclick="openModal('sydney')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Sydney</span>
+                        </div>
+                        <div onclick="openModal('melbourne')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div onclick="openModal('brisbane')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Brisbane</span>
+                        </div>
+                        <div onclick="openModal('perth')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Western Australia</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Perth</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-light rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Nationwide opening estimation</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div onclick="openModal('allStates')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div onclick="openModal('commercialOpenings')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Commercial Openings</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Expertise</span>
+                        </div>
+                        <div onclick="openModal('residentialDoors')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Residential Doors</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Specialized</span>
+                        </div>
+                        <div onclick="openModal('industrialAccess')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Industrial Access</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Custom Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-4 sm:mb-6 lg:mb-8 text-center orange-gradient-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-xl">
+            <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">Experience Precision in Opening Estimating</h2>
+            <div class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">
+                Get Professional Opening Estimates<br>
+                <span class="text-xs sm:text-sm lg:text-base text-white/80">Accurate Estimates for Doors, Windows, and All Building Openings</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6 max-w-2xl mx-auto">
+                <div onclick="openModal('doors')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Doors</div>
+                    <div class="text-xs text-white/80">All Types & Materials</div>
+                </div>
+                <div onclick="openModal('windows')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Windows</div>
+                    <div class="text-xs text-white/80">Commercial & Residential</div>
+                </div>
+                <div onclick="openModal('specialOpenings')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Special Openings</div>
+                    <div class="text-xs text-white/80">Custom & Industrial</div>
+                </div>
+            </div>
+            
+            <button onclick="openModal('estimate')" class="bg-white text-orange-600 hover:bg-gray-100 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <i class="ri-door-fill mr-1 sm:mr-2"></i>
+                Get Your Opening Estimate
+            </button>
+        </section>
+
+    </main>
+    
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-2 sm:mb-3">
+                <h2 id="modalTitle" class="text-base sm:text-lg lg:text-xl font-bold text-orange-600 dark:text-orange-400">Opening Estimating Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-lg sm:text-xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here dynamically -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="ri-door-fill text-orange-600 dark:text-orange-400 text-sm sm:text-base"></i>
+                        <div>
+                            <span class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">BENNY ESTIMATES</span>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">96 Jones Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <a href="mailto:Ben@bennyestimates.com" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-xs">
+                            <i class="ri-mail-send-line mr-1"></i>Email
+                        </a>
+                        <a href="tel:+12898017224" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs">
+                            <i class="ri-phone-line mr-1"></i>Call
+                        </a>
+                        <button onclick="closeModal()" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-xs">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BENNY ESTIMATES contact information template
+        const bennyInfo = `
+            <div class="bg-orange-50 dark:bg-gray-700 p-3 sm:p-4 rounded-lg mt-3 border-l-4 border-orange-600">
+                <p class="font-semibold text-orange-700 dark:text-orange-400 flex items-center text-xs sm:text-sm">
+                    <i class="ri-door-fill mr-2"></i>
+                    BENNY ESTIMATES
+                </p>
+                <p class="mt-2 text-xs"><i class="ri-map-pin-line mr-2 text-orange-600"></i>96 Jones Street, New York, USA</p>
+                <p class="text-xs"><i class="ri-mail-line mr-2 text-orange-600"></i><a href="mailto:Ben@bennyestimates.com" class="hover:underline">Ben@bennyestimates.com</a></p>
+                <p class="text-xs"><i class="ri-phone-line mr-2 text-orange-600"></i><a href="tel:+12898017224" class="hover:underline">+1 (289) 801-7224</a></p>
+                <p class="text-xs mt-2 text-gray-600 dark:text-gray-400"><i class="ri-time-line mr-1"></i>Call us any time</p>
+            </div>
+        `;
+
+        // Modal content data structure
+        const openingData = {
+            estimate: {
+                title: 'Get Your Opening Estimate',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Ready to Get Started?</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your opening estimating needs. Our team of certified estimators is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">What We Need From You:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project plans and specifications (PDF, CAD, or digital formats)</li>
+                            <li>Door and window schedules</li>
+                            <li>Scope of work details</li>
+                            <li>Project timeline and delivery requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            expertEstimation: {
+                title: 'Expert Opening Estimation',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision in Every Opening</p>
+                        <p class="text-xs sm:text-sm">Our dedicated team of estimators possesses extensive expertise in assessing expenses, evaluating materials, and calculating precise costs for opening installations. We understand the unique requirements of doors, windows, and all types of building openings.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Expertise Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Door and frame assemblies</li>
+                            <li>Window systems and glazing</li>
+                            <li>Hardware and accessories</li>
+                            <li>Installation labor costs</li>
+                            <li>Material optimization</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            doorsFrames: {
+                title: 'Doors & Frames Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Door & Frame Estimates</p>
+                        <p class="text-xs sm:text-sm">Our door and frame estimating service covers all types of doors including interior doors, exterior doors, fire-rated doors, and specialty doors. We account for frames, hardware, and installation requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Door Types We Estimate:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Wood doors - hollow core, solid core</li>
+                            <li>Metal doors - hollow metal, steel</li>
+                            <li>Fiberglass and composite doors</li>
+                            <li>Glass doors and storefronts</li>
+                            <li>Fire-rated doors and frames</li>
+                            <li>French doors and patio doors</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            windows: {
+                title: 'Window Estimating Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Window Estimates</p>
+                        <p class="text-xs sm:text-sm">Our window estimating service provides accurate quantification of all window types for residential, commercial, and industrial projects. We account for frame materials, glazing, hardware, and installation.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Window Types We Estimate:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Double-hung windows</li>
+                            <li>Casement windows</li>
+                            <li>Slider windows</li>
+                            <li>Bay and bow windows</li>
+                            <li>Awning and hopper windows</li>
+                            <li>Fixed and picture windows</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            slidingDoors: {
+                title: 'Sliding Door Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Accurate Sliding Door Estimates</p>
+                        <p class="text-xs sm:text-sm">Our sliding door estimating service covers all types of sliding doors including patio doors, pocket doors, barn doors, and commercial sliding systems. We account for tracks, hardware, and installation complexity.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Sliding Door Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Sliding patio doors</li>
+                            <li>Pocket doors</li>
+                            <li>Barn doors and hardware</li>
+                            <li>Commercial sliding systems</li>
+                            <li>Automatic sliding doors</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            storefronts: {
+                title: 'Storefront Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Commercial Storefront Estimates</p>
+                        <p class="text-xs sm:text-sm">Our storefront estimating service provides detailed cost projections for commercial entrance systems, including aluminum storefronts, curtain walls, and entrance doors. We ensure accurate quantification of all components.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Storefront Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Aluminum storefront framing</li>
+                            <li>Entrance doors and hardware</li>
+                            <li>Glass and glazing systems</li>
+                            <li>Transoms and sidelights</li>
+                            <li>Automatic door operators</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            curtainWalls: {
+                title: 'Curtain Wall Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Curtain Wall Estimates</p>
+                        <p class="text-xs sm:text-sm">Our curtain wall estimating service provides accurate quantification of all components for glass and metal curtain wall systems. We account for framing, glazing, anchors, and installation.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Curtain Wall Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Aluminum framing members</li>
+                            <li>Glass panels and spandrels</li>
+                            <li>Thermal breaks and insulation</li>
+                            <li>Anchors and connections</li>
+                            <li>Sealants and gaskets</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            skylights: {
+                title: 'Skylight Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Skylight Estimates</p>
+                        <p class="text-xs sm:text-sm">Our skylight estimating service provides accurate cost projections for all types of skylights and roof windows. We account for frame materials, glazing, flashing, and installation requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Skylight Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Fixed skylights</li>
+                            <li>Vented skylights</li>
+                            <li>Tubular skylights</li>
+                            <li>Custom skylight systems</li>
+                            <li>Roof windows</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            hangarDoors: {
+                title: 'Hangar Door Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Industrial Hangar Door Estimates</p>
+                        <p class="text-xs sm:text-sm">Our hangar door estimating service provides detailed cost projections for large industrial doors including aircraft hangar doors, bi-fold doors, and sliding industrial doors. We account for structural requirements, operating systems, and installation.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Hangar Door Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Bi-fold hangar doors</li>
+                            <li>Sliding hangar doors</li>
+                            <li>Vertical lift doors</li>
+                            <li>Multi-leaf doors</li>
+                            <li>Operating systems and controls</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            smokeContainment: {
+                title: 'Smoke Containment Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Smoke Containment Systems</p>
+                        <p class="text-xs sm:text-sm">Our smoke containment estimating service provides accurate quantification of smoke barriers, smoke doors, and related systems. We ensure compliance with fire and life safety codes.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Smoke Containment Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Smoke doors and frames</li>
+                            <li>Smoke curtains and barriers</li>
+                            <li>Seals and gaskets</li>
+                            <li>Automatic closing devices</li>
+                            <li>Smoke detection integration</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            aluminum: {
+                title: 'Aluminum Openings',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Aluminum Door and Window Estimates</p>
+                        <p class="text-xs sm:text-sm">Our aluminum opening estimating service provides accurate cost projections for aluminum doors, windows, storefronts, and curtain walls. Aluminum is a popular choice for modern construction due to its durability and aesthetic appeal.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Aluminum Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Aluminum storefront systems</li>
+                            <li>Aluminum windows (casement, awning, sliding)</li>
+                            <li>Aluminum entrance doors</li>
+                            <li>Aluminum curtain walls</li>
+                            <li>Aluminum frames for glass</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            bronze: {
+                title: 'Bronze Openings',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Bronze Door and Window Estimates</p>
+                        <p class="text-xs sm:text-sm">Our bronze opening estimating service covers classic bronze doors, windows, and architectural elements. Bronze offers timeless beauty and exceptional durability for high-end projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Bronze Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Bronze entrance doors</li>
+                            <li>Bronze window frames</li>
+                            <li>Historic restoration</li>
+                            <li>Custom architectural bronze</li>
+                            <li>Bronze hardware and trim</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            vinyl: {
+                title: 'Vinyl Openings',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Vinyl Window and Door Estimates</p>
+                        <p class="text-xs sm:text-sm">Our vinyl opening estimating service provides accurate cost projections for energy-efficient vinyl windows and doors. Vinyl is a popular choice for residential applications due to its thermal performance and low maintenance.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Vinyl Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Vinyl replacement windows</li>
+                            <li>Vinyl sliding patio doors</li>
+                            <li>Vinyl entry doors</li>
+                            <li>Energy-efficient glazing</li>
+                            <li>Multi-chambered frames</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fiberglass: {
+                title: 'Fiberglass Openings',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Fiberglass Door and Window Estimates</p>
+                        <p class="text-xs sm:text-sm">Our fiberglass opening estimating service covers strong, versatile fiberglass doors and windows. Fiberglass offers excellent thermal performance and can mimic the look of wood without the maintenance.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fiberglass Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Fiberglass entry doors</li>
+                            <li>Fiberglass window frames</li>
+                            <li>French doors and patio doors</li>
+                            <li>Impact-resistant openings</li>
+                            <li>Wood-grain finishes</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            metal: {
+                title: 'Metal Openings',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Metal Door and Frame Estimates</p>
+                        <p class="text-xs sm:text-sm">Our metal opening estimating service provides accurate cost projections for industrial-grade metal doors, frames, and windows. Metal openings are essential for commercial, industrial, and institutional projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Metal Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Hollow metal doors and frames</li>
+                            <li>Steel windows</li>
+                            <li>Security doors and grilles</li>
+                            <li>Industrial access doors</li>
+                            <li>Fire-rated metal assemblies</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            accuracy: {
+                title: 'Power of Accuracy',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Meticulous Calculations for Confident Bidding</p>
+                        <p class="text-xs sm:text-sm">Our estimates are known for their accuracy and reliability. We provide precise estimates you can trust for your opening projects. Every detail is meticulously calculated and verified by our experienced estimators.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Accuracy Features:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Detailed quantity takeoffs</li>
+                            <li>Material cost verification</li>
+                            <li>Labor hour calculations</li>
+                            <li>Hardware and accessory counts</li>
+                            <li>Industry insights for competitive bidding</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            timeSaving: {
+                title: 'Time-Saving Solutions',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Efficient Processes for Agile Bidding</p>
+                        <p class="text-xs sm:text-sm">We understand that time is money in construction. Our efficient estimating processes help you get accurate quotes quickly, allowing you to bid on more projects and respond to opportunities faster.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Time-Saving Features:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>24-48 hour turnaround on estimates</li>
+                            <li>Streamlined takeoff process</li>
+                            <li>Digital plan review</li>
+                            <li>Automated calculations</li>
+                            <li>Rapid quote generation</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            expertise: {
+                title: 'Expertise That Fuels Success',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Specialized Knowledge for All Openings</p>
+                        <p class="text-xs sm:text-sm">Our team brings specialized knowledge of all types of openings and materials. We understand the unique requirements of different door and window systems, ensuring accurate estimates for every project.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Areas of Expertise:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial and residential openings</li>
+                            <li>Industrial and specialty doors</li>
+                            <li>Fire-rated and code-compliant assemblies</li>
+                            <li>Historic restoration</li>
+                            <li>Custom fabricated openings</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            submitDrawings: {
+                title: 'Submit Your Opening Drawings',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Easy Plan Submission</p>
+                        <p class="text-xs sm:text-sm">Getting started with BENNY ESTIMATES is simple. Upload your plans through our secure platform in PDF, CAD, or other digital formats.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Supported Formats:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>PDF drawings and specifications</li>
+                            <li>CAD files (DWG, DXF)</li>
+                            <li>Bluebeam files</li>
+                            <li>Revit/BIM models</li>
+                            <li>Door and window schedules</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Email your plans to <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a></p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            getQuote: {
+                title: 'Get Your Opening Quote',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Transparent, Competitive Pricing</p>
+                        <p class="text-xs sm:text-sm">After reviewing your project, we provide a clear, competitive quote for our estimating services. Our pricing is transparent with no hidden fees or surprises.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Quote Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project scope and deliverables</li>
+                            <li>Timeline for completion</li>
+                            <li>Total cost breakdown</li>
+                            <li>Payment terms and options</li>
+                            <li>Revision and support policy</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            receiveEstimate: {
+                title: 'Receive Your Opening Estimate',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Opening Takeoff Report</p>
+                        <p class="text-xs sm:text-sm">Upon completion, you receive a comprehensive opening estimate with all the details you need for successful project planning and execution.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Deliverables Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Complete door and window quantities</li>
+                            <li>Frame sizes and specifications</li>
+                            <li>Hardware schedules</li>
+                            <li>Glazing requirements</li>
+                            <li>Installation labor costs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            samples: {
+                title: 'Opening Estimates Samples',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Review Our Work</p>
+                        <p class="text-xs sm:text-sm">We invite you to review samples of our opening estimating work. Our portfolio demonstrates the quality and accuracy you can expect from BENNY ESTIMATES.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Sample Types Available:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial door estimates</li>
+                            <li>Residential window takeoffs</li>
+                            <li>Storefront cost projections</li>
+                            <li>Curtain wall estimates</li>
+                            <li>Hardware schedules</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a> to request samples.</p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            unitedStates: {
+                title: 'United States - Nationwide Coverage',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Opening Estimating Across the USA</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides comprehensive opening estimating services across all 50 United States. We understand regional variations in building codes, material costs, and construction practices.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">US Coverage:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>All 50 states - full coverage</li>
+                            <li>IBC and local code compliance</li>
+                            <li>Regional material pricing</li>
+                            <li>Climate-specific considerations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            australia: {
+                title: 'Australia - Complete Coverage',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Opening Estimating Across Australia</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides comprehensive opening estimating services throughout Australia. Our team understands local building codes, material suppliers, and market conditions across all states.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Australian Coverage:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>All states and territories</li>
+                            <li>Australian building codes</li>
+                            <li>Local material sourcing</li>
+                            <li>Regional labor rates</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            unitedKingdom: {
+                title: 'United Kingdom - International Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Opening Estimating in the UK</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides international opening estimating services for clients in the United Kingdom. We understand UK building regulations and construction practices.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">UK Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>UK building regulations compliance</li>
+                            <li>British standards</li>
+                            <li>Local material pricing</li>
+                            <li>International project support</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            canada: {
+                title: 'Canada - North American Projects',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Opening Estimating in Canada</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides opening estimating services for clients throughout Canada. We understand Canadian building codes and construction practices across all provinces.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Canadian Coverage:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>All provinces and territories</li>
+                            <li>National Building Code of Canada</li>
+                            <li>Regional material pricing</li>
+                            <li>Climate-specific considerations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sydney: {
+                title: 'Sydney - New South Wales',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Opening Estimating in Sydney</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides comprehensive opening estimating services throughout Sydney and New South Wales. Our team understands local building codes, material suppliers, and market conditions.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Services in Sydney:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial building openings</li>
+                            <li>Residential door and window estimates</li>
+                            <li>Storefront and curtain wall takeoffs</li>
+                            <li>Industrial access systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            melbourne: {
+                title: 'Melbourne - Victoria',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Opening Estimating in Melbourne</p>
+                        <p class="text-xs sm:text-sm">Serving Melbourne and all of Victoria with professional opening estimating services. From residential to commercial projects, we deliver accurate, reliable estimates.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Local Expertise:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Victorian building code compliance</li>
+                            <li>Local material pricing knowledge</li>
+                            <li>Quick turnaround times</li>
+                            <li>Personalized customer service</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            brisbane: {
+                title: 'Brisbane - Queensland',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Opening Estimating in Brisbane</p>
+                        <p class="text-xs sm:text-sm">Complete opening estimating services for Brisbane and throughout Queensland. Trust BENNY ESTIMATES for accurate, timely takeoffs for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Queensland Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial building openings</li>
+                            <li>Residential door and window estimates</li>
+                            <li>Cyclone-rated openings</li>
+                            <li>Coastal project considerations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            perth: {
+                title: 'Perth - Western Australia',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Opening Estimating in Perth</p>
+                        <p class="text-xs sm:text-sm">Professional opening estimating for Perth and Western Australia. Accurate, reliable estimates for all project types across the region.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">WA Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial and industrial openings</li>
+                            <li>Mining and resource sector projects</li>
+                            <li>Residential door and window estimates</li>
+                            <li>Coastal and climate-specific considerations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            allStates: {
+                title: 'All 50 States Coverage',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Nationwide US Coverage</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides opening estimating services across all 50 United States. We understand regional variations in building codes, material costs, and construction practices.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">US Coverage Details:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>All 50 states - full coverage</li>
+                            <li>IBC and local code compliance</li>
+                            <li>Regional material pricing</li>
+                            <li>Climate-specific considerations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            commercialOpenings: {
+                title: 'Commercial Openings Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Commercial Opening Estimates</p>
+                        <p class="text-xs sm:text-sm">Our commercial opening estimating service provides specialized estimates for commercial buildings including offices, retail centers, restaurants, and institutional projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Commercial Expertise:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Storefront and entrance systems</li>
+                            <li>Curtain wall and window walls</li>
+                            <li>Commercial door hardware</li>
+                            <li>Fire-rated assemblies</li>
+                            <li>Automatic door operators</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            residentialDoors: {
+                title: 'Residential Door Estimates',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Residential Door and Window Estimates</p>
+                        <p class="text-xs sm:text-sm">Our residential opening estimating service provides specialized estimates for homes, apartments, and residential projects. We account for all types of residential doors and windows.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Residential Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Entry doors and sidelights</li>
+                            <li>Interior doors and hardware</li>
+                            <li>Patio and sliding doors</li>
+                            <li>Residential windows</li>
+                            <li>Storm doors and screens</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            industrialAccess: {
+                title: 'Industrial Access Solutions',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Industrial Access Systems</p>
+                        <p class="text-xs sm:text-sm">Our industrial opening estimating service provides custom solutions for industrial facilities including warehouses, manufacturing plants, and industrial buildings.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Industrial Solutions:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Industrial doors and frames</li>
+                            <li>Hangar doors and bi-folds</li>
+                            <li>Security doors and grilles</li>
+                            <li>Loading dock equipment</li>
+                            <li>High-speed doors</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            doors: {
+                title: 'Door Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Door Estimates</p>
+                        <p class="text-xs sm:text-sm">Our door estimating service covers all types of doors including wood, metal, fiberglass, and specialty doors. We account for frames, hardware, and installation requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Door Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Entry and exterior doors</li>
+                            <li>Interior passage doors</li>
+                            <li>Fire-rated doors</li>
+                            <li>French and patio doors</li>
+                            <li>Commercial and industrial doors</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            specialOpenings: {
+                title: 'Special Opening Solutions',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Custom and Specialty Opening Estimates</p>
+                        <p class="text-xs sm:text-sm">Our special opening estimating service provides accurate cost projections for custom and specialty openings including skylights, smoke containment systems, and unique architectural features.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Special Opening Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Skylights and roof windows</li>
+                            <li>Smoke containment systems</li>
+                            <li>Custom architectural openings</li>
+                            <li>Security and detention openings</li>
+                            <li>Acoustic and sound-rated doors</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            }
+        };
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, modal functionality ready');
+            
+            // Add door opening animation to cards
+            document.querySelectorAll('.opening-card').forEach(card => {
+                card.style.animation = 'slideOpen 0.5s ease-out';
+                
+                card.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-8px)';
+                    this.style.boxShadow = '0 20px 50px rgba(2, 132, 199, 0.2)';
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(-6px)';
+                    this.style.boxShadow = '0 15px 40px rgba(2, 132, 199, 0.15)';
+                });
+            });
+            
+            // Add door swing animation to time icon
+            const swingIcon = document.querySelector('.animate-swing');
+            if (swingIcon) {
+                swingIcon.style.animationPlayState = 'running';
+            }
+            
+            // Add door opening animation effect to page load
+            window.addEventListener('load', () => {
+                const heroSection = document.querySelector('section:first-of-type');
+                if (heroSection) {
+                    heroSection.style.animation = 'slideOpen 1s ease-out';
+                }
+            });
+        });
+
+        // Open modal function - defined globally
+        window.openModal = function(modalKey) {
+            console.log('Opening modal for:', modalKey);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Check if data exists
+            if (openingData[modalKey]) {
+                modalTitle.textContent = openingData[modalKey].title;
+                modalBody.innerHTML = openingData[modalKey].content;
+            } else {
+                console.warn('Data not found for key:', modalKey, 'using fallback');
+                modalTitle.textContent = 'Opening Estimating Services';
+                modalBody.innerHTML = `
+                    <p class="text-xs sm:text-sm">Detailed information about this opening estimating service is available. Contact BENNY ESTIMATES for more information.</p>
+                    ${bennyInfo}
+                `;
+            }
+            
+            // Show modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modalOverlay = document.getElementById('modalOverlay');
+                if (modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            }
+        });
+
+        // Make sure all clickable elements work even if they have nested elements
+        document.querySelectorAll('[onclick]').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Prevent event from bubbling up if clicked on a child
+                if (e.target !== this && e.target.closest('[onclick]') !== this) {
+                    return;
+                }
+                // The onclick attribute will handle the rest
+            });
+        });
+        
+        console.log('Opening Estimating page loaded with orange theme and modal functionality');
+    </script>
+</body>
+</html>

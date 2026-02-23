@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construct Estimates - Benefits Section</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        gradient: {
+                            start: '#3b82f6',
+                            middle: '#8b5cf6',
+                            end: '#ec4899'
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7', boxShadow: '0 0 20px rgba(59, 130, 246, 0.5)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #ec4899 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dark .gradient-text {
+            background: linear-gradient(90deg, #60a5fa 0%, #a78bfa 50%, #f472b6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Section background */
+        .benefits-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .dark .benefits-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* Feature card hover effects */
+        .feature-card {
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .feature-card:hover .feature-number {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+        }
+        
+        .dark .feature-card:hover .feature-number {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+        }
+        
+        /* Glowing effect for CTA */
+        .glowing-cta {
+            animation: pulseGlow 2s ease-in-out infinite;
+        }
+        
+        /* Decorative elements */
+        .decoration-blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.1;
+        }
+        
+        .decoration-blob-1 {
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            top: -150px;
+            right: -150px;
+        }
+        
+        .decoration-blob-2 {
+            width: 200px;
+            height: 200px;
+            background: linear-gradient(135deg, #ec4899 0%, #f97316 100%);
+            bottom: -100px;
+            left: -100px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Theme Toggle Demo -->
+    <div class="container mx-auto px-4 py-4 flex justify-end">
+        <button id="themeToggle" class="flex items-center px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content for context -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">Construct Estimates</h1>
+        <p class="text-center text-gray-600 dark:text-gray-400 mb-12">Scroll down to see the Benefits section</p>
+    </div>
+
+    <!-- Benefits Section -->
+    <section class="benefits-bg py-12 lg:py-20 relative overflow-hidden animate-fade-in">
+        <!-- Decorative Blobs -->
+        <div class="decoration-blob decoration-blob-1"></div>
+        <div class="decoration-blob decoration-blob-2"></div>
+        
+        <div class="container mx-auto px-4 relative z-10">
+            <!-- Header Section -->
+            <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16 animate-slide-up">
+                <!-- Section Label -->
+                <div class="inline-flex items-center mb-4">
+                    <div class="w-12 h-0.5 bg-gradient-to-r from-gradient-start via-gradient-middle to-gradient-end mr-3"></div>
+                    <span class="text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider text-sm flex items-center">
+                        <i class="ri-trophy-line mr-2"></i>
+                        COMPETITIVE ADVANTAGE
+                    </span>
+                    <div class="w-12 h-0.5 bg-gradient-to-r from-gradient-end via-gradient-middle to-gradient-start ml-3"></div>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                    Outrank Your Competitors with
+                    <span class="gradient-text block mt-2">Accurate Construction Estimates</span>
+                </h1>
+
+                <!-- Description -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Don't let estimating expenses hold you back. Our cost-effective solutions and industry 
+                        expertise allow you to bid more confidently, secure more contracts, and grow your business. 
+                        Our team of experts is ready to assist you in optimizing your bidding process, winning 
+                        more projects, and maximizing your profitability.
+                    </p>
+                    
+                    <!-- Stats Row -->
+                    <div class="grid grid-cols-3 gap-4 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">30%</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Cost Savings</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">3-9%</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Higher Win Rate</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">50%</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Time Saved</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Features Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8 animate-slide-up">
+                <!-- Feature 01 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-2xl">
+                    <div class="flex items-start mb-6">
+                        <div class="feature-number w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 rounded-xl flex items-center justify-center text-2xl font-bold text-blue-600 dark:text-blue-400 transition-all duration-300 mr-4">
+                            01
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                Our Commitment to Your Success
+                            </h3>
+                            <div class="flex items-center text-sm text-blue-600 dark:text-blue-400">
+                                <i class="ri-hand-heart-line mr-2"></i>
+                                Beyond Estimates - Strategic Partnership
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                        We go beyond estimating by offering consulting services to help you negotiate and close 
+                        deals effectively. Our experienced team can work with you to develop winning strategies, 
+                        advise you during negotiations, and even join conference calls.
+                    </p>
+                    
+                    <!-- Feature Details -->
+                    <div class="space-y-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-chat-3-line text-blue-600 dark:text-blue-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Negotiation strategy sessions</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-presentation-line text-blue-600 dark:text-blue-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Conference call participation</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-line-chart-line text-blue-600 dark:text-blue-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Winning bid strategy development</span>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <a href="#" class="inline-flex items-center text-blue-600 dark:text-blue-400 font-medium hover:text-blue-700 dark:hover:text-blue-300">
+                            Learn more about consulting
+                            <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Feature 02 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-2xl">
+                    <div class="flex items-start mb-6">
+                        <div class="feature-number w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900 dark:to-green-800 rounded-xl flex items-center justify-center text-2xl font-bold text-green-600 dark:text-green-400 transition-all duration-300 mr-4">
+                            02
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                Time-Saving Solutions for Busy Contractors
+                            </h3>
+                            <div class="flex items-center text-sm text-green-600 dark:text-green-400">
+                                <i class="ri-time-line mr-2"></i>
+                                Reclaim Your Evenings & Weekends
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                        Don't let a lack of resources or time hinder your success. Many contractors lose significant 
+                        money each month due to insufficient construction estimation capabilities. No more spending 
+                        nights and weekends at the kitchen table trying to estimate projects.
+                    </p>
+                    
+                    <!-- Feature Details -->
+                    <div class="space-y-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-rest-time-line text-green-600 dark:text-green-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Reclaim 15+ hours per week</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-focus-mode-line text-green-600 dark:text-green-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Focus on core business activities</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-money-dollar-circle-line text-green-600 dark:text-green-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Eliminate opportunity costs</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Time Saved Calculator -->
+                    <div class="mt-6 bg-green-50 dark:bg-green-900/20 rounded-lg p-4">
+                        <div class="flex items-center">
+                            <i class="ri-calculator-line text-green-600 dark:text-green-400 text-lg mr-3"></i>
+                            <div>
+                                <div class="text-green-800 dark:text-green-300 font-bold">Time Saved: 15+ hours/week</div>
+                                <div class="text-green-700 dark:text-green-400 text-sm">That's 60+ hours/month!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Feature 03 -->
+                <div class="feature-card bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg hover:shadow-2xl">
+                    <div class="flex items-start mb-6">
+                        <div class="feature-number w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900 dark:to-purple-800 rounded-xl flex items-center justify-center text-2xl font-bold text-purple-600 dark:text-purple-400 transition-all duration-300 mr-4">
+                            03
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">
+                                Save Big with Our Monthly Takeoff Package!
+                            </h3>
+                            <div class="flex items-center text-sm text-purple-600 dark:text-purple-400">
+                                <i class="ri-coupon-3-line mr-2"></i>
+                                Cost-Effective Subscription Plan
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p class="text-gray-600 dark:text-gray-300 mb-6 leading-relaxed">
+                        With our reliable construction takeoff services at your fingertips, you can confidently 
+                        bid on more projects and increase your chances of winning. Imagine the time and money 
+                        you'll save by outsourcing your estimating needs to our expert team.
+                    </p>
+                    
+                    <!-- Package Features -->
+                    <div class="space-y-3 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-infinite-line text-purple-600 dark:text-purple-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Unlimited estimates per month</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-price-tag-3-line text-purple-600 dark:text-purple-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Fixed monthly rate - no surprises</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-vip-crown-line text-purple-600 dark:text-purple-400 text-sm"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 text-sm">Priority support & faster turnaround</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Price Display -->
+                    <div class="mt-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-lg p-4 text-center">
+                        <div class="text-white">
+                            <div class="text-sm opacity-90">Starting from only</div>
+                            <div class="text-3xl font-bold my-2">$499<span class="text-lg">/month</span></div>
+                            <div class="text-sm opacity-90">Save 40% vs. individual estimates</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom CTA Section -->
+            <div class="mt-16 text-center animate-fade-in">
+                <!-- Testimonial -->
+                <div class="max-w-2xl mx-auto mb-8">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-double-quotes-l text-primary-600 dark:text-primary-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <div class="font-bold text-gray-900 dark:text-white">Mark Thompson</div>
+                                <div class="text-gray-600 dark:text-gray-400 text-sm">General Contractor, Houston TX</div>
+                            </div>
+                        </div>
+                        <p class="text-gray-600 dark:text-gray-300 italic">
+                            "Since partnering with Construct Estimates, our win rate increased by 12% and we're saving 
+                            over 20 hours per week on estimating. The monthly package paid for itself in the first month!"
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Main CTA -->
+                <div class="bg-gradient-to-r from-gradient-start via-gradient-middle to-gradient-end rounded-2xl p-8 shadow-2xl glowing-cta">
+                    <h3 class="text-2xl font-bold text-white mb-4">Ready to Transform Your Business?</h3>
+                    <p class="text-white/90 mb-6 max-w-2xl mx-auto">
+                        Join hundreds of successful contractors who have already optimized their bidding process 
+                        with our expert estimating services.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button class="bg-white text-primary-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 flex items-center justify-center">
+                            <i class="ri-calendar-check-line mr-2"></i>
+                            Book Free Strategy Session
+                        </button>
+                        <button class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
+                            <i class="ri-phone-line mr-2"></i>
+                            Call Now: (346) 660-2440
+                        </button>
+                    </div>
+                    
+                    <div class="mt-6 flex flex-wrap justify-center gap-6">
+                        <div class="flex items-center text-white/80">
+                            <i class="ri-checkbox-circle-fill text-white mr-2"></i>
+                            <span>No long-term contracts</span>
+                        </div>
+                        <div class="flex items-center text-white/80">
+                            <i class="ri-checkbox-circle-fill text-white mr-2"></i>
+                            <span>30-day money-back guarantee</span>
+                        </div>
+                        <div class="flex items-center text-white/80">
+                            <i class="ri-checkbox-circle-fill text-white mr-2"></i>
+                            <span>First project 50% off</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Footer Note -->
+    <div class="container mx-auto px-4 py-8 text-center">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">
+            This Benefits section integrates perfectly with your existing theme system. Copy and paste it into your main website file.
+        </p>
+    </div>
+
+    <script>
+        // Theme functionality (same as your existing system)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+
+        // Feature card hover effects
+        document.querySelectorAll('.feature-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const number = card.querySelector('.feature-number');
+                if (number) {
+                    number.style.transform = 'scale(1.1)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const number = card.querySelector('.feature-number');
+                if (number) {
+                    number.style.transform = 'scale(1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

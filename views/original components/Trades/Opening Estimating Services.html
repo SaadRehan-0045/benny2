@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Opening Estimating Services | Construct Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        opening: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-open': 'slideOpen 1s ease-in-out',
+                        'swing': 'swing 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideOpen: {
+                            '0%': { transform: 'translateX(-100%)' },
+                            '100%': { transform: 'translateX(0)' },
+                        },
+                        swing: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(2deg)' },
+                            '75%': { transform: 'rotate(-2deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Opening theme styling */
+        .opening-gradient {
+            background: linear-gradient(135deg, #0284c7 0%, #075985 100%);
+        }
+        
+        .dark .opening-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        }
+        
+        /* Door frame pattern */
+        .frame-pattern {
+            background-image: 
+                linear-gradient(90deg, transparent 95%, rgba(2, 132, 199, 0.1) 95%),
+                linear-gradient(transparent 95%, rgba(2, 132, 199, 0.1) 95%);
+            background-size: 50px 50px;
+        }
+        
+        .dark .frame-pattern {
+            background-image: 
+                linear-gradient(90deg, transparent 95%, rgba(56, 189, 248, 0.1) 95%),
+                linear-gradient(transparent 95%, rgba(56, 189, 248, 0.1) 95%);
+            background-size: 50px 50px;
+        }
+        
+        /* Opening card effect */
+        .opening-card {
+            border: 2px solid #bae6fd;
+            border-top: 5px solid #0284c7;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .opening-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #38bdf8, transparent);
+            animation: slideOpen 2s linear infinite;
+        }
+        
+        .opening-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(2, 132, 199, 0.15);
+            border-color: #7dd3fc;
+        }
+        
+        .dark .opening-card {
+            border-color: #075985;
+        }
+        
+        .dark .opening-card:hover {
+            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+        }
+        
+        /* Window pane effect */
+        .window-pane {
+            background-image: 
+                linear-gradient(90deg, transparent 49%, rgba(2, 132, 199, 0.1) 49%, rgba(2, 132, 199, 0.1) 51%, transparent 51%),
+                linear-gradient(transparent 49%, rgba(2, 132, 199, 0.1) 49%, rgba(2, 132, 199, 0.1) 51%, transparent 51%);
+            background-size: 40px 40px;
+        }
+        
+        .dark .window-pane {
+            background-image: 
+                linear-gradient(90deg, transparent 49%, rgba(56, 189, 248, 0.1) 49%, rgba(56, 189, 248, 0.1) 51%, transparent 51%),
+                linear-gradient(transparent 49%, rgba(56, 189, 248, 0.1) 49%, rgba(56, 189, 248, 0.1) 51%, transparent 51%);
+            background-size: 40px 40px;
+        }
+        
+        /* Door handle effect */
+        .handle-effect {
+            position: relative;
+        }
+        
+        .handle-effect:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 10px;
+            width: 6px;
+            height: 12px;
+            background: #f59e0b;
+            border-radius: 3px;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+
+    <!-- Theme Toggle Button (Top Right) -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="flex items-center px-4 py-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium text-sm">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+        
+        <!-- Breadcrumb -->
+        <nav class="mb-8 text-sm text-gray-600 dark:text-gray-400">
+            <a href="#" class="hover:text-opening-600 dark:hover:text-opening-400">Home</a>
+            <span class="mx-2">»</span>
+            <span class="text-gray-800 dark:text-gray-300 font-medium">Opening Estimating Services</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                    Opening Estimating Services
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-opening-600 dark:text-opening-400">
+                    Accurate and Affordable Results for Doors, Windows, and Openings
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                    <div class="opening-gradient text-white p-6 rounded-2xl shadow-xl mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Get an Estimate Today!</h3>
+                        <p class="mb-4">
+                            Tired of inaccurate cost estimations for opening frames, doors, and windows? We specialize in providing top-notch Opening Estimating Services with unparalleled accuracy and reliability.
+                        </p>
+                        <button class="bg-white text-opening-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300 mt-4">
+                            Request Your First Estimate
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-opening-100 dark:bg-opening-900 p-3 rounded-lg mr-4">
+                                <i class="ri-door-fill text-opening-600 dark:text-opening-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Expert Estimation</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Cost-effective solutions for all openings</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Our dedicated team of estimators possesses extensive expertise in assessing expenses, evaluating materials, and calculating precise costs for opening installations.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Openings Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Door and window openings in construction" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Comprehensive Solutions -->
+        <section class="mb-16 frame-pattern p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Comprehensive Solutions for Diverse Openings</h2>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-opening-600 dark:text-opening-400 text-2xl mb-3">
+                        <i class="ri-door-fill"></i>
+                    </div>
+                    <span class="font-medium">Doors & Frames</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-opening-600 dark:text-opening-400 text-2xl mb-3">
+                        <i class="ri-window-fill"></i>
+                    </div>
+                    <span class="font-medium">Windows</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-opening-600 dark:text-opening-400 text-2xl mb-3">
+                        <i class="ri-sliding-door-fill"></i>
+                    </div>
+                    <span class="font-medium">Sliding Doors</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-opening-600 dark:text-opening-400 text-2xl mb-3">
+                        <i class="ri-store-fill"></i>
+                    </div>
+                    <span class="font-medium">Storefronts</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-opening-600 dark:text-opening-400 text-2xl mb-3">
+                        <i class="ri-building-fill"></i>
+                    </div>
+                    <span class="font-medium">Curtain Walls</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-opening-600 dark:text-opening-400 text-2xl mb-3">
+                        <i class="ri-sun-fill"></i>
+                    </div>
+                    <span class="font-medium">Skylights</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-opening-600 dark:text-opening-400 text-2xl mb-3">
+                        <i class="ri-gate-fill"></i>
+                    </div>
+                    <span class="font-medium">Hangar Doors</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center shadow-sm opening-card">
+                    <div class="text-opening-600 dark:text-opening-400 text-2xl mb-3">
+                        <i class="ri-shield-fill"></i>
+                    </div>
+                    <span class="font-medium">Smoke Containment</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materials Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Expertise in All Opening Materials</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-5 gap-4">
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm text-center">
+                    <div class="text-opening-600 dark:text-opening-400 text-3xl mb-4">
+                        <i class="ri-cube-fill"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Aluminum</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Modern, lightweight openings</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm text-center">
+                    <div class="text-opening-600 dark:text-opening-400 text-3xl mb-4">
+                        <i class="ri-gem-fill"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Bronze</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Classic, durable finishes</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm text-center">
+                    <div class="text-opening-600 dark:text-opening-400 text-3xl mb-4">
+                        <i class="ri-plug-fill"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Vinyl</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Energy-efficient solutions</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm text-center">
+                    <div class="text-opening-600 dark:text-opening-400 text-3xl mb-4">
+                        <i class="ri-cup-fill"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Fiberglass</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Strong, versatile options</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-sm text-center">
+                    <div class="text-opening-600 dark:text-opening-400 text-3xl mb-4">
+                        <i class="ri-hammer-fill"></i>
+                    </div>
+                    <h3 class="font-bold mb-2">Metal</h3>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Industrial-grade openings</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="mb-16 window-pane p-8 rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">How Our Services Propel Your Success</h2>
+                
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center p-6 border border-opening-200 dark:border-opening-700 rounded-lg">
+                        <div class="text-opening-600 dark:text-opening-400 text-4xl mb-4">
+                            <i class="ri-checkbox-circle-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Power of Accuracy</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Meticulous calculations and industry insights for confident bidding</p>
+                    </div>
+                    
+                    <div class="text-center p-6 border border-opening-200 dark:border-opening-700 rounded-lg">
+                        <div class="text-opening-600 dark:text-opening-400 text-4xl mb-4 animate-swing">
+                            <i class="ri-time-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Time-Saving Solutions</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Efficient processes for agile bidding and project management</p>
+                    </div>
+                    
+                    <div class="text-center p-6 border border-opening-200 dark:border-opening-700 rounded-lg">
+                        <div class="text-opening-600 dark:text-opening-400 text-4xl mb-4 handle-effect">
+                            <i class="ri-user-star-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Expertise That Fuels Success</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Specialized knowledge for all types of openings and materials</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">A Seamless Process to Get Your Openings Estimates</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="w-20 h-20 bg-opening-100 dark:bg-opening-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-upload-cloud-2-fill text-opening-600 dark:text-opening-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Submit Your Drawings</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Share your plans and drawings with us effortlessly</p>
+                    <button class="bg-opening-600 hover:bg-opening-700 text-white px-4 py-2 rounded-lg text-sm transition duration-300">
+                        Upload Plans Here!
+                    </button>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="w-20 h-20 bg-opening-100 dark:bg-opening-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-price-tag-3-fill text-opening-600 dark:text-opening-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Get a Quote</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Receive comprehensive pricing within minutes</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="w-20 h-20 bg-opening-100 dark:bg-opening-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-file-download-fill text-opening-600 dark:text-opening-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Receive Your Estimate</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Get detailed opening estimates delivered promptly</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <a href="#" class="inline-flex items-center text-opening-600 dark:text-opening-400 hover:text-opening-700 dark:hover:text-opening-300 font-semibold">
+                    <i class="ri-file-list-3-line mr-2"></i>
+                    Check Opening Estimates Samples
+                </a>
+            </div>
+        </section>
+
+        <!-- Global Reach -->
+        <section class="mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Serving Clients Nationwide and Beyond</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl">
+                    <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-flag-fill text-red-600 dark:text-red-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">United States</h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Nationwide opening estimating</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-flag-fill text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Australia</h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Complete coverage across states</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-flag-fill text-purple-600 dark:text-purple-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">United Kingdom</h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">International estimating services</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="ri-flag-fill text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Canada</h4>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">North American projects</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Services Areas in Australia</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Complete opening estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-opening-600 dark:text-opening-400 font-semibold">Sydney</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-opening-600 dark:text-opening-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-opening-600 dark:text-opening-400 font-semibold">Brisbane</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Western Australia</span>
+                            <span class="text-opening-600 dark:text-opening-400 font-semibold">Perth</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-red-600 dark:text-red-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Nationwide opening estimation</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-opening-600 dark:text-opening-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Commercial Openings</span>
+                            <span class="text-opening-600 dark:text-opening-400 font-semibold">Expertise</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Residential Doors</span>
+                            <span class="text-opening-600 dark:text-opening-400 font-semibold">Specialized</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Industrial Access</span>
+                            <span class="text-opening-600 dark:text-opening-400 font-semibold">Custom Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-12 text-center bg-gradient-to-r from-opening-600 to-blue-700 dark:from-opening-700 dark:to-blue-800 text-white p-8 rounded-2xl shadow-xl">
+            <h2 class="text-3xl font-bold mb-6">Experience Precision in Opening Estimating</h2>
+            <div class="text-2xl font-bold mb-6">
+                Get Professional Opening Estimates<br>
+                <span class="text-lg opacity-90">Accurate Estimates for Doors, Windows, and All Building Openings</span>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8 max-w-2xl mx-auto">
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">Doors</div>
+                    <div class="text-sm opacity-90">All Types & Materials</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">Windows</div>
+                    <div class="text-sm opacity-90">Commercial & Residential</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">Special Openings</div>
+                    <div class="text-sm opacity-90">Custom & Industrial</div>
+                </div>
+            </div>
+            
+            <button class="bg-white text-opening-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <i class="ri-door-fill mr-2"></i>
+                Get Your Opening Estimate
+            </button>
+        </section>
+
+    </main>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+        
+        // Add door opening animation to cards
+        document.querySelectorAll('.opening-card').forEach(card => {
+            card.style.animation = 'slideOpen 0.5s ease-out';
+            
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 20px 50px rgba(2, 132, 199, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-6px)';
+                this.style.boxShadow = '0 15px 40px rgba(2, 132, 199, 0.15)';
+            });
+        });
+        
+        // Add door swing animation to time icon
+        const swingIcon = document.querySelector('.animate-swing');
+        if (swingIcon) {
+            swingIcon.style.animationPlayState = 'running';
+        }
+        
+        // Add interactive effect to upload button
+        document.querySelector('button:contains("Upload Plans Here!")')?.addEventListener('click', function() {
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i> Uploading...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="ri-check-line mr-2"></i> Upload Complete!';
+                this.classList.remove('bg-opening-600', 'hover:bg-opening-700');
+                this.classList.add('bg-green-600', 'hover:bg-green-700');
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                    this.classList.remove('bg-green-600', 'hover:bg-green-700');
+                    this.classList.add('bg-opening-600', 'hover:bg-opening-700');
+                }, 2000);
+            }, 1500);
+        });
+        
+        // Add door opening animation effect to page load
+        window.addEventListener('load', () => {
+            const heroSection = document.querySelector('section:first-of-type');
+            if (heroSection) {
+                heroSection.style.animation = 'slideOpen 1s ease-out';
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermal & Moisture Protection Estimating Services | Construct Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        thermal: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'water-drop': 'waterDrop 2s ease-in-out infinite',
+                        'heat-wave': 'heatWave 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        waterDrop: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        heatWave: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Thermal theme styling */
+        .thermal-gradient {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+        }
+        
+        .dark .thermal-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        /* Water drop pattern */
+        .water-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(217, 119, 6, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, rgba(217, 119, 6, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 40% 80%, rgba(217, 119, 6, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+        }
+        
+        .dark .water-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(245, 158, 11, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, rgba(245, 158, 11, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+        }
+        
+        /* Thermal card effect */
+        .thermal-card {
+            border: 2px solid #fde68a;
+            border-top: 5px solid #d97706;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .thermal-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(217, 119, 6, 0.05) 100%);
+            z-index: 0;
+        }
+        
+        .thermal-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(217, 119, 6, 0.15);
+            border-color: #fcd34d;
+        }
+        
+        .dark .thermal-card {
+            border-color: #92400e;
+        }
+        
+        .dark .thermal-card:hover {
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+        }
+        
+        /* Heat wave pattern */
+        .heat-pattern {
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(245, 158, 11, 0.1) 25%, 
+                rgba(245, 158, 11, 0.2) 50%, 
+                rgba(245, 158, 11, 0.1) 75%, 
+                transparent 100%);
+            background-size: 200% 100%;
+            animation: heatWave 3s ease-in-out infinite;
+        }
+        
+        /* Water barrier effect */
+        .barrier-effect {
+            position: relative;
+        }
+        
+        .barrier-effect:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #06b6d4, #3b82f6, #06b6d4);
+            background-size: 200% 100%;
+            animation: heatWave 2s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .barrier-effect:hover:after {
+            opacity: 1;
+        }
+        
+        /* Thermal insulation effect */
+        .insulation-effect {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 5px,
+                rgba(217, 119, 6, 0.05) 5px,
+                rgba(217, 119, 6, 0.05) 10px
+            );
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+
+    <!-- Theme Toggle Button (Top Right) -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="flex items-center px-4 py-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium text-sm">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+        
+        <!-- Breadcrumb -->
+        <nav class="mb-8 text-sm text-gray-600 dark:text-gray-400">
+            <a href="#" class="hover:text-thermal-600 dark:hover:text-thermal-400">Home</a>
+            <span class="mx-2">»</span>
+            <span class="text-gray-800 dark:text-gray-300 font-medium">Thermal & Moisture Protection Estimating Services</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                    Thermal & Moisture Protection Estimating Services
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-thermal-600 dark:text-thermal-400">
+                    Estimating Services That Shield Your Project with Precision
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                    <div class="thermal-gradient text-white p-6 rounded-2xl shadow-xl mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Save Big - Request Your 50% Off Estimate!</h3>
+                        <p class="mb-4">
+                            Protecting your property from thermal and moisture elements is paramount. Our team provides accurate cost estimates tailored to your specific needs.
+                        </p>
+                        <button class="bg-white text-thermal-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300 mt-4">
+                            Supercharge Your Success
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-thermal-100 dark:bg-thermal-900 p-3 rounded-lg mr-4">
+                                <i class="ri-shield-fill text-thermal-600 dark:text-thermal-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Expert Protection</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Waterproofing, roofing, fire-stopping & more</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Our thorough knowledge in thermal and moisture protection makes us the trusted choice for all your estimation requirements.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Thermal/Moisture Protection Image -->
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Thermal and moisture protection in construction" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="mb-16 water-pattern p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Experience Accurate and Efficient Protection Services</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm thermal-card">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-4xl mb-4">
+                        <i class="ri-home-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Residential Services</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Homes, apartments, condominiums, townhouses, and renovation projects with reliable thermal moisture estimation.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm thermal-card">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-4xl mb-4 animate-water-drop">
+                        <i class="ri-building-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Commercial Services</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Office buildings, retail spaces, hospitals, and commercial facilities with comprehensive protection solutions.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm thermal-card">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-4xl mb-4 animate-heat-wave">
+                        <i class="ri-factory-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Industrial Services</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Chemical plants, manufacturing facilities, and industrial complexes with specialized thermal protection.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Expertise in a Wide Range of Protective Measures</h2>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-2xl mb-3">
+                        <i class="ri-water-percent-fill"></i>
+                    </div>
+                    <span class="font-medium">Waterproofing</span>
+                </div>
+                
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-2xl mb-3">
+                        <i class="ri-home-5-fill"></i>
+                    </div>
+                    <span class="font-medium">Roofing Systems</span>
+                </div>
+                
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-2xl mb-3">
+                        <i class="ri-fire-fill"></i>
+                    </div>
+                    <span class="font-medium">Fire-stopping</span>
+                </div>
+                
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-2xl mb-3">
+                        <i class="ri-tools-fill"></i>
+                    </div>
+                    <span class="font-medium">Caulking & Sealants</span>
+                </div>
+                
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-2xl mb-3">
+                        <i class="ri-layout-fill"></i>
+                    </div>
+                    <span class="font-medium">Siding Systems</span>
+                </div>
+                
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-2xl mb-3">
+                        <i class="ri-shield-fill"></i>
+                    </div>
+                    <span class="font-medium">Vapor Barriers</span>
+                </div>
+                
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-2xl mb-3">
+                        <i class="ri-temp-hot-fill"></i>
+                    </div>
+                    <span class="font-medium">Insulation</span>
+                </div>
+                
+                <div class="p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect">
+                    <div class="text-thermal-600 dark:text-thermal-400 text-2xl mb-3">
+                        <i class="ri-settings-5-fill"></i>
+                    </div>
+                    <span class="font-medium">Sheet Metal Flashing</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Services -->
+        <section class="mb-16 insulation-effect p-8 rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Enhance Your Building with Exceptional Protection Services</h2>
+                
+                <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                    <div class="p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center">
+                        <div class="text-thermal-600 dark:text-thermal-400 text-xl mb-2">
+                            <i class="ri-wind-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Roof Curbs</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs">Seamless integration</p>
+                    </div>
+                    
+                    <div class="p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center">
+                        <div class="text-thermal-600 dark:text-thermal-400 text-xl mb-2">
+                            <i class="ri-scissors-cut-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Joint Seals</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs">Precise measurements</p>
+                    </div>
+                    
+                    <div class="p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center">
+                        <div class="text-thermal-600 dark:text-thermal-400 text-xl mb-2">
+                            <i class="ri-shield-check-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Vapor Barriers</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs">Moisture control</p>
+                    </div>
+                    
+                    <div class="p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center">
+                        <div class="text-thermal-600 dark:text-thermal-400 text-xl mb-2">
+                            <i class="ri-drop-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Waterproofing</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs">Complete protection</p>
+                    </div>
+                    
+                    <div class="p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center">
+                        <div class="text-thermal-600 dark:text-thermal-400 text-xl mb-2">
+                            <i class="ri-fire-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Fireproofing</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs">Intumescent systems</p>
+                    </div>
+                    
+                    <div class="p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center">
+                        <div class="text-thermal-600 dark:text-thermal-400 text-xl mb-2">
+                            <i class="ri-layout-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Siding Panels</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs">Exterior protection</p>
+                    </div>
+                    
+                    <div class="p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center">
+                        <div class="text-thermal-600 dark:text-thermal-400 text-xl mb-2">
+                            <i class="ri-sun-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Reflective Insulation</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs">Thermal efficiency</p>
+                    </div>
+                    
+                    <div class="p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center">
+                        <div class="text-thermal-600 dark:text-thermal-400 text-xl mb-2">
+                            <i class="ri-cloud-windy-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm mb-1">Weather Barriers</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-xs">Climate protection</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fire Proofing Section -->
+        <section class="mb-16 heat-pattern p-8 rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Thorough Fire Proofing & Fire Stopping Estimations</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <div class="flex items-center mb-4">
+                            <div class="bg-red-100 dark:bg-red-900 p-3 rounded-lg mr-4">
+                                <i class="ri-fire-fill text-red-600 dark:text-red-400 text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold">Attention to Detail</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Crucial for fire protection</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 mb-6">
+                            Our estimators excel in providing detailed descriptions and takeoffs of plans, including fireproofing ratings and structural assemblies such as beams, columns, walls, and framing.
+                        </p>
+                        
+                        <div class="space-y-3">
+                            <div class="flex items-center">
+                                <i class="ri-check-line text-green-500 mr-2"></i>
+                                <span>Accurate insulation thickness measurements</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="ri-check-line text-green-500 mr-2"></i>
+                                <span>Detailed structural assembly analysis</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="ri-check-line text-green-500 mr-2"></i>
+                                <span>Comprehensive bid development support</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-gradient-to-br from-red-600 to-orange-600 text-white p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-4">Project Portfolio</h3>
+                            <p class="mb-4">Successful projects across multiple sectors:</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-white/20 p-3 rounded-lg">
+                                    <div class="font-bold">Schools</div>
+                                    <div class="text-sm opacity-90">Educational facilities</div>
+                                </div>
+                                <div class="bg-white/20 p-3 rounded-lg">
+                                    <div class="font-bold">Hospitals</div>
+                                    <div class="text-sm opacity-90">Healthcare buildings</div>
+                                </div>
+                                <div class="bg-white/20 p-3 rounded-lg">
+                                    <div class="font-bold">Commercial</div>
+                                    <div class="text-sm opacity-90">Office complexes</div>
+                                </div>
+                                <div class="bg-white/20 p-3 rounded-lg">
+                                    <div class="font-bold">Retail</div>
+                                    <div class="text-sm opacity-90">Shopping centers</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Waterproofing Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Streamlined Material Takeoff for Waterproofing</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="text-blue-500 text-3xl mb-4">
+                        <i class="ri-drop-fill"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Foundation Protection</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Accurate material takeoffs for foundations, footings, and below-grade slabs.</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="text-cyan-500 text-3xl mb-4">
+                        <i class="ri-wind-fill"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Air Vapor Barriers</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Precise information on required material quantities for vapor control.</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="text-teal-500 text-3xl mb-4">
+                        <i class="ri-tools-fill"></i>
+                    </div>
+                    <h3 class="text-lg font-bold mb-2">Sealants Application</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Detailed guidance on application of necessary materials for contractors.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="mb-16 text-center">
+            <div class="bg-gradient-to-r from-thermal-600 to-orange-600 dark:from-thermal-700 dark:to-orange-800 text-white p-8 rounded-2xl shadow-xl">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                    <div class="text-left">
+                        <h3 class="text-3xl font-bold mb-4">Ready to Take the Next Step?</h3>
+                        <p class="text-xl mb-4 max-w-2xl">
+                            Roofing contractors regard us as the best roofing estimates company, and for good reason. We value our partnership with contractors and prioritize delivering estimates that meet their specific requirements.
+                        </p>
+                        <div class="flex items-center">
+                            <i class="ri-customer-service-2-fill text-2xl mr-3"></i>
+                            <div>
+                                <div class="font-bold">24/7 Support</div>
+                                <div class="text-sm opacity-90">Always available to address any queries or concerns</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-4">
+                        <button class="bg-white text-thermal-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                            <i class="ri-upload-cloud-2-line mr-2"></i>
+                            Upload Plan
+                        </button>
+                        <button class="bg-transparent border-2 border-white hover:bg-white/10 px-8 py-4 rounded-lg font-bold text-lg transition duration-300">
+                            Transform Your Construction Game
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-12 text-center">
+            <div class="bg-gradient-to-r from-thermal-700 to-amber-800 dark:from-thermal-800 dark:to-amber-900 text-white p-8 rounded-2xl shadow-xl">
+                <h2 class="text-3xl font-bold mb-6">Expert Thermal & Moisture Protection Estimates</h2>
+                <div class="text-2xl font-bold mb-6">
+                    Shield Your Project with Precision<br>
+                    <span class="text-lg opacity-90">Accurate Estimates for Waterproofing, Fireproofing, and Thermal Protection</span>
+                </div>
+                
+                <div class="grid md:grid-cols-3 gap-6 mb-8 max-w-2xl mx-auto">
+                    <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                        <div class="text-lg font-bold">Thermal Protection</div>
+                        <div class="text-sm opacity-90">Insulation & Barriers</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                        <div class="text-lg font-bold">Moisture Control</div>
+                        <div class="text-sm opacity-90">Waterproofing Systems</div>
+                    </div>
+                    <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                        <div class="text-lg font-bold">Fire Protection</div>
+                        <div class="text-sm opacity-90">Fireproofing Solutions</div>
+                    </div>
+                </div>
+                
+                <button class="bg-white text-thermal-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    <i class="ri-shield-fill mr-2"></i>
+                    Request a Quote Now!
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+        
+        // Add water drop animation
+        document.querySelectorAll('.animate-water-drop').forEach(element => {
+            element.style.animationPlayState = 'running';
+        });
+        
+        // Add heat wave animation
+        document.querySelectorAll('.animate-heat-wave').forEach(element => {
+            element.style.animationPlayState = 'running';
+        });
+        
+        // Add hover effects to thermal cards
+        document.querySelectorAll('.thermal-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 20px 50px rgba(217, 119, 6, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 15px 40px rgba(217, 119, 6, 0.15)';
+            });
+        });
+        
+        // Add barrier effect to service items
+        document.querySelectorAll('.barrier-effect').forEach(element => {
+            element.style.transition = 'all 0.3s ease';
+            element.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px)';
+                this.style.boxShadow = '0 5px 20px rgba(217, 119, 6, 0.1)';
+            });
+            
+            element.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+                this.style.boxShadow = '';
+            });
+        });
+        
+        // Add interactive effect to upload button
+        document.querySelector('button:contains("Upload Plan")')?.addEventListener('click', function() {
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i> Processing...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="ri-check-line mr-2"></i> Plan Uploaded!';
+                this.classList.remove('bg-white', 'text-thermal-700', 'hover:bg-gray-100');
+                this.classList.add('bg-green-500', 'text-white', 'hover:bg-green-600');
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                    this.classList.remove('bg-green-500', 'text-white', 'hover:bg-green-600');
+                    this.classList.add('bg-white', 'text-thermal-700', 'hover:bg-gray-100');
+                }, 2000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

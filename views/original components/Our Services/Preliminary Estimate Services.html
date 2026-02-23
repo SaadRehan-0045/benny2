@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preliminary Estimate Services - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.8' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .preliminary-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+        }
+        .dark .preliminary-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+        }
+        .preliminary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #14b8a6;
+        }
+        .theme-preliminary-toggle {
+            background: linear-gradient(135deg, #14b8a6, #2563eb);
+            color: white;
+            box-shadow: 0 8px 20px rgba(20, 184, 166, 0.3);
+        }
+        .theme-preliminary-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(20, 184, 166, 0.4);
+        }
+        .estimate-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #14b8a6;
+            color: white;
+        }
+        .accuracy-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .dark .accuracy-bar {
+            background: #374151;
+        }
+        .accuracy-fill {
+            height: 100%;
+            border-radius: 4px;
+            background: linear-gradient(90deg, #14b8a6, #3b82f6);
+        }
+        .component-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .type-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .gradient-text-prelim {
+            background: linear-gradient(135deg, #14b8a6, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .discount-ribbon {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            font-size: 12px;
+            font-weight: bold;
+            border-radius: 4px;
+            transform: rotate(15deg);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-900 dark:to-teal-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Preliminary Estimate Theme Toggle Button -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="themeToggle" class="theme-preliminary-toggle flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all duration-300 animate-pulse-soft">
+            <i id="themeIcon" class="ri-calculator-line text-lg"></i>
+            <span id="themeText" class="hidden md:inline font-semibold">Preliminary</span>
+            <span id="themeEmoji" class="md:hidden">📊</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-teal-600 dark:text-teal-400 hover:text-teal-800 dark:hover:text-teal-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400 font-medium">Preliminary Estimate Services</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-fade-in">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-teal-600 to-blue-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-article-line mr-2"></i>
+                Early-Stage Cost Planning
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text-prelim">Preliminary Estimate</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Services</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Build with Confidence – Uncover the True Costs of Your Construction Project with Precise Preliminary Estimates!
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Preliminary Construction Estimating" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12 relative">
+            <div class="discount-ribbon">30% OFF</div>
+            <div class="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-teal-200 dark:border-teal-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-flashlight-line text-teal-600 mr-2"></i>
+                    Unleash Your Project's Potential
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                    Get Accurate Preliminary Estimates for Informed Construction Planning
+                </p>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Are you tired of grappling with incomplete drawing plans and struggling to prepare accurate estimates? 
+                    We offer fast and detailed preliminary estimates with per-square-foot costs that empower you to make 
+                    informed decisions, optimize resource allocation, and stay within budget.
+                </p>
+            </div>
+        </div>
+
+        <!-- Estimate Types -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Types of Preliminary Estimates for Different Project Stages
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="preliminary-card p-6 relative">
+                    <div class="estimate-badge" style="background: #f59e0b;">ROM</div>
+                    <div class="component-icon bg-orange-100 dark:bg-orange-900">
+                        <i class="ri-compass-line text-orange-600 dark:text-orange-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Rough Order Magnitude</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Early-stage broad cost range for feasibility analysis and high-level decisions.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600 dark:text-gray-300">Accuracy:</span>
+                            <span class="font-bold text-orange-600">±50%</span>
+                        </div>
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 50%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preliminary-card p-6 relative">
+                    <div class="estimate-badge" style="background: #3b82f6;">Ballpark</div>
+                    <div class="component-icon bg-blue-100 dark:bg-blue-900">
+                        <i class="ri-target-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Ballpark Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Scope definition within client budget based on preliminary drawings.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600 dark:text-gray-300">Accuracy:</span>
+                            <span class="font-bold text-blue-600">±20%</span>
+                        </div>
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 80%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preliminary-card p-6 relative">
+                    <div class="estimate-badge" style="background: #10b981;">Budget</div>
+                    <div class="component-icon bg-green-100 dark:bg-green-900">
+                        <i class="ri-money-dollar-circle-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Budget Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Detailed cost breakdowns using past project data for fund allocation.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600 dark:text-gray-300">Accuracy:</span>
+                            <span class="font-bold text-green-600">±15%</span>
+                        </div>
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 85%"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preliminary-card p-6 relative">
+                    <div class="estimate-badge" style="background: #8b5cf6;">Definitive</div>
+                    <div class="component-icon bg-purple-100 dark:bg-purple-900">
+                        <i class="ri-file-list-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Definitive Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Detailed itemized lists with enhanced accuracy for advanced planning.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600 dark:text-gray-300">Accuracy:</span>
+                            <span class="font-bold text-purple-600">±10%</span>
+                        </div>
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 90%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estimate Components -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-list-check text-teal-600 mr-2"></i>
+                Preliminary Estimating Components: Comprehensive Breakdown
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="preliminary-card p-5">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-teal-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Preliminaries</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Site preparation, temporary facilities, and permits</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preliminary-card p-5">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-blue-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Substructures</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Footings, foundations, and supporting structures</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preliminary-card p-5">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-green-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Superstructures</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Brickwork, walls, roofs, and structural elements</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preliminary-card p-5">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-orange-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Finishes</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Interior and exterior finishes, painting, flooring</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preliminary-card p-5">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-purple-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">MEP Systems</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Mechanical, electrical, and plumbing components</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="preliminary-card p-5">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-red-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Contingency</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Unforeseen circumstances and risk allowance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-teal-600 to-blue-600 rounded-2xl p-8 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center">What You Get with Our Preliminary Cost Estimate</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-time-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Early-Stage Estimates</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Get a solid foundation for project planning and budgeting with early-stage cost insights.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-calculator-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Accurate Calculations</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Meticulous analysis with advanced software tools and industry expertise.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-database-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Data-Driven Approach</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Leveraging vast databases and industry benchmarks for precise estimates.
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-shield-check-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Risk Mitigation</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Identify potential risks early and plan proactively to save time and money.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                How to Begin Your Preliminary Estimates with Us
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-teal-100 dark:bg-teal-900 rounded-full flex items-center justify-center mx-auto mb-4 text-teal-600 dark:text-teal-400 text-2xl font-bold">
+                        1
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Submit Plans</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Upload incomplete or conceptual drawings</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 dark:text-blue-400 text-2xl font-bold">
+                        2
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">We Review</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Experts analyze your project requirements</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600 dark:text-green-400 text-2xl font-bold">
+                        3
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Get Quote</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Receive preliminary pricing and timeline</p>
+                </div>
+                
+                <div class="text-center p-6">
+                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-600 dark:text-purple-400 text-2xl font-bold">
+                        4
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Receive Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Get comprehensive preliminary estimate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-map-pin-line text-teal-600 mr-2"></i>
+                Our Preliminary Estimate Service Areas
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Australia -->
+                <div class="bg-gradient-to-r from-teal-50 to-white dark:from-teal-900/10 dark:to-gray-800 rounded-xl p-6 border border-teal-200 dark:border-teal-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-line text-teal-600 dark:text-teal-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Australia</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div class="text-gray-600 dark:text-gray-300">New South Wales</div>
+                        <div class="text-gray-600 dark:text-gray-300">Sydney</div>
+                        <div class="text-gray-600 dark:text-gray-300">Victoria</div>
+                        <div class="text-gray-600 dark:text-gray-300">Melbourne</div>
+                        <div class="text-gray-600 dark:text-gray-300">Queensland</div>
+                        <div class="text-gray-600 dark:text-gray-300">Brisbane</div>
+                        <div class="text-gray-600 dark:text-gray-300">Western Australia</div>
+                        <div class="text-gray-600 dark:text-gray-300">Perth</div>
+                    </div>
+                </div>
+
+                <!-- USA -->
+                <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-800 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-2-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">United States</h3>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm">
+                        Nationwide preliminary estimating services for early-stage construction planning across all states.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-teal-600 to-blue-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl animate-slide-up">
+            <h3 class="text-2xl font-bold mb-4">Supercharge Your Bids - Save 30% Today!</h3>
+            <p class="mb-6 opacity-90">Get accurate preliminary estimates for informed construction planning</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-teal-700 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Upload Plans
+                </button>
+                <button class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                    Request Estimate
+                </button>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-teal-600 dark:text-teal-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">US Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(737) 273-3314</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-blue-600 dark:text-blue-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">AUS Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(048) 862-0354</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-mail-line text-green-600 dark:text-green-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Email</h4>
+                <p class="text-gray-600 dark:text-gray-300">info@constructestimates.com</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="ri-calculator-line text-teal-400 mr-2"></i>
+                        Preliminary Estimates
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        Professional preliminary estimating services for early-stage construction planning, feasibility studies, and budget development.
+                    </p>
+                    <div class="mt-4 flex space-x-3">
+                        <div class="w-8 h-8 bg-teal-700 rounded-full flex items-center justify-center">
+                            <i class="ri-article-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <i class="ri-compass-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-green-600 rounded-full flex items-center justify-center">
+                            <i class="ri-money-dollar-circle-line text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Estimate Types</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-teal-400 transition-colors text-sm">ROM Estimates</a></li>
+                        <li><a href="#" class="hover:text-teal-400 transition-colors text-sm">Ballpark Estimates</a></li>
+                        <li><a href="#" class="hover:text-teal-400 transition-colors text-sm">Budget Estimates</a></li>
+                        <li><a href="#" class="hover:text-teal-400 transition-colors text-sm">Definitive Estimates</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Coverage Areas</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">United States</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Australia</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Sydney, AUS</a></li>
+                        <li><a href="#" class="hover:text-blue-400 transition-colors text-sm">Melbourne, AUS</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Get Preliminary Quote</h3>
+                    <p class="text-gray-400 text-sm mb-4">Upload your incomplete plans and get preliminary estimates within 24-48 hours.</p>
+                    <a href="#" class="inline-flex items-center px-4 py-2 bg-teal-600 hover:bg-teal-700 text-white rounded-lg text-sm font-medium transition-colors">
+                        <i class="ri-upload-cloud-line mr-2"></i> Upload Plans
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Preliminary Estimate Services. Early-stage construction cost planning and feasibility analysis.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const themeEmoji = document.getElementById('themeEmoji');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+                themeEmoji.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+                themeEmoji.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Animate accuracy bars on scroll
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const accuracyBars = entry.target.querySelectorAll('.accuracy-fill');
+                    accuracyBars.forEach(bar => {
+                        bar.style.transition = 'width 1s ease-in-out';
+                        bar.style.width = bar.style.width || '0%';
+                        setTimeout(() => {
+                            bar.style.width = bar.dataset.width || bar.style.width;
+                        }, 300);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Set width data attributes
+        document.querySelectorAll('.accuracy-fill').forEach(bar => {
+            const width = bar.style.width;
+            bar.style.width = '0%';
+            bar.dataset.width = width;
+        });
+
+        // Observe estimate types section
+        const estimateSection = document.querySelector('.mb-12:nth-of-type(3)');
+        if (estimateSection) {
+            observer.observe(estimateSection);
+        }
+
+        console.log('Preliminary Estimate Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle: Calculator themed button');
+        console.log('Features: Estimate types, components breakdown, accuracy indicators');
+    </script>
+</body>
+</html>

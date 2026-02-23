@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny Estimates - Hero Section</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        accent: {
+                            red: '#ef4444',
+                            orange: '#f97316',
+                            amber: '#f59e0b',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.8s ease-in-out',
+                        'slide-up': 'slideUp 0.8s ease-out',
+                        'pulse-slow': 'pulse 2s ease-in-out infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0', transform: 'translateY(20px)' },
+                            '100%': { opacity: '1', transform: 'translateY(0)' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Background overlay for better text readability */
+        .bg-overlay {
+            position: relative;
+        }
+        
+        .bg-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.9) 100%);
+            z-index: 1;
+        }
+        
+        .dark .bg-overlay::before {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(15, 23, 42, 0.9) 100%);
+        }
+        
+        /* Content positioning */
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Button animations */
+        .btn-pulse:hover {
+            animation: pulse 1s infinite;
+        }
+        
+        .btn-hover-effect {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+        }
+        
+        .dark .btn-hover-effect:hover {
+            box-shadow: 0 10px 25px -5px rgba(96, 165, 250, 0.3);
+        }
+        
+        /* Icon animations */
+        .icon-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        /* Feature card hover */
+        .feature-card {
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            height: 100%;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #2563eb;
+        }
+        
+        .dark .feature-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+            border-color: #60a5fa;
+        }
+
+        /* Content area */
+        .content-area {
+            max-width: 1200px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            border-left: 4px solid #3b82f6;
+            background: linear-gradient(90deg, rgba(59, 130, 246, 0.1) 0%, rgba(59, 130, 246, 0.02) 100%);
+            border-radius: 0 12px 12px 0;
+        }
+        
+        .dark .highlight-box {
+            border-left: 4px solid #60a5fa;
+            background: linear-gradient(90deg, rgba(96, 165, 250, 0.15) 0%, rgba(96, 165, 250, 0.02) 100%);
+        }
+
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Decorative elements */
+        .decoration-1 {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .decoration-2 {
+            animation: float 3.5s ease-in-out infinite reverse;
+        }
+
+        /* Stats card */
+        .stats-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .dark .stats-card {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Benefit item hover */
+        .benefit-item {
+            transition: all 0.3s ease;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+        }
+        
+        .benefit-item:hover {
+            transform: translateX(5px);
+            border-color: #2563eb;
+            background: rgba(37, 99, 235, 0.05);
+        }
+        
+        .dark .benefit-item:hover {
+            border-color: #60a5fa;
+            background: rgba(96, 165, 250, 0.1);
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-heading {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .about-text {
+                font-size: 0.95rem !important;
+                line-height: 1.5 !important;
+            }
+            .feature-card {
+                padding: 1rem !important;
+            }
+            .feature-card h3 {
+                font-size: 0.9rem !important;
+            }
+            .feature-card p {
+                font-size: 0.7rem !important;
+            }
+            .benefit-item {
+                padding: 0.75rem !important;
+            }
+        }
+
+        @media (min-width: 641px) and (max-width: 1024px) {
+            .hero-heading {
+                font-size: 2.5rem !important;
+            }
+        }
+
+        @media (min-width: 1025px) {
+            .hero-heading {
+                font-size: 3.2rem !important;
+                line-height: 1.2 !important;
+            }
+            .about-text {
+                font-size: 1.1rem !important;
+                line-height: 1.7 !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen overflow-x-hidden">
+
+    <!-- Hero Section with Background Overlay - Styled like file #1 -->
+    <section class="relative overflow-hidden bg-overlay min-h-screen flex items-center"
+             style="background-image: url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+                    background-size: cover;
+                    background-position: center;
+                    background-attachment: fixed;">
+        
+        <!-- Decorative Elements - Same as file #1 -->
+        <div class="absolute top-10 left-10 w-20 h-20 bg-yellow-400/20 rounded-full blur-xl decoration-1"></div>
+        <div class="absolute bottom-10 right-10 w-32 h-32 bg-blue-400/20 rounded-full blur-xl decoration-2"></div>
+        <div class="absolute top-1/2 left-1/4 w-16 h-16 bg-primary-400/20 rounded-full blur-xl decoration-1"></div>
+        <div class="absolute bottom-1/3 right-1/4 w-24 h-24 bg-purple-400/20 rounded-full blur-xl decoration-2"></div>
+        
+        <!-- Content Container -->
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 hero-content">
+            <!-- Parent Container - Full width centered content -->
+            <div class="flex flex-col items-center animate-fade-in">
+                
+                <!-- Content Section - Full width -->
+                <div class="w-full content-area">
+                    
+                    <!-- Section Label - Same style as file #1 -->
+                    <div class="inline-flex items-center mb-4 sm:mb-6 mx-auto lg:mx-0 w-full justify-center lg:justify-start">
+                        <div class="w-12 h-0.5 bg-white/50 mr-3"></div>
+                        <span class="text-white/90 font-semibold uppercase tracking-wider text-xs sm:text-sm flex items-center">
+                            <i class="ri-rocket-line mr-2"></i>
+                            BENNY ESTIMATES - CONSTRUCTION EXPERTS
+                        </span>
+                    </div>
+                    
+                    <!-- Main Heading - Transform Your Projects into Profitable Realities -->
+                    <h1 class="hero-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4 sm:mb-6 leading-tight text-center lg:text-left">
+                        Transform Your Projects into 
+                        <span class="text-primary-400 block mt-2">Profitable Realities</span>
+                    </h1>
+                    
+                    <!-- First Paragraph - Company Introduction -->
+                    <div class="max-w-4xl mx-auto lg:mx-0 mb-4 sm:mb-5">
+                        <p class="about-text text-base sm:text-lg text-white/90 leading-relaxed text-center lg:text-left">
+                            <span class="font-bold text-primary-400">Benny Estimates</span> is your trusted partner in construction estimating and material takeoff services to make the bidding process easier for contractors and builders.
+                        </p>
+                    </div>
+
+                    <!-- Second Paragraph - Services Description -->
+                    <div class="max-w-4xl mx-auto lg:mx-0 mb-4 sm:mb-5">
+                        <p class="about-text text-base sm:text-lg text-white/90 leading-relaxed text-center lg:text-left">
+                            With our comprehensive services, we specialize in providing accurate local pricing estimates and taking off entire projects. Our goal is to transform contractors' potential projects into profitable realities, allowing them to focus on other aspects of their business.
+                        </p>
+                    </div>
+
+                    <!-- Third Paragraph - Experience Highlight with Border -->
+                    <div class="max-w-4xl mx-auto lg:mx-0 mb-6 sm:mb-8">
+                        <div class="highlight-box p-4 sm:p-5 lg:p-6">
+                            <p class="about-text text-base sm:text-lg text-white/90 leading-relaxed">
+                                <i class="ri-lightbulb-flash-line text-primary-400 mr-2 text-xl"></i>
+                                With over <span class="font-bold text-primary-400">10 years of experience</span> in the construction industry, Benny Estimates has built a solid reputation for delivering accurate material estimates. Residential, commercial, civil, or industrial projects—whatever the scope, our construction managers and quantity surveyors have the expertise and references spanning hundreds of satisfied clients.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Feature List Grid - 2 columns on mobile, 4 on desktop - Styled like file #1 -->
+                    <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-5 xl:gap-6 mb-6 sm:mb-8 lg:mb-10">
+                        <!-- Feature 1 -->
+                        <div class="feature-card bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 sm:p-5 lg:p-6 text-center border border-white/20 dark:border-gray-700/50">
+                            <div class="feature-icon flex-shrink-0 mb-3">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-primary-500/20 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="ri-building-line text-primary-400 text-xl sm:text-2xl lg:text-3xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white mb-1 text-sm sm:text-base lg:text-lg">All Project Types</h3>
+                                <p class="text-white/70 text-xs sm:text-sm">Residential • Commercial • Industrial</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div class="feature-card bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 sm:p-5 lg:p-6 text-center border border-white/20 dark:border-gray-700/50">
+                            <div class="feature-icon flex-shrink-0 mb-3">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="ri-check-double-line text-green-400 text-xl sm:text-2xl lg:text-3xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white mb-1 text-sm sm:text-base lg:text-lg">98% Accuracy</h3>
+                                <p class="text-white/70 text-xs sm:text-sm">Precision estimates guaranteed</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="feature-card bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 sm:p-5 lg:p-6 text-center border border-white/20 dark:border-gray-700/50">
+                            <div class="feature-icon flex-shrink-0 mb-3">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-purple-500/20 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="ri-refund-line text-purple-400 text-xl sm:text-2xl lg:text-3xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white mb-1 text-sm sm:text-base lg:text-lg">Risk-Free</h3>
+                                <p class="text-white/70 text-xs sm:text-sm">100% satisfaction guarantee</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 4 -->
+                        <div class="feature-card bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-4 sm:p-5 lg:p-6 text-center border border-white/20 dark:border-gray-700/50">
+                            <div class="feature-icon flex-shrink-0 mb-3">
+                                <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mx-auto">
+                                    <i class="ri-price-tag-3-line text-yellow-400 text-xl sm:text-2xl lg:text-3xl"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-white mb-1 text-sm sm:text-base lg:text-lg">Transparent Pricing</h3>
+                                <p class="text-white/70 text-xs sm:text-sm">No hidden charges ever</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cost Saving Banner - Benny Estimates Promise - Styled like file #1 -->
+                    <div class="mb-6 sm:mb-8 lg:mb-10">
+                        <div class="bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 text-white p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg icon-float">
+                            <div class="flex items-center justify-center flex-wrap gap-3 sm:gap-4">
+                                <div class="flex-shrink-0">
+                                    <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                        <i class="ri-arrow-down-line text-white text-sm sm:text-base lg:text-lg xl:text-xl"></i>
+                                    </div>
+                                </div>
+                                <div class="text-center sm:text-left">
+                                    <h3 class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold mb-1">Reduce Estimating Costs by 30%</h3>
+                                    <p class="text-primary-100 text-xs sm:text-sm lg:text-base">Let Benny Estimates handle your takeoffs while you focus on construction</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefits Row - Why Choose Benny Estimates - Styled like file #1 -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 lg:gap-5 xl:gap-6 mb-6 sm:mb-8 lg:mb-10">
+                        <!-- Benefit 1 -->
+                        <div class="benefit-item flex items-center p-3 sm:p-4 lg:p-5 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-white/20 dark:border-gray-700/50">
+                            <div class="benefit-icon flex-shrink-0 mr-3">
+                                <div class="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-blue-500/20 rounded-full flex items-center justify-center">
+                                    <i class="ri-timer-line text-blue-400 text-sm sm:text-base"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-xs sm:text-sm lg:text-base">Fast Turnaround</h4>
+                                <p class="text-white/70 text-[10px] sm:text-xs lg:text-sm">24-48 hour delivery</p>
+                            </div>
+                        </div>
+
+                        <!-- Benefit 2 -->
+                        <div class="benefit-item flex items-center p-3 sm:p-4 lg:p-5 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-white/20 dark:border-gray-700/50">
+                            <div class="benefit-icon flex-shrink-0 mr-3">
+                                <div class="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-green-500/20 rounded-full flex items-center justify-center">
+                                    <i class="ri-customer-service-2-line text-green-400 text-sm sm:text-base"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-xs sm:text-sm lg:text-base">24/7 Support</h4>
+                                <p class="text-white/70 text-[10px] sm:text-xs lg:text-sm">Always here to help</p>
+                            </div>
+                        </div>
+
+                        <!-- Benefit 3 -->
+                        <div class="benefit-item flex items-center p-3 sm:p-4 lg:p-5 bg-white/10 dark:bg-gray-800/50 backdrop-blur-sm rounded-lg border border-white/20 dark:border-gray-700/50">
+                            <div class="benefit-icon flex-shrink-0 mr-3">
+                                <div class="w-8 h-8 sm:w-9 sm:h-9 lg:w-10 lg:h-10 bg-purple-500/20 rounded-full flex items-center justify-center">
+                                    <i class="ri-award-line text-purple-400 text-sm sm:text-base"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-white text-xs sm:text-sm lg:text-base">Certified Experts</h4>
+                                <p class="text-white/70 text-[10px] sm:text-xs lg:text-sm">Professional estimators</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Stats Row - Added from file #1 style -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mb-6 sm:mb-8">
+                        <div class="stats-card rounded-lg p-3 text-center">
+                            <div class="text-xl sm:text-2xl font-bold text-white">8000+</div>
+                            <div class="text-white/70 text-xs">Projects</div>
+                        </div>
+                        <div class="stats-card rounded-lg p-3 text-center">
+                            <div class="text-xl sm:text-2xl font-bold text-white">98%</div>
+                            <div class="text-white/70 text-xs">Accuracy</div>
+                        </div>
+                        <div class="stats-card rounded-lg p-3 text-center">
+                            <div class="text-xl sm:text-2xl font-bold text-white">10+</div>
+                            <div class="text-white/70 text-xs">Years</div>
+                        </div>
+                        <div class="stats-card rounded-lg p-3 text-center">
+                            <div class="text-xl sm:text-2xl font-bold text-white">700+</div>
+                            <div class="text-white/70 text-xs">Clients</div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Info - Added from file #1 -->
+                    <div class="flex flex-wrap gap-4 sm:gap-6 mb-6 sm:mb-8 justify-center lg:justify-start">
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-phone-line text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-white/80 text-xs sm:text-sm">Call us anytime</div>
+                                <div class="text-white font-bold text-sm sm:text-base">+1 (289) 801-7224</div>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-8 h-8 bg-primary-500 rounded-full flex items-center justify-center mr-3">
+                                <i class="ri-mail-line text-white text-sm"></i>
+                            </div>
+                            <div>
+                                <div class="text-white/80 text-xs sm:text-sm">Email us at</div>
+                                <div class="text-white font-bold text-sm sm:text-base">Ben@bennyestimates.com</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons - Updated with email - Styled like file #1 -->
+                    <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                        <a href="mailto:Ben@bennyestimates.com" class="bg-gradient-to-r from-primary-500 to-primary-600 hover:from-primary-600 hover:to-primary-700 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl btn-hover-effect flex items-center justify-center text-sm sm:text-base shadow-lg btn-pulse">
+                            <i class="ri-mail-send-line mr-2"></i>
+                            Ben@bennyestimates.com
+                        </a>
+                        <a href="tel:+12898017224" class="bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white font-semibold py-3 sm:py-4 px-6 sm:px-8 rounded-xl btn-hover-effect flex items-center justify-center text-sm sm:text-base border border-white/30">
+                            <i class="ri-phone-line mr-2"></i>
+                            Call: +1 (289) 801-7224
+                        </a>
+                    </div>
+
+                    <!-- Trust Badge - Styled like file #1 -->
+                    <div class="mt-8 sm:mt-10 text-center lg:text-left">
+                        <p class="text-white/60 text-xs sm:text-sm">
+                            Join <span class="font-bold text-white">700+ construction professionals</span> who trust Benny Estimates for accurate project estimates
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            if (updateThemeUI) updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (updateThemeUI) updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                if (themeIcon) themeIcon.className = 'ri-sun-line mr-2';
+                if (themeText) themeText.textContent = 'Light Mode';
+            } else {
+                if (themeIcon) themeIcon.className = 'ri-moon-line mr-2';
+                if (themeText) themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle if exists
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Preliminary Estimate Services - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        teal: {
+                            50: '#f0fdfa',
+                            100: '#ccfbf1',
+                            200: '#99f6e4',
+                            300: '#5eead4',
+                            400: '#2dd4bf',
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                            700: '#0f766e',
+                            800: '#115e59',
+                            900: '#134e4a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'fade-in-slow': 'fadeIn 0.8s ease-in',
+                        'pulse-soft': 'pulseSoft 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        pulseSoft: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.8' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .preliminary-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+        }
+        .dark .preliminary-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+        }
+        .preliminary-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #14b8a6;
+        }
+        .estimate-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #14b8a6;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .accuracy-bar {
+            height: 8px;
+            border-radius: 4px;
+            background: #e5e7eb;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+        .dark .accuracy-bar {
+            background: #374151;
+        }
+        .accuracy-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease-in-out;
+        }
+        .component-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        .type-indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 8px;
+        }
+        .gradient-text-prelim {
+            background: linear-gradient(135deg, #14b8a6, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .preliminary-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-teal-50 to-blue-50 dark:from-gray-900 dark:to-teal-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+   <%- include('../header.ejs') %>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-fade-in-slow">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-teal-600 to-blue-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-article-line mr-2"></i>
+                Early-Stage Cost Planning
+            </div>
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text-prelim">Preliminary Estimate</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Services</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Build with Confidence – Uncover the True Costs of Your Construction Project with Precise Preliminary Estimates!
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Preliminary Construction Estimating" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-teal-50 to-blue-50 dark:from-teal-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-teal-200 dark:border-teal-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-flashlight-line text-teal-600 mr-2"></i>
+                    Unleash Your Project's Potential
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                    Get Accurate Preliminary Estimates for Informed Construction Planning
+                </p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Are you tired of grappling with incomplete drawing plans and struggling to prepare accurate estimates? 
+                    We offer fast and detailed preliminary estimates with per-square-foot costs that empower you to make 
+                    informed decisions, optimize resource allocation, and stay within budget.
+                </p>
+                <button onclick="openModal(1)" class="mt-2 text-teal-600 dark:text-teal-400 font-medium hover:text-teal-800 dark:hover:text-teal-300 inline-flex items-center cursor-pointer">
+                    Learn More About Our Preliminary Services <i class="ri-arrow-right-line ml-1"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Estimate Types -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Types of Preliminary Estimates for Different Project Stages
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- ROM Estimate - Orange Theme -->
+                <div class="preliminary-card p-6 relative">
+                    <div class="estimate-badge" style="background: #f59e0b;" onclick="openModal(2)">ROM</div>
+                    <div class="component-icon bg-orange-100 dark:bg-orange-900" onclick="openModal(2)">
+                        <i class="ri-compass-line text-orange-600 dark:text-orange-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Rough Order Magnitude</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Early-stage broad cost range for feasibility analysis and high-level decisions.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600 dark:text-gray-300">Accuracy:</span>
+                            <span class="font-bold text-orange-600">±50%</span>
+                        </div>
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 50%; background: #f59e0b;"></div>
+                        </div>
+                    </div>
+                    <button onclick="openModal(2)" class="mt-3 text-teal-600 dark:text-teal-400 font-medium text-sm hover:text-teal-800 dark:hover:text-teal-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Ballpark Estimate - Blue Theme -->
+                <div class="preliminary-card p-6 relative">
+                    <div class="estimate-badge" style="background: #3b82f6;" onclick="openModal(3)">Ballpark</div>
+                    <div class="component-icon bg-blue-100 dark:bg-blue-900" onclick="openModal(3)">
+                        <i class="ri-increase-decrease-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Ballpark Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Scope definition within client budget based on preliminary drawings.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600 dark:text-gray-300">Accuracy:</span>
+                            <span class="font-bold text-blue-600">±20%</span>
+                        </div>
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 80%; background: #3b82f6;"></div>
+                        </div>
+                    </div>
+                    <button onclick="openModal(3)" class="mt-3 text-teal-600 dark:text-teal-400 font-medium text-sm hover:text-teal-800 dark:hover:text-teal-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Budget Estimate - Green Theme -->
+                <div class="preliminary-card p-6 relative">
+                    <div class="estimate-badge" style="background: #10b981;" onclick="openModal(4)">Budget</div>
+                    <div class="component-icon bg-green-100 dark:bg-green-900" onclick="openModal(4)">
+                        <i class="ri-money-dollar-circle-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Budget Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Detailed cost breakdowns using past project data for fund allocation.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600 dark:text-gray-300">Accuracy:</span>
+                            <span class="font-bold text-green-600">±15%</span>
+                        </div>
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 85%; background: #10b981;"></div>
+                        </div>
+                    </div>
+                    <button onclick="openModal(4)" class="mt-3 text-teal-600 dark:text-teal-400 font-medium text-sm hover:text-teal-800 dark:hover:text-teal-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Definitive Estimate - Purple Theme -->
+                <div class="preliminary-card p-6 relative">
+                    <div class="estimate-badge" style="background: #8b5cf6;" onclick="openModal(5)">Definitive</div>
+                    <div class="component-icon bg-purple-100 dark:bg-purple-900" onclick="openModal(5)">
+                        <i class="ri-file-list-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Definitive Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Detailed itemized lists with enhanced accuracy for advanced planning.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-gray-600 dark:text-gray-300">Accuracy:</span>
+                            <span class="font-bold text-purple-600">±10%</span>
+                        </div>
+                        <div class="accuracy-bar">
+                            <div class="accuracy-fill" style="width: 90%; background: #8b5cf6;"></div>
+                        </div>
+                    </div>
+                    <button onclick="openModal(5)" class="mt-3 text-teal-600 dark:text-teal-400 font-medium text-sm hover:text-teal-800 dark:hover:text-teal-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Estimate Components -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-list-check text-teal-600 mr-2"></i>
+                Preliminary Estimating Components: Comprehensive Breakdown
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div onclick="openModal(6)" class="preliminary-card p-5 cursor-pointer hover:border-teal-500 transition-colors">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-teal-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Preliminaries</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Site preparation, temporary facilities, and permits</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openModal(7)" class="preliminary-card p-5 cursor-pointer hover:border-teal-500 transition-colors">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-blue-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Substructures</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Footings, foundations, and supporting structures</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openModal(8)" class="preliminary-card p-5 cursor-pointer hover:border-teal-500 transition-colors">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-green-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Superstructures</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Brickwork, walls, roofs, and structural elements</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openModal(9)" class="preliminary-card p-5 cursor-pointer hover:border-teal-500 transition-colors">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-orange-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Finishes</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Interior and exterior finishes, painting, flooring</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openModal(10)" class="preliminary-card p-5 cursor-pointer hover:border-teal-500 transition-colors">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-purple-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">MEP Systems</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Mechanical, electrical, and plumbing components</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div onclick="openModal(11)" class="preliminary-card p-5 cursor-pointer hover:border-teal-500 transition-colors">
+                    <div class="flex items-start">
+                        <div class="type-indicator bg-red-500 mt-1"></div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Contingency</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">Unforeseen circumstances and risk allowance</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Benefits Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-teal-600 to-blue-600 rounded-2xl p-8 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center">What You Get with Our Preliminary Cost Estimate</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-time-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Early-Stage Estimates</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Get a solid foundation for project planning and budgeting with early-stage cost insights.
+                        </p>
+                        <button onclick="openModal(12)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-calculator-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Accurate Calculations</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Meticulous analysis with advanced software tools and industry expertise.
+                        </p>
+                        <button onclick="openModal(13)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-database-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Data-Driven Approach</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Leveraging vast databases and industry benchmarks for precise estimates.
+                        </p>
+                        <button onclick="openModal(14)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-shield-check-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Risk Mitigation</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Identify potential risks early and plan proactively to save time and money.
+                        </p>
+                        <button onclick="openModal(15)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                How to Begin Your Preliminary Estimates with Us
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div onclick="openModal(16)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-teal-100 dark:bg-teal-900 rounded-full flex items-center justify-center mx-auto mb-4 text-teal-600 dark:text-teal-400 text-2xl font-bold">
+                        1
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Submit Plans</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Upload incomplete or conceptual drawings</p>
+                </div>
+                
+                <div onclick="openModal(17)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 dark:text-blue-400 text-2xl font-bold">
+                        2
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">We Review</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Experts analyze your project requirements</p>
+                </div>
+                
+                <div onclick="openModal(18)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600 dark:text-green-400 text-2xl font-bold">
+                        3
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Get Quote</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Receive preliminary pricing and timeline</p>
+                </div>
+                
+                <div onclick="openModal(19)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-600 dark:text-purple-400 text-2xl font-bold">
+                        4
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Receive Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Get comprehensive preliminary estimate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-map-pin-line text-teal-600 mr-2"></i>
+                Our Preliminary Estimate Service Areas
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Australia -->
+                <div class="bg-gradient-to-r from-teal-50 to-white dark:from-teal-900/10 dark:to-gray-800 rounded-xl p-6 border border-teal-200 dark:border-teal-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-teal-100 dark:bg-teal-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-line text-teal-600 dark:text-teal-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Australia</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div onclick="openModal(20)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400">New South Wales</div>
+                        <div onclick="openModal(21)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400">Sydney</div>
+                        <div onclick="openModal(22)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400">Victoria</div>
+                        <div onclick="openModal(23)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400">Melbourne</div>
+                        <div onclick="openModal(24)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400">Queensland</div>
+                        <div onclick="openModal(25)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400">Brisbane</div>
+                        <div onclick="openModal(26)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400">Western Australia</div>
+                        <div onclick="openModal(27)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-teal-600 dark:hover:text-teal-400">Perth</div>
+                    </div>
+                    <button onclick="openModal(28)" class="mt-4 text-teal-600 dark:text-teal-400 text-sm hover:text-teal-800 dark:hover:text-teal-300 inline-flex items-center cursor-pointer">
+                        View All Australian Services <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- USA -->
+                <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-800 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-2-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">United States</h3>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Nationwide preliminary estimating services for early-stage construction planning across all states.
+                    </div>
+                    <button onclick="openModal(29)" class="text-teal-600 dark:text-teal-400 text-sm hover:text-teal-800 dark:hover:text-teal-300 inline-flex items-center cursor-pointer">
+                        View US Services <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-teal-600 to-blue-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl animate-slide-up">
+            <h3 class="text-2xl font-bold mb-4">Get Accurate Preliminary Estimates Today</h3>
+            <p class="mb-6 opacity-90">Professional preliminary estimating services for informed construction planning</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button onclick="openModal(30)" class="px-8 py-3 bg-white text-teal-700 font-bold rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                    Upload Plans
+                </button>
+                <button onclick="openModal(31)" class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+                    Request Estimate
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Preliminary Estimate Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content
+        const serviceData = {
+            1: {
+                title: "Our Preliminary Estimating Services",
+                content: `<p class="mb-4">At Benny Estimates, we specialize in providing accurate preliminary estimates for construction projects at every stage of development. Our preliminary estimating services help you make informed decisions before committing significant resources.</p>
+                <p class="mb-4">Preliminary estimates are essential for project feasibility studies, budget planning, and securing financing. They provide a reliable cost foundation that guides your project from concept to completion.</p>
+                <p class="mb-4">Our team uses advanced estimating software, historical data, and industry benchmarks to deliver estimates that you can trust. We understand that early-stage estimates need to be both quick and accurate to support your decision-making.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to discuss your preliminary estimating needs.</p>`
+            },
+            2: {
+                title: "Rough Order Magnitude (ROM) Estimates",
+                content: `<p class="mb-4">Rough Order Magnitude (ROM) estimates are the earliest form of cost estimates, typically used during project conception and feasibility studies. ROM estimates provide a broad cost range that helps stakeholders understand potential project scale and investment requirements.</p>
+                <p class="mb-4">Our ROM estimates are developed using historical data from similar projects, industry benchmarks, and high-level quantity assumptions. With accuracy typically ranging from -30% to +50%, these estimates are ideal for initial go/no-go decisions.</p>
+                <p class="mb-4">ROM estimates help you evaluate project feasibility, compare alternative approaches, and establish preliminary budgets for further development. They're essential for securing early-stage funding and stakeholder buy-in.</p>
+                <p>Contact us to learn how our ROM estimates can support your project's early planning stages.</p>`
+            },
+            3: {
+                title: "Ballpark Estimates",
+                content: `<p class="mb-4">Ballpark estimates provide more refined cost projections than ROM estimates, typically developed when preliminary drawings and scope definitions are available. These estimates help align project scope with client budgets.</p>
+                <p class="mb-4">Our ballpark estimates achieve accuracy of approximately ±20% by incorporating more detailed quantity assumptions and current market pricing. We analyze preliminary drawings and specifications to develop realistic cost projections.</p>
+                <p class="mb-4">Ballpark estimates are valuable for refining project scope, testing budget assumptions, and supporting design decisions before detailed drawings are complete. They help prevent scope creep and budget overruns.</p>
+                <p>Let our ballpark estimating expertise help you align your project vision with realistic budget expectations.</p>`
+            },
+            4: {
+                title: "Budget Estimates",
+                content: `<p class="mb-4">Budget estimates provide detailed cost breakdowns suitable for fund allocation and project financing. These estimates achieve accuracy of approximately ±15% by using past project data and detailed quantity takeoffs.</p>
+                <p class="mb-4">Our budget estimates include comprehensive cost breakdowns by trade, material, and project phase. We analyze available drawings and specifications to develop reliable cost projections that support financial planning.</p>
+                <p class="mb-4">Budget estimates are essential for securing construction financing, obtaining permits, and establishing realistic project budgets. They provide the detail needed for confident decision-making.</p>
+                <p>Contact us to learn how our budget estimating services can support your project financing needs.</p>`
+            },
+            5: {
+                title: "Definitive Estimates",
+                content: `<p class="mb-4">Definitive estimates provide the highest level of accuracy before detailed construction documents are complete. These estimates achieve accuracy of approximately ±10% through detailed itemized lists and comprehensive quantity takeoffs.</p>
+                <p class="mb-4">Our definitive estimates include detailed cost breakdowns by trade, material quantities, labor hours, and equipment requirements. We analyze available drawings and specifications to develop precise cost projections.</p>
+                <p class="mb-4">Definitive estimates are used for final budget approval, contractor negotiations, and project control. They provide the detail needed for successful project execution and cost management.</p>
+                <p>Let our definitive estimating expertise help you prepare for successful project delivery.</p>`
+            },
+            6: {
+                title: "Preliminaries in Construction Estimating",
+                content: `<p class="mb-4">Preliminaries encompass all the site preparation, temporary facilities, and administrative costs required before and during construction. These include site clearing, erosion control, temporary utilities, site offices, security, and permit fees.</p>
+                <p class="mb-4">Accurate estimation of preliminaries is essential because these costs can represent 5-15% of total project value. Underestimating preliminaries can lead to significant budget shortfalls and project delays.</p>
+                <p class="mb-4">Our preliminary estimates include comprehensive allowances for all preliminary items based on project size, location, and complexity. We account for local requirements, seasonal factors, and site-specific conditions.</p>
+                <p>Contact us to ensure your preliminary estimates include accurate allowances for all pre-construction and site preparation costs.</p>`
+            },
+            7: {
+                title: "Substructures in Construction Estimating",
+                content: `<p class="mb-4">Substructures include all construction below grade, including footings, foundations, basements, and below-grade walls. These elements are critical to building stability and represent significant project costs.</p>
+                <p class="mb-4">Our substructure estimates include detailed quantities for excavation, concrete, reinforcement, formwork, waterproofing, and backfill. We account for soil conditions, groundwater, and foundation depth in our calculations.</p>
+                <p class="mb-4">Accurate substructure estimates are essential because foundation problems are among the most expensive to correct after construction begins. We help you anticipate and budget for all foundation requirements.</p>
+                <p>Let our substructure estimating expertise ensure your project's foundation is properly budgeted.</p>`
+            },
+            8: {
+                title: "Superstructures in Construction Estimating",
+                content: `<p class="mb-4">Superstructures include all construction above grade, including structural frames, exterior walls, roofs, and interior structural elements. These components form the building's primary structure and envelope.</p>
+                <p class="mb-4">Our superstructure estimates include detailed quantities for structural steel, concrete, masonry, wood framing, exterior cladding, and roofing. We account for building height, spans, and structural loads in our calculations.</p>
+                <p class="mb-4">Superstructure costs typically represent 30-50% of total project value, making accurate estimation essential for project success. We provide comprehensive breakdowns that support procurement and construction planning.</p>
+                <p>Contact us to learn how our superstructure estimating can support your project's structural planning.</p>`
+            },
+            9: {
+                title: "Finishes in Construction Estimating",
+                content: `<p class="mb-4">Finishes include all interior and exterior surface treatments that define a building's appearance and functionality. These include flooring, wall finishes, ceilings, painting, trim, and specialty finishes.</p>
+                <p class="mb-4">Our finish estimates include detailed quantities for all finish materials based on architectural drawings and finish schedules. We account for material grades, installation methods, and quality standards.</p>
+                <p class="mb-4">Finish costs can vary significantly based on material selection and quality standards. Our estimates help you understand the cost implications of finish choices and make informed decisions.</p>
+                <p>Let our finish estimating expertise help you select finishes that balance quality, appearance, and budget.</p>`
+            },
+            10: {
+                title: "MEP Systems in Construction Estimating",
+                content: `<p class="mb-4">Mechanical, Electrical, and Plumbing (MEP) systems are among the most complex and costly building components. MEP estimates must account for equipment, distribution systems, controls, and installation requirements.</p>
+                <p class="mb-4">Our MEP estimates include detailed quantities for HVAC equipment, ductwork, piping, electrical distribution, lighting, fire protection, and plumbing systems. We account for system complexity, building codes, and energy efficiency requirements.</p>
+                <p class="mb-4">MEP systems typically represent 20-40% of total project value, making accurate estimation essential for budget control. Our comprehensive MEP estimates support procurement, coordination, and installation planning.</p>
+                <p>Contact us for specialized MEP estimating support for your next project.</p>`
+            },
+            11: {
+                title: "Contingency in Construction Estimates",
+                content: `<p class="mb-4">Contingency allowances are essential components of construction estimates, providing funds for unforeseen circumstances, design changes, and project risks. Proper contingency planning prevents budget overruns and project delays.</p>
+                <p class="mb-4">Our contingency recommendations are based on project complexity, stage of design, and risk assessment. Early-stage estimates may include 15-20% contingency, while detailed estimates may include 5-10%.</p>
+                <p class="mb-4">We help you understand the appropriate contingency for your project based on specific risk factors including site conditions, market volatility, and design completeness.</p>
+                <p>Proper contingency planning protects your project from unexpected costs and ensures successful delivery within budget.</p>`
+            },
+            12: {
+                title: "Early-Stage Estimates Benefits",
+                content: `<p class="mb-4">Early-stage estimates provide a solid foundation for project planning and budgeting. They help you understand project feasibility before committing significant resources to design and development.</p>
+                <p class="mb-4">With early-stage estimates, you can evaluate alternative approaches, test budget assumptions, and make informed decisions about project scope and quality. This early insight prevents costly surprises later.</p>
+                <p class="mb-4">Our early-stage estimates are developed quickly using historical data and industry benchmarks, providing the information you need when you need it most.</p>
+                <p>Contact us to learn how early-stage estimates can support your project planning and decision-making.</p>`
+            },
+            13: {
+                title: "Accurate Calculations Methodology",
+                content: `<p class="mb-4">Our accurate calculations are the result of meticulous analysis, advanced software tools, and extensive industry expertise. We combine technology with human judgment to deliver estimates you can trust.</p>
+                <p class="mb-4">We use industry-leading estimating software for quantity takeoffs, cost databases for current pricing, and sophisticated spreadsheets for detailed analysis. Our quality control processes ensure accuracy and consistency.</p>
+                <p class="mb-4">Our estimators bring decades of combined experience to every project, identifying cost factors that software alone might miss. This combination of technology and expertise delivers superior results.</p>
+                <p>Trust Benny Estimates for accurate calculations that support successful project delivery.</p>`
+            },
+            14: {
+                title: "Data-Driven Approach to Estimating",
+                content: `<p class="mb-4">Our data-driven approach leverages vast databases and industry benchmarks to deliver precise estimates. We continuously update our cost data with current market pricing and project feedback.</p>
+                <p class="mb-4">We maintain detailed historical data from hundreds of completed projects, allowing us to benchmark your project against similar work. This data-driven insight improves accuracy and reliability.</p>
+                <p class="mb-4">Our databases include regional variations in labor rates, material costs, and productivity factors, ensuring your estimates reflect local market conditions.</p>
+                <p>Contact us to learn how our data-driven estimating approach can benefit your next project.</p>`
+            },
+            15: {
+                title: "Risk Mitigation Through Estimating",
+                content: `<p class="mb-4">Effective risk mitigation starts with accurate estimating. Our estimates help you identify potential risks early and plan proactively to save time and money throughout your project.</p>
+                <p class="mb-4">We identify risk factors including site conditions, market volatility, design complexity, and regulatory requirements. Our estimates include appropriate contingencies and recommendations for risk management.</p>
+                <p class="mb-4">Early identification of risks allows you to develop mitigation strategies before problems occur. This proactive approach prevents costly surprises and keeps projects on track.</p>
+                <p>Let our estimating expertise help you identify and mitigate risks in your next construction project.</p>`
+            },
+            16: {
+                title: "Step 1: Submit Your Plans",
+                content: `<p class="mb-4">Getting started with your preliminary estimate is easy. Simply submit your plans, drawings, or conceptual sketches through our secure platform. We accept PDF, CAD, and BIM formats.</p>
+                <p class="mb-4">Include as much information as possible about your project, including scope, materials, and any special requirements. Even incomplete or conceptual drawings can be used for preliminary estimates.</p>
+                <p class="mb-4">Once we receive your plans, we'll acknowledge receipt and provide an estimated timeline for your estimate. Most preliminary estimates are completed within 24-48 hours.</p>
+                <p>Ready to begin? Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> to submit your plans today.</p>`
+            },
+            17: {
+                title: "Step 2: We Review Your Project",
+                content: `<p class="mb-4">After receiving your plans, our expert estimators conduct a thorough review of your project requirements. We analyze drawings, specifications, and any additional information you've provided.</p>
+                <p class="mb-4">During review, we identify key project components, scope assumptions, and potential risk factors. We note any special considerations that might affect costs or require additional information.</p>
+                <p class="mb-4">Our review process ensures we understand your project completely before beginning the estimate. This attention to detail results in more accurate and useful preliminary estimates.</p>
+                <p>We'll contact you if we have questions or need additional information during the review process.</p>`
+            },
+            18: {
+                title: "Step 3: Get Your Quote",
+                content: `<p class="mb-4">Based on our review, we prepare a detailed quote for your preliminary estimating services. Our quotes are transparent, with clear pricing based on project scope and complexity.</p>
+                <p class="mb-4">We provide competitive pricing for preliminary estimates, with options for different levels of detail based on your needs. Our quotes include expected delivery timelines so you know when to expect your estimate.</p>
+                <p class="mb-4">Once you approve the quote, we begin work on your estimate immediately. Most preliminary estimates are completed within 24-48 hours, with complex projects scheduled accordingly.</p>
+                <p>Contact us to receive your personalized quote for preliminary estimating services.</p>`
+            },
+            19: {
+                title: "Step 4: Receive Your Estimate",
+                content: `<p class="mb-4">Your completed preliminary estimate includes comprehensive cost breakdowns for all project components. We provide detailed material quantities, labor estimates, and cost projections.</p>
+                <p class="mb-4">Estimates are delivered in clear, organized formats that are easy to understand and present to clients, lenders, or project stakeholders. We include supporting documentation and assumptions.</p>
+                <p class="mb-4">After delivery, we're available to answer questions and provide additional information as needed. We stand behind our estimates and support you throughout your project planning process.</p>
+                <p>Contact us today to receive your comprehensive preliminary estimate.</p>`
+            },
+            20: {
+                title: "Preliminary Estimates in New South Wales",
+                content: `<p class="mb-4">Benny Estimates provides comprehensive preliminary estimating services throughout New South Wales, Australia. Our team understands the local construction market, regulatory requirements, and cost factors specific to NSW.</p>
+                <p class="mb-4">We serve clients across the state, from Sydney's urban developments to regional projects. Our local knowledge ensures accurate preliminary estimates that reflect NSW market conditions.</p>
+                <p class="mb-4">Whether you're planning residential, commercial, or industrial projects in New South Wales, our preliminary estimates provide the early-stage cost insights you need.</p>
+                <p>Contact us to discuss your New South Wales project and preliminary estimating needs.</p>`
+            },
+            21: {
+                title: "Preliminary Estimates in Sydney",
+                content: `<p class="mb-4">Sydney's construction market is dynamic and competitive. Benny Estimates provides specialized preliminary estimating services for projects throughout the Sydney metropolitan area.</p>
+                <p class="mb-4">We understand the unique requirements of Sydney projects including local planning regulations, labor markets, and material availability. Our preliminary estimates reflect Sydney-specific costs and conditions.</p>
+                <p class="mb-4">Whether you're developing residential, commercial, or mixed-use projects in Sydney, our preliminary estimates provide the early-stage cost insights you need for informed decision-making.</p>
+                <p>Contact us to discuss your Sydney project and preliminary estimating needs.</p>`
+            },
+            22: {
+                title: "Preliminary Estimates in Victoria",
+                content: `<p class="mb-4">Victoria's construction sector includes diverse residential, commercial, and industrial projects. Benny Estimates provides comprehensive preliminary estimating services throughout Victoria.</p>
+                <p class="mb-4">We serve clients in Melbourne and regional Victoria, providing accurate preliminary estimates that reflect local market conditions. Our estimators understand Victorian construction requirements.</p>
+                <p class="mb-4">From feasibility studies to budget planning, our preliminary estimates support successful project delivery across Victoria.</p>
+                <p>Contact us to discuss your Victorian project and preliminary estimating needs.</p>`
+            },
+            23: {
+                title: "Preliminary Estimates in Melbourne",
+                content: `<p class="mb-4">Melbourne is a major center for construction and development in Australia. Benny Estimates provides specialized preliminary estimating services for projects throughout the Melbourne metropolitan area.</p>
+                <p class="mb-4">We understand Melbourne's construction markets, labor conditions, and material availability. Our preliminary estimates reflect local costs and support informed decision-making.</p>
+                <p class="mb-4">Whether you're planning residential developments, commercial projects, or mixed-use facilities in Melbourne, our preliminary estimates provide the early-stage cost insights you need.</p>
+                <p>Contact us to discuss your Melbourne project and preliminary estimating needs.</p>`
+            },
+            24: {
+                title: "Preliminary Estimates in Queensland",
+                content: `<p class="mb-4">Queensland's construction sector includes diverse residential, commercial, and infrastructure projects. Benny Estimates provides comprehensive preliminary estimating services throughout Queensland.</p>
+                <p class="mb-4">We serve clients in Brisbane, the Gold Coast, and regional Queensland, providing accurate preliminary estimates that reflect local market conditions. Our estimators understand Queensland's construction environment.</p>
+                <p class="mb-4">From feasibility studies to budget planning, our preliminary estimates support successful project delivery across Queensland.</p>
+                <p>Contact us to discuss your Queensland project and preliminary estimating needs.</p>`
+            },
+            25: {
+                title: "Preliminary Estimates in Brisbane",
+                content: `<p class="mb-4">Brisbane's construction market is growing rapidly. Benny Estimates provides specialized preliminary estimating services for projects throughout the Brisbane metropolitan area.</p>
+                <p class="mb-4">We understand Brisbane's construction markets, labor conditions, and material availability. Our preliminary estimates reflect local costs and support informed decision-making.</p>
+                <p class="mb-4">Whether you're planning residential developments, commercial projects, or infrastructure in Brisbane, our preliminary estimates provide the early-stage cost insights you need.</p>
+                <p>Contact us to discuss your Brisbane project and preliminary estimating needs.</p>`
+            },
+            26: {
+                title: "Preliminary Estimates in Western Australia",
+                content: `<p class="mb-4">Western Australia's construction sector includes resource-related facilities and diverse development projects. Benny Estimates provides comprehensive preliminary estimating services throughout WA.</p>
+                <p class="mb-4">We serve clients in Perth and regional Western Australia, providing accurate preliminary estimates that reflect local market conditions. Our estimators understand WA's unique construction requirements.</p>
+                <p class="mb-4">From feasibility studies to budget planning, our preliminary estimates support successful project delivery across Western Australia.</p>
+                <p>Contact us to discuss your Western Australian project and preliminary estimating needs.</p>`
+            },
+            27: {
+                title: "Preliminary Estimates in Perth",
+                content: `<p class="mb-4">Perth is a major center for resource industry support and construction development. Benny Estimates provides specialized preliminary estimating services for projects throughout the Perth metropolitan area.</p>
+                <p class="mb-4">We understand Perth's construction markets, labor conditions, and material availability. Our preliminary estimates reflect local costs and support informed decision-making.</p>
+                <p class="mb-4">Whether you're planning residential, commercial, or industrial projects in Perth, our preliminary estimates provide the early-stage cost insights you need.</p>
+                <p>Contact us to discuss your Perth project and preliminary estimating needs.</p>`
+            },
+            28: {
+                title: "Australian Preliminary Estimate Services",
+                content: `<p class="mb-4">Benny Estimates provides comprehensive preliminary estimating services throughout Australia, with local expertise in all major construction markets. Our team understands Australian construction standards and practices.</p>
+                <p class="mb-4">We serve clients across New South Wales, Victoria, Queensland, Western Australia, and other states, providing accurate preliminary estimates that reflect regional market conditions.</p>
+                <p class="mb-4">Australian projects have unique requirements including local building codes, material availability, and labor considerations. Our estimators have the local knowledge needed for accurate preliminary estimates.</p>
+                <p>Contact us to discuss your Australian project and learn how our preliminary estimating services can support your success.</p>`
+            },
+            29: {
+                title: "US Preliminary Estimate Services",
+                content: `<p class="mb-4">Benny Estimates provides nationwide preliminary estimating services across the United States, with expertise in American construction standards, building codes, labor rates, and material costs.</p>
+                <p class="mb-4">From residential developments to commercial projects and industrial facilities, our estimators understand regional variations that affect construction costs across the US.</p>
+                <p class="mb-4">US projects must comply with federal, state, and local regulations. Our estimators stay current with requirements across jurisdictions, ensuring your preliminary estimates reflect all applicable standards.</p>
+                <p>Contact us to discuss your US project and discover why American developers trust Benny Estimates for preliminary estimating.</p>`
+            },
+            30: {
+                title: "Upload Your Plans for Preliminary Estimate",
+                content: `<p class="mb-4">Ready to get started with your preliminary estimate? Upload your construction plans, conceptual drawings, or project specifications and receive a comprehensive preliminary estimate.</p>
+                <p class="mb-4">Simply upload your digital files through our secure platform. We accept PDF, CAD, and BIM formats. Once received, our estimators will review your project and provide a detailed cost breakdown within 24-48 hours.</p>
+                <p class="mb-4">Your preliminary estimate includes comprehensive cost projections, material quantity estimates, and budget recommendations. We'll help you understand the cost implications of your project at its earliest stages.</p>
+                <p>Upload your plans today and discover why developers trust Benny Estimates for preliminary estimating.</p>`
+            },
+            31: {
+                title: "Request Your Preliminary Estimate",
+                content: `<p class="mb-4">Ready to discuss your project and request a preliminary estimate? Contact our team today. We'll discuss your project requirements and provide transparent pricing for our estimating services.</p>
+                <p class="mb-4">We offer competitive rates for preliminary estimates, with options for different levels of detail based on your needs. Our quotes include expected delivery timelines and scope descriptions.</p>
+                <p class="mb-4">Whether you need a ROM estimate for feasibility analysis or a detailed budget estimate for financing, we can structure services to meet your needs.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to request your preliminary estimate.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const themeEmoji = document.getElementById('themeEmoji');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText, themeEmoji);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText, themeEmoji) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                        if (themeEmoji) themeEmoji.textContent = '☀️';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                        if (themeEmoji) themeEmoji.textContent = '🌙';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText, themeEmoji);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+
+        // Animate accuracy bars on scroll
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const accuracyBars = entry.target.querySelectorAll('.accuracy-fill');
+                    accuracyBars.forEach(bar => {
+                        // Bars are already visible with their colors
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe estimate types section
+        const estimateSection = document.querySelector('.mb-12:nth-of-type(3)');
+        if (estimateSection) {
+            observer.observe(estimateSection);
+        }
+
+        console.log('Preliminary Estimate Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

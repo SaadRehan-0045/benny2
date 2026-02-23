@@ -1,0 +1,859 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny Estimates - How to Begin</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'slide-in-right': 'slideInRight 0.6s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Process step styling */
+        .process-step {
+            transition: all 0.3s ease;
+        }
+        
+        .process-step:hover {
+            transform: translateX(5px);
+        }
+        
+        /* Active state styling - IMPROVED TEXT CONTRAST */
+        .process-step.active {
+            background: #ffffff !important;
+            color: #111827 !important;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .dark .process-step.active {
+            background: #1f2937 !important;
+            color: #f9fafb !important;
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+        }
+        
+        /* Active state text colors - LIGHT MODE */
+        .process-step.active h3 {
+            color: #111827 !important;
+            font-weight: 700;
+        }
+        
+        .process-step.active p {
+            color: #4b5563 !important;
+        }
+        
+        .process-step.active .step-number {
+            background: #3b82f6 !important;
+            color: #ffffff !important;
+        }
+        
+        .process-step.active .text-gray-500,
+        .process-step.active .text-gray-600,
+        .process-step.active .text-gray-700,
+        .process-step.active .text-gray-800 {
+            color: #1f2937 !important;
+        }
+        
+        .process-step.active .text-gray-400 {
+            color: #6b7280 !important;
+        }
+        
+        /* Active state background colors for inner elements - LIGHT MODE */
+        .process-step.active .bg-blue-50 {
+            background-color: #dbeafe !important;
+        }
+        
+        .process-step.active .bg-green-50 {
+            background-color: #dcfce7 !important;
+        }
+        
+        .process-step.active .bg-purple-50 {
+            background-color: #f3e8ff !important;
+        }
+        
+        .process-step.active .bg-orange-50 {
+            background-color: #ffedd5 !important;
+        }
+        
+        .process-step.active .bg-gray-50 {
+            background-color: #f3f4f6 !important;
+        }
+        
+        /* Dark mode active state text colors */
+        .dark .process-step.active h3 {
+            color: #f9fafb !important;
+        }
+        
+        .dark .process-step.active p {
+            color: #d1d5db !important;
+        }
+        
+        .dark .process-step.active .step-number {
+            background: #3b82f6 !important;
+            color: #ffffff !important;
+        }
+        
+        .dark .process-step.active .text-gray-500,
+        .dark .process-step.active .text-gray-600,
+        .dark .process-step.active .text-gray-700,
+        .dark .process-step.active .text-gray-800 {
+            color: #e5e7eb !important;
+        }
+        
+        .dark .process-step.active .text-gray-400 {
+            color: #9ca3af !important;
+        }
+        
+        /* Dark mode active state background colors */
+        .dark .process-step.active .bg-blue-50 {
+            background-color: #1e3a8a !important;
+        }
+        
+        .dark .process-step.active .bg-blue-50 .text-gray-700,
+        .dark .process-step.active .bg-blue-50 .text-gray-800,
+        .dark .process-step.active .bg-blue-50 .text-gray-900 {
+            color: #f3f4f6 !important;
+        }
+        
+        .dark .process-step.active .bg-green-50 {
+            background-color: #14532d !important;
+        }
+        
+        .dark .process-step.active .bg-green-50 .text-gray-700,
+        .dark .process-step.active .bg-green-50 .text-gray-800 {
+            color: #f3f4f6 !important;
+        }
+        
+        .dark .process-step.active .bg-purple-50 {
+            background-color: #581c87 !important;
+        }
+        
+        .dark .process-step.active .bg-purple-50 .text-gray-700,
+        .dark .process-step.active .bg-purple-50 .text-gray-800 {
+            color: #f3f4f6 !important;
+        }
+        
+        .dark .process-step.active .bg-orange-50 {
+            background-color: #7c2d12 !important;
+        }
+        
+        .dark .process-step.active .bg-orange-50 .text-gray-700,
+        .dark .process-step.active .bg-orange-50 .text-gray-800 {
+            color: #f3f4f6 !important;
+        }
+        
+        .dark .process-step.active .bg-gray-50 {
+            background-color: #374151 !important;
+        }
+        
+        .dark .process-step.active .bg-gray-50 .text-gray-700,
+        .dark .process-step.active .bg-gray-50 .text-gray-800 {
+            color: #f3f4f6 !important;
+        }
+        
+        /* Active state icon colors */
+        .process-step.active .ri-arrow-down-s-line {
+            color: #3b82f6 !important;
+        }
+        
+        .dark .process-step.active .ri-arrow-down-s-line {
+            color: #93c5fd !important;
+        }
+        
+        /* Active state link colors */
+        .process-step.active a.text-primary-600 {
+            color: #2563eb !important;
+            font-weight: 600;
+        }
+        
+        .dark .process-step.active a.text-primary-600 {
+            color: #93c5fd !important;
+        }
+        
+        .process-step.active a.text-primary-600:hover {
+            text-decoration: underline;
+        }
+        
+        /* Section background */
+        .process-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .process-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* Image overlay */
+        .process-image-overlay {
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?q=80&w=1170&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            border-radius: 1rem;
+            overflow: hidden;
+        }
+        
+        .process-image-overlay::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(30, 41, 59, 0.9) 100%);
+            z-index: 1;
+        }
+        
+        .dark .process-image-overlay::before {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(15, 23, 42, 0.9) 100%);
+        }
+        
+        .process-image-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Step connector lines */
+        .step-connector {
+            position: relative;
+        }
+        
+        .step-connector::after {
+            content: '';
+            position: absolute;
+            left: 40px;
+            top: 100%;
+            width: 2px;
+            height: 20px;
+            background: #cbd5e1;
+        }
+        
+        .dark .step-connector::after {
+            background: #475569;
+        }
+        
+        .step-connector:last-child::after {
+            display: none;
+        }
+        
+        /* Process content animation */
+        .process-content {
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .process-content.open {
+            max-height: 1000px; /* Large enough to contain content */
+            padding-top: 1.5rem;
+            padding-bottom: 1.5rem;
+        }
+        
+        /* Icon rotation */
+        .ri-arrow-down-s-line {
+            transition: transform 0.3s ease;
+        }
+        
+        .rotate-icon {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+
+    <!-- Process Section -->
+    <section class="process-bg py-12 lg:py-20 animate-fade-in">
+        <div class="container mx-auto px-4">
+            <!-- Benny Estimates Logo/Badge -->
+            
+
+            <!-- Header Section -->
+            <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16 animate-slide-up">
+                <!-- Section Label -->
+                <div class="inline-flex items-center mb-4">
+                    <div class="w-12 h-0.5 bg-primary-500 dark:bg-primary-400 mr-3"></div>
+                    <span class="text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider text-sm flex items-center">
+                        <i class="ri-flow-chart mr-2"></i>
+                        SIMPLE PROCESS
+                    </span>
+                    <div class="w-12 h-0.5 bg-primary-500 dark:bg-primary-400 ml-3"></div>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                    How to Begin Construction Estimation & 
+                    <span class="text-primary-600 dark:text-primary-400">Quantity Takeoffs with Benny Estimates</span>
+                </h1>
+
+                <!-- Description -->
+                <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
+                    Follow our simple 4-step process to get accurate construction estimates and takeoffs for your projects.
+                </p>
+            </div>
+
+            <!-- Process Content -->
+            <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                <!-- Child 1: Image Section -->
+                <div class="lg:w-2/5 animate-slide-in-left">
+                    <div class="process-image-overlay rounded-2xl overflow-hidden h-full">
+                        <div class="process-image-content p-8 h-full flex flex-col justify-center">
+                            <!-- Stats -->
+                            <div class="grid grid-cols-2 gap-6 mb-8">
+                                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                                    <div class="text-2xl font-bold text-white mb-1">24-48h</div>
+                                    <div class="text-white/80 text-sm">Average Turnaround</div>
+                                </div>
+                                <div class="bg-white/10 backdrop-blur-sm rounded-xl p-4 text-center">
+                                    <div class="text-2xl font-bold text-white mb-1">98%</div>
+                                    <div class="text-white/80 text-sm">Client Satisfaction</div>
+                                </div>
+                            </div>
+                            
+                            <!-- Icon -->
+                            <div class="w-24 h-24 mx-auto bg-white/10 backdrop-blur-sm rounded-full flex items-center justify-center mb-8">
+                                <i class="ri-file-cloud-line text-white text-4xl"></i>
+                            </div>
+                            
+                            <!-- Content -->
+                            <h3 class="text-2xl font-bold text-white text-center mb-4">Easy File Upload</h3>
+                            <p class="text-white/90 text-center mb-6">
+                                Upload your plans in any format: PDF, DWG, RVT, or even hand-drawn sketches.
+                            </p>
+                            
+                            <!-- Supported Formats -->
+                            <div class="bg-white/5 backdrop-blur-sm rounded-xl p-4">
+                                <h4 class="text-white font-bold mb-3 flex items-center">
+                                    <i class="ri-file-list-3-line mr-2"></i>
+                                    Supported File Formats
+                                </h4>
+                                <div class="grid grid-cols-2 gap-2">
+                                    <div class="flex items-center text-white/80 text-sm">
+                                        <i class="ri-file-pdf-line text-red-400 mr-2"></i>
+                                        PDF Files
+                                    </div>
+                                    <div class="flex items-center text-white/80 text-sm">
+                                        <i class="ri-file-cad-line text-blue-400 mr-2"></i>
+                                        DWG/CAD
+                                    </div>
+                                    <div class="flex items-center text-white/80 text-sm">
+                                        <i class="ri-file-3d-line text-green-400 mr-2"></i>
+                                        RVT/Revit
+                                    </div>
+                                    <div class="flex items-center text-white/80 text-sm">
+                                        <i class="ri-image-line text-yellow-400 mr-2"></i>
+                                        Images
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Upload Email CTA -->
+                            <div class="mt-8">
+                                <a href="mailto:Ben@bennyestimates.com" class="w-full bg-white text-primary-600 hover:bg-gray-100 font-bold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center">
+                                    <i class="ri-mail-send-line mr-2"></i>
+                                    Upload plans on: Ben@bennyestimates.com
+                                </a>
+                                <p class="text-white/70 text-center text-sm mt-4">
+                                    <i class="ri-shield-check-line text-green-400 mr-2"></i>
+                                    Secure & confidential file handling
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Child 2: Process Steps -->
+                <div class="lg:w-3/5 animate-slide-in-right">
+                    <div class="space-y-4" id="processStepsContainer">
+                        <!-- Step 1 -->
+                        <div class="process-step step-connector bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden" data-step="1">
+                            <button class="process-toggle w-full text-left p-6 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                <div class="flex items-center">
+                                    <div class="step-number w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4 text-blue-600 dark:text-blue-400 font-bold text-xl">
+                                        01
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Submit Your Drawing Plans</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Upload plans to our email</p>
+                                    </div>
+                                </div>
+                                <i class="ri-arrow-down-s-line text-gray-400 text-xl"></i>
+                            </button>
+                            <div class="process-content">
+                                <div class="px-6 pb-6 pt-2">
+                                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                        You can easily upload your drawing plans in various formats including PDF files 
+                                        by emailing them directly to 
+                                        <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400 font-medium hover:underline">Ben@bennyestimates.com</a>. 
+                                        We value your convenience, so feel free to choose the method that works best for you.
+                                    </p>
+                                    
+                                    <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 mb-4">
+                                        <h4 class="font-bold text-gray-900 dark:text-white mb-2 flex items-center">
+                                            <i class="ri-information-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                            Important Information
+                                        </h4>
+                                        <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                            Don't forget to provide us with essential information about your project scope 
+                                            and any specific details when emailing your plans.
+                                        </p>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                                                <i class="ri-mail-line text-green-600 dark:text-green-400"></i>
+                                            </div>
+                                            <div>
+                                                <div class="font-medium text-gray-800 dark:text-gray-200">Email</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">
+                                                    <a href="mailto:Ben@bennyestimates.com" class="hover:underline">Ben@bennyestimates.com</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center">
+                                            <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-3">
+                                                <i class="ri-attachment-line text-purple-600 dark:text-purple-400"></i>
+                                            </div>
+                                            <div>
+                                                <div class="font-medium text-gray-800 dark:text-gray-200">Attach Files</div>
+                                                <div class="text-sm text-gray-600 dark:text-gray-400">Send your plans directly</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <a href="mailto:Ben@bennyestimates.com" class="w-full bg-blue-600 hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center justify-center mt-4">
+                                        <i class="ri-mail-send-line mr-2"></i>
+                                        Email Plans to Ben@bennyestimates.com
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="process-step step-connector bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden" data-step="2">
+                            <button class="process-toggle w-full text-left p-6 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                <div class="flex items-center">
+                                    <div class="step-number w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4 text-green-600 dark:text-green-400 font-bold text-xl">
+                                        02
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">We Review The Plans</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Detailed analysis by experts</p>
+                                    </div>
+                                </div>
+                                <i class="ri-arrow-down-s-line text-gray-400 text-xl"></i>
+                            </button>
+                            <div class="process-content">
+                                <div class="px-6 pb-6 pt-2">
+                                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                        Our team will swiftly proceed to review the intricacies of your project. We understand 
+                                        that every client and project is unique, which is why we take the time to analyze 
+                                        factors such as project range, complexity, and involved trades.
+                                    </p>
+                                    
+                                    <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-4 mb-4">
+                                        <h4 class="font-bold text-gray-900 dark:text-white mb-2 flex items-center">
+                                            <i class="ri-search-eye-line text-green-600 dark:text-green-400 mr-2"></i>
+                                            What We Analyze
+                                        </h4>
+                                        <div class="grid grid-cols-2 gap-3">
+                                            <div class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-check-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                Project scope & scale
+                                            </div>
+                                            <div class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-check-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                Material requirements
+                                            </div>
+                                            <div class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-check-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                Labor calculations
+                                            </div>
+                                            <div class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-check-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                Timeline estimation
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        This ensures complete transparency and allows you to make informed decisions about 
+                                        your project requirements and budget.
+                                    </p>
+                                    
+                                    <div class="mt-4 flex items-center text-green-600 dark:text-green-400">
+                                        <i class="ri-time-line mr-2"></i>
+                                        <span>Review typically completed within 4-6 hours</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="process-step step-connector bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden" data-step="3">
+                            <button class="process-toggle w-full text-left p-6 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                <div class="flex items-center">
+                                    <div class="step-number w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4 text-purple-600 dark:text-purple-400 font-bold text-xl">
+                                        03
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Get A Quote</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Transparent pricing & timeline</p>
+                                    </div>
+                                </div>
+                                <i class="ri-arrow-down-s-line text-gray-400 text-xl"></i>
+                            </button>
+                            <div class="process-content">
+                                <div class="px-6 pb-6 pt-2">
+                                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                        After reviewing your plans, we will promptly respond to you with a detailed quote 
+                                        containing essential information such as the invoice, turnaround time, and delivery 
+                                        date.
+                                    </p>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-4">
+                                        <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
+                                            <h4 class="font-bold text-gray-900 dark:text-white mb-3 flex items-center">
+                                                <i class="ri-file-list-3-line text-purple-600 dark:text-purple-400 mr-2"></i>
+                                                Quote Includes:
+                                            </h4>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-check-double-line text-purple-600 dark:text-purple-400 mr-2"></i>
+                                                    Detailed cost breakdown
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-check-double-line text-purple-600 dark:text-purple-400 mr-2"></i>
+                                                    Turnaround timeline
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-check-double-line text-purple-600 dark:text-purple-400 mr-2"></i>
+                                                    Delivery date guarantee
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-check-double-line text-purple-600 dark:text-purple-400 mr-2"></i>
+                                                    Payment options
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-purple-50 dark:bg-purple-900/20 rounded-lg p-4">
+                                            <h4 class="font-bold text-gray-900 dark:text-white mb-3 flex items-center">
+                                                <i class="ri-bank-card-line text-purple-600 dark:text-purple-400 mr-2"></i>
+                                                Payment Methods:
+                                            </h4>
+                                            <div class="space-y-3">
+                                                <div class="flex items-center">
+                                                    <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3">
+                                                        <i class="ri-bank-card-line text-blue-600 dark:text-blue-400"></i>
+                                                    </div>
+                                                    <span class="text-gray-700 dark:text-gray-300">Credit/Debit Cards</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <div class="w-8 h-8 bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mr-3">
+                                                        <i class="ri-paypal-line text-yellow-600 dark:text-yellow-400"></i>
+                                                    </div>
+                                                    <span class="text-gray-700 dark:text-gray-300">PayPal</span>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                                                        <i class="ri-bank-line text-green-600 dark:text-green-400"></i>
+                                                    </div>
+                                                    <span class="text-gray-700 dark:text-gray-300">Bank Transfer</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        If you find the quote acceptable, you can proceed to make the payment using your 
+                                        preferred method.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="process-step bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden" data-step="4">
+                            <button class="process-toggle w-full text-left p-6 flex items-center justify-between hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-200">
+                                <div class="flex items-center">
+                                    <div class="step-number w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mr-4 text-orange-600 dark:text-orange-400 font-bold text-xl">
+                                        04
+                                    </div>
+                                    <div>
+                                        <h3 class="font-bold text-lg text-gray-900 dark:text-white">Receive an Estimate</h3>
+                                        <p class="text-sm text-gray-500 dark:text-gray-400 mt-1">Accurate, detailed reporting</p>
+                                    </div>
+                                </div>
+                                <i class="ri-arrow-down-s-line text-gray-400 text-xl"></i>
+                            </button>
+                            <div class="process-content">
+                                <div class="px-6 pb-6 pt-2">
+                                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                                        Our estimators will meticulously perform takeoffs and generate an accurate estimate 
+                                        for your construction project. We ensure that the estimate is presented clearly and 
+                                        organized, allowing you to understand and evaluate the costs involved easily.
+                                    </p>
+                                    
+                                    <div class="bg-orange-50 dark:bg-orange-900/20 rounded-lg p-4 mb-4">
+                                        <h4 class="font-bold text-gray-900 dark:text-white mb-3 flex items-center">
+                                            <i class="ri-file-excel-line text-orange-600 dark:text-orange-400 mr-2"></i>
+                                            Deliverable Formats:
+                                        </h4>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="ri-file-excel-line text-green-600 dark:text-green-400"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="font-medium text-gray-800 dark:text-gray-200">Excel Template</div>
+                                                    <div class="text-sm text-gray-600 dark:text-gray-400">Our standard format</div>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center">
+                                                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                                                    <i class="ri-file-excel-line text-blue-600 dark:text-blue-400"></i>
+                                                </div>
+                                                <div>
+                                                    <div class="font-medium text-gray-800 dark:text-gray-200">Custom Format</div>
+                                                    <div class="text-sm text-gray-600 dark:text-gray-400">Tailored to your needs</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                            <h4 class="font-bold text-gray-900 dark:text-white mb-2">Estimate Includes:</h4>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-check-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                    Material quantities
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-check-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                    Labor costs
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-check-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                    Equipment requirements
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-check-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                    Timeline breakdown
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        
+                                        <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                            <h4 class="font-bold text-gray-900 dark:text-white mb-2">Benefits:</h4>
+                                            <ul class="space-y-2">
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-award-line text-yellow-600 dark:text-yellow-400 mr-2"></i>
+                                                    98% accuracy guarantee
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-time-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                    Fast turnaround
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-customer-service-2-line text-purple-600 dark:text-purple-400 mr-2"></i>
+                                                    Expert support
+                                                </li>
+                                                <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                    <i class="ri-refresh-line text-green-600 dark:text-green-400 mr-2"></i>
+                                                    Revisions available
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    
+                                    <p class="text-gray-600 dark:text-gray-300">
+                                        You will receive the estimate in an Excel format using our template or customized 
+                                        to fit your specific requirements.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Bottom CTA -->
+                    <div class="mt-8 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 rounded-2xl p-8 text-center">
+                        <h3 class="text-2xl font-bold text-white mb-4">Ready to Get Started?</h3>
+                        <p class="text-white/90 mb-6">
+                            Begin your construction estimation journey with Benny Estimates today. Email your plans and get your 
+                            first estimate within 24-48 hours!
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <a href="mailto:Ben@bennyestimates.com" class="bg-white text-primary-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
+                                <i class="ri-mail-send-line mr-2"></i>
+                                Email Your Plans
+                            </a>
+                            <a href="tel:+12898017224" class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
+                                <i class="ri-phone-line mr-2"></i>
+                                Call: +1 (289) 801-7224
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Self-contained accordion functionality that works on any page
+        (function() {
+            'use strict';
+            
+            // Function to initialize accordion
+            function initAccordion() {
+                console.log('Initializing accordion...');
+                
+                // Get all process steps
+                const processSteps = document.querySelectorAll('.process-step');
+                
+                if (processSteps.length === 0) {
+                    console.log('No process steps found');
+                    return;
+                }
+                
+                // First, ensure all content starts closed (except first one)
+                processSteps.forEach((step, index) => {
+                    const content = step.querySelector('.process-content');
+                    const icon = step.querySelector('.ri-arrow-down-s-line');
+                    
+                    if (content) {
+                        if (index === 0) {
+                            // Open first step by default
+                            content.classList.add('open');
+                            step.classList.add('active');
+                            if (icon) icon.classList.add('rotate-icon');
+                        } else {
+                            // Close other steps
+                            content.classList.remove('open');
+                            step.classList.remove('active');
+                            if (icon) icon.classList.remove('rotate-icon');
+                        }
+                    }
+                });
+                
+                // Add click event to all toggle buttons
+                document.querySelectorAll('.process-toggle').forEach(button => {
+                    // Remove any existing event listeners
+                    button.removeEventListener('click', handleToggleClick);
+                    // Add new event listener
+                    button.addEventListener('click', handleToggleClick);
+                });
+            }
+            
+            // Toggle click handler
+            function handleToggleClick(event) {
+                event.preventDefault();
+                
+                const button = event.currentTarget;
+                const step = button.closest('.process-step');
+                
+                if (!step) return;
+                
+                const content = step.querySelector('.process-content');
+                const icon = button.querySelector('.ri-arrow-down-s-line');
+                
+                if (!content) return;
+                
+                // Check if this step is already open
+                const isOpen = content.classList.contains('open');
+                
+                // Close all steps
+                document.querySelectorAll('.process-step').forEach(otherStep => {
+                    const otherContent = otherStep.querySelector('.process-content');
+                    const otherIcon = otherStep.querySelector('.ri-arrow-down-s-line');
+                    
+                    if (otherContent) {
+                        otherContent.classList.remove('open');
+                    }
+                    otherStep.classList.remove('active');
+                    if (otherIcon) {
+                        otherIcon.classList.remove('rotate-icon');
+                    }
+                });
+                
+                // If it wasn't open, open it
+                if (!isOpen) {
+                    content.classList.add('open');
+                    step.classList.add('active');
+                    if (icon) {
+                        icon.classList.add('rotate-icon');
+                    }
+                }
+                
+                // Scroll to the step smoothly (optional)
+                step.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+            
+            // Initialize on DOM load
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', initAccordion);
+            } else {
+                // DOM is already loaded
+                initAccordion();
+            }
+            
+            // Re-initialize after any dynamic content changes
+            // This can be called from outside if needed
+            window.reinitAccordion = initAccordion;
+            
+        })();
+    </script>
+</body>
+</html>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construct Estimates - Our Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        secondary: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            500: '#64748b',
+                            600: '#475569',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Service card hover effects */
+        .service-card {
+            transition: all 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .service-card:hover .service-icon {
+            transform: scale(1.1);
+        }
+        
+        /* Gradient backgrounds */
+        .services-gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .dark .services-gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* Button hover effect */
+        .btn-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+        }
+        
+        .dark .btn-hover:hover {
+            box-shadow: 0 10px 25px -5px rgba(96, 165, 250, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Theme Toggle Demo -->
+    <div class="container mx-auto px-4 py-4 flex justify-end">
+        <button id="themeToggle" class="flex items-center px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 btn-hover">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services-gradient-bg py-12 lg:py-20 animate-fade-in">
+        <div class="container mx-auto px-4">
+            
+            <!-- Parent 1: Header Section -->
+            <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16 animate-slide-up">
+                <!-- Section Label -->
+                <div class="inline-flex items-center mb-4">
+                    <span class="text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider text-sm flex items-center">
+                        <i class="ri-service-line mr-2"></i>
+                        OUR EXPERT SERVICES
+                    </span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                    Our Construction Estimating 
+                    <span class="text-primary-600 dark:text-primary-400">Services</span>
+                </h1>
+
+                <!-- Description -->
+                <p class="text-lg lg:text-xl text-gray-600 dark:text-gray-300 leading-relaxed">
+                    Whether you're a General Contractor, Subcontractor, Lender, Builder, Architect, 
+                    Engineering Firm, or Vendor, we cater to all your estimating needs with precision 
+                    and expertise.
+                </p>
+                
+                <!-- Stats Bar -->
+                <div class="mt-8 flex flex-wrap justify-center gap-6">
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-check-line text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <span class="text-gray-700 dark:text-gray-300">✓ 100% Accuracy Guaranteed</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-time-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <span class="text-gray-700 dark:text-gray-300">⚡ Fast Turnaround</span>
+                    </div>
+                    <div class="flex items-center">
+                        <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-customer-service-2-line text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                        <span class="text-gray-700 dark:text-gray-300">👨‍💼 Dedicated Support</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Parent 2: Services Grid -->
+            <div class="animate-slide-up">
+                <!-- Row 1 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
+                    <!-- Service 1: Cost Estimating Services -->
+                    <a href="#" class="service-card block group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-xl">
+                            <div class="mb-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900 dark:to-blue-800 rounded-xl flex items-center justify-center mb-4 service-icon transition-transform">
+                                    <i class="ri-calculator-line text-blue-600 dark:text-blue-400 text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-primary-600 dark:group-hover:text-primary-400">
+                                    Cost Estimating Services
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Detailed cost analysis and budget forecasting for construction projects of all sizes.
+                                </p>
+                            </div>
+                            <div class="flex items-center text-primary-600 dark:text-primary-400 font-medium">
+                                <span>Learn More</span>
+                                <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Service 2: Material Takeoff Services -->
+                    <a href="#" class="service-card block group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full hover:border-green-300 dark:hover:border-green-600 hover:shadow-xl">
+                            <div class="mb-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-900 dark:to-green-800 rounded-xl flex items-center justify-center mb-4 service-icon transition-transform">
+                                    <i class="ri-ruler-line text-green-600 dark:text-green-400 text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-green-600 dark:group-hover:text-green-400">
+                                    Material Takeoff Services
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Accurate quantity takeoffs for all construction materials with detailed measurements.
+                                </p>
+                            </div>
+                            <div class="flex items-center text-green-600 dark:text-green-400 font-medium">
+                                <span>Learn More</span>
+                                <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Service 3: Residential Estimating Services -->
+                    <a href="#" class="service-card block group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-xl">
+                            <div class="mb-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900 dark:to-purple-800 rounded-xl flex items-center justify-center mb-4 service-icon transition-transform">
+                                    <i class="ri-home-4-line text-purple-600 dark:text-purple-400 text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-purple-600 dark:group-hover:text-purple-400">
+                                    Residential Estimating Services
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Specialized estimating for single-family homes, apartments, and residential complexes.
+                                </p>
+                            </div>
+                            <div class="flex items-center text-purple-600 dark:text-purple-400 font-medium">
+                                <span>Learn More</span>
+                                <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Service 4: Commercial Estimating Services -->
+                    <a href="#" class="service-card block group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full hover:border-yellow-300 dark:hover:border-yellow-600 hover:shadow-xl">
+                            <div class="mb-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900 dark:to-yellow-800 rounded-xl flex items-center justify-center mb-4 service-icon transition-transform">
+                                    <i class="ri-building-line text-yellow-600 dark:text-yellow-400 text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-yellow-600 dark:group-hover:text-yellow-400">
+                                    Commercial Estimating Services
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Comprehensive estimating for offices, retail spaces, and commercial developments.
+                                </p>
+                            </div>
+                            <div class="flex items-center text-yellow-600 dark:text-yellow-400 font-medium">
+                                <span>Learn More</span>
+                                <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Row 2 -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Service 5: Industrial Estimating Services -->
+                    <a href="#" class="service-card block group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full hover:border-red-300 dark:hover:border-red-600 hover:shadow-xl">
+                            <div class="mb-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 dark:from-red-900 dark:to-red-800 rounded-xl flex items-center justify-center mb-4 service-icon transition-transform">
+                                    <i class="ri-factory-line text-red-600 dark:text-red-400 text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-red-600 dark:group-hover:text-red-400">
+                                    Industrial Estimating Services
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Specialized estimates for industrial facilities, warehouses, and manufacturing plants.
+                                </p>
+                            </div>
+                            <div class="flex items-center text-red-600 dark:text-red-400 font-medium">
+                                <span>Learn More</span>
+                                <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Service 6: Preliminary Estimates Services -->
+                    <a href="#" class="service-card block group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-xl">
+                            <div class="mb-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-indigo-100 to-indigo-200 dark:from-indigo-900 dark:to-indigo-800 rounded-xl flex items-center justify-center mb-4 service-icon transition-transform">
+                                    <i class="ri-file-search-line text-indigo-600 dark:text-indigo-400 text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-indigo-600 dark:group-hover:text-indigo-400">
+                                    Preliminary Estimates Services
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Quick initial cost estimates for project feasibility and budget planning.
+                                </p>
+                            </div>
+                            <div class="flex items-center text-indigo-600 dark:text-indigo-400 font-medium">
+                                <span>Learn More</span>
+                                <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Service 7: Monthly Subscription -->
+                    <a href="#" class="service-card block group">
+                        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 h-full hover:border-pink-300 dark:hover:border-pink-600 hover:shadow-xl">
+                            <div class="mb-4">
+                                <div class="w-16 h-16 bg-gradient-to-br from-pink-100 to-pink-200 dark:from-pink-900 dark:to-pink-800 rounded-xl flex items-center justify-center mb-4 service-icon transition-transform">
+                                    <i class="ri-calendar-check-line text-pink-600 dark:text-pink-400 text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 group-hover:text-pink-600 dark:group-hover:text-pink-400">
+                                    Monthly Subscription
+                                </h3>
+                                <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                    Cost-effective subscription plans for ongoing estimating needs and regular projects.
+                                </p>
+                            </div>
+                            <div class="flex items-center text-pink-600 dark:text-pink-400 font-medium">
+                                <span>View Plans</span>
+                                <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Service 8: Accurate Estimate -->
+                    <a href="#" class="service-card block group">
+                        <div class="bg-gradient-to-br from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 rounded-xl p-6 border border-primary-400 dark:border-primary-600 h-full hover:shadow-xl animate-float">
+                            <div class="mb-4">
+                                <div class="w-16 h-16 bg-white/20 rounded-xl flex items-center justify-center mb-4 service-icon transition-transform">
+                                    <i class="ri-award-line text-white text-2xl"></i>
+                                </div>
+                                <h3 class="text-xl font-bold text-white mb-3">
+                                    Get An Accurate Estimate
+                                </h3>
+                                <p class="text-primary-100 text-sm">
+                                    Request a free, no-obligation quote for your specific project requirements.
+                                </p>
+                            </div>
+                            <div class="flex items-center text-white font-medium">
+                                <span>Get Free Quote</span>
+                                <i class="ri-arrow-right-line ml-2 transition-transform group-hover:translate-x-1"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Additional Info Section -->
+            <div class="mt-16 bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+                            <i class="ri-shield-check-line text-primary-600 dark:text-primary-400 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-2">Quality Guaranteed</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">100% accuracy guarantee on all our estimates</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
+                            <i class="ri-time-line text-green-600 dark:text-green-400 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-2">Fast Delivery</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">24-48 hour turnaround for most projects</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-20 h-20 mx-auto bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mb-4">
+                            <i class="ri-customer-service-2-line text-purple-600 dark:text-purple-400 text-2xl"></i>
+                        </div>
+                        <h3 class="font-bold text-gray-900 dark:text-white mb-2">Expert Support</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Dedicated project managers for each client</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Section -->
+            <div class="text-center mt-12">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">Ready to Get Started?</h3>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-semibold py-3 px-8 rounded-lg btn-hover flex items-center justify-center">
+                        <i class="ri-chat-3-line mr-2"></i>
+                        Contact Us Today
+                    </button>
+                    <button class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-3 px-8 rounded-lg btn-hover flex items-center justify-center">
+                        <i class="ri-phone-line mr-2"></i>
+                        Call: (346) 660-2440
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Footer Note -->
+    <div class="container mx-auto px-4 py-8 text-center">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">
+            This Services section integrates perfectly with your existing theme system. Copy and paste it into your main website file.
+        </p>
+    </div>
+
+    <script>
+        // Theme functionality (same as your existing system)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

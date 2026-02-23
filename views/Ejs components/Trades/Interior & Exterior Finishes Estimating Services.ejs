@@ -1,0 +1,1602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interior & Exterior Finishes Estimating Services | BENNY ESTIMATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        finish: {
+                            50: '#fdf4ff',
+                            100: '#fae8ff',
+                            200: '#f5d0fe',
+                            300: '#f0abfc',
+                            400: '#e879f9',
+                            500: '#d946ef',
+                            600: '#c026d3',
+                            700: '#a21caf',
+                            800: '#86198f',
+                            900: '#701a75',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'pulse-soft': 'pulse 4s ease-in-out infinite',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'modal-enter': 'modalEnter 0.3s ease-out',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        },
+                        pulseGlow: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(217, 70, 239, 0.7)' },
+                            '50%': { boxShadow: '0 0 20px 10px rgba(217, 70, 239, 0.3)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Finishes theme styling */
+        .finish-gradient {
+            background: linear-gradient(135deg, #d946ef 0%, #a21caf 100%);
+        }
+        
+        .dark .finish-gradient {
+            background: linear-gradient(135deg, #e879f9 0%, #c026d3 100%);
+        }
+        
+        /* Pattern overlay for texture */
+        .texture-overlay {
+            position: relative;
+        }
+        
+        .texture-overlay:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.3;
+            pointer-events: none;
+        }
+        
+        .dark .texture-overlay:before {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Finish card hover effect */
+        .finish-card {
+            border-top: 4px solid #d946ef;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .finish-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 20px 50px rgba(217, 70, 239, 0.15);
+        }
+        
+        .dark .finish-card:hover {
+            box-shadow: 0 20px 50px rgba(217, 70, 239, 0.25);
+        }
+        
+        /* Swatch pattern */
+        .swatch-pattern {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(217, 70, 239, 0.1) 10px,
+                rgba(217, 70, 239, 0.1) 20px
+            );
+        }
+        
+        .dark .swatch-pattern {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(232, 121, 249, 0.1) 10px,
+                rgba(232, 121, 249, 0.1) 20px
+            );
+        }
+
+        /* Modal styles - from page#2 */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border: 1px solid #374151;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #d946ef;
+            border-radius: 10px;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-thumb {
+            background: #e879f9;
+        }
+
+        /* Ensure buttons are clickable */
+        button, .cursor-pointer {
+            cursor: pointer;
+        }
+
+        /* Button animations */
+        .btn-primary {
+            @apply relative overflow-hidden transition-all duration-300 ease-in-out;
+        }
+
+        .btn-primary::after {
+            content: '';
+            @apply absolute inset-0 bg-white opacity-0 transition-opacity duration-300;
+        }
+
+        .btn-primary:hover::after {
+            @apply opacity-20;
+        }
+
+        .btn-primary:active {
+            @apply scale-95;
+        }
+
+        .btn-gradient {
+            background: linear-gradient(135deg, #d946ef, #a21caf);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .btn-gradient:hover::before {
+            left: 100%;
+        }
+
+        .dark .btn-gradient {
+            background: linear-gradient(135deg, #e879f9, #c026d3);
+        }
+
+        /* CTA card styling */
+        .cta-card {
+            background: linear-gradient(135deg, #d946ef, #a21caf);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark .cta-card {
+            background: linear-gradient(135deg, #e879f9, #c026d3);
+        }
+
+        .cta-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.2) 0%, transparent 70%);
+            animation: rotate 20s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Feature cards in CTA */
+        .cta-feature-card {
+            @apply bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 transition-all duration-300;
+        }
+
+        .dark .cta-feature-card {
+            @apply bg-black/20 border-white/10 hover:bg-black/30;
+        }
+
+        /* Get Your Free Estimate button - UPDATED STYLING */
+        .btn-free-estimate {
+            background: white;
+            color: #a21caf;
+            font-weight: 700;
+            font-size: 1.125rem;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .btn-free-estimate:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 25px 30px -5px rgba(162, 28, 175, 0.4);
+            background: linear-gradient(135deg, #ffffff, #fae8ff);
+            border-color: #a21caf;
+        }
+
+        .dark .btn-free-estimate {
+            background: #1f2937;
+            color: #e879f9;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .dark .btn-free-estimate:hover {
+            background: #374151;
+            color: #f0abfc;
+            border-color: #e879f9;
+        }
+
+        .btn-free-estimate:active {
+            transform: translateY(0);
+        }
+
+        /* Hero section button - UPDATED STYLING */
+        .btn-hero {
+            background: white;
+            color: #a21caf;
+            font-weight: 600;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-hero:hover {
+            background: #fae8ff;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(162, 28, 175, 0.3);
+            border-color: #a21caf;
+        }
+
+        .dark .btn-hero {
+            background: #1f2937;
+            color: #e879f9;
+        }
+
+        .dark .btn-hero:hover {
+            background: #374151;
+            color: #f0abfc;
+            border-color: #e879f9;
+        }
+
+        /* CTA Section - UPDATED STYLING */
+        .cta-section {
+            background: linear-gradient(135deg, #d946ef, #a21caf);
+            border-radius: 1rem;
+            padding: 2.5rem;
+            text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dark .cta-section {
+            background: linear-gradient(135deg, #e879f9, #c026d3);
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.2) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        .cta-title {
+            font-size: 2.25rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            position: relative;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        @media (max-width: 640px) {
+            .cta-title {
+                font-size: 1.875rem;
+            }
+        }
+
+        .cta-subtitle {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1.5rem;
+            line-height: 1.4;
+            position: relative;
+        }
+
+        @media (max-width: 640px) {
+            .cta-subtitle {
+                font-size: 1.25rem;
+            }
+        }
+
+        .cta-description {
+            font-size: 1.125rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .cta-feature-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 42rem;
+            margin: 0 auto 2.5rem auto;
+            position: relative;
+        }
+
+        @media (max-width: 640px) {
+            .cta-feature-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+        }
+
+        .cta-feature-item {
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(4px);
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .cta-feature-item:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-4px);
+            box-shadow: 0 10px 20px -5px rgba(0,0,0,0.2);
+        }
+
+        .cta-feature-title {
+            font-size: 1.125rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 0.25rem;
+        }
+
+        .cta-feature-subtitle {
+            font-size: 0.875rem;
+            color: rgba(255,255,255,0.8);
+        }
+
+        /* Get Your Finishes Estimate button */
+        .btn-finish-estimate {
+            background: white;
+            color: #a21caf;
+            font-weight: 700;
+            font-size: 1.125rem;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: 2px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-finish-estimate i {
+            transition: transform 0.3s ease;
+        }
+
+        .btn-finish-estimate:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 30px 30px -5px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, #ffffff, #fae8ff);
+            border-color: #a21caf;
+        }
+
+        .btn-finish-estimate:hover i {
+            transform: scale(1.1);
+        }
+
+        .dark .btn-finish-estimate {
+            background: #1f2937;
+            color: #e879f9;
+        }
+
+        .dark .btn-finish-estimate:hover {
+            background: #374151;
+            color: #f0abfc;
+            border-color: #e879f9;
+        }
+    </style>
+</head>
+  <%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+
+    <!-- Header Include - Using your existing header -->
+  
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+        
+        <!-- Hero Section -->
+        <section class="mb-12 texture-overlay">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                    Interior & Exterior Finishes Estimating Services
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-finish-600 dark:text-finish-400">
+                    Enhance Your Building Projects with Precise Finishes Estimations
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                    <div class="finish-gradient text-white p-6 rounded-2xl shadow-xl mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Save Big - Request Your 30% Off Estimate!</h3>
+                        <p class="mb-4">
+                            From painting to stucco, and plaster to specialized coatings, accurate estimates play a pivotal role in securing winning bids and providing clients with accurate pricing.
+                        </p>
+                        <!-- Updated Get Your Free Estimate button with new styling -->
+                        <button onclick="openModal('estimate')" class="btn-hero inline-flex items-center gap-2 animate-pulse-soft cursor-pointer">
+                            <i class="ri-gift-fill"></i>
+                            Get Your Free Estimate
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-finish-100 dark:bg-finish-900 p-3 rounded-lg mr-4">
+                                <i class="ri-palette-fill text-finish-600 dark:text-finish-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Why Accuracy Matters</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Precision in finishes estimating</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Contractors bear the responsibility for any shortcomings in estimates. By outsourcing to BENNY ESTIMATES, you reduce in-house costs while maintaining the highest standards of accuracy.
+                        </p>
+                        <button onclick="openModal('accuracy')" class="mt-4 text-finish-600 dark:text-finish-400 font-semibold hover:underline flex items-center cursor-pointer">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+                <div>
+                    <!-- Interior Finishes Image -->
+                    <img src="https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Interior and exterior finishes design" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Range Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Range of Finishes Estimating Services</h2>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Material Takeoffs -->
+                <div onclick="openModal('materialTakeoffs')" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm finish-card">
+                    <div class="text-finish-600 dark:text-finish-400 text-4xl mb-4">
+                        <i class="ri-ruler-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Material Takeoffs</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Accurate measurement and quantification of materials required for your project.</p>
+                    <div class="mt-4 text-finish-600 dark:text-finish-400 font-semibold flex items-center">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <!-- Flooring Estimates -->
+                <div onclick="openModal('flooring')" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm finish-card">
+                    <div class="text-finish-600 dark:text-finish-400 text-4xl mb-4">
+                        <i class="ri-home-5-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Flooring Estimates</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Detailed estimates for various types of flooring, including intricate patterns.</p>
+                    <div class="mt-4 text-finish-600 dark:text-finish-400 font-semibold flex items-center">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <!-- Painting Estimates -->
+                <div onclick="openModal('painting')" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm finish-card">
+                    <div class="text-finish-600 dark:text-finish-400 text-4xl mb-4">
+                        <i class="ri-brush-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Painting Estimates</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Precise estimates for interior and exterior painting projects.</p>
+                    <div class="mt-4 text-finish-600 dark:text-finish-400 font-semibold flex items-center">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <!-- Ceiling Estimates -->
+                <div onclick="openModal('ceiling')" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm finish-card">
+                    <div class="text-finish-600 dark:text-finish-400 text-4xl mb-4">
+                        <i class="ri-cloud-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Ceiling Estimates</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Thorough estimation of materials and labor costs for ceiling installations.</p>
+                    <div class="mt-4 text-finish-600 dark:text-finish-400 font-semibold flex items-center">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <!-- Drywall Estimates -->
+                <div onclick="openModal('drywall')" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm finish-card">
+                    <div class="text-finish-600 dark:text-finish-400 text-4xl mb-4">
+                        <i class="ri-layout-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Drywall Estimates</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Accurate takeoffs for framing, taping, and gypsum board installations.</p>
+                    <div class="mt-4 text-finish-600 dark:text-finish-400 font-semibold flex items-center">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <!-- Stucco Estimates -->
+                <div onclick="openModal('stucco')" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm finish-card">
+                    <div class="text-finish-600 dark:text-finish-400 text-4xl mb-4">
+                        <i class="ri-brick-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Stucco Estimates</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Comprehensive estimation services for stucco finishes.</p>
+                    <div class="mt-4 text-finish-600 dark:text-finish-400 font-semibold flex items-center">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flooring Section -->
+        <section class="mb-16 swatch-pattern p-8 rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">Flooring Estimating & Takeoff Services</h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+                            Trust the expertise of BENNY ESTIMATES for professional Flooring Estimating Services. We save you precious time, allowing you to focus on other crucial aspects of managing bids.
+                        </p>
+                        
+                        <div class="bg-finish-50 dark:bg-gray-700 p-6 rounded-xl mb-6">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">What We Deliver To You:</h3>
+                            <ul class="space-y-3">
+                                <li class="flex items-center">
+                                    <i class="ri-checkbox-circle-fill text-finish-600 dark:text-finish-400 mr-3"></i>
+                                    <span>Digital flooring takeoff files</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="ri-checkbox-circle-fill text-finish-600 dark:text-finish-400 mr-3"></i>
+                                    <span>Material spreadsheets & color-coded plans</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="ri-checkbox-circle-fill text-finish-600 dark:text-finish-400 mr-3"></i>
+                                    <span>Seaming diagrams & takeoff summaries</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button onclick="openModal('flooringDetailed')" class="text-finish-600 dark:text-finish-400 font-semibold hover:underline flex items-center cursor-pointer">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-gradient-to-br from-finish-500 to-purple-600 text-white p-6 rounded-xl">
+                            <h3 class="text-2xl font-bold mb-4">Save up to 30% on Estimating Expenses</h3>
+                            <p class="mb-4">Unlock the Power of Precision with Our Comprehensive Flooring Services</p>
+                            <button onclick="openModal('flooringOptions')" class="btn-hero inline-flex items-center gap-2 cursor-pointer">
+                                <i class="ri-stack-fill"></i>
+                                Explore Flooring Options
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Flooring Types Grid -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Comprehensive Flooring Solutions</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+                <!-- Flooring types (all clickable) -->
+                <div onclick="openModal('concreteFlooring')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-building-2-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Concrete Flooring</span>
+                </div>
+                
+                <div onclick="openModal('glassFlooring')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-windows-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Glass Flooring</span>
+                </div>
+                
+                <div onclick="openModal('bambooFlooring')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-leaf-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Bamboo Flooring</span>
+                </div>
+                
+                <div onclick="openModal('woodFlooring')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-tree-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Wood Flooring</span>
+                </div>
+                
+                <div onclick="openModal('corkFlooring')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-drop-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Cork Flooring</span>
+                </div>
+                
+                <div onclick="openModal('rubberFlooring')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-circle-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Rubber Flooring</span>
+                </div>
+                
+                <div onclick="openModal('sportsFlooring')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-footprint-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Sports Flooring</span>
+                </div>
+                
+                <div onclick="openModal('terrazzoTile')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-artboard-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Terrazzo Tile</span>
+                </div>
+                
+                <div onclick="openModal('carpeting')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-square-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Carpeting</span>
+                </div>
+                
+                <div onclick="openModal('fluidApplied')" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-finish-400 transition-colors">
+                    <div class="text-finish-600 dark:text-finish-400 text-2xl mb-2">
+                        <i class="ri-water-flash-fill"></i>
+                    </div>
+                    <span class="text-sm font-medium">Fluid Applied</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Painting & Coating Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                    Painting & Coating Estimating Services
+                </h2>
+                
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div>
+                        <div class="bg-blue-50 dark:bg-blue-900/20 p-6 rounded-xl border-l-4 border-blue-500 mb-6">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Enhancing Your Efficiency</h3>
+                            <p class="text-gray-700 dark:text-gray-300">
+                                Our team helps you streamline operations, increase your bid-hit ratio, and maximize profit potential with quick, accurate estimating.
+                            </p>
+                        </div>
+                        
+                        <div class="bg-finish-50 dark:bg-gray-700 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Achievements that Exceed Expectations</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">
+                                We provide detailed takeoff Excel spreadsheets, color-coded plans, labor hours, bid summaries, and thorough reviews.
+                            </p>
+                            <ul class="space-y-2">
+                                <li class="flex items-center">
+                                    <i class="ri-check-line text-finish-600 dark:text-finish-400 mr-2"></i>
+                                    <span>Material & labor cost breakdowns</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="ri-check-line text-finish-600 dark:text-finish-400 mr-2"></i>
+                                    <span>Visual project scope representation</span>
+                                </li>
+                                <li class="flex items-center">
+                                    <i class="ri-check-line text-finish-600 dark:text-finish-400 mr-2"></i>
+                                    <span>Overhead & profit percentage calculations</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <button onclick="openModal('paintingDetailed')" class="mt-4 text-finish-600 dark:text-finish-400 font-semibold hover:underline flex items-center cursor-pointer">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-gradient-to-br from-blue-500 to-cyan-500 text-white p-6 rounded-xl h-full">
+                            <h3 class="text-2xl font-bold mb-4">Accurate Estimates, Competitive Advantage</h3>
+                            <p class="mb-6">
+                                As trusted experts in drywall, ceiling, mosaic, tile, and acoustical finishes, we empower clients to confidently quote prices and secure more projects.
+                            </p>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="bg-white/20 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold">24-48</div>
+                                    <div class="text-sm">Hour Turnaround</div>
+                                </div>
+                                <div class="bg-white/20 p-4 rounded-lg text-center">
+                                    <div class="text-2xl font-bold">100%</div>
+                                    <div class="text-sm">Accuracy</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">How Our Process Works</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div onclick="openModal('submitPlans')" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm animate-slide-up cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="w-16 h-16 bg-finish-100 dark:bg-finish-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-upload-cloud-2-fill text-finish-600 dark:text-finish-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Submit Your Plans</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Upload plans through our convenient online platform</p>
+                    <div class="text-finish-600 dark:text-finish-400 text-sm font-semibold">Minutes to Quote</div>
+                </div>
+                
+                <div onclick="openModal('receiveQuote')" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm animate-slide-up cursor-pointer hover:shadow-lg transition-shadow" style="animation-delay: 0.2s;">
+                    <div class="w-16 h-16 bg-finish-100 dark:bg-finish-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-price-tag-3-fill text-finish-600 dark:text-finish-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Receive a Quote</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Get a tailored quote for your project's requirements</p>
+                    <div class="text-finish-600 dark:text-finish-400 text-sm font-semibold">Transparent Pricing</div>
+                </div>
+                
+                <div onclick="openModal('comprehensiveEstimates')" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm animate-slide-up cursor-pointer hover:shadow-lg transition-shadow" style="animation-delay: 0.4s;">
+                    <div class="w-16 h-16 bg-finish-100 dark:bg-finish-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-file-text-fill text-finish-600 dark:text-finish-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Comprehensive Estimates</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Receive detailed, accurate finishing estimates</p>
+                    <div class="text-finish-600 dark:text-finish-400 text-sm font-semibold">Ready to Bid</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Complete finishes estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div onclick="openModal('sydney')" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-finish-600 dark:text-finish-400 font-semibold">Sydney</span>
+                        </div>
+                        <div onclick="openModal('melbourne')" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-finish-600 dark:text-finish-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div onclick="openModal('brisbane')" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-finish-600 dark:text-finish-400 font-semibold">Brisbane</span>
+                        </div>
+                        <div onclick="openModal('perth')" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Western Australia</span>
+                            <span class="text-finish-600 dark:text-finish-400 font-semibold">Perth</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-red-600 dark:text-red-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Nationwide finishes estimating</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div onclick="openModal('allStates')" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-finish-600 dark:text-finish-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div onclick="openModal('residential')" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Residential Projects</span>
+                            <span class="text-finish-600 dark:text-finish-400 font-semibold">Specialized</span>
+                        </div>
+                        <div onclick="openModal('commercial')" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Commercial Finishes</span>
+                            <span class="text-finish-600 dark:text-finish-400 font-semibold">Expertise</span>
+                        </div>
+                        <div onclick="openModal('industrial')" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Industrial Coatings</span>
+                            <span class="text-finish-600 dark:text-finish-400 font-semibold">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA - UPDATED with new styling -->
+        <section class="mb-12">
+            <div class="cta-section">
+                <h2 class="cta-title">Experience Precision in Finishes Estimating</h2>
+                <div class="cta-subtitle">
+                    Get Professional Estimates<br>
+                    <span class="cta-description">Enhance Your Project Success with Accurate Finishes Costing</span>
+                </div>
+                
+                <div class="cta-feature-grid">
+                    <div onclick="openModal('painting')" class="cta-feature-item">
+                        <div class="cta-feature-title">Painting</div>
+                        <div class="cta-feature-subtitle">Interior & Exterior</div>
+                    </div>
+                    <div onclick="openModal('flooring')" class="cta-feature-item">
+                        <div class="cta-feature-title">Flooring</div>
+                        <div class="cta-feature-subtitle">All Material Types</div>
+                    </div>
+                    <div onclick="openModal('specialFinishes')" class="cta-feature-item">
+                        <div class="cta-feature-title">Special Finishes</div>
+                        <div class="cta-feature-subtitle">Custom & Decorative</div>
+                    </div>
+                </div>
+                
+                <button onclick="openModal('estimate')" class="btn-finish-estimate">
+                    <i class="ri-palette-fill"></i>
+                    Get Your Finishes Estimate
+                    <i class="ri-arrow-right-line"></i>
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <%- include('../footer.ejs') %> 
+
+    <!-- Modal Overlay - From page#2 pattern -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-finish-600 dark:text-finish-400">Finishes Estimating Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here dynamically -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+                    <div class="flex items-center space-x-3">
+                        <i class="ri-palette-fill text-finish-600 dark:text-finish-400 text-xl"></i>
+                        <div>
+                            <span class="text-sm font-semibold text-gray-900 dark:text-white">BENNY ESTIMATES</span>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">96 Jones Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="flex space-x-3">
+                        <a href="mailto:Ben@bennyestimates.com" class="px-4 py-2 bg-finish-600 text-white rounded-lg hover:bg-finish-700 transition-colors text-sm">
+                            <i class="ri-mail-send-line mr-2"></i>Email
+                        </a>
+                        <a href="tel:+12898017224" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-sm">
+                            <i class="ri-phone-line mr-2"></i>Call
+                        </a>
+                        <button onclick="closeModal()" class="px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-sm">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========== THEME FUNCTIONALITY ==========
+        // Note: Theme toggle is handled by your header include
+        
+        // ========== MODAL FUNCTIONALITY (from page#2) ==========
+        
+        // BENNY ESTIMATES contact information template
+        const bennyInfo = `
+            <div class="bg-finish-50 dark:bg-gray-700 p-4 rounded-lg mt-4">
+                <p class="font-semibold text-finish-700 dark:text-finish-400">BENNY ESTIMATES</p>
+                <p><i class="ri-map-pin-line mr-2"></i>96 Jones Street, New York, USA</p>
+                <p><i class="ri-mail-line mr-2"></i>Ben@bennyestimates.com</p>
+                <p><i class="ri-phone-line mr-2"></i>+1 (289) 801-7224</p>
+                <p class="text-sm mt-2">Call us any time</p>
+            </div>
+        `;
+
+        // Modal content data structure (like serviceData in page#2)
+        const finishesData = {
+            accuracy: {
+                title: 'Why Accuracy Matters in Finishes Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">The Importance of Precise Estimations</p>
+                        <p>At BENNY ESTIMATES, we understand that accuracy in finishes estimating is crucial for project success. Contractors bear the responsibility for any shortcomings in estimates, which can lead to significant financial losses and damaged reputations.</p>
+                        
+                        <p class="font-semibold mt-4">Key Benefits of Accurate Estimating:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Winning more bids with competitive pricing</li>
+                            <li>Building trust with clients through transparent estimates</li>
+                            <li>Avoiding costly material shortages or overages</li>
+                            <li>Optimizing labor allocation and scheduling</li>
+                            <li>Maximizing profit margins on every project</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            materialTakeoffs: {
+                title: 'Material Takeoffs Service',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Comprehensive Material Takeoff Solutions</p>
+                        <p>Our material takeoff service provides accurate measurement and quantification of all materials required for your finishing projects. We ensure you have the exact quantities needed, eliminating waste and optimizing your budget.</p>
+                        
+                        <p class="font-semibold mt-4">What's Included:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Detailed quantity takeoffs from your plans</li>
+                            <li>Material specifications and grade recommendations</li>
+                            <li>Waste factor calculations based on project complexity</li>
+                            <li>Color-coded plans for easy reference</li>
+                            <li>Digital files compatible with your estimating software</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            flooring: {
+                title: 'Flooring Estimating Services',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Precision Flooring Estimates for All Materials</p>
+                        <p>BENNY ESTIMATES provides detailed estimates for all types of flooring materials, from traditional hardwood to modern luxury vinyl. Our team understands the unique requirements of each flooring type and calculates accordingly.</p>
+                        
+                        <p class="font-semibold mt-4">Flooring Types We Cover:</p>
+                        <ul class="grid grid-cols-2 gap-2">
+                            <li>• Hardwood</li>
+                            <li>• Laminate</li>
+                            <li>• Luxury Vinyl</li>
+                            <li>• Tile & Stone</li>
+                            <li>• Carpet</li>
+                            <li>• Bamboo</li>
+                            <li>• Cork</li>
+                            <li>• Rubber</li>
+                            <li>• Concrete</li>
+                            <li>• Terrazzo</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            painting: {
+                title: 'Painting Estimating Services',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Interior & Exterior Painting Estimates</p>
+                        <p>Our painting estimating service covers both interior and exterior projects, from residential repaints to large commercial developments. We account for surface preparation, primer requirements, number of coats, and finishing details.</p>
+                        
+                        <p class="font-semibold mt-4">Our Estimate Includes:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Wall square footage calculations</li>
+                            <li>Trim and door measurements</li>
+                            <li>Ceiling area calculations</li>
+                            <li>Paint quantity by type and brand</li>
+                            <li>Labor hours by skill level</li>
+                            <li>Equipment and material costs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            ceiling: {
+                title: 'Ceiling Estimating Services',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Comprehensive Ceiling Installation Estimates</p>
+                        <p>From drop ceilings to decorative finishes, our team provides thorough estimation of materials and labor costs for all ceiling types. We ensure your ceiling projects are accurately quoted and profitable.</p>
+                        
+                        <p class="font-semibold mt-4">Ceiling Types We Estimate:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Acoustic drop ceilings</li>
+                            <li>Drywall ceilings</li>
+                            <li>Popcorn/stipple finishes</li>
+                            <li>Tray and coffered ceilings</li>
+                            <li>Wood plank ceilings</li>
+                            <li>Metal panel systems</li>
+                            <li>Skylight integrations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            drywall: {
+                title: 'Drywall Estimating Services',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Precision Drywall Takeoffs</p>
+                        <p>Our drywall estimating service provides accurate takeoffs for framing, taping, and gypsum board installations. We account for all components of drywall systems to ensure complete and accurate estimates.</p>
+                        
+                        <p class="font-semibold mt-4">What We Calculate:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Sheet count by size and thickness</li>
+                            <li>Metal or wood framing requirements</li>
+                            <li>Fasteners and adhesive quantities</li>
+                            <li>Tape and joint compound</li>
+                            <li>Corner bead and trim</li>
+                            <li>Labor hours for hanging and finishing</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            stucco: {
+                title: 'Stucco Estimating Services',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Exterior Stucco & Finish Estimates</p>
+                        <p>Our comprehensive estimation services for stucco finishes ensure your exterior projects are accurately priced. We account for all layers, textures, and finish options in our detailed estimates.</p>
+                        
+                        <p class="font-semibold mt-4">Our Stucco Estimates Include:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Scratch, brown, and finish coat quantities</li>
+                            <li>Lath and accessories</li>
+                            <li>Control joint placement</li>
+                            <li>Color and texture additives</li>
+                            <li>Waterproofing and drainage</li>
+                            <li>Labor by application method</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            flooringDetailed: {
+                title: 'Detailed Flooring Services',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Comprehensive Flooring Solutions</p>
+                        <p>BENNY ESTIMATES delivers complete flooring takeoff services that save you time and money. We handle projects of all sizes, from residential renovations to commercial developments.</p>
+                        
+                        <p class="font-semibold mt-4">Additional Services:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Subfloor preparation requirements</li>
+                            <li>Moisture barrier specifications</li>
+                            <li>Pattern layout optimization</li>
+                            <li>Transition and trim details</li>
+                            <li>Waste reduction strategies</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            paintingDetailed: {
+                title: 'Advanced Painting & Coating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Specialized Painting & Coating Services</p>
+                        <p>As trusted experts in all finishing trades, we provide detailed estimates for drywall, ceiling, mosaic, tile, acoustical finishes, and specialized coatings. Our comprehensive approach ensures no detail is missed.</p>
+                        
+                        <p class="font-semibold mt-4">Specialty Coatings We Cover:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Epoxy floor coatings</li>
+                            <li>Fire-resistant paints</li>
+                            <li>Anti-graffiti coatings</li>
+                            <li>Waterproofing membranes</li>
+                            <li>Decorative faux finishes</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            estimate: {
+                title: 'Get Your Finishes Estimate',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Ready to Get Started?</p>
+                        <p>Contact BENNY ESTIMATES today for a free consultation and quote for your finishes estimating needs. Our team of experts is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-4">What We Need From You:</p>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Project plans and specifications</li>
+                            <li>Scope of work details</li>
+                            <li>Material preferences if any</li>
+                            <li>Project timeline</li>
+                        </ul>
+                        
+                        <div class="bg-finish-50 dark:bg-gray-700 p-4 rounded-lg mt-4">
+                            <p class="font-semibold text-finish-700 dark:text-finish-400">Contact Us Today:</p>
+                            <p><i class="ri-mail-line mr-2"></i>Ben@bennyestimates.com</p>
+                            <p><i class="ri-phone-line mr-2"></i>+1 (289) 801-7224</p>
+                            <p><i class="ri-map-pin-line mr-2"></i>96 Jones Street, New York, USA</p>
+                        </div>
+                    </div>
+                `
+            },
+            concreteFlooring: {
+                title: 'Concrete Flooring Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Concrete Flooring Solutions</p>
+                        <p>Our concrete flooring estimating service covers polished concrete, stained concrete, epoxy coatings, and industrial concrete floors. We account for preparation, materials, labor, and finishing requirements.</p>
+                        <p>Whether for residential, commercial, or industrial applications, our estimates provide accurate costs for successful project planning.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            glassFlooring: {
+                title: 'Glass Flooring Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Glass Flooring Systems</p>
+                        <p>Specialized estimating for glass flooring systems including structural glass, laminated glass, and specialty installations. We account for support structures, safety requirements, and installation complexity.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            bambooFlooring: {
+                title: 'Bamboo Flooring Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Bamboo Flooring Solutions</p>
+                        <p>Sustainable bamboo flooring requires specialized estimating. We account for material grades, installation methods, and finishing requirements. Contact us for accurate bamboo flooring estimates.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            woodFlooring: {
+                title: 'Wood Flooring Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Hardwood & Engineered Wood Flooring</p>
+                        <p>Precision estimates for all wood flooring types including solid hardwood, engineered wood, and parquet. We account for species, grades, and installation patterns.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            corkFlooring: {
+                title: 'Cork Flooring Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Cork Flooring Solutions</p>
+                        <p>Eco-friendly cork flooring requires accurate estimating for material quantities and installation costs. We provide detailed estimates for residential and commercial cork flooring projects.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            rubberFlooring: {
+                title: 'Rubber Flooring Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Rubber Flooring Systems</p>
+                        <p>Rubber flooring for gyms, play areas, and commercial spaces requires specialized estimating. We account for thickness, color patterns, and installation requirements.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sportsFlooring: {
+                title: 'Sports Flooring Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Sports Flooring Systems</p>
+                        <p>Specialized estimating for sports flooring including basketball courts, gym floors, and athletic surfaces. We account for performance requirements and installation complexity.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            terrazzoTile: {
+                title: 'Terrazzo Tile Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Terrazzo & Tile Estimating</p>
+                        <p>Comprehensive estimates for terrazzo and tile installations including material quantities, patterns, and installation labor. Accurate costs for elegant flooring solutions.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            carpeting: {
+                title: 'Carpeting Estimating',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Carpet & Floor Covering Estimates</p>
+                        <p>Accurate estimates for all carpet types including broadloom, carpet tiles, and specialty carpets. We account for grade, padding, and installation requirements.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fluidApplied: {
+                title: 'Fluid Applied Flooring',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Fluid Applied Flooring Systems</p>
+                        <p>Specialized estimating for fluid applied flooring including epoxy, polyurethane, and acrylic systems. We account for substrate preparation, coating layers, and curing requirements.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            submitPlans: {
+                title: 'Submit Your Plans',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Easy Plan Submission</p>
+                        <p>Getting started with BENNY ESTIMATES is simple. Upload your plans through our secure platform in PDF, CAD, or BIM formats. We'll review your project and provide a comprehensive estimate within 24-48 hours.</p>
+                        <p>Contact us at Ben@bennyestimates.com to submit your plans today.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            receiveQuote: {
+                title: 'Receive Your Quote',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Transparent Pricing</p>
+                        <p>After reviewing your project requirements, we provide a clear, competitive quote for our estimating services. No hidden fees, no surprises. Just professional, accurate estimating at fair prices.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            comprehensiveEstimates: {
+                title: 'Comprehensive Estimates',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Ready-to-Bid Estimates</p>
+                        <p>Your completed estimate includes detailed material quantities, labor costs, equipment requirements, and budget projections. Delivered in clear, organized formats ready for bidding.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sydney: {
+                title: 'Sydney - New South Wales',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Finishes Estimating in Sydney</p>
+                        <p>BENNY ESTIMATES provides comprehensive finishes estimating services throughout Sydney and New South Wales. Our team understands local market conditions and requirements.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            melbourne: {
+                title: 'Melbourne - Victoria',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Finishes Estimating in Melbourne</p>
+                        <p>Serving Melbourne and all of Victoria with professional finishes estimating. From residential to commercial projects, we deliver accurate, reliable estimates.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            brisbane: {
+                title: 'Brisbane - Queensland',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Finishes Estimating in Brisbane</p>
+                        <p>Complete finishes estimating services for Brisbane and throughout Queensland. Trust BENNY ESTIMATES for your project needs.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            perth: {
+                title: 'Perth - Western Australia',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Finishes Estimating in Perth</p>
+                        <p>Professional finishes estimating for Perth and Western Australia. Accurate, reliable estimates for all project types.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            allStates: {
+                title: 'Nationwide US Coverage',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">US Nationwide Estimating</p>
+                        <p>BENNY ESTIMATES provides finishes estimating services across all 50 United States. We understand regional variations and requirements.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            residential: {
+                title: 'Residential Finishes',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Residential Finishes Estimating</p>
+                        <p>Specialized estimating for residential projects including homes, apartments, and residential complexes. Accurate estimates for all finishes.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            commercial: {
+                title: 'Commercial Finishes',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Commercial Finishes Estimating</p>
+                        <p>Expert estimating for commercial projects including offices, retail, and commercial developments. Comprehensive finishes coverage.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            industrial: {
+                title: 'Industrial Coatings',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Industrial Coatings Estimating</p>
+                        <p>Specialized estimating for industrial coatings including epoxy, polyurethane, and protective finishes. Advanced solutions for industrial applications.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            specialFinishes: {
+                title: 'Special Finishes',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Custom & Decorative Finishes</p>
+                        <p>Estimating for custom and decorative finishes including faux finishes, textured coatings, and specialty applications. Bring your vision to life with accurate estimates.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            flooringOptions: {
+                title: 'Explore Flooring Options',
+                content: `
+                    <div class="space-y-4">
+                        <p class="text-lg font-semibold text-finish-600 dark:text-finish-400">Comprehensive Flooring Solutions</p>
+                        <p>From traditional materials to innovative new products, BENNY ESTIMATES provides accurate estimates for all flooring types. Contact us to discuss your specific flooring project.</p>
+                        ${bennyInfo}
+                    </div>
+                `
+            }
+        };
+
+        // Open modal function - matches page#2 pattern
+        window.openModal = function(modalKey) {
+            console.log('Opening modal for:', modalKey);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const data = finishesData[modalKey];
+            if (data) {
+                modalTitle.textContent = data.title;
+                modalBody.innerHTML = data.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent scrolling
+            } else {
+                console.error('Data not found for key:', modalKey);
+                // Fallback content
+                modalTitle.textContent = 'Finishes Estimating';
+                modalBody.innerHTML = `
+                    <p>Detailed information about this finishes estimating service is available. Contact BENNY ESTIMATES for more information.</p>
+                    ${bennyInfo}
+                `;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Add hover effects to finish cards
+        document.querySelectorAll('.finish-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px) scale(1.03)';
+                this.style.boxShadow = '0 25px 60px rgba(217, 70, 239, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+                this.style.boxShadow = '0 20px 50px rgba(217, 70, 239, 0.15)';
+            });
+        });
+        
+        // Add animation to process steps
+        let animationDelay = 0;
+        document.querySelectorAll('.animate-slide-up').forEach(step => {
+            step.style.animationDelay = `${animationDelay}s`;
+            animationDelay += 0.2;
+        });
+        
+        // Add texture pattern effect to hero section
+        const textureOverlay = document.querySelector('.texture-overlay');
+        if (textureOverlay) {
+            textureOverlay.style.position = 'relative';
+            const pattern = document.createElement('div');
+            pattern.style.position = 'absolute';
+            pattern.style.top = '0';
+            pattern.style.left = '0';
+            pattern.style.right = '0';
+            pattern.style.bottom = '0';
+            pattern.style.backgroundImage = document.documentElement.classList.contains('dark') 
+                ? "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")"
+                : "url(\"data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E\")";
+            pattern.style.opacity = '0.3';
+            pattern.style.pointerEvents = 'none';
+            textureOverlay.appendChild(pattern);
+        }
+        
+        console.log('Page loaded with modal functionality from page#2 pattern');
+    </script>
+</body>
+</html>

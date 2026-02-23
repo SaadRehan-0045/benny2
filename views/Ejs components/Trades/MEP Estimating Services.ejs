@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MEP Estimating Services | BENNY ESTIMATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        mep: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        },
+                        orange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'pulse-circuit': 'pulseCircuit 2s ease-in-out infinite',
+                        'flow': 'flow 3s linear infinite',
+                        'modal-enter': 'modalEnter 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        pulseCircuit: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        },
+                        flow: {
+                            '0%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                            '100%': { backgroundPosition: '0% 50%' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* MEP theme styling */
+        .mep-gradient {
+            background: linear-gradient(135deg, #0284c7 0%, #075985 100%);
+        }
+        
+        .dark .mep-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        }
+        
+        /* Circuit pattern background */
+        .circuit-pattern {
+            background-image: 
+                linear-gradient(90deg, transparent 50%, rgba(2, 132, 199, 0.1) 50%),
+                linear-gradient(transparent 50%, rgba(2, 132, 199, 0.1) 50%);
+            background-size: 40px 40px;
+        }
+        
+        .dark .circuit-pattern {
+            background-image: 
+                linear-gradient(90deg, transparent 50%, rgba(56, 189, 248, 0.1) 50%),
+                linear-gradient(transparent 50%, rgba(56, 189, 248, 0.1) 50%);
+            background-size: 40px 40px;
+        }
+        
+        /* MEP card effect */
+        .mep-card {
+            border: 1px solid #bae6fd;
+            border-top: 4px solid #0284c7;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .mep-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(2, 132, 199, 0.05) 100%);
+            z-index: 0;
+        }
+        
+        .mep-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(2, 132, 199, 0.15);
+            border-color: #7dd3fc;
+        }
+        
+        .dark .mep-card {
+            border-color: #075985;
+        }
+        
+        .dark .mep-card:hover {
+            box-shadow: 0 15px 40px rgba(56, 189, 248, 0.2);
+            border-color: #38bdf8;
+        }
+        
+        /* Pipe flow effect */
+        .flow-effect {
+            background: linear-gradient(90deg, #bae6fd, #7dd3fc, #38bdf8, #7dd3fc, #bae6fd);
+            background-size: 200% 100%;
+            animation: flow 3s linear infinite;
+        }
+        
+        /* Electrical spark */
+        .spark {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .spark:after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 8px;
+            height: 8px;
+            background: #fbbf24;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            animation: sparkFlash 1s ease-in-out infinite;
+        }
+        
+        @keyframes sparkFlash {
+            0%, 100% { opacity: 0; }
+            50% { opacity: 1; }
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 1rem;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border: 1px solid #374151;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-thumb {
+            background: #fb923c;
+        }
+
+        /* Ensure buttons are clickable */
+        button, .cursor-pointer, [onclick] {
+            cursor: pointer;
+        }
+
+        /* Button color override - Orange theme for all CTAs */
+        .btn-estimate {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+            border: none !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-estimate:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4) !important;
+        }
+        
+        .dark .btn-estimate {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+        
+        .dark .btn-estimate:hover {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        }
+        
+        .btn-estimate i {
+            color: white !important;
+        }
+
+        /* Orange theme for secondary buttons */
+        .btn-secondary {
+            background: transparent !important;
+            color: white !important;
+            border: 2px solid white !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1) !important;
+            transform: translateY(-2px);
+        }
+        
+        .dark .btn-secondary {
+            border-color: #fb923c !important;
+            color: #fb923c !important;
+        }
+        
+        .dark .btn-secondary:hover {
+            background: rgba(249, 115, 22, 0.1) !important;
+        }
+
+        /* Orange gradient for featured cards */
+        .orange-gradient-card {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+        }
+        
+        .dark .orange-gradient-card {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+
+        /* Orange text for highlights */
+        .text-orange-highlight {
+            color: #f97316 !important;
+        }
+        
+        .dark .text-orange-highlight {
+            color: #fb923c !important;
+        }
+
+        /* Orange border for cards */
+        .border-orange-highlight {
+            border-color: #f97316 !important;
+        }
+        
+        .dark .border-orange-highlight {
+            border-color: #fb923c !important;
+        }
+
+        /* Orange background for icons */
+        .bg-orange-light {
+            background-color: #fff7ed !important;
+        }
+        
+        .dark .bg-orange-light {
+            background-color: #7c2d12 !important;
+        }
+
+        /* Responsive typography */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 1.75rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .card-title {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Header spacing fix */
+        .main-content {
+            padding-top: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                padding-top: 6rem;
+            }
+        }
+
+        /* Remove default margin/padding for body */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col">
+    <!-- Main Content with header padding -->
+    <main class="main-content flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        
+        <!-- Hero Section -->
+        <section class="mb-6 sm:mb-8 lg:mb-12">
+            <div class="text-center mb-4 sm:mb-6 lg:mb-8">
+                <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 lg:mb-4 animate-fade-in leading-tight">
+                    MEP Estimating Services
+                </h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-mep-600 dark:text-mep-400 px-2">
+                    Accurate and Reliable Cost Estimation for Mechanical, Electrical & Plumbing
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center mb-4 sm:mb-6 lg:mb-8">
+                <div>
+                    <div class="mep-gradient text-white p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl mb-3 sm:mb-4 lg:mb-6">
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">Get a 30% off Estimate Today!</h3>
+                        <p class="mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base">
+                            Are you looking for accurate and reliable MEP estimating services? BENNY ESTIMATES specializes in providing comprehensive and cost-effective estimation solutions tailored to meet your specific needs.
+                        </p>
+                        <button onclick="openModal('estimate')" class="btn-estimate px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 cursor-pointer w-full sm:w-auto">
+                            <span class="flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="ri-tools-fill"></i>
+                                Request Your Estimate
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div onclick="openModal('experience')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                        <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                            <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                                <i class="ri-tools-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl lg:text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm sm:text-base lg:text-lg">Over a Decade of Experience</h4>
+                                <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Affordable and precise MEP estimating</p>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-300">
+                            With over 10 years in the industry, we specialize in mechanical, electrical, and plumbing projects ensuring your projects stay within budget.
+                        </p>
+                        <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                            Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 sm:mt-4 lg:mt-0">
+                    <!-- MEP Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="MEP systems and construction" 
+                         class="w-full h-auto rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg object-cover max-h-[250px] sm:max-h-[300px] lg:max-h-none">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Overview -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 circuit-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Comprehensive MEP Estimating Services</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3 lg:gap-4">
+                <div onclick="openModal('fireStopping')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-fire-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Fire Stopping</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('pipeInsulation')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-temp-cold-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Pipe Insulation</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('fireproofing')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-shield-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Fireproofing</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('heating')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-temp-hot-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Heating</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('moistureProtection')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-drop-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Moisture Protection</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('hvac')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-windy-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">HVAC</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('sprinklers')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-water-percent-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Sprinklers</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('sheetMetal')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-settings-5-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Sheet Metal</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('sprayInsulation')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-ink-bottle-line"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Spray Insulation</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('ductwork')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 rounded-lg text-center shadow-sm mep-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-dashboard-horizontal-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Ductwork</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Mechanical Components -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Accurate Estimates for Mechanical Components</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('airConditioning')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-snowy-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Air Conditioning</h3>
+                    </div>
+                    <div class="space-y-1 sm:space-y-2">
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Chillers & Cooling Systems</span>
+                        </div>
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Air Handling Units</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('heatingSystems')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-fire-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Heating Systems</h3>
+                    </div>
+                    <div class="space-y-1 sm:space-y-2">
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Boilers & Water Heaters</span>
+                        </div>
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Heat Pumps</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('ventilation')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-bar-chart-grouped-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Ventilation</h3>
+                    </div>
+                    <div class="space-y-1 sm:space-y-2">
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Ducts & Duct Fittings</span>
+                        </div>
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Exhaust Fans & Louvers</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('pipingSystems')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-settings-5-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Piping Systems</h3>
+                    </div>
+                    <div class="space-y-1 sm:space-y-2">
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Pipes & Pipe Fittings</span>
+                        </div>
+                        <div class="flex items-center text-xs sm:text-sm">
+                            <div class="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full mr-2"></div>
+                            <span>Pumps & Hangers</span>
+                        </div>
+                    </div>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Electrical & Plumbing -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <div class="grid lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-8">
+                <!-- Electrical Section -->
+                <div onclick="openModal('electrical')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-t-4 hover:border-orange-500">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="bg-orange-light p-3 sm:p-4 rounded-lg mr-3 sm:mr-4">
+                            <i class="ri-flashlight-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">Expert Electrical Estimation</h2>
+                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Residential, Commercial & Industrial Systems</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4 lg:mb-6">
+                        <div class="p-2 sm:p-3 lg:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg spark">
+                            <h4 class="font-bold text-xs sm:text-sm mb-1">Lighting Fixtures</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">All types of lighting systems</p>
+                        </div>
+                        <div class="p-2 sm:p-3 lg:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg spark">
+                            <h4 class="font-bold text-xs sm:text-sm mb-1">Panels & Controls</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">Electrical distribution systems</p>
+                        </div>
+                        <div class="p-2 sm:p-3 lg:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg spark">
+                            <h4 class="font-bold text-xs sm:text-sm mb-1">Conductors & Fuses</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">Wiring and protection systems</p>
+                        </div>
+                        <div class="p-2 sm:p-3 lg:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg spark">
+                            <h4 class="font-bold text-xs sm:text-sm mb-1">Grounding Systems</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">Safety and protection equipment</p>
+                        </div>
+                    </div>
+                    <div class="text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <!-- Plumbing Section -->
+                <div onclick="openModal('plumbing')" class="orange-gradient-card p-4 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="bg-white/20 p-3 sm:p-4 rounded-lg mr-3 sm:mr-4">
+                            <i class="ri-drop-fill text-white text-xl sm:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-white">Precision Plumbing Estimates</h2>
+                            <p class="text-xs sm:text-sm text-white/80">Residential, Commercial & Industrial Projects</p>
+                        </div>
+                    </div>
+                    
+                    <p class="mb-3 sm:mb-4 lg:mb-6 text-xs sm:text-sm text-white/90">
+                        Unlocking precision and profitability for your plumbing projects with unmatched expertise and field knowledge.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-3 sm:mb-4">
+                        <div class="bg-white/20 p-2 sm:p-3 lg:p-4 rounded-lg">
+                            <div class="font-bold text-xs sm:text-sm text-white">All Sizes</div>
+                            <div class="text-xs text-white/70">Small to large projects</div>
+                        </div>
+                        <div class="bg-white/20 p-2 sm:p-3 lg:p-4 rounded-lg">
+                            <div class="font-bold text-xs sm:text-sm text-white">All Sectors</div>
+                            <div class="text-xs text-white/70">Residential to industrial</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Insulation Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 flow-effect p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md">
+                <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Accurate Estimates for Your Insulation Needs</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-6 mb-4 sm:mb-6 lg:mb-8">
+                    <div onclick="openModal('pipeInsulationDetail')" class="text-center p-3 sm:p-4 lg:p-5 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2">
+                            <i class="ri-temp-cold-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Pipe Insulation</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">All pipe insulation types and systems</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('ductworkInsulation')" class="text-center p-3 sm:p-4 lg:p-5 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2">
+                            <i class="ri-dashboard-horizontal-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Ductwork Insulation</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">HVAC and ventilation insulation</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('fireStoppingDetail')" class="text-center p-3 sm:p-4 lg:p-5 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2">
+                            <i class="ri-shield-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Fire Stopping</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Fire protection and proofing systems</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Why Choose BENNY ESTIMATES?</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('fastTurnaround')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3">
+                        <i class="ri-time-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2">Fast Turnaround</h4>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Quick estimate delivery to meet deadlines</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('customizableServices')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3">
+                        <i class="ri-settings-5-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2">Customizable Services</h4>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Tailored MEP estimation to your needs</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('experiencedEstimators')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3">
+                        <i class="ri-user-star-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2">Experienced Estimators</h4>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Expert MEP estimators ensuring satisfaction</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('affordableRates')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3">
+                        <i class="ri-money-dollar-circle-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-2">Affordable Rates</h4>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Transparent pricing with no hidden costs</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our MEP Cost Estimation Process</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3 lg:gap-4">
+                <div onclick="openModal('drawingSubmission')" class="text-center cursor-pointer group">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-orange-600 text-white rounded-full flex items-center justify-center text-base sm:text-lg font-bold mx-auto mb-2 animate-pulse-circuit group-hover:scale-110 transition-transform">
+                        1
+                    </div>
+                    <h4 class="font-bold text-xs sm:text-sm mb-0.5">Drawing Submission</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Submit your digital plans</p>
+                </div>
+                
+                <div onclick="openModal('quote')" class="text-center cursor-pointer group">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-orange-600 text-white rounded-full flex items-center justify-center text-base sm:text-lg font-bold mx-auto mb-2 animate-pulse-circuit group-hover:scale-110 transition-transform" style="animation-delay: 0.2s;">
+                        2
+                    </div>
+                    <h4 class="font-bold text-xs sm:text-sm mb-0.5">Quote</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Get comprehensive pricing</p>
+                </div>
+                
+                <div onclick="openModal('estimation')" class="text-center cursor-pointer group">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-orange-600 text-white rounded-full flex items-center justify-center text-base sm:text-lg font-bold mx-auto mb-2 animate-pulse-circuit group-hover:scale-110 transition-transform" style="animation-delay: 0.4s;">
+                        3
+                    </div>
+                    <h4 class="font-bold text-xs sm:text-sm mb-0.5">Estimation</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Advanced technology analysis</p>
+                </div>
+                
+                <div onclick="openModal('finalAudit')" class="text-center cursor-pointer group">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-orange-600 text-white rounded-full flex items-center justify-center text-base sm:text-lg font-bold mx-auto mb-2 animate-pulse-circuit group-hover:scale-110 transition-transform" style="animation-delay: 0.6s;">
+                        4
+                    </div>
+                    <h4 class="font-bold text-xs sm:text-sm mb-0.5">Final Audit</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Quality assurance check</p>
+                </div>
+                
+                <div onclick="openModal('delivery')" class="text-center cursor-pointer group sm:col-span-1 col-span-2 sm:col-auto">
+                    <div class="w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 bg-orange-600 text-white rounded-full flex items-center justify-center text-base sm:text-lg font-bold mx-auto mb-2 animate-pulse-circuit group-hover:scale-110 transition-transform" style="animation-delay: 0.8s;">
+                        5
+                    </div>
+                    <h4 class="font-bold text-xs sm:text-sm mb-0.5">Delivery</h4>
+                    <p class="text-[10px] sm:text-xs text-gray-600 dark:text-gray-400">Precision estimate delivery</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 text-center">
+            <div class="orange-gradient-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-xl">
+                <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-3 sm:mb-4 lg:mb-5 text-white">Building Success Starts Here</h3>
+                <p class="text-sm sm:text-base lg:text-lg mb-4 sm:mb-5 lg:mb-6 max-w-2xl mx-auto text-white/90">
+                    Trust BENNY ESTIMATES for Superior MEP Estimation and Unlock the Power of Seamless Design
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-5 justify-center items-center mb-4 sm:mb-5 lg:mb-6">
+                    <button onclick="openModal('uploadPlans')" class="btn-estimate px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto">
+                        <i class="ri-upload-cloud-2-line mr-1 sm:mr-2"></i>
+                        Upload Plans Here!
+                    </button>
+                    <button onclick="openModal('discountedEstimate')" class="btn-secondary px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto">
+                        Save Big - Request Your Discounted Estimate!
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-3 sm:gap-4 lg:gap-8">
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-light rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Complete MEP estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div onclick="openModal('sydney')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Sydney</span>
+                        </div>
+                        <div onclick="openModal('melbourne')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div onclick="openModal('brisbane')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Brisbane</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-light rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Nationwide MEP estimation</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div onclick="openModal('allStates')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div onclick="openModal('mechanicalSystems')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Mechanical Systems</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Expertise</span>
+                        </div>
+                        <div onclick="openModal('electricalPlumbing')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Electrical & Plumbing</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Specialized</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-4 sm:mb-6 lg:mb-8 text-center orange-gradient-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-xl">
+            <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">Experience Precision in MEP Estimating</h2>
+            <div class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">
+                Get Professional MEP Estimates<br>
+                <span class="text-xs sm:text-sm lg:text-base text-white/80">Accurate Estimates for Mechanical, Electrical & Plumbing Systems</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6 max-w-2xl mx-auto">
+                <div onclick="openModal('mechanical')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Mechanical</div>
+                    <div class="text-xs text-white/80">HVAC & Piping Systems</div>
+                </div>
+                <div onclick="openModal('electrical')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Electrical</div>
+                    <div class="text-xs text-white/80">Power & Lighting Systems</div>
+                </div>
+                <div onclick="openModal('plumbing')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Plumbing</div>
+                    <div class="text-xs text-white/80">Water & Drainage Systems</div>
+                </div>
+            </div>
+            
+            <button onclick="openModal('estimate')" class="bg-white text-orange-600 hover:bg-gray-100 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <i class="ri-tools-fill mr-1 sm:mr-2"></i>
+                Get Your MEP Estimate
+            </button>
+        </section>
+
+    </main>
+    
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-2 sm:mb-3">
+                <h2 id="modalTitle" class="text-base sm:text-lg lg:text-xl font-bold text-orange-600 dark:text-orange-400">MEP Estimating Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-lg sm:text-xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here dynamically -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="ri-tools-fill text-orange-600 dark:text-orange-400 text-sm sm:text-base"></i>
+                        <div>
+                            <span class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">BENNY ESTIMATES</span>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">96 Jones Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <a href="mailto:Ben@bennyestimates.com" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-xs">
+                            <i class="ri-mail-send-line mr-1"></i>Email
+                        </a>
+                        <a href="tel:+12898017224" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs">
+                            <i class="ri-phone-line mr-1"></i>Call
+                        </a>
+                        <button onclick="closeModal()" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-xs">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BENNY ESTIMATES contact information template
+        const bennyInfo = `
+            <div class="bg-orange-50 dark:bg-gray-700 p-3 sm:p-4 rounded-lg mt-3 border-l-4 border-orange-600">
+                <p class="font-semibold text-orange-700 dark:text-orange-400 flex items-center text-xs sm:text-sm">
+                    <i class="ri-tools-fill mr-2"></i>
+                    BENNY ESTIMATES
+                </p>
+                <p class="mt-2 text-xs"><i class="ri-map-pin-line mr-2 text-orange-600"></i>96 Jones Street, New York, USA</p>
+                <p class="text-xs"><i class="ri-mail-line mr-2 text-orange-600"></i><a href="mailto:Ben@bennyestimates.com" class="hover:underline">Ben@bennyestimates.com</a></p>
+                <p class="text-xs"><i class="ri-phone-line mr-2 text-orange-600"></i><a href="tel:+12898017224" class="hover:underline">+1 (289) 801-7224</a></p>
+                <p class="text-xs mt-2 text-gray-600 dark:text-gray-400"><i class="ri-time-line mr-1"></i>Call us any time</p>
+            </div>
+        `;
+
+        // Modal content data structure - COMPLETE with all entries
+        const mepData = {
+            estimate: {
+                title: 'Get Your MEP Estimate',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Ready to Get Started?</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your MEP estimating needs. Our team of certified estimators is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">What We Need From You:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project plans and specifications (PDF, CAD, or digital formats)</li>
+                            <li>MEP system details and requirements</li>
+                            <li>Scope of work details</li>
+                            <li>Project timeline and delivery requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            experience: {
+                title: 'Over a Decade of MEP Experience',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">A Decade of Excellence in MEP Estimating</p>
+                        <p class="text-xs sm:text-sm">With over 10 years in the industry, BENNY ESTIMATES has established itself as a trusted leader in mechanical, electrical, and plumbing estimation. Our experience spans thousands of projects across residential, commercial, and industrial sectors.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Experience Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>1,000+ successful MEP projects completed</li>
+                            <li>98% client satisfaction rate</li>
+                            <li>Certified estimators with industry credentials</li>
+                            <li>Advanced technology and software expertise</li>
+                            <li>Proven track record of cost savings</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fireStopping: {
+                title: 'Fire Stopping Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Fire Stopping Estimates</p>
+                        <p class="text-xs sm:text-sm">Our fire stopping estimating service provides accurate quantification of all materials needed for fire protection systems. We account for all types of fire stopping materials and installation requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fire Stopping Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Firestop sealants and caulking</li>
+                            <li>Firestop pillows and putty pads</li>
+                            <li>Firestop collars and wrap strips</li>
+                            <li>Fire-rated assemblies</li>
+                            <li>Smoke seals and gaskets</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            pipeInsulation: {
+                title: 'Pipe Insulation Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Accurate Pipe Insulation Estimates</p>
+                        <p class="text-xs sm:text-sm">Our pipe insulation estimating service covers all types of insulation materials for mechanical piping systems. We provide detailed quantities for thermal and acoustic insulation requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Insulation Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Fiberglass pipe insulation</li>
+                            <li>Mineral wool insulation</li>
+                            <li>Foam insulation (PE, PU, NBR)</li>
+                            <li>Calcium silicate insulation</li>
+                            <li>Cellular glass insulation</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fireproofing: {
+                title: 'Fireproofing Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Fireproofing Estimates</p>
+                        <p class="text-xs sm:text-sm">Our fireproofing estimating service provides accurate quantification of materials for structural fire protection. We account for all types of fireproofing applications and requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fireproofing Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Spray-applied fireproofing (SFRM)</li>
+                            <li>Intumescent coatings</li>
+                            <li>Fireproofing boards and wraps</li>
+                            <li>Concrete encasement</li>
+                            <li>Masonry fireproofing</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            heating: {
+                title: 'Heating Systems Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Heating System Estimates</p>
+                        <p class="text-xs sm:text-sm">Our heating system estimating service provides accurate quantification of all components for residential, commercial, and industrial heating systems.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Heating Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Boilers and water heaters</li>
+                            <li>Furnaces and heat pumps</li>
+                            <li>Radiators and baseboard heaters</li>
+                            <li>Piping and distribution systems</li>
+                            <li>Controls and thermostats</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            moistureProtection: {
+                title: 'Moisture Protection Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Complete Moisture Protection Estimates</p>
+                        <p class="text-xs sm:text-sm">Our moisture protection estimating service covers all materials and systems designed to protect buildings from water damage and moisture intrusion.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Moisture Protection Systems:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Waterproofing membranes</li>
+                            <li>Dampproofing systems</li>
+                            <li>Vapor barriers</li>
+                            <li>Flashing and sealants</li>
+                            <li>Drainage systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            hvac: {
+                title: 'HVAC Systems Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive HVAC Estimates</p>
+                        <p class="text-xs sm:text-sm">Our HVAC estimating service provides accurate quantification of all heating, ventilation, and air conditioning components for any project size.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">HVAC Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Air handling units (AHUs)</li>
+                            <li>Chillers and cooling towers</li>
+                            <li>Ductwork and fittings</li>
+                            <li>VAV boxes and diffusers</li>
+                            <li>Controls and thermostats</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sprinklers: {
+                title: 'Fire Sprinkler Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Accurate Fire Sprinkler Estimates</p>
+                        <p class="text-xs sm:text-sm">Our fire sprinkler estimating service provides detailed quantification of all components for fire suppression systems, ensuring code compliance and safety.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Sprinkler Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Sprinkler heads (various types)</li>
+                            <li>Piping and fittings</li>
+                            <li>Valves and controls</li>
+                            <li>Fire pumps and tanks</li>
+                            <li>Alarm and monitoring systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sheetMetal: {
+                title: 'Sheet Metal Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Sheet Metal Estimates</p>
+                        <p class="text-xs sm:text-sm">Our sheet metal estimating service provides accurate quantification of all sheet metal components for HVAC, architectural, and industrial applications.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Sheet Metal Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Ductwork and fittings</li>
+                            <li>Flashings and copings</li>
+                            <li>Gutters and downspouts</li>
+                            <li>Roofing and siding panels</li>
+                            <li>Custom fabricated parts</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sprayInsulation: {
+                title: 'Spray Insulation Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Complete Spray Insulation Estimates</p>
+                        <p class="text-xs sm:text-sm">Our spray insulation estimating service provides accurate quantification of spray foam and other applied insulation materials for thermal and acoustic applications.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Insulation Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Open-cell spray foam</li>
+                            <li>Closed-cell spray foam</li>
+                            <li>Spray-applied cellulose</li>
+                            <li>Spray-applied fiberglass</li>
+                            <li>Acoustic spray coatings</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            ductwork: {
+                title: 'Ductwork Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Ductwork Estimates</p>
+                        <p class="text-xs sm:text-sm">Our ductwork estimating service provides accurate quantification of all duct materials and components for HVAC systems in residential, commercial, and industrial buildings.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Ductwork Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Rectangular ductwork</li>
+                            <li>Round and spiral duct</li>
+                            <li>Flexible duct</li>
+                            <li>Fittings (elbows, transitions, tees)</li>
+                            <li>Dampers and access doors</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            airConditioning: {
+                title: 'Air Conditioning Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive AC System Estimates</p>
+                        <p class="text-xs sm:text-sm">Our air conditioning estimating service covers all components of cooling systems for residential, commercial, and industrial applications.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">AC Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Chillers and cooling towers</li>
+                            <li>Air handling units</li>
+                            <li>Condensing units</li>
+                            <li>Evaporator coils</li>
+                            <li>Refrigerant piping</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            heatingSystems: {
+                title: 'Heating Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Heating System Estimates</p>
+                        <p class="text-xs sm:text-sm">Our heating systems estimating service provides accurate quantification of all components for hydronic, forced air, and radiant heating systems.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Heating Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Boilers and water heaters</li>
+                            <li>Heat pumps</li>
+                            <li>Radiant floor heating</li>
+                            <li>Baseboard heaters</li>
+                            <li>Controls and thermostats</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            ventilation: {
+                title: 'Ventilation Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Complete Ventilation Estimates</p>
+                        <p class="text-xs sm:text-sm">Our ventilation estimating service covers all components of air movement systems for buildings of all types and sizes.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Ventilation Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Exhaust fans and ventilators</li>
+                            <li>Supply fans and blowers</li>
+                            <li>Ductwork and grilles</li>
+                            <li>Louvers and dampers</li>
+                            <li>Heat recovery ventilators</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            pipingSystems: {
+                title: 'Piping Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Piping Estimates</p>
+                        <p class="text-xs sm:text-sm">Our piping systems estimating service provides accurate quantification of all piping materials for plumbing, HVAC, and industrial applications.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Piping Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Pipe materials (copper, steel, PVC, PEX)</li>
+                            <li>Fittings and valves</li>
+                            <li>Hangers and supports</li>
+                            <li>Insulation and tracing</li>
+                            <li>Pumps and accessories</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            electrical: {
+                title: 'Electrical Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Expert Electrical Estimates</p>
+                        <p class="text-xs sm:text-sm">Our electrical estimating service covers all components of power distribution, lighting, and control systems for residential, commercial, and industrial projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Electrical Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Lighting fixtures and controls</li>
+                            <li>Panelboards and switchgear</li>
+                            <li>Conductors and raceways</li>
+                            <li>Transformers and generators</li>
+                            <li>Grounding and bonding</li>
+                            <li>Fire alarm and security systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            plumbing: {
+                title: 'Plumbing Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Plumbing Estimates</p>
+                        <p class="text-xs sm:text-sm">Our plumbing estimating service provides accurate quantification of all plumbing systems for residential, commercial, and industrial projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Plumbing Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Water supply piping</li>
+                            <li>Drain, waste, and vent systems</li>
+                            <li>Fixtures (sinks, toilets, faucets)</li>
+                            <li>Water heaters and tanks</li>
+                            <li>Pumps and lift stations</li>
+                            <li>Gas piping systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            pipeInsulationDetail: {
+                title: 'Pipe Insulation Details',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Pipe Insulation Estimates</p>
+                        <p class="text-xs sm:text-sm">Our detailed pipe insulation estimating service provides comprehensive quantification for all types of piping systems requiring thermal or acoustic insulation.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Pipe Insulation Materials:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Fiberglass pipe insulation</li>
+                            <li>Mineral wool pipe insulation</li>
+                            <li>Closed-cell elastomeric foam</li>
+                            <li>Polyethylene foam</li>
+                            <li>Calcium silicate for high temp</li>
+                            <li>Jacketing and finishes</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            ductworkInsulation: {
+                title: 'Ductwork Insulation',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Complete Duct Insulation Estimates</p>
+                        <p class="text-xs sm:text-sm">Our ductwork insulation estimating service covers all types of insulation for HVAC duct systems, including thermal and acoustic applications.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Duct Insulation Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Fiberglass duct wrap</li>
+                            <li>Rigid fiberglass board</li>
+                            <li>Closed-cell foam insulation</li>
+                            <li>Acoustic liner for ducts</li>
+                            <li>External insulation jackets</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fireStoppingDetail: {
+                title: 'Fire Stopping Details',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Fire Stopping</p>
+                        <p class="text-xs sm:text-sm">Our detailed fire stopping estimating service provides accurate quantification of all fire protection materials for penetrations and joints in fire-rated assemblies.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fire Stopping Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Through-penetration firestops</li>
+                            <li>Perimeter fire barrier systems</li>
+                            <li>Firestop collars for plastic pipe</li>
+                            <li>Firestop putty pads for electrical</li>
+                            <li>Fire-rated joint systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fastTurnaround: {
+                title: 'Fast Turnaround on Estimates',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Quick, Reliable Service</p>
+                        <p class="text-xs sm:text-sm">We understand that construction projects run on tight schedules. That's why BENNY ESTIMATES delivers most MEP estimates within 24-48 hours of receiving complete project information.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Turnaround Times:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Standard projects: 24-48 hours</li>
+                            <li>Complex projects: 3-5 days</li>
+                            <li>Rush service available upon request</li>
+                            <li>Same-day quotes for urgent needs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            customizableServices: {
+                title: 'Customizable MEP Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Tailored to Your Needs</p>
+                        <p class="text-xs sm:text-sm">Every project is unique, and so are our estimating services. We customize our approach to meet your specific MEP requirements, project size, and budget constraints.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Customization Options:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Preliminary budget estimates</li>
+                            <li>Detailed construction estimates</li>
+                            <li>Bid-ready documentation</li>
+                            <li>Value engineering analysis</li>
+                            <li>Phased project estimates</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            experiencedEstimators: {
+                title: 'Experienced MEP Estimators',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Expert Team You Can Trust</p>
+                        <p class="text-xs sm:text-sm">Our team of MEP estimators brings years of industry experience and technical expertise to every project. We stay current with the latest codes, standards, and technologies.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Team Qualifications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Certified professional estimators</li>
+                            <li>Mechanical engineering backgrounds</li>
+                            <li>Electrical systems expertise</li>
+                            <li>Plumbing code specialists</li>
+                            <li>Continuing education commitment</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            affordableRates: {
+                title: 'Affordable MEP Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Cost-Effective Solutions</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides professional MEP estimating at affordable rates. Our transparent pricing model ensures you get exceptional value without hidden costs or surprises.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Pricing Benefits:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Competitive flat-rate pricing</li>
+                            <li>No hidden fees or charges</li>
+                            <li>Volume discounts for multiple projects</li>
+                            <li>Save 30% vs. in-house estimating</li>
+                            <li>Flexible payment options</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            drawingSubmission: {
+                title: 'Drawing Submission Process',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Easy Plan Submission</p>
+                        <p class="text-xs sm:text-sm">Getting started with BENNY ESTIMATES is simple. Upload your plans through our secure platform in PDF, CAD, or other digital formats.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Supported Formats:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>PDF drawings and specifications</li>
+                            <li>CAD files (DWG, DXF)</li>
+                            <li>Bluebeam files</li>
+                            <li>Revit/BIM models</li>
+                            <li>Digital photos of plans</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Email your plans to <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a></p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            quote: {
+                title: 'Get Your MEP Quote',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Transparent, Competitive Pricing</p>
+                        <p class="text-xs sm:text-sm">After reviewing your project, we provide a clear, competitive quote for our estimating services. Our pricing is transparent with no hidden fees or surprises.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Quote Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project scope and deliverables</li>
+                            <li>Timeline for completion</li>
+                            <li>Total cost breakdown</li>
+                            <li>Payment terms and options</li>
+                            <li>Revision and support policy</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            estimation: {
+                title: 'MEP Estimation Process',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Advanced Technology Analysis</p>
+                        <p class="text-xs sm:text-sm">Our estimators use the latest MEP estimating software and technology to ensure accuracy and efficiency. We combine digital tools with experienced professional judgment.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Software We Use:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Trimble Accubid</li>
+                            <li>PlanSwift for takeoffs</li>
+                            <li>Bluebeam Revu</li>
+                            <li>Autodesk BIM 360</li>
+                            <li>Custom Excel templates</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            finalAudit: {
+                title: 'Final Quality Audit',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Rigorous Quality Assurance</p>
+                        <p class="text-xs sm:text-sm">Before delivery, every MEP estimate undergoes a comprehensive quality audit to ensure accuracy and completeness. We don't just estimate – we verify.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Audit Process:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Peer review of all calculations</li>
+                            <li>Cross-check with industry standards</li>
+                            <li>Material price verification</li>
+                            <li>Labor rate validation</li>
+                            <li>Final quality control sign-off</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            delivery: {
+                title: 'Precision Estimate Delivery',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Ready-to-Use Estimates</p>
+                        <p class="text-xs sm:text-sm">Your completed MEP estimate includes detailed information in organized formats that are easy to use for bidding, procurement, and project planning.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Deliverables Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Complete material quantity lists</li>
+                            <li>Labor hour breakdowns</li>
+                            <li>Equipment requirements</li>
+                            <li>Subcontractor scopes</li>
+                            <li>Bid-ready documentation</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            uploadPlans: {
+                title: 'Upload Your MEP Plans',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Secure Plan Upload</p>
+                        <p class="text-xs sm:text-sm">Upload your MEP plans and specifications through our secure platform. We accept multiple file formats and ensure your confidential information remains protected.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Upload Instructions:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Compress multiple files into a ZIP</li>
+                            <li>Include specifications if available</li>
+                            <li>Note any special requirements</li>
+                            <li>Provide contact information</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Email your plans to <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a></p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            discountedEstimate: {
+                title: 'Request Your Discounted Estimate',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Save Big on MEP Estimating</p>
+                        <p class="text-xs sm:text-sm">Take advantage of our special offer and request your discounted estimate today. Save 30% on your first MEP estimating project with BENNY ESTIMATES.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">How to Claim Your Discount:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Submit your plans through our platform</li>
+                            <li>Mention this special offer</li>
+                            <li>Receive your discounted quote</li>
+                            <li>Get your detailed estimate within 24-48 hours</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a> to claim your discount.</p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sydney: {
+                title: 'Sydney - New South Wales',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">MEP Estimating Services in Sydney</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides comprehensive MEP estimating services throughout Sydney and New South Wales. Our team understands local building codes, material suppliers, and market conditions.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Services in Sydney:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial MEP estimates</li>
+                            <li>Residential MEP takeoffs</li>
+                            <li>Industrial mechanical systems</li>
+                            <li>Electrical distribution design</li>
+                            <li>Plumbing system planning</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            melbourne: {
+                title: 'Melbourne - Victoria',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">MEP Estimating Services in Melbourne</p>
+                        <p class="text-xs sm:text-sm">Serving Melbourne and all of Victoria with professional MEP estimating services. From residential to commercial projects, we deliver accurate, reliable estimates.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Local Expertise:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Victorian building code compliance</li>
+                            <li>Local material pricing knowledge</li>
+                            <li>Quick turnaround times</li>
+                            <li>Personalized customer service</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            brisbane: {
+                title: 'Brisbane - Queensland',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">MEP Estimating Services in Brisbane</p>
+                        <p class="text-xs sm:text-sm">Complete MEP estimating services for Brisbane and throughout Queensland. Trust BENNY ESTIMATES for accurate, timely takeoffs for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Queensland Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial building MEP</li>
+                            <li>Industrial facility systems</li>
+                            <li>Healthcare facility MEP</li>
+                            <li>Educational institution projects</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            allStates: {
+                title: 'Nationwide US Coverage',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">MEP Estimating Across All 50 States</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides MEP estimating services across all 50 United States. We understand regional variations in building codes, material costs, and construction practices.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">US Coverage:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>All 50 states - full coverage</li>
+                            <li>IBC and local code compliance</li>
+                            <li>Regional material pricing</li>
+                            <li>Climate-specific considerations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            mechanicalSystems: {
+                title: 'Mechanical Systems Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Specialized Mechanical Estimates</p>
+                        <p class="text-xs sm:text-sm">Our mechanical systems estimating service provides specialized estimates for HVAC, piping, and mechanical equipment in commercial, industrial, and institutional projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Mechanical Expertise:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>HVAC systems design support</li>
+                            <li>Chilled water systems</li>
+                            <li>Boiler plant estimation</li>
+                            <li>Process piping systems</li>
+                            <li>Mechanical room layouts</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            electricalPlumbing: {
+                title: 'Electrical & Plumbing Specialists',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Integrated MEP Expertise</p>
+                        <p class="text-xs sm:text-sm">Our team provides specialized estimates for both electrical and plumbing systems, ensuring coordination and integration between all MEP disciplines.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Electrical & Plumbing:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Power distribution systems</li>
+                            <li>Lighting and controls</li>
+                            <li>Plumbing fixture counts</li>
+                            <li>Domestic water systems</li>
+                            <li>Sanitary and storm drainage</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            mechanical: {
+                title: 'Mechanical Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Mechanical System Estimates</p>
+                        <p class="text-xs sm:text-sm">Our mechanical estimating service covers all aspects of HVAC and piping systems for buildings of all types and sizes.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Mechanical Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Heating and cooling systems</li>
+                            <li>Ventilation and air distribution</li>
+                            <li>Piping and pumps</li>
+                            <li>Controls and automation</li>
+                            <li>Mechanical insulation</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            }
+        };
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, modal functionality ready');
+            
+            // Add circuit animation to process steps
+            let circuitDelay = 0;
+            document.querySelectorAll('.animate-pulse-circuit').forEach(element => {
+                element.style.animationDelay = `${circuitDelay}s`;
+                circuitDelay += 0.2;
+            });
+            
+            // Add spark animation to electrical elements
+            document.querySelectorAll('.spark').forEach(element => {
+                element.style.animation = 'sparkFlash 1s ease-in-out infinite';
+            });
+        });
+
+        // Open modal function - defined globally
+        window.openModal = function(modalKey) {
+            console.log('Opening modal for:', modalKey);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Check if data exists
+            if (mepData[modalKey]) {
+                modalTitle.textContent = mepData[modalKey].title;
+                modalBody.innerHTML = mepData[modalKey].content;
+            } else {
+                console.warn('Data not found for key:', modalKey, 'using fallback');
+                modalTitle.textContent = 'MEP Estimating Services';
+                modalBody.innerHTML = `
+                    <p class="text-xs sm:text-sm">Detailed information about this MEP estimating service is available. Contact BENNY ESTIMATES for more information.</p>
+                    ${bennyInfo}
+                `;
+            }
+            
+            // Show modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modalOverlay = document.getElementById('modalOverlay');
+                if (modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            }
+        });
+
+        // Make sure all clickable elements work even if they have nested elements
+        document.querySelectorAll('[onclick]').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Prevent event from bubbling up if clicked on a child
+                if (e.target !== this && e.target.closest('[onclick]') !== this) {
+                    return;
+                }
+                // The onclick attribute will handle the rest
+            });
+        });
+        
+        console.log('MEP Estimating page loaded with fixed modal functionality');
+    </script>
+</body>
+</html>

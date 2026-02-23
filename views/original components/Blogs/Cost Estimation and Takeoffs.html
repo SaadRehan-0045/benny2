@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cost Estimation and Takeoffs - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        amber: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        }
+                    },
+                    animation: {
+                        'bounce-slow': 'bounce 3s infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .estimation-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .estimation-card:hover {
+            transform: translateX(5px);
+            border-left-color: #3b82f6;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        .theme-toggle-estimate {
+            background: linear-gradient(135deg, #3b82f6, #f59e0b);
+            color: white;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+        .theme-toggle-estimate:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+        }
+        .page-indicator {
+            transition: all 0.3s ease;
+        }
+        .page-indicator.active {
+            background: #3b82f6;
+            color: white;
+            transform: scale(1.1);
+        }
+        .service-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            font-size: 10px;
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-50 to-amber-50 dark:from-gray-900 dark:to-gray-800 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Theme Toggle Button with Calculator Icon -->
+    <div class="fixed top-6 right-6 z-50">
+        <button id="themeToggle" class="theme-toggle-estimate flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all duration-300">
+            <i id="themeIcon" class="ri-calculator-line text-lg"></i>
+            <span id="themeText" class="hidden md:inline">Switch Theme</span>
+            <span id="themeIndicator" class="md:hidden text-sm">●</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400">Cost Estimation and Takeoffs</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center px-4 py-2 bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300 rounded-full text-sm font-medium mb-4">
+                <i class="ri-calculator-line mr-2"></i> Professional Estimating Services
+            </div>
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Cost Estimation & Takeoffs
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Accurate construction cost estimation and quantity takeoff services for residential, commercial, and industrial projects
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-xl overflow-hidden mb-12 shadow-xl border border-gray-200 dark:border-gray-700">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Construction Cost Estimation" 
+                 class="w-full h-64 md:h-80 object-cover">
+        </div>
+
+        <!-- Page Navigation -->
+        <div class="mb-8 overflow-x-auto">
+            <div class="flex space-x-2 pb-2">
+                <button class="page-indicator active px-4 py-2 bg-primary-600 text-white rounded-lg text-sm font-medium">Page 1</button>
+                <button class="page-indicator px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-300 dark:hover:bg-gray-600">Page 2</button>
+                <button class="page-indicator px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-300 dark:hover:bg-gray-600">Page 3</button>
+                <button class="page-indicator px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-300 dark:hover:bg-gray-600">Page 4</button>
+                <button class="page-indicator px-4 py-2 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded-lg text-sm font-medium hover:bg-gray-300 dark:hover:bg-gray-600">Page 5</button>
+            </div>
+        </div>
+
+        <!-- Services Grid - Page 1 -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center">
+                <i class="ri-map-pin-line mr-2 text-primary-600"></i> Regional Estimating Services
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Montana -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300">Montana</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-building-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Montana Construction Estimating Services</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Looking for accurate, reliable, and local construction estimating services in Montana? Whether you're planning a residential build in Bozeman, a commercial facility in Billings...
+                    </p>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center">
+                        Get Estimate <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </article>
+
+                <!-- Indiana -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300">Indiana</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-time-line text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Indiana Construction Estimating Services</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Indiana's construction market has its own realities. Relying on national averages or rough estimates often leads to underbidding, change orders, and shrinking margins...
+                    </p>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center">
+                        24-Hour Service <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </article>
+
+                <!-- Virginia -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300">Virginia</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flashlight-line text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Construction Estimating Services in Virginia</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Construction projects in Virginia depend on precise, reliable cost estimates to stay on schedule and within budget. Whether you're a general contractor, a developer...
+                    </p>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center">
+                        Fast Estimates <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </article>
+
+                <!-- Arizona -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-amber-100 dark:bg-amber-900 text-amber-800 dark:text-amber-300">Arizona</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-money-dollar-circle-line text-amber-600 dark:text-amber-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Affordable Construction Estimating Services in Arizona</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Construction projects succeed or fail long before ground is broken. In Arizona, rising labor costs, competitive bidding, climate-driven construction challenges...
+                    </p>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center">
+                        Affordable Rates <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </article>
+
+                <!-- Alaska -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300">Alaska</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-snowflake-line text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Construction Takeoff Services in Alaska</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Accurate construction takeoff services are crucial to the success of any building project in Alaska, where remote locations, extreme weather, and high logistics costs...
+                    </p>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center">
+                        Remote Support <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </article>
+
+                <!-- Painting Doors -->
+                <article class="estimation-card bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700 relative">
+                    <div class="service-badge bg-pink-100 dark:bg-pink-900 text-pink-800 dark:text-pink-300">Interior</div>
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-pink-100 dark:bg-pink-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-brush-line text-pink-600 dark:text-pink-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Painting Interior Doors – Step-by-Step Guide & Cost</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Painting interior doors is one of the fastest ways to refresh a home's interior, yet it's also one of the easiest projects to get wrong...
+                    </p>
+                    <a href="#" class="text-primary-600 dark:text-primary-400 font-medium text-sm hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center">
+                        Cost Breakdown <i class="ri-arrow-right-line ml-1"></i>
+                    </a>
+                </article>
+            </div>
+        </div>
+
+        <!-- Garages Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center">
+                <i class="ri-home-gear-line mr-2 text-amber-600"></i> Garage Construction Estimates
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- 3 Car Garage -->
+                <div class="bg-gradient-to-r from-amber-50 to-white dark:from-amber-900/20 dark:to-gray-800 rounded-xl p-6 border border-amber-200 dark:border-amber-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-car-line text-amber-600 dark:text-amber-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">3 Car Garage – Sizes, Layout & Costs 2025</h3>
+                            <p class="text-amber-600 dark:text-amber-400 text-sm">Standard Sizes and Cost Guide</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        A 3 car garage is one of the most practical upgrades a homeowner can add, offering space for three vehicles, storage, tools, and a flexible workshop area.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">Average Cost: $25,000 - $45,000</span>
+                        <a href="#" class="text-amber-600 dark:text-amber-400 font-medium hover:text-amber-800 dark:hover:text-amber-300">
+                            View Details →
+                        </a>
+                    </div>
+                </div>
+
+                <!-- 2 Car Garage -->
+                <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/20 dark:to-gray-800 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-home-3-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">2 Car Garage – Dimensions, Layouts and Cost 2025</h3>
+                            <p class="text-blue-600 dark:text-blue-400 text-sm">Complete Planning Guide</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">
+                        A 2-car garage is more than just a space to park vehicles; it's a functional asset that significantly impacts property value, architectural planning, and home usability.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">Average Cost: $18,000 - $30,000</span>
+                        <a href="#" class="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300">
+                            View Details →
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Painting Services -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center">
+                <i class="ri-paint-line mr-2 text-pink-600"></i> Painting Estimation Services
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <!-- Interior Painting -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Interior Painting Services</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        A fresh coat of paint can do more than change a room's color. It can transform your space, boost your home's value, and even enhance your mood.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-pink-600 dark:text-pink-400 text-sm font-medium">Detailed Estimates</span>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 text-sm font-medium">Get Quote</a>
+                    </div>
+                </div>
+
+                <!-- Room Painting Cost -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">How Much Does It Cost to Paint a Room?</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        The average cost to paint a room in 2025 ranges from $300 to $800, depending on room size, wall condition, labor rates, and the type of paint used.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-amber-600 dark:text-amber-400 text-sm font-medium">Cost Calculator</span>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 text-sm font-medium">Calculate</a>
+                    </div>
+                </div>
+
+                <!-- Painting Estimator -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Role of a Paint Estimator</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        How do painting projects stay on budget and schedule? This professional determines the cost of a painting project before any work begins.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-green-600 dark:text-green-400 text-sm font-medium">Expert Service</span>
+                        <a href="#" class="text-primary-600 dark:text-primary-400 text-sm font-medium">Learn More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Estimate Form -->
+        <div class="bg-gradient-to-r from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-800 rounded-2xl p-8 mb-12 text-white">
+            <div class="flex flex-col md:flex-row items-center justify-between">
+                <div class="mb-6 md:mb-0 md:mr-8">
+                    <h3 class="text-2xl font-bold mb-3">Get Your Free Estimate</h3>
+                    <p class="opacity-90">Professional cost estimation services for any construction project</p>
+                </div>
+                <button class="px-8 py-3 bg-white text-primary-700 dark:text-primary-800 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Request Estimate
+                </button>
+            </div>
+        </div>
+
+        <!-- Service Categories -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Specialized Estimation Services</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-primary-400 dark:hover:border-primary-500 transition-colors">
+                    <i class="ri-water-flash-line text-blue-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Plumbing</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 transition-colors">
+                    <i class="ri-flashlight-line text-green-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Electrical</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-500 transition-colors">
+                    <i class="ri-tools-line text-amber-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100">HVAC</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-500 transition-colors">
+                    <i class="ri-ruler-line text-purple-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium text-gray-800 dark:text-gray-100">Takeoffs</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Cost Estimation Services</h3>
+                    <p class="text-gray-400 text-sm">
+                        Professional construction cost estimation and quantity takeoff services with accuracy, speed, and regional expertise for successful project planning.
+                    </p>
+                    <div class="mt-4">
+                        <div class="flex items-center text-sm text-gray-400">
+                            <i class="ri-checkbox-circle-line text-green-400 mr-2"></i>
+                            <span>Accurate Estimates</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-400 mt-2">
+                            <i class="ri-checkbox-circle-line text-green-400 mr-2"></i>
+                            <span>Fast Turnaround</span>
+                        </div>
+                        <div class="flex items-center text-sm text-gray-400 mt-2">
+                            <i class="ri-checkbox-circle-line text-green-400 mr-2"></i>
+                            <span>Regional Pricing</span>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Service Areas</h3>
+                    <div class="grid grid-cols-2 gap-2">
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors text-sm">Montana</a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors text-sm">Indiana</a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors text-sm">Virginia</a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors text-sm">Arizona</a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors text-sm">Alaska</a>
+                        <a href="#" class="text-gray-400 hover:text-primary-400 transition-colors text-sm">California</a>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Need an Estimate?</h3>
+                    <p class="text-gray-400 text-sm mb-4">Get accurate cost estimates for your construction project within 24 hours.</p>
+                    <a href="#" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-colors">
+                        <i class="ri-mail-send-line mr-2"></i> Contact Estimators
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Professional Cost Estimation Services. All estimates are for planning purposes only.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const themeIndicator = document.getElementById('themeIndicator');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+                themeIndicator.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+                themeIndicator.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Page indicator functionality
+        document.querySelectorAll('.page-indicator').forEach(button => {
+            button.addEventListener('click', function() {
+                document.querySelectorAll('.page-indicator').forEach(btn => {
+                    btn.classList.remove('active');
+                    btn.classList.add('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+                });
+                this.classList.add('active');
+                this.classList.remove('bg-gray-200', 'dark:bg-gray-700', 'text-gray-700', 'dark:text-gray-300');
+            });
+        });
+
+        console.log('Cost Estimation Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle: Calculator-themed button');
+        console.log('Features: Regional services, garage estimates, painting costs');
+    </script>
+</body>
+</html>

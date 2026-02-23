@@ -1,0 +1,840 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny Estimates - Testimonials</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Testimonials background */
+        .testimonials-hero-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.9)), 
+                        url('https://images.unsplash.com/photo-1507207611509-ec012433ff52?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dark .testimonials-hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1507207611509-ec012433ff52?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        /* Testimonial card styling */
+        .testimonial-card {
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(59, 130, 246, 0.2);
+        }
+        
+        .dark .testimonial-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(96, 165, 250, 0.3);
+        }
+        
+        /* Quote icon styling */
+        .quote-icon {
+            opacity: 0.1;
+            transform: scale(1.5);
+        }
+        
+        /* Stats card styling */
+        .stats-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stats-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Section background */
+        .testimonials-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .testimonials-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .section-title {
+                font-size: 1.75rem !important;
+            }
+            .testimonial-card {
+                padding: 1.5rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <%- include('../header.ejs') %>
+
+    <!-- Testimonials Page -->
+    <main class="testimonials-bg">
+      
+        <!-- Hero Section -->
+        <section class="testimonials-hero-bg text-white py-16 lg:py-24 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="hero-title text-4xl lg:text-5xl font-bold mb-6 animate-slide-up">
+                        Testimonials
+                    </h1>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 animate-slide-up" style="animation-delay: 0.1s;">
+                        <h2 class="section-title text-3xl lg:text-4xl font-bold mb-6">
+                            What Our Clients Say About Us
+                        </h2>
+                        <p class="text-xl mb-6">
+                            They deliver more than they promise and they have well-trained professional staff.
+                        </p>
+                        <div class="flex flex-wrap justify-center gap-4">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center mr-2">
+                                    <i class="ri-star-fill text-white text-sm"></i>
+                                </div>
+                                <span class="font-bold">4.9/5 Average Rating</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-400 rounded-full flex items-center justify-center mr-2">
+                                    <i class="ri-user-smile-line text-white text-sm"></i>
+                                </div>
+                                <span class="font-bold">700+ Happy Clients</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="py-12 bg-white dark:bg-gray-800 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div class="stats-card bg-primary-50 dark:bg-primary-900/20 rounded-xl p-6 text-center border border-primary-100 dark:border-primary-800">
+                        <div class="text-3xl font-bold text-primary-600 dark:text-primary-400 mb-2">700+</div>
+                        <div class="text-gray-700 dark:text-gray-300">Satisfied Clients</div>
+                    </div>
+                    <div class="stats-card bg-green-50 dark:bg-green-900/20 rounded-xl p-6 text-center border border-green-100 dark:border-green-800">
+                        <div class="text-3xl font-bold text-green-600 dark:text-green-400 mb-2">98%</div>
+                        <div class="text-gray-700 dark:text-gray-300">Client Retention</div>
+                    </div>
+                    <div class="stats-card bg-purple-50 dark:bg-purple-900/20 rounded-xl p-6 text-center border border-purple-100 dark:border-purple-800">
+                        <div class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-2">8000+</div>
+                        <div class="text-gray-700 dark:text-gray-300">Projects Estimated</div>
+                    </div>
+                    <div class="stats-card bg-amber-50 dark:bg-amber-900/20 rounded-xl p-6 text-center border border-amber-100 dark:border-amber-800">
+                        <div class="text-3xl font-bold text-amber-600 dark:text-amber-400 mb-2">4.9/5</div>
+                        <div class="text-gray-700 dark:text-gray-300">Average Rating</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Grid -->
+        <section class="py-16 lg:py-24 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="testimonial-card bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg relative">
+                        <div class="absolute top-6 right-6 text-primary-600 dark:text-primary-400 quote-icon">
+                            <i class="ri-double-quotes-r text-5xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line text-primary-600 dark:text-primary-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">James Builders</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Contractor</p>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 italic">
+                            "These guys were very attentive to my specific, custom needs for estimating and 
+                            delivered an excellent product in very timely fashion. I'm looking forward to 
+                            hiring them again in the near future!"
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Project: Commercial Office Building</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="testimonial-card bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg relative">
+                        <div class="absolute top-6 right-6 text-primary-600 dark:text-primary-400 quote-icon">
+                            <i class="ri-double-quotes-r text-5xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line text-green-600 dark:text-green-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Bill A.</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Contractor</p>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 italic">
+                            "Excellent service all round, fast informative and very professional."
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Project: Residential Complex</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="testimonial-card bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg relative">
+                        <div class="absolute top-6 right-6 text-primary-600 dark:text-primary-400 quote-icon">
+                            <i class="ri-double-quotes-r text-5xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line text-purple-600 dark:text-purple-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Alan Stuckey</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Contractor</p>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 italic">
+                            "Their Head Estimator took direction well, met the deadline alongside their team, 
+                            and their skills are strong. Their communication was great and I will most likely 
+                            be reaching out to them for help on future projects."
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Project: Industrial Facility</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 4 -->
+                    <div class="testimonial-card bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg relative">
+                        <div class="absolute top-6 right-6 text-primary-600 dark:text-primary-400 quote-icon">
+                            <i class="ri-double-quotes-r text-5xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-pink-100 dark:bg-pink-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line text-pink-600 dark:text-pink-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Caryn Viscovi</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Contractor</p>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 italic">
+                            "Benny Estimates is an exceptional asset to our projects. Despite the rush on 
+                            some projects, CE demonstrated remarkable dedication, successfully meeting the 
+                            deadlines without compromising the quality of their output. Based on this positive 
+                            experience, I have no doubt that I will seek opportunities to collaborate with CE 
+                            again in the future. Their expertise and reliability make them an invaluable team 
+                            members for any project."
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Project: Healthcare Facility</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 5 -->
+                    <div class="testimonial-card bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg relative">
+                        <div class="absolute top-6 right-6 text-primary-600 dark:text-primary-400 quote-icon">
+                            <i class="ri-double-quotes-r text-5xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-amber-100 dark:bg-amber-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line text-amber-600 dark:text-amber-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Allison Dorwart</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Contractor</p>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 italic">
+                            "I am very impressed with their ability to understand, interpret and implement 
+                            the requirements i had for my project. Very quick service and great communication 
+                            I will invite Benny Estimates to work for me again 🙂"
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Project: Residential Development</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 6 -->
+                    <div class="testimonial-card bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg relative">
+                        <div class="absolute top-6 right-6 text-primary-600 dark:text-primary-400 quote-icon">
+                            <i class="ri-double-quotes-r text-5xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line text-blue-600 dark:text-blue-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Mark Scheinberg</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Contractor</p>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 italic">
+                            "Good afternoon. This is Dawn from LA Plumbing & A/C from San Antonio, Texas. 
+                            I would like to tell you how wonderful Scott Adkins and the rest of the team are 
+                            at Benny Estimates. They have been doing my estimates for at least 2 years 
+                            now and I have no complaints."
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                                <i class="ri-map-pin-line mr-2"></i>
+                                <span>San Antonio, Texas</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 7 -->
+                    <div class="testimonial-card bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg relative">
+                        <div class="absolute top-6 right-6 text-primary-600 dark:text-primary-400 quote-icon">
+                            <i class="ri-double-quotes-r text-5xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line text-green-600 dark:text-green-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Alain Bouchard</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Contractor</p>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 italic">
+                            "Benny Estimates provide accurate measurements with fast project delivery. 
+                            Highly recommend."
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                                <i class="ri-building-line mr-2"></i>
+                                <span>Project: Multi-family Complex</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 8 -->
+                    <div class="testimonial-card bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg relative">
+                        <div class="absolute top-6 right-6 text-primary-600 dark:text-primary-400 quote-icon">
+                            <i class="ri-double-quotes-r text-5xl"></i>
+                        </div>
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-user-line text-red-600 dark:text-red-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 dark:text-white">Alex James</h3>
+                                <p class="text-gray-600 dark:text-gray-400">Contractor</p>
+                                <div class="flex text-yellow-400 mt-1">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300 italic">
+                            "Exceptional service and accurate estimates. The team at Benny Estimates 
+                            went above and beyond to ensure our project was properly estimated within budget 
+                            and timeline constraints."
+                        </p>
+                        <div class="mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center text-gray-600 dark:text-gray-400 text-sm">
+                                <i class="ri-building-2-line mr-2"></i>
+                                <span>Project: Commercial Retail</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Verified Reviews Section -->
+        <section class="py-16 lg:py-24 bg-white dark:bg-gray-800 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="section-title text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                        Verified Reviews & Ratings
+                    </h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                        Our clients consistently rate us highly for accuracy, speed, and professionalism
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Rating Breakdown -->
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-2xl p-8">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Rating Breakdown</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 dark:text-gray-300">5 Stars</span>
+                                <div class="w-32 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 85%"></div>
+                                </div>
+                                <span class="text-gray-700 dark:text-gray-300 font-bold">85%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 dark:text-gray-300">4 Stars</span>
+                                <div class="w-32 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 12%"></div>
+                                </div>
+                                <span class="text-gray-700 dark:text-gray-300 font-bold">12%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 dark:text-gray-300">3 Stars</span>
+                                <div class="w-32 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 2%"></div>
+                                </div>
+                                <span class="text-gray-700 dark:text-gray-300 font-bold">2%</span>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-gray-700 dark:text-gray-300">2 Stars</span>
+                                <div class="w-32 bg-gray-200 dark:bg-gray-600 rounded-full h-2">
+                                    <div class="bg-yellow-400 h-2 rounded-full" style="width: 1%"></div>
+                                </div>
+                                <span class="text-gray-700 dark:text-gray-300 font-bold">1%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Average Ratings -->
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-2xl p-8">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Average Ratings</h3>
+                        <div class="space-y-6">
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-700 dark:text-gray-300">Accuracy</span>
+                                    <span class="text-gray-900 dark:text-white font-bold">4.9/5</span>
+                                </div>
+                                <div class="flex text-yellow-400">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-700 dark:text-gray-300">Timeliness</span>
+                                    <span class="text-gray-900 dark:text-white font-bold">4.8/5</span>
+                                </div>
+                                <div class="flex text-yellow-400">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-700 dark:text-gray-300">Communication</span>
+                                    <span class="text-gray-900 dark:text-white font-bold">4.9/5</span>
+                                </div>
+                                <div class="flex text-yellow-400">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-half-fill"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between items-center mb-2">
+                                    <span class="text-gray-700 dark:text-gray-300">Professionalism</span>
+                                    <span class="text-gray-900 dark:text-white font-bold">5.0/5</span>
+                                </div>
+                                <div class="flex text-yellow-400">
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                    <i class="ri-star-fill"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review Platforms -->
+                    <div class="bg-gray-50 dark:bg-gray-700 rounded-2xl p-8">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-6">Trusted Platforms</h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-google-fill text-blue-600 dark:text-blue-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-gray-900 dark:text-white">Google Reviews</div>
+                                        <div class="flex text-yellow-400">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-half-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xl font-bold text-gray-900 dark:text-white">4.8</div>
+                                    <div class="text-gray-600 dark:text-gray-400 text-sm">150+ reviews</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-thumb-up-fill text-green-600 dark:text-green-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-gray-900 dark:text-white">Trustpilot</div>
+                                        <div class="flex text-yellow-400">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xl font-bold text-gray-900 dark:text-white">5.0</div>
+                                    <div class="text-gray-600 dark:text-gray-400 text-sm">85+ reviews</div>
+                                </div>
+                            </div>
+                            <div class="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-lg">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-linkedin-box-fill text-purple-600 dark:text-purple-400"></i>
+                                    </div>
+                                    <div>
+                                        <div class="font-bold text-gray-900 dark:text-white">LinkedIn</div>
+                                        <div class="flex text-yellow-400">
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-fill"></i>
+                                            <i class="ri-star-half-fill"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="text-xl font-bold text-gray-900 dark:text-white">4.7</div>
+                                    <div class="text-gray-600 dark:text-gray-400 text-sm">200+ reviews</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section - Updated with Benny Estimates contact info -->
+        <section class="py-16 lg:py-24 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center text-white">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-6">
+                        Ready to Experience Excellence?
+                    </h2>
+                    <p class="text-xl mb-8 max-w-2xl mx-auto">
+                        Join hundreds of satisfied contractors who trust Benny Estimates for their 
+                        construction estimating needs.
+                    </p>
+                    
+                    <!-- Contact Information - Updated -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8">
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                            <!-- Location -->
+                            <div class="text-center">
+                                <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                                    <i class="ri-map-pin-line text-white text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-white mb-1">Visit Us</h3>
+                                <p class="text-white/80 text-sm">96 Jones Street, New York, USA</p>
+                            </div>
+                            
+                            <!-- Phone -->
+                            <div class="text-center">
+                                <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                                    <i class="ri-phone-line text-white text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-white mb-1">Call us any time</h3>
+                                <a href="tel:+12898017224" class="text-white/80 text-sm hover:text-white transition-colors">
+                                    +1 (289) 801-7224
+                                </a>
+                            </div>
+                            
+                            <!-- Email -->
+                            <div class="text-center">
+                                <div class="w-12 h-12 mx-auto bg-white/20 rounded-full flex items-center justify-center mb-3">
+                                    <i class="ri-mail-line text-white text-xl"></i>
+                                </div>
+                                <h3 class="font-bold text-white mb-1">Email Us</h3>
+                                <a href="mailto:Ben@bennyestimates.com" class="text-white/80 text-sm hover:text-white transition-colors break-all">
+                                    Ben@bennyestimates.com
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <a href="mailto:Ben@bennyestimates.com" class="bg-white text-primary-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center">
+                            <i class="ri-mail-send-line mr-2"></i>
+                            Send Us a Message
+                        </a>
+                        <a href="tel:+12898017224" class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
+                            <i class="ri-phone-line mr-2"></i>
+                            Call Now: +1 (289) 801-7224
+                        </a>
+                    </div>
+                    
+                    <p class="text-white/80 mt-8">
+                        <i class="ri-check-double-line text-green-300 mr-2"></i>
+                        30-day money-back guarantee on all estimating services
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            if (themeIcon && themeText) updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (themeIcon && themeText) updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle if exists
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon && themeText) updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon && themeText) updateThemeUI('light');
+                }
+            }
+        });
+
+        // Testimonial card hover effects
+        document.querySelectorAll('.testimonial-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-8px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Stats card hover effects
+        document.querySelectorAll('.stats-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Animation on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('section, .testimonial-card').forEach(element => {
+            observer.observe(element);
+        });
+    </script>
+</body>
+</html>

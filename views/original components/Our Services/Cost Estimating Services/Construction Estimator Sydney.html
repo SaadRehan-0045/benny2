@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Estimator Sydney | Construct Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth theme transition */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Custom scrollbar for better dark mode */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        
+        .dark ::-webkit-scrollbar-track {
+            background: #374151;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 4px;
+        }
+        
+        .dark ::-webkit-scrollbar-thumb {
+            background: #2563eb;
+        }
+        
+        /* Gradient text effect */
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dark .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Sticky section headers */
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+    
+    <!-- Theme Toggle Button (Top Right for Testing) -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="flex items-center px-4 py-2 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-shadow duration-300 border border-gray-200 dark:border-gray-700">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium text-sm">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+        
+        <!-- Breadcrumb -->
+        <nav class="mb-6 text-sm text-gray-600 dark:text-gray-400">
+            <a href="#" class="hover:text-primary-600 dark:hover:text-primary-400">Home</a>
+            <span class="mx-2">»</span>
+            <span class="text-gray-800 dark:text-gray-300">Construction Estimator Sydney</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                Construction Estimator Sydney
+            </h1>
+            <h2 class="text-2xl md:text-3xl font-semibold text-primary-700 dark:text-primary-300 mb-8">
+                Construction Estimators In Sydney
+            </h2>
+            
+            <div class="bg-gradient-to-r from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-800 rounded-2xl p-8 mb-8 text-white shadow-xl">
+                <h3 class="text-2xl font-bold mb-4">Sydney's Cost-Estimation Experts</h3>
+                <p class="text-lg mb-4">
+                    Where Vision Meets Precision for Your Construction Projects with Substantial Savings
+                </p>
+                <div class="bg-white/20 backdrop-blur-sm rounded-xl p-4 inline-block">
+                    <span class="text-3xl font-bold">Save Upto 30% On Estimating Expenses</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Introduction Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Sydney Cost Estimating Services</h2>
+            <div class="grid lg:grid-cols-2 gap-8 items-center">
+                <div>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+                        Are you ready to revolutionise your construction projects and unlock remarkable savings? Whether you're a seasoned builder, developer, or homeowner, one thing is sure: accurate cost estimation is the cornerstone of success. Construct Estimates is your trusted partner to make your construction endeavours in Sydney more cost-effective, efficient, and transparent.
+                    </p>
+                    <div class="bg-gray-100 dark:bg-gray-800 p-6 rounded-xl">
+                        <p class="text-xl font-semibold text-gray-900 dark:text-white mb-2">Our track record speaks volumes:</p>
+                        <div class="grid grid-cols-2 gap-4 mt-4">
+                            <div class="text-center p-3 bg-white dark:bg-gray-700 rounded-lg">
+                                <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">8,000+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Projects Completed</div>
+                            </div>
+                            <div class="text-center p-3 bg-white dark:bg-gray-700 rounded-lg">
+                                <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">100%</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Accuracy</div>
+                            </div>
+                            <div class="text-center p-3 bg-white dark:bg-gray-700 rounded-lg">
+                                <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">25+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Qualified Estimators</div>
+                            </div>
+                            <div class="text-center p-3 bg-white dark:bg-gray-700 rounded-lg">
+                                <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">30%</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Cost Savings</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <!-- Unsplash Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Construction estimating in Sydney" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                    <div class="mt-4 text-center">
+                        <a href="#" class="inline-block bg-primary-600 hover:bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold transition duration-300 transform hover:-translate-y-1 hover:shadow-lg">
+                            View Sample Estimates Here!
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="mb-12 bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Your Construction Estimating Trusted Partner In Sydney</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl hover:shadow-lg transition duration-300">
+                    <div class="text-primary-600 dark:text-primary-400 text-3xl mb-4">
+                        <i class="ri-award-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Expertise Beyond Measure</h3>
+                    <p class="text-gray-700 dark:text-gray-300">With over 10 years of industry expertise, we provide accurate construction cost estimation with wisdom and insights from an established track record of excellence.</p>
+                </div>
+                
+                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl hover:shadow-lg transition duration-300">
+                    <div class="text-primary-600 dark:text-primary-400 text-3xl mb-4">
+                        <i class="ri-building-4-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Every Project Matters</h3>
+                    <p class="text-gray-700 dark:text-gray-300">From commercial and industrial ventures to residential construction. No matter the scope, we're equipped to handle it.</p>
+                </div>
+                
+                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl hover:shadow-lg transition duration-300">
+                    <div class="text-primary-600 dark:text-primary-400 text-3xl mb-4">
+                        <i class="ri-line-chart-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Precise Cost Transparency</h3>
+                    <p class="text-gray-700 dark:text-gray-300">While others rely on unreliable cost guides, we provide concrete data and rates in Sydney to make you feel secure in your budgets and decisions.</p>
+                </div>
+                
+                <div class="p-6 bg-gray-50 dark:bg-gray-700 rounded-xl hover:shadow-lg transition duration-300">
+                    <div class="text-primary-600 dark:text-primary-400 text-3xl mb-4">
+                        <i class="ri-money-dollar-circle-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">ROI-Driven Approach</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Construct Estimates can save up to 30% on your construction costs. That could translate to incredible savings in your pocket.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Key Features You will Get</h2>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+                <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-xl text-center">
+                    <div class="text-2xl mb-2 text-primary-600 dark:text-primary-400">
+                        <i class="ri-time-fill"></i>
+                    </div>
+                    <h4 class="font-bold mb-1">Timely Delivery</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">24 - 48 Hours</p>
+                </div>
+                
+                <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-xl text-center">
+                    <div class="text-2xl mb-2 text-primary-600 dark:text-primary-400">
+                        <i class="ri-price-tag-3-fill"></i>
+                    </div>
+                    <h4 class="font-bold mb-1">Competitive Rates</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Best in Market</p>
+                </div>
+                
+                <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-xl text-center">
+                    <div class="text-2xl mb-2 text-primary-600 dark:text-primary-400">
+                        <i class="ri-database-2-fill"></i>
+                    </div>
+                    <h4 class="font-bold mb-1">Accurate Database</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Zip-code Based</p>
+                </div>
+                
+                <div class="p-4 border border-gray-200 dark:border-gray-700 rounded-xl text-center">
+                    <div class="text-2xl mb-2 text-primary-600 dark:text-primary-400">
+                        <i class="ri-customer-service-2-fill"></i>
+                    </div>
+                    <h4 class="font-bold mb-1">24/7 Support</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Always Available</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services List Section -->
+        <section class="mb-12 bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Our Expertise Extends to a Wide Range of Services</h2>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <i class="ri-calculator-fill text-primary-600 dark:text-primary-400 mr-2"></i>
+                    <span>Cost Estimating</span>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <i class="ri-user-voice-fill text-primary-600 dark:text-primary-400 mr-2"></i>
+                    <span>Estimating Consultant</span>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <i class="ri-building-fill text-primary-600 dark:text-primary-400 mr-2"></i>
+                    <span>Commercial Estimating</span>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <i class="ri-home-fill text-primary-600 dark:text-primary-400 mr-2"></i>
+                    <span>Residential Estimating</span>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <i class="ri-factory-fill text-primary-600 dark:text-primary-400 mr-2"></i>
+                    <span>Industrial Estimating</span>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <i class="ri-file-list-3-fill text-primary-600 dark:text-primary-400 mr-2"></i>
+                    <span>Preliminary Estimates</span>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <i class="ri-auction-fill text-primary-600 dark:text-primary-400 mr-2"></i>
+                    <span>Virtual Bid Management</span>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg shadow-sm">
+                    <i class="ri-ruler-fill text-primary-600 dark:text-primary-400 mr-2"></i>
+                    <span>Construction Takeoff</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="mb-12 text-center">
+            <div class="bg-gradient-to-r from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-3xl font-bold mb-4">Get Ahead of the Competition with Unbeatable Offers!</h3>
+                <p class="text-xl mb-6">Unlock 30% off your first estimate and Save up to 60% on monthly estimating expenses</p>
+                <div class="inline-block bg-white text-emerald-700 px-8 py-4 rounded-xl font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    Monthly Takeoff Package
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas Section -->
+        <section class="mb-12">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Service Areas Across Australia</h2>
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <h4 class="font-bold text-lg mb-3 text-primary-700 dark:text-primary-400">Major Cities</h4>
+                    <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-center">
+                            <i class="ri-map-pin-fill text-primary-500 mr-2"></i>
+                            <span>Sydney</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-map-pin-fill text-primary-500 mr-2"></i>
+                            <span>Melbourne</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-map-pin-fill text-primary-500 mr-2"></i>
+                            <span>Brisbane</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <h4 class="font-bold text-lg mb-3 text-primary-700 dark:text-primary-400">States & Territories</h4>
+                    <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-center">
+                            <i class="ri-government-fill text-primary-500 mr-2"></i>
+                            <span>New South Wales</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-government-fill text-primary-500 mr-2"></i>
+                            <span>Victoria</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-government-fill text-primary-500 mr-2"></i>
+                            <span>Queensland</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <h4 class="font-bold text-lg mb-3 text-primary-700 dark:text-primary-400">Other Regions</h4>
+                    <ul class="space-y-2 text-gray-700 dark:text-gray-300">
+                        <li class="flex items-center">
+                            <i class="ri-building-fill text-primary-500 mr-2"></i>
+                            <span>Adelaide</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-building-fill text-primary-500 mr-2"></i>
+                            <span>Perth</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-building-fill text-primary-500 mr-2"></i>
+                            <span>Hobart</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-12 text-center bg-primary-50 dark:bg-gray-800 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Experience the Difference with Construct Estimates Now!</h2>
+            <div class="text-2xl font-bold text-primary-700 dark:text-primary-300 mb-6">
+                Get Estimate At 30% OFF<br>
+                <span class="text-lg">TURNAROUND TIME: 24-48 hrs!</span>
+            </div>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                    <div class="font-bold text-gray-900 dark:text-white">(737) 273-3314</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">For US</div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                    <div class="font-bold text-gray-900 dark:text-white">(048) 862-0354</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">For AUS</div>
+                </div>
+                <div class="bg-white dark:bg-gray-700 p-4 rounded-lg">
+                    <div class="font-bold text-gray-900 dark:text-white">info@constructestimates.com</div>
+                    <div class="text-sm text-gray-600 dark:text-gray-400">Email</div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use system preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>

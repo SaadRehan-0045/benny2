@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Materials and Procurement - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .material-card {
+            transition: all 0.3s ease;
+        }
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .theme-btn {
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Floating Theme Toggle Button -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="theme-btn flex items-center gap-2 px-4 py-3 rounded-full bg-white/90 dark:bg-gray-800/90 hover:bg-white dark:hover:bg-gray-800 text-gray-800 dark:text-gray-200 border border-gray-200 dark:border-gray-700 transition-all duration-300">
+            <i id="themeIcon" class="ri-contrast-2-line text-xl"></i>
+            <span id="themeText" class="font-medium hidden sm:inline">Switch Theme</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700 py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-primary-600 dark:text-primary-400 hover:text-primary-800 dark:hover:text-primary-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400">Construction Materials and Procurement</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Construction Materials & Procurement
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Complete guides on construction materials, costs, installation, and procurement strategies for successful projects
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-2xl overflow-hidden mb-12 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Construction Materials" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Materials Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Brick Masonry -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Brick Masonry" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300 text-xs font-semibold rounded-full">
+                            Masonry
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">8 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        Brick Masonry Guide – Types, Uses, Cost, & Benefits
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Brick masonry is one of the most enduring and widely adopted construction methods in the world. From traditional housing to modern architectural facades...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Concrete Slab -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Concrete Slab" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-xs font-semibold rounded-full">
+                            Concrete
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">6 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        How Much Does a Concrete Slab Cost?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Concrete slabs are foundational elements in residential and commercial construction, forming the base for patios, garages, sheds, and homes...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Metal Roof -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Metal Roof Installation" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-xs font-semibold rounded-full">
+                            Roofing
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">10 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        How to Install a Metal Roof – Step-by-Step DIY Guide
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Installing a metal roof might sound like a big job and it is. But with the right tools, guidance, and planning...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Drywall Problems -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600585154340-043788447eb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Drywall Problems" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300 text-xs font-semibold rounded-full">
+                            Drywall
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">7 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        10 Signs of Drywall Problems And How to Fix Them
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Drywall is one of the most common materials used in modern homes to create smooth interior walls and ceilings...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- What is Drywall -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="What is Drywall" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs font-semibold rounded-full">
+                            Materials
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">5 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        What is Drywall? A Guide on Types, Uses & Installation
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Have you ever wondered what's behind the smooth walls in your house? Most likely, it's drywall-a building material that covers the inside of homes...
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </article>
+
+            <!-- Built Up Roof -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Built Up Roof" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300 text-xs font-semibold rounded-full">
+                            Roofing
+                        </span>
+                        <span class="text-gray-500 dark:text-gray-400 text-sm">9 min read</span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        What is a Built Up Roof? Why It Still Works Best
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        When it comes to protecting large commercial buildings from the elements, few systems have stood the test of time like the built-up roof, or BUR.
+                    </p>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </article>
+        </div>
+
+        <!-- Procurement Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">
+                Procurement Guides
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Procurement Article -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-shopping-cart-line text-green-600 dark:text-green-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                What is Procurement in Construction?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Construction procurement is the strategic process of acquiring goods and services essential for the successful execution of a construction project.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Learn More <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Online Resources -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-global-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                Top 10 Online Sources for Building Materials in the US
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                These days, it seems like everyone buys things online, and this trend extends to online sources for building materials in the US.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        View Sources <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Save Money -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-money-dollar-circle-line text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                How to Save Money on Construction Materials?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Construction materials take up a significant part of the construction cost. Higher the cost of construction materials, higher will be the building cost.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Save Money <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+
+                <!-- Buy Online -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-shopping-bag-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                How to Buy Construction Materials Online
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Ordering construction materials can be an intimidating process, especially if you're new to the construction industry.
+                            </p>
+                        </div>
+                    </div>
+                    <a href="#" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm">
+                        Buy Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Articles -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">
+                More Material Guides
+            </h2>
+            <div class="space-y-4">
+                <!-- Modified Bitumen -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-1">What is Modified Bitumen Roofing and Why Do Flat Roofs Love It?</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Modified bitumen roofing is a key component in the construction of commercial properties...</p>
+                    </div>
+                    <a href="#" class="mt-2 md:mt-0 md:ml-4 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-sm font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors whitespace-nowrap">
+                        Read Article
+                    </a>
+                </div>
+
+                <!-- ADU Cost -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-1">How Much Does it Cost to Build an Accessory Dwelling Unit?</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Wondering how much it costs to build an ADU? On average, building an Accessory Dwelling Unit...</p>
+                    </div>
+                    <a href="#" class="mt-2 md:mt-0 md:ml-4 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-sm font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors whitespace-nowrap">
+                        Read Article
+                    </a>
+                </div>
+
+                <!-- Concrete Setting -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-1">How Long Does It Take for Concrete to Set?</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Concrete is one of the most widely used materials in construction due to its strength and durability...</p>
+                    </div>
+                    <a href="#" class="mt-2 md:mt-0 md:ml-4 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-sm font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors whitespace-nowrap">
+                        Read Article
+                    </a>
+                </div>
+
+                <!-- Cutting and Filling -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-1">Cutting and Filling in Construction Earthwork – Explained Clearly</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Cutting and filling are essential techniques in earthwork: moving and shaping soil and rock to prepare land for construction...</p>
+                    </div>
+                    <a href="#" class="mt-2 md:mt-0 md:ml-4 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-sm font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors whitespace-nowrap">
+                        Read Article
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Material Comparison Table -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 mb-12">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-6">Common Materials Comparison</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                            <th class="p-3 text-left text-gray-800 dark:text-gray-200 font-semibold">Material</th>
+                            <th class="p-3 text-left text-gray-800 dark:text-gray-200 font-semibold">Cost Range</th>
+                            <th class="p-3 text-left text-gray-800 dark:text-gray-200 font-semibold">Durability</th>
+                            <th class="p-3 text-left text-gray-800 dark:text-gray-200 font-semibold">Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750">
+                            <td class="p-3">Concrete</td>
+                            <td class="p-3">$$-$$$</td>
+                            <td class="p-3">High</td>
+                            <td class="p-3">Foundations, Slabs</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750">
+                            <td class="p-3">Brick</td>
+                            <td class="p-3">$$$</td>
+                            <td class="p-3">Very High</td>
+                            <td class="p-3">Walls, Facades</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750">
+                            <td class="p-3">Drywall</td>
+                            <td class="p-3">$</td>
+                            <td class="p-3">Medium</td>
+                            <td class="p-3">Interior Walls</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750">
+                            <td class="p-3">Metal Roofing</td>
+                            <td class="p-3">$$$-$$$$</td>
+                            <td class="p-3">Very High</td>
+                            <td class="p-3">Roofing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Materials & Procurement</h3>
+                    <p class="text-gray-400 text-sm">
+                        Comprehensive guides on construction materials, costs, installation techniques, and procurement strategies for successful construction projects.
+                    </p>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Material Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary-400 transition-colors text-sm">Concrete & Masonry</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors text-sm">Roofing Materials</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors text-sm">Drywall & Finishes</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Procurement Tools</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-primary-400 transition-colors text-sm">Cost Calculators</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors text-sm">Supplier Directory</a></li>
+                        <li><a href="#" class="hover:text-primary-400 transition-colors text-sm">Material Checklists</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Need Materials?</h3>
+                    <p class="text-gray-400 text-sm mb-3">Get connected with trusted suppliers and get quotes for your project.</p>
+                    <a href="#" class="inline-flex items-center text-primary-400 hover:text-primary-300 font-medium text-sm">
+                        Find Suppliers <i class="ri-arrow-right-line ml-2"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Construction Materials Guides. All prices and information subject to change.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-xl';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line text-xl';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Theme debugging info
+        console.log('Materials & Procurement Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle Button: Active');
+    </script>
+</body>
+</html>

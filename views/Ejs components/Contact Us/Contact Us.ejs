@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny Estimates - Contact Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'slide-in-left': 'slideInLeft 0.5s ease-out',
+                        'slide-in-right': 'slideInRight 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Contact section background */
+        .contact-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .contact-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* Form styling */
+        .form-input {
+            transition: all 0.3s ease;
+        }
+        
+        .form-input:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.2);
+        }
+        
+        .dark .form-input:focus {
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+        }
+        
+        /* Contact card hover effects */
+        .contact-card {
+            transition: all 0.3s ease;
+        }
+        
+        .contact-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Hero section with background image */
+        .contact-hero {
+            background: linear-gradient(rgba(15, 23, 42, 0.8), rgba(30, 41, 59, 0.9)), 
+                        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        
+        .dark .contact-hero {
+            background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .contact-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+        
+        /* Remove any download buttons */
+        .download-btn {
+            display: none;
+        }
+    </style>
+</head>
+
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Contact Us Page -->
+    <main class="contact-bg">
+      
+        <!-- Hero Section -->
+        <section class="contact-hero text-white py-16 lg:py-24 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="hero-title text-4xl lg:text-5xl font-bold mb-6 animate-slide-up">
+                        Contact Us
+                    </h1>
+                    <p class="text-xl text-white/90 mb-8 animate-slide-up" style="animation-delay: 0.1s;">
+                        Ready to Get Accurate Construction Estimates?
+                    </p>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 mb-8 animate-slide-up" style="animation-delay: 0.2s;">
+                        <p class="text-lg mb-6">
+                            Don't let uncertainty impact your construction projects. Take the next step towards success 
+                            by uploading your detailed plans, blueprints, or drawings for a comprehensive analysis of 
+                            your project costs. Our team will provide you with accurate estimates to help you make 
+                            informed decisions and stay within budget.
+                        </p>
+                        <button onclick="openModal(1)" class="bg-primary-500 hover:bg-primary-600 text-white font-bold py-3 px-8 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center mx-auto cursor-pointer">
+                            <i class="ri-upload-cloud-line mr-2"></i>
+                            Get Estimate
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Information Section -->
+        <section class="py-16 lg:py-24 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                    <!-- Left Column: Contact Info -->
+                    <div class="lg:w-1/2 animate-slide-in-left">
+                        <div class="sticky top-8">
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+                                Have a query or need immediate assistance?
+                            </h2>
+                            <p class="text-gray-600 dark:text-gray-300 mb-10 text-lg">
+                                Feel free to reach out to us through any of the following channels:
+                            </p>
+
+                            <!-- Contact Cards -->
+                            <div class="space-y-6">
+                                <!-- Email Card -->
+                                <div class="contact-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mr-4">
+                                            <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center">
+                                                <i class="ri-mail-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Email</h3>
+                                            <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400 hover:text-primary-700 dark:hover:text-primary-300 text-lg font-medium transition-colors break-all">
+                                                Ben@bennyestimates.com
+                                            </a>
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                                                We typically respond within 2-4 business hours
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Phone Card -->
+                                <div class="contact-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mr-4">
+                                            <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                                                <i class="ri-phone-line text-green-600 dark:text-green-400 text-xl"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Call us any time</h3>
+                                            <a href="tel:+12898017224" class="block text-gray-900 dark:text-white hover:text-primary-600 dark:hover:text-primary-400 text-lg font-medium transition-colors">
+                                                +1 (289) 801-7224
+                                            </a>
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                                                24/7 support available for urgent inquiries
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Address Card -->
+                                <div class="contact-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mr-4">
+                                            <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+                                                <i class="ri-map-pin-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Head Office</h3>
+                                            <p class="text-gray-600 dark:text-gray-300 text-lg font-medium">
+                                                96 Jones Street<br>New York, USA
+                                            </p>
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                                                Serving clients worldwide
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Working Hours Card -->
+                                <div class="contact-card bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                                    <div class="flex items-start">
+                                        <div class="flex-shrink-0 mr-4">
+                                            <div class="w-12 h-12 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center">
+                                                <i class="ri-time-line text-amber-600 dark:text-amber-400 text-xl"></i>
+                                            </div>
+                                        </div>
+                                        <div class="flex-1">
+                                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Working Hours</h3>
+                                            <p class="text-gray-600 dark:text-gray-300 text-lg font-medium">
+                                                Mon-Sat: 8 AM – 12 PM
+                                            </p>
+                                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                                                Sunday: Closed
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Global Reach Card -->
+                            <div class="mt-8 bg-gradient-to-br from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 rounded-xl overflow-hidden">
+                                <div class="p-6">
+                                    <h3 class="text-xl font-bold text-white mb-4">Global Reach</h3>
+                                    <div class="flex items-center">
+                                        <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                                            <i class="ri-globe-line text-white text-2xl"></i>
+                                        </div>
+                                        <div>
+                                            <div class="text-white font-bold">Serving Clients Worldwide</div>
+                                            <div class="text-white/80 text-sm">USA • Canada • Australia • UK</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Contact Form -->
+                    <div class="lg:w-1/2 animate-slide-in-right">
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg">
+                            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-2">
+                                Get In Touch
+                            </h2>
+                            <p class="text-gray-600 dark:text-gray-300 mb-8">
+                                Fill the below form to resolve any queries or to ask for estimation.
+                            </p>
+
+                            <form id="contactForm" class="space-y-6" enctype="multipart/form-data">
+                                <!-- Name Field -->
+                                <div>
+                                    <label for="name" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                                        Your Name <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                                            <i class="ri-user-line text-gray-400"></i>
+                                        </div>
+                                        <input type="text" 
+                                               id="name" 
+                                               name="name"
+                                               placeholder="e.g., John Smith"
+                                               required
+                                               class="form-input w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                </div>
+
+                                <!-- Company Field -->
+                                <div>
+                                    <label for="company" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                                        Your Company <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                                            <i class="ri-building-line text-gray-400"></i>
+                                        </div>
+                                        <input type="text" 
+                                               id="company" 
+                                               name="company"
+                                               placeholder="e.g., ABC Construction"
+                                               required
+                                               class="form-input w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                </div>
+
+                                <!-- Email Field -->
+                                <div>
+                                    <label for="email" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                                        Your Email <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                                            <i class="ri-mail-line text-gray-400"></i>
+                                        </div>
+                                        <input type="email" 
+                                               id="email" 
+                                               name="email"
+                                               placeholder="e.g., john@abcconstruction.com"
+                                               required
+                                               class="form-input w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                </div>
+
+                                <!-- Phone Field -->
+                                <div>
+                                    <label for="phone" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                                        Your Cell <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                                            <i class="ri-phone-line text-gray-400"></i>
+                                        </div>
+                                        <input type="tel" 
+                                               id="phone" 
+                                               name="phone"
+                                               placeholder="e.g., (289) 801-7224"
+                                               required
+                                               class="form-input w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                </div>
+
+                                <!-- Subject Field -->
+                                <div>
+                                    <label for="subject" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                                        Subject <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute left-3 top-1/2 transform -translate-y-1/2">
+                                            <i class="ri-file-list-line text-gray-400"></i>
+                                        </div>
+                                        <input type="text" 
+                                               id="subject" 
+                                               name="subject"
+                                               placeholder="e.g., Question about commercial building estimate"
+                                               required
+                                               class="form-input w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent">
+                                    </div>
+                                </div>
+
+                                <!-- Message Field -->
+                                <div>
+                                    <label for="message" class="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                                        Message <span class="text-red-500">*</span>
+                                    </label>
+                                    <div class="relative">
+                                        <div class="absolute left-3 top-3">
+                                            <i class="ri-chat-3-line text-gray-400"></i>
+                                        </div>
+                                        <textarea id="message" 
+                                                  name="message"
+                                                  rows="5"
+                                                  placeholder="e.g., I need an estimate for a 3-story commercial building in downtown..."
+                                                  required
+                                                  class="form-input w-full pl-10 pr-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent resize-none"></textarea>
+                                    </div>
+                                </div>
+
+                                <!-- File Upload -->
+                                <div>
+                                    <label class="block text-gray-700 dark:text-gray-300 font-medium mb-2">
+                                        Upload Files (Optional)
+                                    </label>
+                                    <div class="border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg p-6 text-center hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer" id="uploadArea">
+                                        <div class="w-16 h-16 mx-auto bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+                                            <i class="ri-upload-cloud-line text-primary-600 dark:text-primary-400 text-2xl"></i>
+                                        </div>
+                                        <p class="text-gray-600 dark:text-gray-300 mb-2">
+                                            Drag & drop your files or <span class="text-primary-600 dark:text-primary-400 cursor-pointer">browse</span>
+                                        </p>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">
+                                            Supports: PDF, DWG, RVT, JPG, PNG (Max 10MB per file)
+                                        </p>
+                                        <input type="file" 
+                                               id="fileUpload" 
+                                               name="files"
+                                               class="hidden" 
+                                               multiple 
+                                               accept=".pdf,.dwg,.rvt,.jpg,.jpeg,.png">
+                                    </div>
+                                    <div id="fileList" class="mt-2 text-sm text-gray-600 dark:text-gray-400"></div>
+                                </div>
+
+                                <!-- Submit Button -->
+                                <div class="pt-4">
+                                    <button type="submit" 
+                                            id="submitBtn"
+                                            class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl flex items-center justify-center">
+                                        <i class="ri-send-plane-line mr-2"></i>
+                                        Send Message
+                                    </button>
+                                    <p class="text-gray-500 dark:text-gray-400 text-sm text-center mt-4">
+                                        <i class="ri-shield-check-line text-green-500 mr-2"></i>
+                                        Your information is secure and will never be shared with third parties
+                                    </p>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom CTA Section -->
+        <section class="py-16 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h2 class="text-3xl lg:text-4xl font-bold text-white mb-6">
+                        Ready to Get Accurate Construction Estimates?
+                    </h2>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+                        <p class="text-lg text-white/90 mb-6">
+                            Don't let uncertainty impact your construction projects. Take the next step towards success 
+                            by uploading your detailed plans, blueprints, or drawings for a comprehensive analysis of 
+                            your project costs. Our team will provide you with accurate estimates to help you make 
+                            informed decisions and stay within budget.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                            <button onclick="openModal(1)" class="bg-white text-primary-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center cursor-pointer">
+                                <i class="ri-upload-cloud-line mr-2"></i>
+                                Upload Plans Now
+                            </button>
+                            <a href="tel:+12898017224" class="bg-transparent border-2 border-white text-white hover:bg-white/10 font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
+                                <i class="ri-phone-line mr-2"></i>
+                                Call Now: +1 (289) 801-7224
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Get Your Free Estimate</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Modal content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <script>
+    // Article data for modal content
+    const articleData = {
+        1: {
+            title: "Get Your Free Estimate",
+            content: `<p class="mb-4">Ready to get started with your construction estimate? Our team of expert estimators is here to help you with accurate, detailed cost estimates for your project.</p>
+            <p class="mb-4">Simply upload your plans, blueprints, or drawings through the form on this page, and we'll provide you with a comprehensive analysis of your project costs within 24-48 hours.</p>
+            <p class="mb-4">Our estimates include detailed breakdowns of material quantities, labor costs, equipment needs, and contingency allowances, ensuring you have all the information needed to make informed decisions.</p>
+            <p>Have questions before submitting? Feel free to contact us directly at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call us at <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a>. We're here to help!</p>`
+        }
+    };
+
+    // Open modal function
+    window.openModal = function(articleId) {
+        const modalOverlay = document.getElementById('modalOverlay');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalBody = document.getElementById('modalBody');
+        
+        const article = articleData[articleId];
+        if (article) {
+            modalTitle.textContent = article.title;
+            modalBody.innerHTML = article.content;
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+    }
+
+    // Close modal function
+    window.closeModal = function() {
+        const modalOverlay = document.getElementById('modalOverlay');
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+
+    // Close modal on outside click
+    window.closeModalOnOutsideClick = function(event) {
+        if (event.target === document.getElementById('modalOverlay')) {
+            closeModal();
+        }
+    }
+
+    // Close modal with Escape key
+    document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape') {
+            closeModal();
+        }
+    });
+
+    // Theme functionality
+    document.addEventListener('DOMContentLoaded', function() {
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+        }
+        
+        // Add event listener for theme toggle
+        if (themeToggle) {
+            themeToggle.addEventListener('click', function() {
+                toggleTheme(themeIcon, themeText);
+            });
+        }
+
+        // Initialize file upload functionality
+        initFileUpload();
+    });
+
+    // Update theme UI elements
+    function updateThemeUI(theme, themeIcon, themeText) {
+        if (theme === 'dark') {
+            themeIcon.className = 'ri-sun-line mr-2';
+            themeText.textContent = 'Light Mode';
+        } else {
+            themeIcon.className = 'ri-moon-line mr-2';
+            themeText.textContent = 'Dark Mode';
+        }
+    }
+    
+    // Toggle theme function
+    function toggleTheme(themeIcon, themeText) {
+        if (document.documentElement.classList.contains('dark')) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+            updateThemeUI('light', themeIcon, themeText);
+        } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+            updateThemeUI('dark', themeIcon, themeText);
+        }
+    }
+
+    // File upload functionality
+    function initFileUpload() {
+        const fileUpload = document.getElementById('fileUpload');
+        const uploadArea = document.getElementById('uploadArea');
+        const fileList = document.getElementById('fileList');
+        
+        if (uploadArea && fileUpload) {
+            // Remove existing event listeners by cloning and replacing
+            const newUploadArea = uploadArea.cloneNode(true);
+            uploadArea.parentNode.replaceChild(newUploadArea, uploadArea);
+            
+            // Re-assign variables with new elements
+            const updatedUploadArea = document.getElementById('uploadArea');
+            const updatedFileUpload = document.getElementById('fileUpload');
+            const updatedFileList = document.getElementById('fileList');
+            
+            updatedUploadArea.addEventListener('click', () => {
+                updatedFileUpload.click();
+            });
+            
+            updatedFileUpload.addEventListener('change', function() {
+                handleFileSelection(this, updatedUploadArea, updatedFileList);
+            });
+            
+            // Drag and drop functionality
+            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+                updatedUploadArea.addEventListener(eventName, preventDefaults, false);
+            });
+            
+            function preventDefaults(e) {
+                e.preventDefault();
+                e.stopPropagation();
+            }
+            
+            ['dragenter', 'dragover'].forEach(eventName => {
+                updatedUploadArea.addEventListener(eventName, highlight, false);
+            });
+            
+            ['dragleave', 'drop'].forEach(eventName => {
+                updatedUploadArea.addEventListener(eventName, unhighlight, false);
+            });
+            
+            function highlight() {
+                updatedUploadArea.classList.add('border-primary-500', 'dark:border-primary-400');
+                updatedUploadArea.classList.remove('border-gray-300', 'dark:border-gray-600');
+            }
+            
+            function unhighlight() {
+                updatedUploadArea.classList.remove('border-primary-500', 'dark:border-primary-400');
+                updatedUploadArea.classList.add('border-gray-300', 'dark:border-gray-600');
+            }
+            
+            updatedUploadArea.addEventListener('drop', function(e) {
+                handleDrop(e, updatedFileUpload, updatedUploadArea, updatedFileList);
+            }, false);
+        }
+    }
+
+    function handleFileSelection(input, uploadArea, fileList) {
+        if (input.files.length > 0) {
+            const files = Array.from(input.files);
+            let fileNames = '';
+            let totalSize = 0;
+            let hasValidFiles = true;
+
+            // Allowed file types
+            const allowedTypes = ['.pdf', '.dwg', '.rvt', '.jpg', '.jpeg', '.png'];
+            
+            files.forEach(file => {
+                const fileExt = '.' + file.name.split('.').pop().toLowerCase();
+                const fileSizeKB = (file.size / 1024).toFixed(2);
+                const fileSizeMB = (file.size / (1024 * 1024)).toFixed(2);
+                totalSize += file.size;
+                
+                // Check file type
+                if (!allowedTypes.includes(fileExt)) {
+                    hasValidFiles = false;
+                    fileNames += `<div class="flex items-center justify-between mt-1 text-red-500">
+                        <span class="truncate max-w-xs">${file.name}</span>
+                        <span class="text-xs ml-2">Invalid type</span>
+                    </div>`;
+                }
+                // Check individual file size (max 5MB)
+                else if (file.size > 5 * 1024 * 1024) {
+                    hasValidFiles = false;
+                    fileNames += `<div class="flex items-center justify-between mt-1 text-red-500">
+                        <span class="truncate max-w-xs">${file.name}</span>
+                        <span class="text-xs ml-2">${fileSizeMB} MB (too large)</span>
+                    </div>`;
+                } else {
+                    fileNames += `<div class="flex items-center justify-between mt-1 text-gray-600 dark:text-gray-400">
+                        <span class="truncate max-w-xs">${file.name}</span>
+                        <span class="text-xs ml-2">${fileSizeKB} KB</span>
+                    </div>`;
+                }
+            });
+
+            // Check total file size (max 10MB total)
+            const totalSizeMB = (totalSize / (1024 * 1024)).toFixed(2);
+            
+            if (totalSize > 10 * 1024 * 1024) {
+                showNotification(`Total file size (${totalSizeMB}MB) exceeds 10MB limit`, 'error');
+                input.value = '';
+                resetUploadArea(uploadArea, fileList);
+                return;
+            }
+            
+            if (!hasValidFiles) {
+                showNotification('Some files are invalid or too large. Max 5MB per file, only PDF, DWG, RVT, JPG, PNG allowed.', 'error');
+            }
+
+            // Update upload area display
+            uploadArea.innerHTML = `
+                <div class="w-16 h-16 mx-auto ${hasValidFiles ? 'bg-green-100 dark:bg-green-900' : 'bg-yellow-100 dark:bg-yellow-900'} rounded-full flex items-center justify-center mb-4">
+                    <i class="ri-${hasValidFiles ? 'check' : 'error-warning'}-line text-${hasValidFiles ? 'green' : 'yellow'}-600 dark:text-${hasValidFiles ? 'green' : 'yellow'}-400 text-2xl"></i>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-2 font-medium">${files.length} file(s) selected</p>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">Total: ${totalSizeMB} MB</p>
+                <p class="text-gray-500 dark:text-gray-400 text-sm mt-1">Click to change files</p>
+            `;
+            
+            fileList.innerHTML = fileNames;
+        } else {
+            resetUploadArea(uploadArea, fileList);
+        }
+    }
+
+    function handleDrop(e, fileUpload, uploadArea, fileList) {
+        const dt = e.dataTransfer;
+        const files = dt.files;
+        
+        // Validate file types
+        const validTypes = ['.pdf', '.dwg', '.rvt', '.jpg', '.jpeg', '.png'];
+        let invalidFiles = [];
+        
+        Array.from(files).forEach(file => {
+            const ext = '.' + file.name.split('.').pop().toLowerCase();
+            if (!validTypes.includes(ext)) {
+                invalidFiles.push(file.name);
+            }
+        });
+        
+        if (invalidFiles.length > 0) {
+            showNotification(`Invalid file types: ${invalidFiles.join(', ')}. Only PDF, DWG, RVT, JPG, PNG allowed.`, 'error');
+            return;
+        }
+        
+        fileUpload.files = files;
+        
+        // Trigger change event
+        handleFileSelection(fileUpload, uploadArea, fileList);
+    }
+
+    function resetUploadArea(uploadArea, fileList) {
+        if (uploadArea) {
+            uploadArea.innerHTML = `
+                <div class="w-16 h-16 mx-auto bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+                    <i class="ri-upload-cloud-line text-primary-600 dark:text-primary-400 text-2xl"></i>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-2">
+                    Drag & drop your files or <span class="text-primary-600 dark:text-primary-400 cursor-pointer">browse</span>
+                </p>
+                <p class="text-gray-500 dark:text-gray-400 text-sm">
+                    Supports: PDF, DWG, RVT, JPG, PNG (Max 5MB per file, 10MB total)
+                </p>
+            `;
+        }
+        if (fileList) {
+            fileList.innerHTML = '';
+        }
+    }
+
+    // Form submission handling
+    const contactForm = document.getElementById('contactForm');
+    if (contactForm) {
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Show loading state
+            const submitBtn = document.getElementById('submitBtn');
+            const originalBtnText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i>Sending...';
+            submitBtn.disabled = true;
+            
+            // Get form data
+            const formData = new FormData();
+            formData.append('name', document.getElementById('name').value);
+            formData.append('company', document.getElementById('company').value);
+            formData.append('email', document.getElementById('email').value);
+            formData.append('phone', document.getElementById('phone').value);
+            formData.append('subject', document.getElementById('subject').value);
+            formData.append('message', document.getElementById('message').value);
+            
+            // Add files if any
+            const fileInput = document.getElementById('fileUpload');
+            let hasValidFiles = true;
+            
+            if (fileInput.files.length > 0) {
+                // Validate files before sending
+                const allowedTypes = ['.pdf', '.dwg', '.rvt', '.jpg', '.jpeg', '.png'];
+                let totalSize = 0;
+                
+                for (let i = 0; i < fileInput.files.length; i++) {
+                    const file = fileInput.files[i];
+                    const fileExt = '.' + file.name.split('.').pop().toLowerCase();
+                    totalSize += file.size;
+                    
+                    // Check file type
+                    if (!allowedTypes.includes(fileExt)) {
+                        hasValidFiles = false;
+                        showNotification(`File "${file.name}" has invalid type. Only PDF, DWG, RVT, JPG, PNG allowed.`, 'error');
+                        break;
+                    }
+                    
+                    // Check individual file size (max 5MB)
+                    if (file.size > 5 * 1024 * 1024) {
+                        hasValidFiles = false;
+                        showNotification(`File "${file.name}" is too large. Maximum size is 5MB.`, 'error');
+                        break;
+                    }
+                }
+                
+                // Check total size (max 10MB total)
+                if (hasValidFiles && totalSize > 10 * 1024 * 1024) {
+                    hasValidFiles = false;
+                    showNotification('Total file size cannot exceed 10MB', 'error');
+                }
+                
+                // Add files to formData if valid
+                if (hasValidFiles) {
+                    for (let i = 0; i < fileInput.files.length; i++) {
+                        formData.append('files', fileInput.files[i]);
+                    }
+                }
+            }
+            
+            if (!hasValidFiles && fileInput.files.length > 0) {
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+                return;
+            }
+            
+            // Set timeout for the request (30 seconds)
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 30000);
+            
+            try {
+                console.log('Sending form data...', {
+                    name: formData.get('name'),
+                    email: formData.get('email'),
+                    files: fileInput.files.length
+                });
+                
+                // Send data to server
+                const response = await fetch('/api/contact-us', {
+                    method: 'POST',
+                    body: formData,
+                    signal: controller.signal
+                });
+                
+                clearTimeout(timeoutId);
+                
+                // Check if response is OK
+                if (!response.ok) {
+                    if (response.status === 413) {
+                        throw new Error('File too large. Please reduce file size.');
+                    }
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                console.log('Server response:', data);
+                
+                if (data.success) {
+                    // Show success message
+                    showNotification(data.message, 'success');
+                    
+                    // Reset form
+                    contactForm.reset();
+                    
+                    // Reset file upload area
+                    const uploadArea = document.getElementById('uploadArea');
+                    const fileList = document.getElementById('fileList');
+                    resetUploadArea(uploadArea, fileList);
+                    
+                    // Clear file input
+                    fileInput.value = '';
+                } else {
+                    showNotification(data.message || 'Failed to send message. Please try again.', 'error');
+                }
+            } catch (error) {
+                console.error('Error details:', error);
+                
+                if (error.name === 'AbortError') {
+                    showNotification('Request timed out. Please try again with smaller files.', 'error');
+                } else if (error.message.includes('413') || error.message.includes('too large')) {
+                    showNotification('File too large. Please reduce file size or try without attachments.', 'error');
+                } else {
+                    showNotification('Network error. Please check your connection and try again.', 'error');
+                }
+            } finally {
+                // Restore button state
+                submitBtn.innerHTML = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    }
+
+    // Notification function
+    function showNotification(message, type) {
+        // Remove any existing notifications
+        const existingNotifications = document.querySelectorAll('.fixed.top-4.right-4');
+        existingNotifications.forEach(notification => notification.remove());
+        
+        const notification = document.createElement('div');
+        notification.className = `fixed top-4 right-4 px-6 py-4 rounded-lg shadow-lg z-50 animate-slide-up ${
+            type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+        }`;
+        notification.innerHTML = `
+            <div class="flex items-center">
+                <i class="ri-${type === 'success' ? 'checkbox-circle' : 'error-warning'}-fill mr-3 text-xl"></i>
+                <div>${message}</div>
+            </div>
+        `;
+        
+        document.body.appendChild(notification);
+        
+        // Remove notification after 5 seconds
+        setTimeout(() => {
+            if (notification.parentNode) {
+                notification.remove();
+            }
+        }, 5000);
+    }
+
+    // Copy contact info to clipboard
+    document.querySelectorAll('a[href^="mailto:"], a[href^="tel:"]').forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (e.ctrlKey || e.metaKey) {
+                e.preventDefault();
+                const text = this.textContent.trim();
+                navigator.clipboard.writeText(text).then(() => {
+                    showNotification(`Copied ${text} to clipboard`, 'success');
+                }).catch(() => {
+                    showNotification('Failed to copy to clipboard', 'error');
+                });
+            }
+        });
+    });
+
+    // Add console log for debugging
+    console.log('Contact Us Page Loaded with updated file upload handling');
+</script>
+</body>
+</html>

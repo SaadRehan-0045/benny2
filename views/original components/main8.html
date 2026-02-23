@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construct Estimates - Takeoff Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'tab-slide': 'tabSlide 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        tabSlide: {
+                            '0%': { transform: 'translateX(-10px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Custom tab styles */
+        .tab-button {
+            transition: all 0.3s ease;
+        }
+        
+        .tab-button:hover {
+            transform: translateX(5px);
+        }
+        
+        .tab-button.active {
+            background: linear-gradient(90deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .dark .tab-button.active {
+            background: linear-gradient(90deg, #60a5fa 0%, #3b82f6 100%);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+        }
+        
+        .tab-content {
+            animation: tabSlide 0.3s ease-out;
+        }
+        
+        /* Section background */
+        .services-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .services-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* Custom scrollbar for tabs */
+        .tabs-scroll {
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e1 #f1f5f9;
+        }
+        
+        .dark .tabs-scroll {
+            scrollbar-color: #475569 #1e293b;
+        }
+        
+        .tabs-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        
+        .tabs-scroll::-webkit-scrollbar-track {
+            background: #f1f5f9;
+            border-radius: 3px;
+        }
+        
+        .dark .tabs-scroll::-webkit-scrollbar-track {
+            background: #1e293b;
+        }
+        
+        .tabs-scroll::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 3px;
+        }
+        
+        .dark .tabs-scroll::-webkit-scrollbar-thumb {
+            background: #475569;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Theme Toggle Demo -->
+    <div class="container mx-auto px-4 py-4 flex justify-end">
+        <button id="themeToggle" class="flex items-center px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content for context -->
+    <div class="container mx-auto px-4 py-8">
+        <h1 class="text-3xl font-bold text-center mb-8">Construct Estimates</h1>
+        <p class="text-center text-gray-600 dark:text-gray-400 mb-12">Scroll down to see the Takeoff Services section</p>
+    </div>
+
+    <!-- Construction Takeoff Services Section -->
+    <section class="services-bg py-12 lg:py-20 animate-fade-in">
+        <div class="container mx-auto px-4">
+            <!-- Header Section -->
+            <div class="text-center max-w-3xl mx-auto mb-12 lg:mb-16 animate-slide-up">
+                <!-- Section Label -->
+                <div class="inline-flex items-center mb-4">
+                    <div class="w-12 h-0.5 bg-primary-500 dark:bg-primary-400 mr-3"></div>
+                    <span class="text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider text-sm flex items-center">
+                        <i class="ri-ruler-line mr-2"></i>
+                        SPECIALIZED SERVICES
+                    </span>
+                    <div class="w-12 h-0.5 bg-primary-500 dark:bg-primary-400 ml-3"></div>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                    Construction TakeOff Services
+                </h1>
+
+                <!-- Description -->
+                <div class="bg-white dark:bg-gray-800 rounded-2xl p-6 border border-gray-200 dark:border-gray-700 shadow-lg">
+                    <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                        We specialize in providing construction takeoff services that support contractors in accurately 
+                        estimating costs and quantities. Our expert team ensures precision in every measurement for 
+                        successful project planning and execution.
+                    </p>
+                    
+                    <!-- Stats Row -->
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-primary-600 dark:text-primary-400">10+</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Specialized Trades</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-primary-600 dark:text-primary-400">99%</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Accuracy Rate</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-primary-600 dark:text-primary-400">24-48h</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Turnaround</div>
+                        </div>
+                        <div class="text-center">
+                            <div class="text-xl font-bold text-primary-600 dark:text-primary-400">8000+</div>
+                            <div class="text-sm text-gray-600 dark:text-gray-400">Projects</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tabs Section -->
+            <div class="flex flex-col lg:flex-row gap-8 animate-slide-up">
+                <!-- Parent 1: Tabs Navigation -->
+                <div class="lg:w-1/3">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg overflow-hidden">
+                        <!-- Tabs Header -->
+                        <div class="bg-primary-50 dark:bg-gray-700 p-6 border-b border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white flex items-center">
+                                <i class="ri-building-line mr-3 text-primary-600 dark:text-primary-400"></i>
+                                Specialized Trades
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-2">
+                                Select a trade to explore our specialized estimating services
+                            </p>
+                        </div>
+                        
+                        <!-- Tabs Navigation -->
+                        <div class="tabs-scroll overflow-x-auto">
+                            <div class="flex flex-col min-w-max">
+                                <!-- Tab 1 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left active" data-tab="concrete">
+                                    <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-building-2-line text-blue-600 dark:text-blue-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Concrete Estimating</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Foundations, slabs, walls</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 2 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left" data-tab="electric">
+                                    <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-flashlight-line text-yellow-600 dark:text-yellow-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Electric Estimating</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Wiring, panels, fixtures</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 3 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left" data-tab="finishes">
+                                    <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-paint-line text-purple-600 dark:text-purple-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Interior & Exterior Finishes</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Drywall, painting, flooring</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 4 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left" data-tab="masonry">
+                                    <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-brick-line text-red-600 dark:text-red-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Masonry Estimating</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Brick, block, stonework</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 5 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left" data-tab="mep">
+                                    <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-settings-5-line text-green-600 dark:text-green-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">MEP Estimating</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Mechanical, Electrical, Plumbing</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 6 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left" data-tab="metal">
+                                    <div class="w-10 h-10 bg-gray-100 dark:bg-gray-700 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-tools-line text-gray-600 dark:text-gray-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Metal Estimating</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Structural steel, framing</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 7 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left" data-tab="openings">
+                                    <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-door-line text-indigo-600 dark:text-indigo-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Openings Estimating</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Doors, windows, frames</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 8 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left" data-tab="sitework">
+                                    <div class="w-10 h-10 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-landscape-line text-orange-600 dark:text-orange-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Sitework Estimating</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Grading, excavation, utilities</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 9 -->
+                                <button class="tab-button flex items-center p-5 border-b border-gray-200 dark:border-gray-700 text-left" data-tab="thermal">
+                                    <div class="w-10 h-10 bg-cyan-100 dark:bg-cyan-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-cloud-line text-cyan-600 dark:text-cyan-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Thermal/Moisture Protection</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Insulation, waterproofing</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                                
+                                <!-- Tab 10 -->
+                                <button class="tab-button flex items-center p-5 text-left" data-tab="lumber">
+                                    <div class="w-10 h-10 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-tree-line text-amber-600 dark:text-amber-400 text-lg"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-gray-900 dark:text-white">Lumber Takeoff</h4>
+                                        <p class="text-gray-500 dark:text-gray-400 text-sm">Framing, sheathing, trim</p>
+                                    </div>
+                                    <i class="ri-arrow-right-s-line text-gray-400 ml-auto text-xl"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- CTA in Tabs Panel -->
+                        <div class="p-6 bg-primary-50 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-700">
+                            <h4 class="font-bold text-gray-900 dark:text-white mb-3">Need Multiple Services?</h4>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mb-4">
+                                Get bundled pricing for multiple trade estimating services.
+                            </p>
+                            <button class="w-full bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-semibold py-3 rounded-lg transition-all duration-300 flex items-center justify-center">
+                                <i class="ri-file-list-3-line mr-2"></i>
+                                Request Custom Quote
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Parent 2: Tab Content -->
+                <div class="lg:w-2/3">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl border border-gray-200 dark:border-gray-700 shadow-lg p-6 h-full">
+                        <!-- Tab Content Container -->
+                        <div id="tab-content" class="tab-content">
+                            <!-- Concrete Estimating (Default Active) -->
+                            <div id="concrete" class="tab-pane active">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-xl flex items-center justify-center mr-4">
+                                        <i class="ri-building-2-line text-blue-600 dark:text-blue-400 text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Concrete Estimating</h2>
+                                        <p class="text-gray-600 dark:text-gray-400">Precision estimates for all concrete work</p>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                                    Our concrete estimating services provide accurate quantity takeoffs and cost estimates 
+                                    for all types of concrete work including foundations, slabs, walls, columns, and 
+                                    structural elements. We ensure precise calculations for formwork, reinforcement, 
+                                    and concrete volumes.
+                                </p>
+                                
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                        <h4 class="font-bold text-gray-900 dark:text-white mb-2">Services Include:</h4>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-checkbox-circle-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                Foundation concrete takeoffs
+                                            </li>
+                                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-checkbox-circle-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                Slab-on-grade calculations
+                                            </li>
+                                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-checkbox-circle-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                Structural concrete estimating
+                                            </li>
+                                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-checkbox-circle-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                Formwork and shoring calculations
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    
+                                    <div class="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                                        <h4 class="font-bold text-gray-900 dark:text-white mb-2">Typical Projects:</h4>
+                                        <ul class="space-y-2">
+                                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-building-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                Commercial building foundations
+                                            </li>
+                                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-home-4-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                Residential concrete slabs
+                                            </li>
+                                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-roadster-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                Parking structures and garages
+                                            </li>
+                                            <li class="flex items-center text-gray-700 dark:text-gray-300">
+                                                <i class="ri-bridge-line text-blue-600 dark:text-blue-400 mr-2"></i>
+                                                Bridge and infrastructure concrete
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-4 border border-blue-200 dark:border-blue-800">
+                                    <div class="flex items-center">
+                                        <i class="ri-information-line text-blue-600 dark:text-blue-400 text-xl mr-3"></i>
+                                        <div>
+                                            <h4 class="font-bold text-gray-900 dark:text-white">Expert Insight</h4>
+                                            <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                                Concrete estimating accuracy can impact project costs by 5-15%. Our detailed 
+                                                takeoffs include waste factors, labor calculations, and equipment requirements.
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Electric Estimating (Hidden by Default) -->
+                            <div id="electric" class="tab-pane hidden">
+                                <div class="flex items-center mb-6">
+                                    <div class="w-16 h-16 bg-yellow-100 dark:bg-yellow-900 rounded-xl flex items-center justify-center mr-4">
+                                        <i class="ri-flashlight-line text-yellow-600 dark:text-yellow-400 text-2xl"></i>
+                                    </div>
+                                    <div>
+                                        <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Electric Estimating</h2>
+                                        <p class="text-gray-600 dark:text-gray-400">Complete electrical system takeoffs</p>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-gray-700 dark:text-gray-300 mb-6 leading-relaxed">
+                                    Detailed electrical estimating for residential, commercial, and industrial projects. 
+                                    We provide comprehensive takeoffs for wiring, panels, fixtures, and all electrical 
+                                    components with NEC code compliance considerations.
+                                </p>
+                                
+                                <!-- Content for other tabs would follow similar structure -->
+                                <div class="text-center py-12">
+                                    <div class="w-20 h-20 mx-auto bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-6">
+                                        <i class="ri-flashlight-line text-yellow-600 dark:text-yellow-400 text-3xl"></i>
+                                    </div>
+                                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Electrical Estimating Services</h3>
+                                    <p class="text-gray-600 dark:text-gray-400">
+                                        Select any trade from the left panel to view detailed information about our specialized 
+                                        estimating services for that specific trade.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            <!-- Similar structure for other 8 tabs -->
+                            <div id="finishes" class="tab-pane hidden">
+                                <!-- Interior & Exterior Finishes content -->
+                            </div>
+                            <div id="masonry" class="tab-pane hidden">
+                                <!-- Masonry Estimating content -->
+                            </div>
+                            <div id="mep" class="tab-pane hidden">
+                                <!-- MEP Estimating content -->
+                            </div>
+                            <div id="metal" class="tab-pane hidden">
+                                <!-- Metal Estimating content -->
+                            </div>
+                            <div id="openings" class="tab-pane hidden">
+                                <!-- Openings Estimating content -->
+                            </div>
+                            <div id="sitework" class="tab-pane hidden">
+                                <!-- Sitework Estimating content -->
+                            </div>
+                            <div id="thermal" class="tab-pane hidden">
+                                <!-- Thermal/Moisture Protection content -->
+                            </div>
+                            <div id="lumber" class="tab-pane hidden">
+                                <!-- Lumber Takeoff content -->
+                            </div>
+                        </div>
+                        
+                        <!-- Bottom CTA -->
+                        <div class="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+                            <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white">Need a Detailed Quote?</h4>
+                                    <p class="text-gray-600 dark:text-gray-400 text-sm">Upload your plans for a free estimate</p>
+                                </div>
+                                <div class="flex gap-4">
+                                    <button class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center">
+                                        <i class="ri-upload-line mr-2"></i>
+                                        Upload Plans
+                                    </button>
+                                    <button class="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-800 dark:text-gray-200 font-semibold py-3 px-6 rounded-lg transition-all duration-300 flex items-center">
+                                        <i class="ri-phone-line mr-2"></i>
+                                        Call for Quote
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Footer Note -->
+    <div class="container mx-auto px-4 py-8 text-center">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">
+            This Takeoff Services section integrates perfectly with your existing theme system. Copy and paste it into your main website file.
+        </p>
+    </div>
+
+    <script>
+        // Theme functionality (same as your existing system)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+
+        // Tab functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabPanes = document.querySelectorAll('.tab-pane');
+            
+            // Function to switch tabs
+            function switchTab(tabId) {
+                // Hide all tab panes
+                tabPanes.forEach(pane => {
+                    pane.classList.remove('active');
+                    pane.classList.add('hidden');
+                });
+                
+                // Remove active class from all tab buttons
+                tabButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                
+                // Show selected tab pane
+                const selectedPane = document.getElementById(tabId);
+                if (selectedPane) {
+                    selectedPane.classList.remove('hidden');
+                    selectedPane.classList.add('active');
+                }
+                
+                // Add active class to clicked button
+                const clickedButton = document.querySelector(`[data-tab="${tabId}"]`);
+                if (clickedButton) {
+                    clickedButton.classList.add('active');
+                }
+            }
+            
+            // Add click event listeners to tab buttons
+            tabButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    const tabId = button.getAttribute('data-tab');
+                    switchTab(tabId);
+                });
+            });
+            
+            // Set first tab as active by default
+            if (tabButtons.length > 0) {
+                const firstTabId = tabButtons[0].getAttribute('data-tab');
+                switchTab(firstTabId);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,1002 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Concrete Estimating Services - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Concrete theme colors */
+        .concrete-gradient {
+            background: linear-gradient(135deg, #4b5563 0%, #1f2937 100%);
+        }
+        
+        .dark .concrete-gradient {
+            background: linear-gradient(135deg, #374151 0%, #111827 100%);
+        }
+        
+        /* Card hover effects */
+        .concrete-card {
+            border-left: 4px solid #3b82f6;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .concrete-card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+        }
+        
+        .dark .concrete-card:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        /* Process step styling */
+        .process-step {
+            position: relative;
+        }
+        
+        .process-step:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 40px;
+            right: -25px;
+            width: 50px;
+            height: 2px;
+            background: #3b82f6;
+        }
+        
+        @media (max-width: 768px) {
+            .process-step:not(:last-child):after {
+                display: none;
+            }
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .concrete-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+
+   
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                    Concrete Estimating Services
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-gray-700 dark:text-gray-300">
+                    Professional Concrete Estimating Services for Accurate Project Estimates
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                    <div class="concrete-gradient text-white p-6 rounded-2xl shadow-xl mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Building Success with Precise Concrete Estimates</h3>
+                        <p class="mb-4">
+                            With years of experience serving general contracting corporations, concrete contractors, home builders, and real estate developers, Benny Estimates has become a trusted name in the industry.
+                        </p>
+                        <button onclick="openModal(1)" class="bg-white text-gray-800 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300 mt-4 cursor-pointer">
+                            Get an Estimate Today!
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-blue-100 dark:bg-blue-900 p-3 rounded-lg mr-4">
+                                <i class="ri-award-fill text-blue-600 dark:text-blue-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Certified Excellence</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Certified by AACE and AIQS</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            Our expert team specializes in Division 3 trades and understands the unique demands of your industry, from sidewalks and driveways to intricate paving projects.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Concrete Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Concrete estimating and construction" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Estimators Section -->
+        <section class="mb-16">
+            <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-6">Expert Concrete Estimators for Precise Cost Estimation</h2>
+                
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+                            At Benny Estimates, we understand the critical role accurate cost estimation plays in the success of your construction projects. Our team combines industry knowledge, cutting-edge software, and thorough attention to detail.
+                        </p>
+                        
+                        <div class="bg-red-50 dark:bg-red-900/20 p-6 rounded-xl border-l-4 border-red-500 mb-6">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-2">Tired of Inaccurate Estimates?</h3>
+                            <p class="text-gray-700 dark:text-gray-300">
+                                Say goodbye to frustration. Even a tiny miscalculation can significantly impact your budget and project timeline. Our rigorous quality control process gives you confidence.
+                            </p>
+                            <button onclick="openModal(2)" class="mt-4 text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                                Learn More <i class="ri-arrow-right-line ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="bg-primary-50 dark:bg-primary-900/20 p-6 rounded-xl border-l-4 border-primary-500">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">Win More Bids, Win More Projects</h3>
+                            <p class="text-gray-700 dark:text-gray-300 mb-4">
+                                In today's competitive construction industry, winning projects often comes down to providing accurate and competitive cost estimates.
+                            </p>
+                            <button onclick="openModal(3)" class="bg-primary-600 hover:bg-primary-700 text-white px-6 py-3 rounded-lg font-semibold transition duration-300 cursor-pointer">
+                                Partner with Benny Estimates!
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Grid -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Comprehensive Concrete Estimation Services</h2>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <div onclick="openModal(4)" class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm concrete-card">
+                    <div class="text-primary-600 dark:text-primary-400 text-2xl mb-3">
+                        <i class="ri-file-list-3-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 dark:text-white">Material Takeoffs</h4>
+                </div>
+                
+                <div onclick="openModal(5)" class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm concrete-card">
+                    <div class="text-primary-600 dark:text-primary-400 text-2xl mb-3">
+                        <i class="ri-calculator-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 dark:text-white">Detailed Cost Estimates</h4>
+                </div>
+                
+                <div onclick="openModal(6)" class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm concrete-card">
+                    <div class="text-primary-600 dark:text-primary-400 text-2xl mb-3">
+                        <i class="ri-auction-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 dark:text-white">Bid Preparation</h4>
+                </div>
+                
+                <div onclick="openModal(7)" class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm concrete-card">
+                    <div class="text-primary-600 dark:text-primary-400 text-2xl mb-3">
+                        <i class="ri-ruler-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 dark:text-white">Quantity Takeoffs</h4>
+                </div>
+                
+                <div onclick="openModal(8)" class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm concrete-card">
+                    <div class="text-primary-600 dark:text-primary-400 text-2xl mb-3">
+                        <i class="ri-money-dollar-circle-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 dark:text-white">Budget Estimates</h4>
+                </div>
+                
+                <div onclick="openModal(9)" class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm concrete-card">
+                    <div class="text-primary-600 dark:text-primary-400 text-2xl mb-3">
+                        <i class="ri-pencil-ruler-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 dark:text-white">Design Estimates</h4>
+                </div>
+                
+                <div onclick="openModal(10)" class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm concrete-card">
+                    <div class="text-primary-600 dark:text-primary-400 text-2xl mb-3">
+                        <i class="ri-file-edit-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 dark:text-white">Change Orders</h4>
+                </div>
+                
+                <div onclick="openModal(11)" class="bg-white dark:bg-gray-800 p-5 rounded-xl shadow-sm concrete-card">
+                    <div class="text-primary-600 dark:text-primary-400 text-2xl mb-3">
+                        <i class="ri-lightbulb-flash-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-900 dark:text-white">Value Engineering</h4>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust & Excellence Section -->
+        <section class="mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl">
+            <div class="text-center mb-8">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Trusted by Contractors, Builders, and Developers Nationwide</h2>
+                <p class="text-lg text-gray-700 dark:text-gray-300 max-w-3xl mx-auto">
+                    Our commitment to accuracy, reliability, and client satisfaction has made us a preferred choice for concrete estimating services.
+                </p>
+            </div>
+            
+            <div class="text-center mb-8">
+                <div class="bg-gradient-to-r from-green-500 to-emerald-600 dark:from-green-600 dark:to-emerald-700 text-white p-6 rounded-xl inline-block">
+                    <div class="text-2xl font-bold mb-2">Act Now and Save 30% Off</div>
+                    <p class="mb-4">Take the Next Step!</p>
+                    <button onclick="openModal(12)" class="bg-white text-emerald-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300 cursor-pointer">
+                        Get Your Estimate
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Outsource Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Why Outsource Your Concrete Estimates?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div onclick="openModal(13)" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+                    <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                        <i class="ri-time-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Save Time and Resources</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Focus on on-site activities while we handle concrete estimation. No need for expensive software or dedicated staff.
+                    </p>
+                </div>
+                
+                <div onclick="openModal(14)" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+                    <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                        <i class="ri-trophy-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Increase Your Bid Volume</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Bid with precision and confidence, leading to higher bid volume and more project wins.
+                    </p>
+                </div>
+                
+                <div onclick="openModal(15)" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+                    <div class="text-primary-600 dark:text-primary-400 text-4xl mb-4">
+                        <i class="ri-line-chart-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Enhance Estimating Efficiency</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Leverage our expert estimators' skills for more accurate cost projections and higher profit potential.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="mb-16 bg-primary-50 dark:bg-gray-800 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Benefits of Choosing Benny Estimates</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="openModal(16)" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="text-3xl text-green-500 mb-4">
+                        <i class="ri-checkbox-circle-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Highly Accurate Estimates</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Meticulous approach ensures comprehensive results</p>
+                </div>
+                
+                <div onclick="openModal(17)" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="text-3xl text-blue-500 mb-4">
+                        <i class="ri-timer-flash-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Exceptional Turnaround</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">24-48 hour delivery for most projects</p>
+                </div>
+                
+                <div onclick="openModal(18)" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="text-3xl text-purple-500 mb-4">
+                        <i class="ri-money-dollar-circle-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Cost-Effective</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Save up to 60% vs in-house estimating</p>
+                </div>
+                
+                <div onclick="openModal(19)" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="text-3xl text-orange-500 mb-4">
+                        <i class="ri-customer-service-2-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">24/7 Support</h4>
+                    <p class="text-sm text-gray-600 dark:text-gray-400">Round-the-clock customer assistance</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Steps -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Estimation Process</h2>
+            
+            <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+                <div onclick="openModal(20)" class="process-step text-center p-6 w-full md:w-1/3 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-20 h-20 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                        1
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Scope Identification</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Thorough study of drawing plans</p>
+                </div>
+                
+                <div onclick="openModal(21)" class="process-step text-center p-6 w-full md:w-1/3 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-20 h-20 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                        2
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">On-Screen Takeoff</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Detailed digital measurement</p>
+                </div>
+                
+                <div onclick="openModal(22)" class="process-step text-center p-6 w-full md:w-1/3 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-20 h-20 bg-primary-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-4">
+                        3
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Quality Assurance</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Double verification process</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Process -->
+        <section class="mb-16 bg-gradient-to-r from-blue-50 to-cyan-50 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">The Quick and Simple Method To Get Your Estimate</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div onclick="openModal(23)" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="text-4xl text-primary-600 dark:text-primary-400 mb-4">
+                        <i class="ri-upload-cloud-2-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Submit Your Plans</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Share your project plans and specifications</p>
+                </div>
+                
+                <div onclick="openModal(24)" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="text-4xl text-primary-600 dark:text-primary-400 mb-4">
+                        <i class="ri-price-tag-3-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Get a Quote</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Receive instant transparent pricing</p>
+                </div>
+                
+                <div onclick="openModal(25)" class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="text-4xl text-primary-600 dark:text-primary-400 mb-4">
+                        <i class="ri-file-download-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Receive Takeoffs</h3>
+                    <p class="text-gray-600 dark:text-gray-400">Get detailed estimates within 24-48 hours</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button onclick="openModal(26)" class="bg-primary-600 hover:bg-primary-700 text-white px-8 py-4 rounded-lg font-semibold text-lg transition duration-300 hover:shadow-lg cursor-pointer">
+                    Start Your Estimate Now
+                </button>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Nationwide coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div onclick="openModal(27)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-primary-600 dark:text-primary-400 font-semibold">Sydney</span>
+                        </div>
+                        <div onclick="openModal(28)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-primary-600 dark:text-primary-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div onclick="openModal(29)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-primary-600 dark:text-primary-400 font-semibold">Brisbane</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-red-600 dark:text-red-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Coast to coast service</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div onclick="openModal(30)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-primary-600 dark:text-primary-400 font-semibold">Nationwide</span>
+                        </div>
+                        <div onclick="openModal(31)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Major Cities</span>
+                            <span class="text-primary-600 dark:text-primary-400 font-semibold">Covered</span>
+                        </div>
+                        <div onclick="openModal(32)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Rural Areas</span>
+                            <span class="text-primary-600 dark:text-primary-400 font-semibold">Available</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-12 text-center bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-700 dark:to-primary-800 text-white p-8 rounded-2xl shadow-xl">
+            <h2 class="text-3xl font-bold mb-6">Experience the Difference with Benny Estimates Now!</h2>
+            <div class="text-2xl font-bold mb-6">
+                Get Estimate At 30% OFF<br>
+                <span class="text-lg opacity-90">TURNAROUND TIME: 24-48 hrs!</span>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <a href="tel:+12898017224" class="text-lg font-bold hover:text-white transition-colors">+1 (289) 801-7224</a>
+                    <div class="text-sm opacity-90">Call us any time</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">96 Jones Street</div>
+                    <div class="text-sm opacity-90">New York, USA</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <a href="mailto:Ben@bennyestimates.com" class="text-lg font-bold hover:text-white transition-colors">Ben@bennyestimates.com</a>
+                    <div class="text-sm opacity-90">Email Us</div>
+                </div>
+            </div>
+            
+            <button onclick="openModal(33)" class="bg-white text-primary-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 cursor-pointer">
+                Contact Us Today
+            </button>
+        </section>
+
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Concrete Estimating Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content (keeping all the same content)
+        const serviceData = {
+            1: {
+                title: "Get an Estimate Today - Concrete Services",
+                content: `<p class="mb-4">Ready to get started with your concrete construction estimate? Our team of expert estimators specializes in Division 3 trades and understands the unique demands of your industry.</p>
+                <p class="mb-4">From sidewalks and driveways to intricate paving projects and commercial foundations, we provide accurate, detailed estimates that help you bid with confidence and win more projects.</p>
+                <p class="mb-4">Our concrete estimating services include comprehensive material takeoffs, labor cost analysis, equipment requirements, and detailed budget breakdowns. We analyze your project plans to ensure nothing is overlooked.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to discuss your concrete project needs.</p>`
+            },
+            2: {
+                title: "Say Goodbye to Inaccurate Estimates",
+                content: `<p class="mb-4">Even a tiny miscalculation can significantly impact your budget and project timeline. Our rigorous quality control process gives you confidence in every estimate we deliver.</p>
+                <p class="mb-4">We use advanced estimating software and proven methodologies to ensure accuracy across all concrete project components. Our quality assurance includes multiple reviews and cross-checking of quantities and pricing.</p>
+                <p class="mb-4">With Benny Estimates, you can trust that your concrete estimates are accurate, comprehensive, and reliable. We help you avoid costly surprises during construction.</p>
+                <p>Contact us to learn how our accurate estimating can benefit your next concrete project.</p>`
+            },
+            3: {
+                title: "Partner with Benny Estimates",
+                content: `<p class="mb-4">In today's competitive construction industry, winning projects often comes down to providing accurate and competitive cost estimates. Partner with Benny Estimates to gain the advantage you need.</p>
+                <p class="mb-4">Our team becomes an extension of your business, providing reliable estimating support that helps you bid with confidence. We handle the complex calculations while you focus on winning projects.</p>
+                <p class="mb-4">Whether you're a general contractor, concrete subcontractor, or developer, our estimating services help you increase your bid volume and win more profitable work.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> to discuss partnership opportunities.</p>`
+            },
+            4: {
+                title: "Material Takeoffs for Concrete Projects",
+                content: `<p class="mb-4">Material takeoffs are the foundation of accurate concrete estimating. Our material takeoff service provides detailed quantity calculations for all concrete materials required in your project.</p>
+                <p class="mb-4">We quantify concrete volumes, reinforcement (rebar and mesh), formwork materials, and specialty concrete products. Our takeoffs account for waste factors, overlaps, and industry standards.</p>
+                <p class="mb-4">Accurate material takeoffs prevent costly shortages or overages, help you negotiate better supplier pricing, and provide the foundation for reliable cost estimates.</p>
+                <p>Contact us for specialized material takeoff services for your concrete construction project.</p>`
+            },
+            5: {
+                title: "Detailed Cost Estimates for Concrete",
+                content: `<p class="mb-4">Our detailed cost estimates provide comprehensive breakdowns of all expenses associated with your concrete project. We analyze every aspect to ensure complete coverage.</p>
+                <p class="mb-4">Each estimate includes material costs with current market pricing, labor hours based on industry productivity standards, equipment requirements with rental or ownership costs, and appropriate contingency allowances for project risks.</p>
+                <p class="mb-4">We tailor our estimates to your specific needs, whether you require preliminary budgets for project feasibility or detailed bids for competitive tendering.</p>
+                <p>Let our detailed cost estimating support your next concrete project.</p>`
+            },
+            6: {
+                title: "Bid Preparation for Concrete Contractors",
+                content: `<p class="mb-4">Our bid preparation service helps concrete contractors prepare competitive, accurate bids that win profitable work. We analyze project requirements and develop comprehensive proposals.</p>
+                <p class="mb-4">We provide detailed bid packages that include material quantities, labor costs, equipment requirements, and subcontractor quotes. Our bids are formatted for easy review and submission.</p>
+                <p class="mb-4">With professional bid preparation, you can submit more bids and increase your win rate. Let us handle the time-consuming work while you focus on your business.</p>
+                <p>Contact us to learn how our bid preparation services can improve your concrete bidding success.</p>`
+            },
+            7: {
+                title: "Quantity Takeoffs for Concrete",
+                content: `<p class="mb-4">Quantity takeoffs are essential for accurate concrete estimating. Our quantity takeoff service provides precise measurements and counts for all concrete components in your project.</p>
+                <p class="mb-4">We measure concrete volumes, reinforcement quantities, formwork areas, and specialty items directly from your plans. Our digital takeoff methods ensure accuracy and consistency.</p>
+                <p class="mb-4">Detailed quantity takeoffs help you understand project requirements, order materials correctly, and prepare competitive bids. They also support effective project management.</p>
+                <p>Contact us for professional quantity takeoff services for your concrete project.</p>`
+            },
+            8: {
+                title: "Budget Estimates for Concrete Projects",
+                content: `<p class="mb-4">Our budget estimating service helps you develop realistic project budgets from the earliest planning stages. We provide cost models that support informed decision-making.</p>
+                <p class="mb-4">Budget estimates are prepared using historical data, industry benchmarks, and current market pricing to provide reliable cost projections before detailed drawings are complete.</p>
+                <p class="mb-4">As your project develops, we refine budget estimates with increasing detail, providing cost control throughout design and construction. This helps you avoid budget overruns.</p>
+                <p>Contact us to learn how our budget estimating can support your concrete project planning.</p>`
+            },
+            9: {
+                title: "Design Estimates for Concrete",
+                content: `<p class="mb-4">Our design estimating service provides cost analysis during the design phase, helping architects and engineers make informed decisions about concrete systems and materials.</p>
+                <p class="mb-4">We evaluate alternative designs, material selections, and construction methods to help you optimize your project for cost and performance. Our estimates support value engineering.</p>
+                <p class="mb-4">Early cost feedback helps prevent design decisions that lead to budget overruns. Let us help you design concrete projects that are both functional and affordable.</p>
+                <p>Contact us for design estimating support for your concrete project.</p>`
+            },
+            10: {
+                title: "Change Order Estimating for Concrete",
+                content: `<p class="mb-4">Change orders are inevitable in construction. Our change order estimating service provides accurate cost analysis for project modifications, helping you negotiate fair compensation.</p>
+                <p class="mb-4">We analyze scope changes, quantify additional materials and labor, and prepare detailed change order proposals. Our estimates support your position in negotiations with owners and contractors.</p>
+                <p class="mb-4">Accurate change order estimates protect your profitability when project changes occur. Let us help you document and price change orders effectively.</p>
+                <p>Contact us for change order estimating support for your concrete project.</p>`
+            },
+            11: {
+                title: "Value Engineering for Concrete Projects",
+                content: `<p class="mb-4">Value engineering helps you reduce costs while maintaining quality and functionality. Our value engineering service identifies opportunities for savings in your concrete project.</p>
+                <p class="mb-4">We analyze alternative materials, construction methods, and design approaches that can significantly reduce project costs without compromising performance or durability.</p>
+                <p class="mb-4">Value engineering recommendations are based on real-world experience and current market conditions. We help you achieve the best value for your concrete investment.</p>
+                <p>Contact us to learn how value engineering can benefit your concrete project.</p>`
+            },
+            12: {
+                title: "Get Your Concrete Estimate",
+                content: `<p class="mb-4">Ready to get started with your concrete estimate? Take advantage of our limited-time offer and save 30% on your first concrete construction estimate.</p>
+                <p class="mb-4">Simply upload your plans, blueprints, or specifications, and our team will provide a comprehensive cost estimate within 24-48 hours. Your estimate includes detailed material takeoffs, labor costs, and budget projections.</p>
+                <p class="mb-4">Our estimates help you bid with confidence, plan your budget accurately, and execute your concrete projects successfully.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to get started.</p>`
+            },
+            13: {
+                title: "Save Time and Resources with Outsourced Estimating",
+                content: `<p class="mb-4">Outsourcing your concrete estimates saves valuable time and resources. Focus on on-site activities and core business operations while we handle the complex estimating work.</p>
+                <p class="mb-4">You avoid the expense of estimating software, training, and dedicated staff. Our team provides professional estimating services at a fraction of the cost of in-house resources.</p>
+                <p class="mb-4">With outsourced estimating, you can bid on more projects and increase your business volume without expanding your overhead. Let us handle the estimates while you build.</p>
+                <p>Contact us to learn how outsourced estimating can benefit your concrete business.</p>`
+            },
+            14: {
+                title: "Increase Your Bid Volume with Professional Estimating",
+                content: `<p class="mb-4">Professional estimating support helps you increase your bid volume significantly. With our team handling the calculations, you can pursue more opportunities simultaneously.</p>
+                <p class="mb-4">Bid with precision and confidence, leading to higher bid volume and more project wins. Our accurate estimates improve your win rate and help you grow your business.</p>
+                <p class="mb-4">Don't let estimating capacity limit your growth. Let Benny Estimates help you bid on more projects and win more profitable work.</p>
+                <p>Contact us to discuss how we can help increase your concrete bidding volume.</p>`
+            },
+            15: {
+                title: "Enhance Estimating Efficiency",
+                content: `<p class="mb-4">Leverage our expert estimators' skills for more accurate cost projections and higher profit potential. Our team brings specialized expertise that improves estimating efficiency.</p>
+                <p class="mb-4">With years of experience in concrete construction, our estimators understand the nuances that affect costs. We identify opportunities and risks that others might miss.</p>
+                <p class="mb-4">Efficient estimating means faster turnaround, more bids, and better accuracy. Let our expertise enhance your concrete estimating capabilities.</p>
+                <p>Contact us to learn how our estimating efficiency can benefit your business.</p>`
+            },
+            16: {
+                title: "Highly Accurate Estimates",
+                content: `<p class="mb-4">Our estimates are known for accuracy and detail. We provide meticulous calculations covering all aspects of concrete construction including materials, labor, equipment, and site preparation.</p>
+                <p class="mb-4">Accuracy in concrete estimating is essential for successful project planning and execution. Our estimates help you avoid cost overruns and make informed decisions.</p>
+                <p class="mb-4">We provide detailed breakdowns that make it easy to understand where costs are allocated, supporting transparent communication with clients and stakeholders.</p>
+                <p>When you need reliable concrete estimates, Benny Estimates delivers the accuracy you can count on.</p>`
+            },
+            17: {
+                title: "Exceptional Turnaround Time",
+                content: `<p class="mb-4">We understand that construction projects operate on tight schedules. That's why we deliver most concrete estimates within 24-48 hours of receiving complete project information.</p>
+                <p class="mb-4">Our streamlined estimating process combines experienced estimators with advanced technology to deliver results quickly without sacrificing accuracy.</p>
+                <p class="mb-4">When you need estimates fast, Benny Estimates delivers the speed you need without compromising on accuracy or detail.</p>
+                <p>Contact us for timely concrete estimating for your next project.</p>`
+            },
+            18: {
+                title: "Cost-Effective Estimating Solutions",
+                content: `<p class="mb-4">Our estimating services are cost-effective compared to maintaining in-house estimating capabilities. You get professional estimates without the overhead of dedicated staff and software.</p>
+                <p class="mb-4">With savings up to 60% compared to in-house estimating, our services maximize your return on investment. You pay only for the estimates you need, when you need them.</p>
+                <p class="mb-4">Cost-effective estimating helps you maintain profitability while expanding your bidding capacity. Let us provide the estimates you need at a price you can afford.</p>
+                <p>Contact us to learn how our cost-effective solutions can benefit your concrete business.</p>`
+            },
+            19: {
+                title: "24/7 Customer Support",
+                content: `<p class="mb-4">Our team is available around the clock to answer questions and provide support for your estimating needs. We understand that construction never sleeps, and neither do we.</p>
+                <p class="mb-4">Whether you have questions about an estimate, need to submit plans, or require urgent support, our team is always available to help. We're committed to your success.</p>
+                <p class="mb-4">24/7 support means you can work on your schedule and get the help you need when you need it most.</p>
+                <p>Contact us anytime at <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> or email <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a>.</p>`
+            },
+            20: {
+                title: "Step 1: Scope Identification",
+                content: `<p class="mb-4">The first step in our estimation process is thorough scope identification. We study your drawing plans, specifications, and project requirements to understand the full scope of work.</p>
+                <p class="mb-4">During this phase, we identify all concrete elements, special requirements, and potential challenges. We note any assumptions and request clarification when needed.</p>
+                <p class="mb-4">Proper scope identification ensures our estimates are comprehensive and aligned with your project requirements. This attention to detail prevents scope gaps and change orders.</p>
+                <p>Contact us to begin the scope identification process for your concrete project.</p>`
+            },
+            21: {
+                title: "Step 2: On-Screen Takeoff",
+                content: `<p class="mb-4">Using advanced digital takeoff software, we perform detailed on-screen measurements of all concrete elements. This includes concrete volumes, formwork areas, and reinforcement quantities.</p>
+                <p class="mb-4">Digital takeoff allows us to measure precisely and efficiently, with automatic calculations and easy verification. We can quickly update quantities when project changes occur.</p>
+                <p class="mb-4">Our takeoff process accounts for waste factors, industry standards, and project-specific requirements. We provide detailed documentation of all quantities.</p>
+                <p>Let our digital takeoff expertise support your concrete estimating needs.</p>`
+            },
+            22: {
+                title: "Step 3: Quality Assurance",
+                content: `<p class="mb-4">Quality assurance is critical to accurate estimating. Our double verification process ensures every estimate meets our high standards for accuracy and completeness.</p>
+                <p class="mb-4">Each estimate is reviewed by multiple estimators who check quantities, pricing, and assumptions. We verify that all project requirements are properly addressed.</p>
+                <p class="mb-4">Our quality assurance process catches errors before they reach you, giving you confidence in every estimate we deliver.</p>
+                <p>Trust Benny Estimates for quality-assured concrete estimates.</p>`
+            },
+            23: {
+                title: "Submit Your Concrete Plans",
+                content: `<p class="mb-4">Getting started is easy. Simply submit your concrete project plans, drawings, or specifications through our secure platform. We accept PDF, CAD, and BIM formats.</p>
+                <p class="mb-4">Include as much information as possible about your project, including scope, materials, and any special requirements. Even preliminary drawings can be used for early-stage estimates.</p>
+                <p class="mb-4">Once we receive your plans, we'll acknowledge receipt and provide an estimated timeline for your estimate. Most concrete estimates are completed within 24-48 hours.</p>
+                <p>Ready to begin? Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> to submit your plans today.</p>`
+            },
+            24: {
+                title: "Get a Quote for Concrete Estimating",
+                content: `<p class="mb-4">After reviewing your project requirements, we provide a transparent quote for our estimating services. Our quotes are based on project scope and complexity.</p>
+                <p class="mb-4">We offer competitive pricing for concrete estimates, with options for different levels of detail based on your needs. Our quotes include expected delivery timelines.</p>
+                <p class="mb-4">Once you approve the quote, we begin work on your estimate immediately. Most concrete estimates are completed within 24-48 hours.</p>
+                <p>Contact us to receive your personalized quote for concrete estimating services.</p>`
+            },
+            25: {
+                title: "Receive Your Concrete Estimate",
+                content: `<p class="mb-4">Your completed concrete estimate includes comprehensive cost breakdowns for all project components. We provide detailed material quantities, labor estimates, equipment requirements, and cost projections.</p>
+                <p class="mb-4">Estimates are delivered in clear, organized formats that are easy to understand and present to clients, lenders, or project stakeholders. We include supporting documentation and assumptions.</p>
+                <p class="mb-4">After delivery, we're available to answer questions and provide additional information as needed. We stand behind our estimates and support you throughout your project planning process.</p>
+                <p>Contact us today to receive your comprehensive concrete estimate.</p>`
+            },
+            26: {
+                title: "Start Your Concrete Estimate Now",
+                content: `<p class="mb-4">Ready to get started with your concrete estimate? Contact our team today to begin the process. We'll discuss your project requirements and provide transparent pricing.</p>
+                <p class="mb-4">Our estimating services help you bid with confidence, plan your budget accurately, and execute your concrete projects successfully. Don't let estimating challenges hold you back.</p>
+                <p class="mb-4">Whether you need a preliminary budget estimate or detailed construction estimate, we have the expertise to support your needs.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to get started.</p>`
+            },
+            27: {
+                title: "Concrete Estimating in New South Wales",
+                content: `<p class="mb-4">Benny Estimates provides comprehensive concrete estimating services throughout New South Wales, Australia. Our team understands the local construction market and requirements.</p>
+                <p class="mb-4">We serve clients in Sydney and regional NSW, providing accurate concrete estimates that reflect local market conditions, building codes, and material availability.</p>
+                <p class="mb-4">Whether you're planning residential, commercial, or industrial concrete projects in New South Wales, our estimates provide the accuracy you need.</p>
+                <p>Contact us to discuss your New South Wales concrete project and estimating needs.</p>`
+            },
+            28: {
+                title: "Concrete Estimating in Victoria",
+                content: `<p class="mb-4">Victoria's concrete construction sector includes diverse projects from residential foundations to commercial structures. Benny Estimates provides comprehensive estimating services throughout Victoria.</p>
+                <p class="mb-4">We serve clients in Melbourne and regional Victoria, providing accurate concrete estimates that reflect local market conditions. Our estimators understand Victorian construction requirements.</p>
+                <p class="mb-4">From foundations to structural concrete, our estimates support successful project delivery across Victoria.</p>
+                <p>Contact us to discuss your Victorian concrete project and estimating needs.</p>`
+            },
+            29: {
+                title: "Concrete Estimating in Queensland",
+                content: `<p class="mb-4">Queensland's concrete construction sector includes residential, commercial, and infrastructure projects. Benny Estimates provides comprehensive estimating services throughout Queensland.</p>
+                <p class="mb-4">We serve clients in Brisbane, the Gold Coast, and regional Queensland, providing accurate concrete estimates that reflect local market conditions. Our estimators understand Queensland's construction environment.</p>
+                <p class="mb-4">From residential slabs to commercial structures, our estimates support successful concrete project delivery across Queensland.</p>
+                <p>Contact us to discuss your Queensland concrete project and estimating needs.</p>`
+            },
+            30: {
+                title: "Concrete Estimating Across All 50 States",
+                content: `<p class="mb-4">Benny Estimates provides nationwide concrete estimating services across all 50 United States. We understand regional variations in building codes, labor rates, and material costs.</p>
+                <p class="mb-4">From California to New York, Texas to Florida, our estimators have the local knowledge needed for accurate concrete estimates. We account for climate considerations, seismic requirements, and regional practices.</p>
+                <p class="mb-4">Whether your project is in major metropolitan areas or rural communities, our estimates reflect local market conditions.</p>
+                <p>Contact us to discuss your US concrete project and estimating needs.</p>`
+            },
+            31: {
+                title: "Concrete Estimating in Major US Cities",
+                content: `<p class="mb-4">Our concrete estimating services cover all major US cities including New York, Los Angeles, Chicago, Houston, Phoenix, Philadelphia, San Antonio, San Diego, Dallas, and more.</p>
+                <p class="mb-4">We understand the unique requirements of urban concrete construction including access constraints, phasing requirements, and local regulations. Our estimates account for these factors.</p>
+                <p class="mb-4">Whether you're building in downtown areas or suburban settings, our estimates provide the accuracy you need for successful project delivery.</p>
+                <p>Contact us to discuss your urban concrete project and estimating needs.</p>`
+            },
+            32: {
+                title: "Concrete Estimating in Rural Areas",
+                content: `<p class="mb-4">Rural concrete projects have unique challenges including material delivery logistics, equipment availability, and labor considerations. Our estimates account for these factors.</p>
+                <p class="mb-4">We serve clients in rural communities across the United States, providing accurate concrete estimates that reflect local conditions. Our estimators understand the nuances of rural construction.</p>
+                <p class="mb-4">Whether you're building agricultural facilities, rural homes, or infrastructure in remote locations, our estimates provide the accuracy you need.</p>
+                <p>Contact us to discuss your rural concrete project and estimating needs.</p>`
+            },
+            33: {
+                title: "Contact Benny Estimates Today",
+                content: `<p class="mb-4">Ready to discuss your concrete estimating needs? Contact our team today. We'll answer your questions, discuss your project requirements, and provide transparent pricing.</p>
+                <p class="mb-4">Our team is available via phone, email, or through our website. We're here to help you succeed with accurate, reliable concrete estimates.</p>
+                <p class="mb-4">Whether you need a one-time estimate for a specific project or ongoing estimating support, we can structure services to meet your needs.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to discuss your concrete estimating needs.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+
+        // Add hover effects to concrete cards
+        document.querySelectorAll('.concrete-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateX(8px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateX(0)';
+            });
+        });
+        
+        // Add animation to process steps
+        document.querySelectorAll('.process-step').forEach((step, index) => {
+            step.style.animationDelay = `${index * 0.2}s`;
+            step.classList.add('animate-fade-in');
+        });
+        
+        // Add click effect to CTA buttons
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Contact') || button.textContent.includes('Get') || button.textContent.includes('Start')) {
+                button.addEventListener('click', function() {
+                    this.classList.add('animate-pulse-slow');
+                    setTimeout(() => {
+                        this.classList.remove('animate-pulse-slow');
+                    }, 2000);
+                });
+            }
+        });
+
+        console.log('Concrete Estimating Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

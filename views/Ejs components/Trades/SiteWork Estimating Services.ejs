@@ -1,0 +1,1799 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteWork Estimating Services | BENNY ESTIMATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        sitework: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        },
+                        orange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'ground-shift': 'groundShift 3s ease-in-out infinite',
+                        'rise-up': 'riseUp 1s ease-out',
+                        'modal-enter': 'modalEnter 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        groundShift: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        riseUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* SiteWork theme styling */
+        .sitework-gradient {
+            background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+        }
+        
+        .dark .sitework-gradient {
+            background: linear-gradient(135deg, #c084fc 0%, #9333ea 100%);
+        }
+        
+        /* Ground pattern */
+        .ground-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(147, 51, 234, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.1) 2px, transparent 2px);
+            background-size: 60px 60px;
+        }
+        
+        .dark .ground-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(192, 132, 252, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(192, 132, 252, 0.1) 2px, transparent 2px);
+            background-size: 60px 60px;
+        }
+        
+        /* SiteWork card effect */
+        .sitework-card {
+            border: 2px solid #e9d5ff;
+            border-bottom: 5px solid #9333ea;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sitework-card:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: linear-gradient(to top, rgba(147, 51, 234, 0.1), transparent);
+            transition: height 0.3s ease;
+        }
+        
+        .sitework-card:hover:before {
+            height: 100%;
+        }
+        
+        .sitework-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.15);
+            border-color: #d8b4fe;
+        }
+        
+        .dark .sitework-card {
+            border-color: #6b21a8;
+        }
+        
+        .dark .sitework-card:hover {
+            box-shadow: 0 15px 40px rgba(192, 132, 252, 0.2);
+            border-color: #c084fc;
+        }
+        
+        /* Excavation pattern */
+        .excavation-pattern {
+            background-image: 
+                linear-gradient(45deg, transparent 65%, rgba(147, 51, 234, 0.05) 65%, rgba(147, 51, 234, 0.05) 75%, transparent 75%),
+                linear-gradient(-45deg, transparent 65%, rgba(147, 51, 234, 0.05) 65%, rgba(147, 51, 234, 0.05) 75%, transparent 75%);
+            background-size: 30px 30px;
+        }
+        
+        .dark .excavation-pattern {
+            background-image: 
+                linear-gradient(45deg, transparent 65%, rgba(192, 132, 252, 0.05) 65%, rgba(192, 132, 252, 0.05) 75%, transparent 75%),
+                linear-gradient(-45deg, transparent 65%, rgba(192, 132, 252, 0.05) 65%, rgba(192, 132, 252, 0.05) 75%, transparent 75%);
+            background-size: 30px 30px;
+        }
+        
+        /* Terrain elevation effect */
+        .terrain-effect {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .terrain-effect:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #9333ea, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .terrain-effect:hover:after {
+            opacity: 1;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 1rem;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border: 1px solid #374151;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-thumb {
+            background: #fb923c;
+        }
+
+        /* Ensure buttons are clickable */
+        button, .cursor-pointer, [onclick] {
+            cursor: pointer;
+        }
+
+        /* Button color override - Orange theme for all CTAs */
+        .btn-estimate {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+            border: none !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-estimate:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4) !important;
+        }
+        
+        .dark .btn-estimate {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+        
+        .dark .btn-estimate:hover {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        }
+        
+        .btn-estimate i {
+            color: white !important;
+        }
+
+        /* Orange theme for secondary buttons */
+        .btn-secondary {
+            background: transparent !important;
+            color: white !important;
+            border: 2px solid white !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1) !important;
+            transform: translateY(-2px);
+        }
+        
+        .dark .btn-secondary {
+            border-color: #fb923c !important;
+            color: #fb923c !important;
+        }
+        
+        .dark .btn-secondary:hover {
+            background: rgba(249, 115, 22, 0.1) !important;
+        }
+
+        /* Orange gradient for featured cards */
+        .orange-gradient-card {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+        }
+        
+        .dark .orange-gradient-card {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+
+        /* Orange text for highlights */
+        .text-orange-highlight {
+            color: #f97316 !important;
+        }
+        
+        .dark .text-orange-highlight {
+            color: #fb923c !important;
+        }
+
+        /* Orange border for cards */
+        .border-orange-highlight {
+            border-color: #f97316 !important;
+        }
+        
+        .dark .border-orange-highlight {
+            border-color: #fb923c !important;
+        }
+
+        /* Orange background for icons */
+        .bg-orange-light {
+            background-color: #fff7ed !important;
+        }
+        
+        .dark .bg-orange-light {
+            background-color: #7c2d12 !important;
+        }
+
+        /* Responsive typography */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 1.75rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .card-title {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Header spacing fix */
+        .main-content {
+            padding-top: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                padding-top: 6rem;
+            }
+        }
+
+        /* Remove default margin/padding for body */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col">
+    <!-- Main Content with header padding -->
+    <main class="main-content flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        
+        <!-- Hero Section -->
+        <section class="mb-6 sm:mb-8 lg:mb-12">
+            <div class="text-center mb-4 sm:mb-6 lg:mb-8">
+                <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 lg:mb-4 animate-fade-in leading-tight">
+                    SiteWork Estimating Services
+                </h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-sitework-600 dark:text-sitework-400 px-2">
+                    Your Premier Source for Site Work Estimating
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center mb-4 sm:mb-6 lg:mb-8">
+                <div>
+                    <div class="sitework-gradient text-white p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl mb-3 sm:mb-4 lg:mb-6">
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">Act Now and Save 50% on First Estimate!</h3>
+                        <p class="mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base">
+                            We understand the challenges faced by site work contractors, landscaping contractors, land developers, and general contractors. BENNY ESTIMATES is here to help.
+                        </p>
+                        <button onclick="openModal('transform')" class="btn-estimate px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 cursor-pointer w-full sm:w-auto">
+                            <span class="flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="ri-landscape-fill"></i>
+                                Transform Your Construction Workflow
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div onclick="openModal('outsource')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                        <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                            <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                                <i class="ri-landscape-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl lg:text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm sm:text-base lg:text-lg">Outsource to Experts</h4>
+                                <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Reliable excavation estimating services</p>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-300">
+                            We cater to busy excavation contractors who need reliable and cost-effective estimation services for public, commercial, and residential projects.
+                        </p>
+                        <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                            Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 sm:mt-4 lg:mt-0">
+                    <!-- SiteWork Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Site work and earthmoving construction" 
+                         class="w-full h-auto rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg object-cover max-h-[250px] sm:max-h-[300px] lg:max-h-none">
+                </div>
+            </div>
+        </section>
+
+        <!-- Deliverables Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 ground-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Comprehensive Deliverables to Support Your Projects</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('cutFillTakeoff')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm sitework-card animate-rise-up">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4 animate-ground-shift">
+                        <i class="ri-ruler-2-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Cut & Fill Takeoff</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Comprehensive list with detailed takeoff summary for your convenience.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('earthVolumes')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 0.2s;">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-mountain-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Earth Volumes</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Accurate calculation of earthwork quantities and surface grading.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('mappingReports')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 0.4s;">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-map-2-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">3D Mapping Reports</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Visual 3D reports and reviewed bid documents for better planning.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('landscapingEstimate')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 0.6s;">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-tree-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Landscaping Estimate</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Detailed landscaping cost analysis and material takeoffs.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('excavationReport')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 0.8s;">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-file-text-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Site Excavation Report</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Comprehensive report detailing site excavation requirements.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('volumeReports')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 1s;">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-calculator-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Volume Reports</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Cut/fill quantities and top soil spread calculations.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 sm:mt-6 lg:mt-8">
+                <a href="#" onclick="openModal('gradingSample'); return false;" class="inline-flex items-center text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-semibold text-xs sm:text-sm">
+                    <i class="ri-folder-open-line mr-2"></i>
+                    Site Work Cut & Fill Grading Sample
+                </a>
+            </div>
+        </section>
+
+        <!-- Services Coverage -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">What We Cover in Our SiteWork Estimation Services</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('quantityTakeoffs')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md terrain-effect cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-calculator-line text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Quantity Takeoffs</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Quick and accurate estimates for preliminary, comparison, conceptual, budget, and bid purposes.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('feasibilityAnalysis')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md terrain-effect cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-search-line text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Feasibility Analysis</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Sitework feasibility analysis and land development consultation.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('biddingAssistance')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md terrain-effect cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-auction-line text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Bidding Assistance</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Expert assistance with bidding and design phase estimating.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('legalClaims')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md terrain-effect cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-scale-line text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Legal Claims Assistance</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Support with legal claims assistance and change order management.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('valueEngineering')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md terrain-effect cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-lightbulb-flash-line text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Value Engineering</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Cost optimization through value engineering and project analysis.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('projectPortfolio')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md terrain-effect cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-file-chart-line text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Project Portfolio</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Comprehensive project portfolio management and reporting.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 excavation-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md">
+                <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Why Choose BENNY ESTIMATES?</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                    <div onclick="openModal('costEffective')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-money-dollar-circle-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Cost-effective</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Competitive pricing that fits your budget</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('efficiencyAccuracy')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-check-double-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Efficiency & Accuracy</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Precise estimates with fast turnaround</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('fastTurnaround')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-time-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Fast Turnaround</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">24-48 hour delivery for most projects</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('confidentiality')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-shield-keyhole-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Confidentiality</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Secure handling of all project information</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('certifiedEstimators')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-award-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Certified Estimators</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Qualified and experienced professionals</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('support247')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                        <div class="text-orange-600 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-customer-service-2-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">24/7 Support</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Round-the-clock customer assistance</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Earthwork & Landscaping -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <div class="grid lg:grid-cols-2 gap-4 sm:gap-5 lg:gap-8">
+                <!-- Earthwork Section -->
+                <div onclick="openModal('earthwork')" class="orange-gradient-card p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-xl shadow-md cursor-pointer hover:shadow-xl transition-all transform hover:-translate-y-1">
+                    <div class="flex items-center mb-4 sm:mb-5 lg:mb-6">
+                        <div class="bg-white/20 p-3 sm:p-4 rounded-lg mr-3 sm:mr-4">
+                            <i class="ri-mountain-fill text-white text-xl sm:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-white">Earthwork Estimating Services</h2>
+                            <p class="text-xs sm:text-sm text-white/80">The Foundation of Your Project</p>
+                        </div>
+                    </div>
+                    
+                    <p class="mb-4 sm:mb-5 lg:mb-6 text-xs sm:text-sm text-white/90">
+                        Excavators, site engineers, and specialized contractors require reliable earthwork estimating services to gauge the total cost of land preparation before commencing construction.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4">
+                        <div class="bg-white/20 p-3 sm:p-4 rounded-lg">
+                            <div class="font-bold text-xs sm:text-sm text-white">Bluebeam & Civil 3D</div>
+                            <div class="text-xs text-white/70">Advanced Software Tools</div>
+                        </div>
+                        <div class="bg-white/20 p-3 sm:p-4 rounded-lg">
+                            <div class="font-bold text-xs sm:text-sm text-white">Volume Reports</div>
+                            <div class="text-xs text-white/70">Cut/Fill Quantities</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Landscaping Section -->
+                <div onclick="openModal('landscaping')" class="bg-white dark:bg-gray-800 p-5 sm:p-6 lg:p-8 rounded-xl sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-t-4 hover:border-orange-500">
+                    <div class="flex items-center mb-4 sm:mb-5 lg:mb-6">
+                        <div class="bg-orange-light p-3 sm:p-4 rounded-lg mr-3 sm:mr-4">
+                            <i class="ri-tree-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-lg sm:text-xl lg:text-2xl font-bold text-gray-900 dark:text-white">Landscaping Services</h2>
+                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Transforming Outdoor Spaces with Precision</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6">
+                        <div class="p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-bold text-xs sm:text-sm mb-1">Hardscape & Softscape</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">Complete landscape estimating</p>
+                        </div>
+                        <div class="p-3 sm:p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-bold text-xs sm:text-sm mb-1">Irrigation Systems</h4>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">Sprinkler and water budget plans</p>
+                        </div>
+                    </div>
+                    <div class="text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 text-center">
+            <div class="orange-gradient-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-xl">
+                <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-3 sm:mb-4 lg:mb-5 text-white">Elevate Your Construction Projects</h3>
+                <p class="text-sm sm:text-base lg:text-lg mb-4 sm:mb-5 lg:mb-6 max-w-2xl mx-auto text-white/90">
+                    Fuel Your Success with Professional SiteWork Estimating Services and Unlock 50% Savings!
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 lg:gap-5 justify-center items-center mb-4 sm:mb-5 lg:mb-6">
+                    <button onclick="openModal('uploadPlans')" class="btn-estimate px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto">
+                        <i class="ri-upload-cloud-2-line mr-1 sm:mr-2"></i>
+                        Upload Your Plans for Quick Evaluation
+                    </button>
+                    <button onclick="openModal('requestQuote')" class="btn-secondary px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 transform hover:-translate-y-1 w-full sm:w-auto">
+                        Request a Quote from BENNY ESTIMATES!
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our Simple Process</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('uploadPlansProcess')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-upload-cloud-2-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Upload Plans</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">Submit your PDF drawings for evaluation</p>
+                    <div class="text-orange-600 dark:text-orange-400 text-xs sm:text-sm font-semibold">Secure Transfer</div>
+                </div>
+                
+                <div onclick="openModal('receiveQuoteProcess')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-price-tag-3-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Receive Quote</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">Get a customized quote for your project</p>
+                    <div class="text-orange-600 dark:text-orange-400 text-xs sm:text-sm font-semibold">Transparent Pricing</div>
+                </div>
+                
+                <div onclick="openModal('getEstimatesProcess')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500 sm:col-span-2 lg:col-span-1">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-file-download-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Get Estimates</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">Receive detailed site work estimates</p>
+                    <div class="text-orange-600 dark:text-orange-400 text-xs sm:text-sm font-semibold">24-48 Hour Delivery</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-3 sm:gap-4 lg:gap-8">
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-light rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Complete site work estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div onclick="openModal('sydney')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Sydney</span>
+                        </div>
+                        <div onclick="openModal('melbourne')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div onclick="openModal('brisbane')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Brisbane</span>
+                        </div>
+                        <div onclick="openModal('perth')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Western Australia</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Perth</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-light rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Nationwide site work estimation</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div onclick="openModal('allStates')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div onclick="openModal('earthworkProjects')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Earthwork Projects</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Expertise</span>
+                        </div>
+                        <div onclick="openModal('landDevelopment')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Land Development</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Specialized</span>
+                        </div>
+                        <div onclick="openModal('siteImprovements')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Site Improvements</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Detailed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-4 sm:mb-6 lg:mb-8 text-center orange-gradient-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-xl">
+            <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">Experience Precision in SiteWork Estimating</h2>
+            <div class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">
+                Get Professional Site Work Estimates<br>
+                <span class="text-xs sm:text-sm lg:text-base text-white/80">Accurate Estimates for Earthwork, Landscaping, and Site Improvements</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6 max-w-2xl mx-auto">
+                <div onclick="openModal('earthwork')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Earthwork</div>
+                    <div class="text-xs text-white/80">Cut & Fill Volumes</div>
+                </div>
+                <div onclick="openModal('landscaping')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Landscaping</div>
+                    <div class="text-xs text-white/80">Hardscape & Irrigation</div>
+                </div>
+                <div onclick="openModal('siteImprovements')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Site Improvements</div>
+                    <div class="text-xs text-white/80">Fences & Retaining Walls</div>
+                </div>
+            </div>
+            
+            <button onclick="openModal('estimate')" class="bg-white text-orange-600 hover:bg-gray-100 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <i class="ri-landscape-fill mr-1 sm:mr-2"></i>
+                Get Your Site Work Estimate
+            </button>
+        </section>
+
+    </main>
+    
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-2 sm:mb-3">
+                <h2 id="modalTitle" class="text-base sm:text-lg lg:text-xl font-bold text-orange-600 dark:text-orange-400">SiteWork Estimating Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-lg sm:text-xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here dynamically -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="ri-landscape-fill text-orange-600 dark:text-orange-400 text-sm sm:text-base"></i>
+                        <div>
+                            <span class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">BENNY ESTIMATES</span>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">96 Jones Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <a href="mailto:Ben@bennyestimates.com" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-xs">
+                            <i class="ri-mail-send-line mr-1"></i>Email
+                        </a>
+                        <a href="tel:+12898017224" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs">
+                            <i class="ri-phone-line mr-1"></i>Call
+                        </a>
+                        <button onclick="closeModal()" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-xs">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BENNY ESTIMATES contact information template
+        const bennyInfo = `
+            <div class="bg-orange-50 dark:bg-gray-700 p-3 sm:p-4 rounded-lg mt-3 border-l-4 border-orange-600">
+                <p class="font-semibold text-orange-700 dark:text-orange-400 flex items-center text-xs sm:text-sm">
+                    <i class="ri-landscape-fill mr-2"></i>
+                    BENNY ESTIMATES
+                </p>
+                <p class="mt-2 text-xs"><i class="ri-map-pin-line mr-2 text-orange-600"></i>96 Jones Street, New York, USA</p>
+                <p class="text-xs"><i class="ri-mail-line mr-2 text-orange-600"></i><a href="mailto:Ben@bennyestimates.com" class="hover:underline">Ben@bennyestimates.com</a></p>
+                <p class="text-xs"><i class="ri-phone-line mr-2 text-orange-600"></i><a href="tel:+12898017224" class="hover:underline">+1 (289) 801-7224</a></p>
+                <p class="text-xs mt-2 text-gray-600 dark:text-gray-400"><i class="ri-time-line mr-1"></i>Call us any time</p>
+            </div>
+        `;
+
+        // Modal content data structure
+        const siteworkData = {
+            transform: {
+                title: 'Transform Your Construction Workflow',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Ready to Get Started?</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your site work estimating needs. Our team of certified estimators is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">What We Need From You:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project plans and specifications (PDF, CAD, or digital formats)</li>
+                            <li>Topographical surveys</li>
+                            <li>Scope of work details</li>
+                            <li>Project timeline and delivery requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            outsource: {
+                title: 'Outsource to SiteWork Experts',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Reliable Excavation Estimating Services</p>
+                        <p class="text-xs sm:text-sm">We cater to busy excavation contractors who need reliable and cost-effective estimation services for public, commercial, and residential projects. Our team understands the unique challenges of site work and delivers accurate, timely estimates.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Why Outsource to Us:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Specialized excavation estimators</li>
+                            <li>Advanced software tools</li>
+                            <li>Fast turnaround times</li>
+                            <li>Cost-effective solutions</li>
+                            <li>Proven track record</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            cutFillTakeoff: {
+                title: 'Cut & Fill Takeoff Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Cut & Fill Analysis</p>
+                        <p class="text-xs sm:text-sm">Our cut and fill takeoff service provides detailed quantification of earthwork volumes for your site projects. We calculate exact cut and fill requirements to help you accurately estimate excavation costs.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Takeoff Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Cut volume calculations</li>
+                            <li>Fill volume requirements</li>
+                            <li>Balance analysis</li>
+                            <li>Import/export quantities</li>
+                            <li>Detailed summary reports</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            earthVolumes: {
+                title: 'Earth Volume Calculations',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Accurate Earthwork Quantities</p>
+                        <p class="text-xs sm:text-sm">Our earth volume calculation service provides precise measurements of all earthwork quantities and surface grading requirements. We use advanced software to ensure accuracy.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Calculations Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Grid method calculations</li>
+                            <li>Cross-section analysis</li>
+                            <li>Contour area measurements</li>
+                            <li>Borrow and waste volumes</li>
+                            <li>Compaction factors</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            mappingReports: {
+                title: '3D Mapping Reports',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Visual 3D Reports for Better Planning</p>
+                        <p class="text-xs sm:text-sm">Our 3D mapping reports provide visual representations of your site conditions and proposed earthwork. These reports help you understand project requirements and communicate effectively with stakeholders.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Report Features:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>3D terrain models</li>
+                            <li>Color-coded cut/fill maps</li>
+                            <li>Cross-section views</li>
+                            <li>Volume heat maps</li>
+                            <li>Bid document integration</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            landscapingEstimate: {
+                title: 'Landscaping Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Landscaping Cost Analysis</p>
+                        <p class="text-xs sm:text-sm">Our landscaping estimating service provides comprehensive cost analysis and material takeoffs for all types of landscaping projects. We cover hardscape, softscape, and irrigation systems.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Landscaping Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Plant materials and trees</li>
+                            <li>Hardscape elements (patios, walkways)</li>
+                            <li>Irrigation systems</li>
+                            <li>Soil and mulch requirements</li>
+                            <li>Installation labor costs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            excavationReport: {
+                title: 'Site Excavation Report',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Excavation Requirements</p>
+                        <p class="text-xs sm:text-sm">Our site excavation report provides detailed information about all excavation requirements for your project. We analyze soil conditions, depths, and volumes to ensure accurate cost projections.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Report Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Excavation depths and areas</li>
+                            <li>Soil classification</li>
+                            <li>Shoring requirements</li>
+                            <li>Dewatering needs</li>
+                            <li>Backfill specifications</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            volumeReports: {
+                title: 'Earthwork Volume Reports',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Cut/Fill Quantities and Top Soil Calculations</p>
+                        <p class="text-xs sm:text-sm">Our volume reports provide detailed calculations of cut and fill quantities, as well as top soil spread requirements. These reports are essential for accurate bidding and project planning.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Report Details:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Total cut volumes</li>
+                            <li>Total fill requirements</li>
+                            <li>Net import/export quantities</li>
+                            <li>Top soil spread calculations</li>
+                            <li>Compaction adjustments</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            gradingSample: {
+                title: 'Site Work Cut & Fill Grading Sample',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Review Our Grading Samples</p>
+                        <p class="text-xs sm:text-sm">We invite you to review samples of our cut and fill grading work. Our samples demonstrate the quality and accuracy you can expect from BENNY ESTIMATES.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Sample Types Available:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Cut/fill analysis reports</li>
+                            <li>3D terrain models</li>
+                            <li>Cross-section drawings</li>
+                            <li>Volume calculations</li>
+                            <li>Bid-ready summaries</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a> to request samples.</p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            quantityTakeoffs: {
+                title: 'Quantity Takeoff Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Quick and Accurate Takeoffs</p>
+                        <p class="text-xs sm:text-sm">Our quantity takeoff service provides quick and accurate estimates for preliminary, comparison, conceptual, budget, and bid purposes. We ensure that every material and component is properly quantified.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Takeoff Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Preliminary takeoffs</li>
+                            <li>Comparative analysis</li>
+                            <li>Conceptual estimates</li>
+                            <li>Budget estimates</li>
+                            <li>Bid-ready takeoffs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            feasibilityAnalysis: {
+                title: 'Sitework Feasibility Analysis',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Land Development Consultation</p>
+                        <p class="text-xs sm:text-sm">Our feasibility analysis service provides comprehensive evaluation of site conditions and development potential. We analyze soil conditions, topography, and regulatory requirements to assess project viability.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Analysis Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Site suitability assessment</li>
+                            <li>Soil condition analysis</li>
+                            <li>Topographical constraints</li>
+                            <li>Regulatory compliance review</li>
+                            <li>Cost feasibility projections</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            biddingAssistance: {
+                title: 'Bidding Assistance',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Expert Bidding Support</p>
+                        <p class="text-xs sm:text-sm">Our bidding assistance service provides expert support to help you prepare winning bids for site work projects. We work alongside your team to ensure every detail is covered and your bid is competitive.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Assistance Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Bid strategy development</li>
+                            <li>Competitive analysis</li>
+                            <li>Risk assessment</li>
+                            <li>Value engineering suggestions</li>
+                            <li>Bid document review</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            legalClaims: {
+                title: 'Legal Claims Assistance',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Support with Legal Claims</p>
+                        <p class="text-xs sm:text-sm">Our legal claims assistance service provides expert support for change orders, disputes, and claims related to site work projects. We help you document and quantify impacts accurately.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Services Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Change order pricing</li>
+                            <li>Impact quantification</li>
+                            <li>Documentation support</li>
+                            <li>Expert witness testimony</li>
+                            <li>Claims analysis</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            valueEngineering: {
+                title: 'Value Engineering',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Cost Optimization Strategies</p>
+                        <p class="text-xs sm:text-sm">Our value engineering service helps you optimize costs without compromising quality. We analyze your project and suggest alternatives that maintain performance while reducing expenses.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Value Engineering Focus:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Material alternatives</li>
+                            <li>Construction method improvements</li>
+                            <li>Design optimization</li>
+                            <li>Labor efficiency</li>
+                            <li>Schedule acceleration</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            projectPortfolio: {
+                title: 'Project Portfolio Management',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Portfolio Management</p>
+                        <p class="text-xs sm:text-sm">Our project portfolio management service helps you track and manage multiple site work projects. We provide consolidated reporting and analysis to support informed decision-making.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Portfolio Features:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Multi-project tracking</li>
+                            <li>Budget consolidation</li>
+                            <li>Resource allocation</li>
+                            <li>Performance metrics</li>
+                            <li>Management reporting</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            costEffective: {
+                title: 'Cost-Effective Solutions',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Competitive Pricing That Fits Your Budget</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides professional site work estimating at competitive rates. Our transparent pricing model ensures you get exceptional value without hidden costs or surprises.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Pricing Benefits:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Competitive flat-rate pricing</li>
+                            <li>No hidden fees or charges</li>
+                            <li>Volume discounts for multiple projects</li>
+                            <li>Save up to 50% vs. in-house estimating</li>
+                            <li>Flexible payment options</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            efficiencyAccuracy: {
+                title: 'Efficiency & Accuracy',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precise Estimates with Fast Turnaround</p>
+                        <p class="text-xs sm:text-sm">We combine efficient processes with rigorous accuracy checks to deliver precise estimates quickly. Our team uses advanced software and proven methodologies to ensure reliability.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Approach:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Streamlined takeoff process</li>
+                            <li>Advanced software tools</li>
+                            <li>Peer review of all calculations</li>
+                            <li>Quality assurance checks</li>
+                            <li>Fast delivery times</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fastTurnaround: {
+                title: 'Fast Turnaround on Estimates',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">24-48 Hour Delivery for Most Projects</p>
+                        <p class="text-xs sm:text-sm">We understand that construction projects run on tight schedules. That's why BENNY ESTIMATES delivers most site work estimates within 24-48 hours of receiving complete project information.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Turnaround Times:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Standard projects: 24-48 hours</li>
+                            <li>Complex projects: 3-5 days</li>
+                            <li>Rush service available upon request</li>
+                            <li>Same-day quotes for urgent needs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            confidentiality: {
+                title: 'Confidentiality & Security',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Secure Handling of Project Information</p>
+                        <p class="text-xs sm:text-sm">We take confidentiality seriously. All project information is handled with the utmost security and discretion. Your plans and data are protected throughout the estimating process.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Security Measures:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Secure file transfer protocols</li>
+                            <li>Confidentiality agreements</li>
+                            <li>Limited access to project data</li>
+                            <li>Secure data storage</li>
+                            <li>Non-disclosure commitments</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            certifiedEstimators: {
+                title: 'Certified Estimators',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Qualified and Experienced Professionals</p>
+                        <p class="text-xs sm:text-sm">Our team of estimators brings years of industry experience and professional certifications to every project. We stay current with the latest techniques and standards.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Team Qualifications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Certified professional estimators</li>
+                            <li>Civil engineering backgrounds</li>
+                            <li>Site work specialization</li>
+                            <li>Continuing education</li>
+                            <li>Industry association memberships</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            support247: {
+                title: '24/7 Customer Support',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Round-the-Clock Assistance</p>
+                        <p class="text-xs sm:text-sm">Our customer support team is available 24/7 to answer questions and provide assistance. We understand that construction never sleeps, and neither do we.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Support Channels:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Phone: +1 (289) 801-7224</li>
+                            <li>Email: Ben@bennyestimates.com</li>
+                            <li>Live chat on our website</li>
+                            <li>Video consultations available</li>
+                            <li>Emergency support for urgent needs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            earthwork: {
+                title: 'Earthwork Estimating Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">The Foundation of Your Project</p>
+                        <p class="text-xs sm:text-sm">Excavators, site engineers, and specialized contractors require reliable earthwork estimating services to gauge the total cost of land preparation before commencing construction. Our earthwork estimates provide accurate projections for all site grading and excavation activities.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Earthwork Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Site clearing and grubbing</li>
+                            <li>Cut and fill calculations</li>
+                            <li>Excavation and backfill</li>
+                            <li>Compaction requirements</li>
+                            <li>Erosion control measures</li>
+                        </ul>
+                        
+                        <p class="mt-2 text-xs">We use advanced software including Bluebeam and Civil 3D for precise volume calculations and 3D modeling.</p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            landscaping: {
+                title: 'Landscaping Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Transforming Outdoor Spaces with Precision</p>
+                        <p class="text-xs sm:text-sm">Our landscaping estimating service provides comprehensive cost analysis for all types of landscape projects. We cover hardscape elements, softscape installations, and irrigation systems.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Landscaping Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Hardscape - patios, walkways, retaining walls</li>
+                            <li>Softscape - plants, trees, sod, mulch</li>
+                            <li>Irrigation systems - sprinklers, drip lines</li>
+                            <li>Lighting - landscape lighting systems</li>
+                            <li>Drainage - surface and subsurface drainage</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            uploadPlans: {
+                title: 'Upload Your Site Work Plans',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Easy Plan Submission</p>
+                        <p class="text-xs sm:text-sm">Getting started with BENNY ESTIMATES is simple. Upload your plans through our secure platform in PDF, CAD, or other digital formats.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Supported Formats:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>PDF drawings and specifications</li>
+                            <li>CAD files (DWG, DXF)</li>
+                            <li>Bluebeam files</li>
+                            <li>Civil 3D models</li>
+                            <li>Topographical surveys</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Email your plans to <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a></p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            requestQuote: {
+                title: 'Request a Quote',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Get Your Site Work Quote</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your site work estimating needs. Our team of certified estimators is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Quote Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project scope and deliverables</li>
+                            <li>Timeline for completion</li>
+                            <li>Total cost breakdown</li>
+                            <li>Payment terms and options</li>
+                            <li>Revision and support policy</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            uploadPlansProcess: {
+                title: 'Upload Plans Process',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Secure Plan Transfer</p>
+                        <p class="text-xs sm:text-sm">Our secure upload process ensures your confidential project information remains protected. We accept multiple file formats and provide confirmation once plans are received.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Upload Steps:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Prepare your digital plans</li>
+                            <li>Upload through secure portal</li>
+                            <li>Receive confirmation</li>
+                            <li>Get initial review</li>
+                            <li>Receive quote within 24 hours</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            receiveQuoteProcess: {
+                title: 'Receive Quote Process',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Transparent, Competitive Pricing</p>
+                        <p class="text-xs sm:text-sm">After reviewing your project, we provide a clear, competitive quote for our estimating services. Our pricing is transparent with no hidden fees or surprises.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Quote Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Detailed scope of work</li>
+                            <li>Pricing breakdown</li>
+                            <li>Delivery timeline</li>
+                            <li>Revision policy</li>
+                            <li>Support terms</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            getEstimatesProcess: {
+                title: 'Get Your Site Work Estimates',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Site Work Estimates</p>
+                        <p class="text-xs sm:text-sm">Upon completion, you receive comprehensive site work estimates with all the details you need for successful project planning and execution.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Deliverables Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Complete earthwork quantities</li>
+                            <li>Cut and fill calculations</li>
+                            <li>Material takeoffs</li>
+                            <li>Labor cost breakdowns</li>
+                            <li>Equipment requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sydney: {
+                title: 'Sydney - New South Wales',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Site Work Estimating in Sydney</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides comprehensive site work estimating services throughout Sydney and New South Wales. Our team understands local soil conditions, regulations, and market conditions.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Services in Sydney:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Residential site development</li>
+                            <li>Commercial earthwork</li>
+                            <li>Infrastructure projects</li>
+                            <li>Land subdivision</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            melbourne: {
+                title: 'Melbourne - Victoria',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Site Work Estimating in Melbourne</p>
+                        <p class="text-xs sm:text-sm">Serving Melbourne and all of Victoria with professional site work estimating services. From residential to commercial projects, we deliver accurate, reliable estimates.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Local Expertise:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Victorian soil conditions</li>
+                            <li>Local regulations</li>
+                            <li>Quick turnaround times</li>
+                            <li>Personalized customer service</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            brisbane: {
+                title: 'Brisbane - Queensland',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Site Work Estimating in Brisbane</p>
+                        <p class="text-xs sm:text-sm">Complete site work estimating services for Brisbane and throughout Queensland. Trust BENNY ESTIMATES for accurate, timely takeoffs for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Queensland Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Residential site development</li>
+                            <li>Commercial earthwork</li>
+                            <li>Infrastructure projects</li>
+                            <li>Mining and resource sector</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            perth: {
+                title: 'Perth - Western Australia',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Site Work Estimating in Perth</p>
+                        <p class="text-xs sm:text-sm">Professional site work estimating for Perth and Western Australia. Accurate, reliable estimates for all project types across the region.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">WA Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Mining and resource projects</li>
+                            <li>Industrial site development</li>
+                            <li>Commercial construction</li>
+                            <li>Infrastructure projects</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            allStates: {
+                title: 'Nationwide US Coverage',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Site Work Estimating Across All 50 States</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides site work estimating services across all 50 United States. We understand regional variations in soil conditions, regulations, and construction practices.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">US Coverage:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>All 50 states - full coverage</li>
+                            <li>Local code compliance</li>
+                            <li>Regional material pricing</li>
+                            <li>Climate-specific considerations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            earthworkProjects: {
+                title: 'Earthwork Projects Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Specialized Earthwork Estimates</p>
+                        <p class="text-xs sm:text-sm">Our earthwork estimating service provides specialized estimates for all types of earthmoving and grading projects. We have extensive experience with commercial, industrial, and residential site work.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Earthwork Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Site grading and leveling</li>
+                            <li>Mass excavation</li>
+                            <li>Trenching and backfill</li>
+                            <li>Compaction and stabilization</li>
+                            <li>Erosion control</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            landDevelopment: {
+                title: 'Land Development Specialists',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Land Development Estimates</p>
+                        <p class="text-xs sm:text-sm">Our land development estimating service provides accurate cost projections for residential and commercial land development projects. We cover all aspects of site preparation and improvement.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Development Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Site clearing and grubbing</li>
+                            <li>Earthwork and grading</li>
+                            <li>Utility installation</li>
+                            <li>Stormwater management</li>
+                            <li>Paving and surfacing</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            siteImprovements: {
+                title: 'Site Improvements',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Site Improvement Estimates</p>
+                        <p class="text-xs sm:text-sm">Our site improvement estimating service provides accurate cost projections for all types of site enhancements including fencing, retaining walls, and paving.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Improvement Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Fencing and gates</li>
+                            <li>Retaining walls</li>
+                            <li>Paving and surfacing</li>
+                            <li>Site furnishings</li>
+                            <li>Signage and lighting</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            estimate: {
+                title: 'Get Your Site Work Estimate',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Ready to Get Started?</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your site work estimating needs. Our team of certified estimators is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">What We Need From You:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project plans and specifications (PDF, CAD, or digital formats)</li>
+                            <li>Topographical surveys</li>
+                            <li>Geotechnical reports</li>
+                            <li>Scope of work details</li>
+                            <li>Project timeline and delivery requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            }
+        };
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, modal functionality ready');
+            
+            // Add ground shift animation
+            document.querySelectorAll('.animate-ground-shift').forEach(element => {
+                element.style.animationPlayState = 'running';
+            });
+            
+            // Add rise up animation to cards
+            let riseDelay = 0;
+            document.querySelectorAll('.animate-rise-up').forEach(card => {
+                card.style.animationDelay = `${riseDelay}s`;
+                riseDelay += 0.2;
+            });
+        });
+
+        // Open modal function - defined globally
+        window.openModal = function(modalKey) {
+            console.log('Opening modal for:', modalKey);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Check if data exists
+            if (siteworkData[modalKey]) {
+                modalTitle.textContent = siteworkData[modalKey].title;
+                modalBody.innerHTML = siteworkData[modalKey].content;
+            } else {
+                console.warn('Data not found for key:', modalKey, 'using fallback');
+                modalTitle.textContent = 'SiteWork Estimating Services';
+                modalBody.innerHTML = `
+                    <p class="text-xs sm:text-sm">Detailed information about this site work estimating service is available. Contact BENNY ESTIMATES for more information.</p>
+                    ${bennyInfo}
+                `;
+            }
+            
+            // Show modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modalOverlay = document.getElementById('modalOverlay');
+                if (modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            }
+        });
+
+        // Make sure all clickable elements work even if they have nested elements
+        document.querySelectorAll('[onclick]').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Prevent event from bubbling up if clicked on a child
+                if (e.target !== this && e.target.closest('[onclick]') !== this) {
+                    return;
+                }
+                // The onclick attribute will handle the rest
+            });
+        });
+        
+        console.log('SiteWork Estimating page loaded with orange theme and modal functionality');
+    </script>
+</body>
+</html>

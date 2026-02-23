@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Projects - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transitions */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Better dark mode contrast */
+        .dark body {
+            color-scheme: dark;
+        }
+        
+        /* Card hover effects */
+        .project-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        /* Theme toggle animation */
+        .theme-toggle {
+            transition: all 0.3s ease;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .project-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+ <%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+   
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 pt-20">
+        
+        <!-- Page Header -->
+        <div class="mb-12 text-center">
+            <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">Our Projects</h1>
+            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                Explore our portfolio of successful construction estimating projects across residential, commercial, and civil sectors.
+            </p>
+        </div>
+
+        <!-- Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-16">
+            
+            <!-- Project 1 -->
+            <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Construction Estimator Sydney" 
+                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 mb-3">
+                        Sydney
+                    </span>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Construction Estimator Sydney</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Residential Buildings</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+                        Comprehensive estimating services for residential high-rise projects in Sydney metropolitan area, including material takeoffs, labor costing, and detailed budget analysis for multi-story developments.
+                    </p>
+                    <button onclick="openModal(1)" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 cursor-pointer">
+                        <i class="ri-information-line mr-2"></i>
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 2 -->
+            <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1487956382158-bb926046304a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Building Estimator Melbourne" 
+                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 mb-3">
+                        Melbourne
+                    </span>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Building Estimator Melbourne</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Commercial Buildings</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+                        Accurate cost estimation for commercial office complexes and retail spaces in Melbourne CBD, featuring detailed quantity takeoffs, subcontractor quotes, and value engineering recommendations.
+                    </p>
+                    <button onclick="openModal(2)" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 cursor-pointer">
+                        <i class="ri-information-line mr-2"></i>
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 3 -->
+            <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Civil Construction" 
+                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 mb-3">
+                        Infrastructure
+                    </span>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Civil Construction</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Civil Construction Projects</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+                        Detailed estimates for large-scale civil engineering projects including roads, drainage systems, and site preparation, with comprehensive earthwork calculations and material specifications.
+                    </p>
+                    <button onclick="openModal(3)" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 cursor-pointer">
+                        <i class="ri-information-line mr-2"></i>
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 4 -->
+            <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1518780664697-55e3ad937233?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Home renovations" 
+                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 mb-3">
+                        Residential
+                    </span>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Home Renovations</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Home Construction & Renovation</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+                        Precise estimating services for home construction and renovation projects with material optimization, including detailed breakdowns of structural changes, finishes, and MEP systems.
+                    </p>
+                    <button onclick="openModal(4)" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 cursor-pointer">
+                        <i class="ri-information-line mr-2"></i>
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 5 -->
+            <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Bridge Construction Process" 
+                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 mb-3">
+                        Infrastructure
+                    </span>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Bridge Construction Process</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Bridge Construction</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+                        Comprehensive cost estimation for bridge construction including materials, labor, and engineering, with specialized takeoffs for structural steel, concrete, and foundation systems.
+                    </p>
+                    <button onclick="openModal(5)" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 cursor-pointer">
+                        <i class="ri-information-line mr-2"></i>
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+            <!-- Project 6 -->
+            <div class="project-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1556911220-bff31c812dba?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Kitchen Interior Design" 
+                         class="w-full h-full object-cover hover:scale-105 transition-transform duration-300">
+                </div>
+                <div class="p-6">
+                    <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-200 mb-3">
+                        Interior
+                    </span>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Kitchen Interior Design</h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4">Kitchen Construction & Design</p>
+                    <p class="text-gray-500 dark:text-gray-400 text-sm mb-6">
+                        Detailed estimates for kitchen construction including cabinets, countertops, and appliances, with material specifications, labor costs, and installation timelines for complete kitchen renovations.
+                    </p>
+                    <button onclick="openModal(6)" class="inline-flex items-center px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg transition-colors duration-300 cursor-pointer">
+                        <i class="ri-information-line mr-2"></i>
+                        View Details
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Updated CTA Section with Contact Us button -->
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-4">Have a Project in Mind?</h2>
+            <p class="text-gray-600 dark:text-gray-300 mb-8 max-w-2xl mx-auto">
+                Contact us for professional construction estimating services tailored to your specific needs.
+            </p>
+            <a href="/contact-us" class="inline-flex items-center px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-lg font-semibold transition-colors duration-300">
+                <i class="ri-chat-3-line mr-2"></i>
+                Contact Us
+            </a>
+        </div>
+
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Project Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Project content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content
+        const projectData = {
+            1: {
+                title: "Construction Estimator Sydney - Residential High-Rise",
+                content: `<p class="mb-4"><strong>Project:</strong> Residential High-Rise Development, Sydney</p>
+                <p class="mb-4"><strong>Location:</strong> Sydney CBD, New South Wales, Australia</p>
+                <p class="mb-4"><strong>Client:</strong> Sydney Property Developers</p>
+                <p class="mb-4"><strong>Project Scope:</strong> Complete construction estimating services for a 25-story residential tower with 150 apartments, including structural steel, concrete, MEP systems, interior finishes, and site development.</p>
+                <p class="mb-4"><strong>Services Provided:</strong> Detailed quantity takeoffs, material cost analysis, labor estimates, equipment requirements, subcontractor quotes, and value engineering recommendations.</p>
+                <p class="mb-4"><strong>Key Achievements:</strong> Delivered comprehensive estimate within 2 weeks, identified $2.5M in cost savings through value engineering, and helped client secure project financing with detailed budget breakdown.</p>
+                <p>This project demonstrates Benny Estimates' capability to handle large-scale residential developments with precision and efficiency, ensuring accurate budgeting and successful project execution.</p>`
+            },
+            2: {
+                title: "Building Estimator Melbourne - Commercial Complex",
+                content: `<p class="mb-4"><strong>Project:</strong> Commercial Office & Retail Complex, Melbourne</p>
+                <p class="mb-4"><strong>Location:</strong> Melbourne CBD, Victoria, Australia</p>
+                <p class="mb-4"><strong>Client:</strong> Melbourne Commercial Properties</p>
+                <p class="mb-4"><strong>Project Scope:</strong> Complete cost estimation for a 15-story commercial building with ground-floor retail spaces, including structural frame, curtain wall systems, HVAC, electrical, plumbing, and interior fit-outs.</p>
+                <p class="mb-4"><strong>Services Provided:</strong> Quantity takeoffs, subcontractor solicitation, material pricing, labor cost analysis, construction scheduling, and detailed bid package preparation.</p>
+                <p class="mb-4"><strong>Key Achievements:</strong> Provided estimate within 10 business days, achieved 98% accuracy against actual construction costs, and helped client win project bid with competitive pricing.</p>
+                <p>Benny Estimates delivered a comprehensive commercial estimating solution that met all client requirements and contributed to successful project execution.</p>`
+            },
+            3: {
+                title: "Civil Construction - Infrastructure Development",
+                content: `<p class="mb-4"><strong>Project:</strong> Road & Drainage Infrastructure, Regional NSW</p>
+                <p class="mb-4"><strong>Location:</strong> Regional New South Wales, Australia</p>
+                <p class="mb-4"><strong>Client:</strong> NSW Infrastructure Authority</p>
+                <p class="mb-4"><strong>Project Scope:</strong> Civil estimating for 12km of roadway construction, including earthwork calculations, drainage systems, culverts, paving, and site restoration.</p>
+                <p class="mb-4"><strong>Services Provided:</strong> Earthwork quantity calculations, cut/fill analysis, material specifications, equipment requirements, labor costing, and environmental compliance estimates.</p>
+                <p class="mb-4"><strong>Key Achievements:</strong> Delivered detailed civil estimate meeting government requirements, helped secure project funding, and provided accurate material quantities preventing delays during construction.</p>
+                <p>This infrastructure project showcases Benny Estimates' expertise in civil construction estimating and ability to handle complex, large-scale projects.</p>`
+            },
+            4: {
+                title: "Home Renovations - Residential Construction",
+                content: `<p class="mb-4"><strong>Project:</strong> Residential Home Renovation, Suburban Sydney</p>
+                <p class="mb-4"><strong>Location:</strong> Sydney Suburbs, New South Wales, Australia</p>
+                <p class="mb-4"><strong>Client:</strong> Private Homeowner</p>
+                <p class="mb-4"><strong>Project Scope:</strong> Complete home renovation including structural modifications, kitchen remodeling, bathroom updates, new flooring, electrical upgrades, and landscaping.</p>
+                <p class="mb-4"><strong>Services Provided:</strong> Material takeoffs, labor estimates, contractor quotes, permit cost analysis, and detailed project budget breakdown with contingency allowances.</p>
+                <p class="mb-4"><strong>Key Achievements:</strong> Provided accurate renovation estimate that matched final construction costs within 3%, helped homeowner make informed decisions about material selections, and identified cost-saving alternatives.</p>
+                <p>Benny Estimates provided comprehensive residential estimating services that enabled successful home renovation completion on time and within budget.</p>`
+            },
+            5: {
+                title: "Bridge Construction - Infrastructure",
+                content: `<p class="mb-4"><strong>Project:</strong> Bridge Construction Over River</p>
+                <p class="mb-4"><strong>Location:</strong> Regional Australia</p>
+                <p class="mb-4"><strong>Client:</strong> Transport Infrastructure Authority</p>
+                <p class="mb-4"><strong>Project Scope:</strong> Complete estimating for a 300-meter bridge structure including foundations, piers, structural steel, concrete deck, and approach roadways.</p>
+                <p class="mb-4"><strong>Services Provided:</strong> Structural steel takeoffs, concrete quantity calculations, foundation estimates, labor costing, equipment requirements, and comprehensive bid package preparation.</p>
+                <p class="mb-4"><strong>Key Achievements:</strong> Delivered complex bridge estimate within project timeline, coordinated with engineering team for accurate specifications, and provided detailed breakdown supporting successful contractor selection.</p>
+                <p>This bridge project demonstrates Benny Estimates' capability in specialized infrastructure estimating requiring detailed technical knowledge and precision.</p>`
+            },
+            6: {
+                title: "Kitchen Interior Design & Construction",
+                content: `<p class="mb-4"><strong>Project:</strong> Luxury Kitchen Renovation</p>
+                <p class="mb-4"><strong>Location:</strong> Sydney, Australia</p>
+                <p class="mb-4"><strong>Client:</strong> Private Residence</p>
+                <p class="mb-4"><strong>Project Scope:</strong> Complete kitchen renovation including custom cabinetry, stone countertops, high-end appliances, lighting design, and specialty finishes.</p>
+                <p class="mb-4"><strong>Services Provided:</strong> Detailed material takeoffs for cabinets, countertops, fixtures, and appliances. Labor estimates for demolition, installation, electrical, and plumbing work. Finishing material specifications.</p>
+                <p class="mb-4"><strong>Key Achievements:</strong> Provided accurate estimate within 48 hours, identified optimal material selections balancing quality and cost, and delivered comprehensive budget breakdown for client approval.</p>
+                <p>Benny Estimates provided specialized kitchen estimating services that helped create a beautiful, functional space within the client's budget.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(projectId) {
+            console.log('Opening modal for project:', projectId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const project = projectData[projectId];
+            if (project) {
+                modalTitle.textContent = project.title;
+                modalBody.innerHTML = project.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Project not found:', projectId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+            } else {
+                document.documentElement.classList.remove('dark');
+                if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+            }
+            
+            // Add event listener for theme toggle if exists
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    toggleTheme(themeIcon, themeText);
+                });
+            }
+        });
+
+        // Update theme UI elements
+        function updateThemeUI(theme, themeIcon, themeText) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme(themeIcon, themeText) {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light', themeIcon, themeText);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark', themeIcon, themeText);
+            }
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+                }
+            }
+        });
+
+        console.log('Our Projects Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

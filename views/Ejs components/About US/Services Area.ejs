@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny Estimates - Service Areas</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.9.1/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                        'pulse-slow': 'pulse 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Service section backgrounds */
+        .hero-bg {
+            background: linear-gradient(rgba(15, 23, 42, 0.85), rgba(30, 41, 59, 0.9)), 
+                        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .dark .hero-bg {
+            background: linear-gradient(rgba(0, 0, 0, 0.85), rgba(15, 23, 42, 0.9)), 
+                        url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .states-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .states-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        .australia-bg {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+        
+        .dark .australia-bg {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        /* State/Region card styling */
+        .region-card {
+            transition: all 0.3s ease;
+        }
+        
+        .region-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+        }
+        
+        .dark .region-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(96, 165, 250, 0.3);
+        }
+        
+        /* Service tag styling */
+        .service-tag {
+            transition: all 0.3s ease;
+        }
+        
+        .service-tag:hover {
+            transform: translateY(-2px);
+        }
+        
+        /* Responsive adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .section-title {
+                font-size: 1.75rem !important;
+            }
+            .region-card {
+                padding: 0.75rem !important;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Include header here (replace with actual header include) -->
+    <%- include('../header.ejs') %>
+
+    <!-- Service Areas Page -->
+    <main>
+        <!-- Hero Section -->
+        <section class="hero-bg text-white py-16 lg:py-24 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="max-w-4xl mx-auto text-center">
+                    <h1 class="hero-title text-4xl lg:text-5xl font-bold mb-6 animate-slide-up">
+                        Serving the Entire United States and Australia
+                    </h1>
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 animate-slide-up" style="animation-delay: 0.1s;">
+                        <p class="text-xl mb-8">
+                            Benny Estimates deliver top-notch construction cost estimating and takeoff services 
+                            across a vast geographical expanse. Our dedication to precision and quality knows no 
+                            borders, so we proudly offer our services in every state of the United States and 
+                            throughout Australia.
+                        </p>
+                        <div class="bg-gradient-to-r from-primary-500 to-primary-600 rounded-xl p-6 mb-6">
+                            <div class="flex items-center justify-center flex-wrap">
+                                <i class="ri-arrow-down-line text-3xl mr-4 animate-bounce hidden sm:inline"></i>
+                                <div>
+                                    <div class="text-3xl font-bold">Save Up to 30%</div>
+                                    <div class="text-lg">On Estimating Expenses</div>
+                                </div>
+                                <i class="ri-arrow-down-line text-3xl ml-4 animate-bounce hidden sm:inline"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- USA Coverage Section -->
+        <section class="states-bg py-16 lg:py-24 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="section-title text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                        Comprehensive Coverage Across the USA
+                    </h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                        Our footprint covers every corner of the United States, from the bustling metropolitan 
+                        areas to the quiet suburbs and rural landscapes. Whether you're embarking on a construction 
+                        project in the heart of New York City, the sunny shores of California, the Midwest's 
+                        industrial hubs, or the picturesque landscapes of the Pacific Northwest, we're here to assist you.
+                    </p>
+                </div>
+
+                <!-- States Grid -->
+                <div class="mb-12">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                            <i class="ri-flag-line text-primary-600 dark:text-primary-400 mr-2"></i>
+                            Areas We Service in the United States
+                        </h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                            <!-- Generating 50 states -->
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Alabama</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Alaska</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Arizona</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Arkansas</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">California</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Colorado</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Connecticut</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Delaware</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Florida</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Georgia</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Hawaii</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Idaho</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Illinois</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Indiana</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Iowa</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Kansas</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Kentucky</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Louisiana</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Maine</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Maryland</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Massachusetts</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Michigan</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Minnesota</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Mississippi</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Missouri</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Montana</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Nebraska</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Nevada</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">New Hampshire</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">New Jersey</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">New Mexico</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">New York</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">North Carolina</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">North Dakota</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Ohio</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Oklahoma</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Oregon</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Pennsylvania</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Rhode Island</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">South Carolina</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">South Dakota</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Tennessee</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Texas</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Utah</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Vermont</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Virginia</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Washington</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">West Virginia</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Wisconsin</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Wyoming</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Show more states indicator -->
+                        <div class="text-center mt-6">
+                            <div class="inline-flex items-center text-primary-600 dark:text-primary-400">
+                                <i class="ri-arrow-down-double-line mr-2"></i>
+                                <span>All 50 states served</span>
+                                <i class="ri-arrow-down-double-line ml-2"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Australia Coverage Section -->
+        <section class="australia-bg py-16 lg:py-24 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="section-title text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                        Extensive Reach in Australia
+                    </h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                        In addition to our U.S. coverage, we extend our services across the beautiful continent of 
+                        Australia. Benny Estimates is your reliable partner for cost estimating and takeoff 
+                        services in the construction industry, from vibrant cities like Sydney and Melbourne to 
+                        serene coastal towns, the rugged outback, and everything in between.
+                    </p>
+                </div>
+
+                <!-- Australian Regions Grid -->
+                <div class="mb-12">
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">
+                            <i class="ri-map-pin-2-line text-primary-600 dark:text-primary-400 mr-2"></i>
+                            Service Areas Across Australia
+                        </h3>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                            <!-- Australian regions -->
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Sydney</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Melbourne</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Brisbane</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Perth</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Adelaide</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Darwin</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Hobart</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Canberra</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Gold Coast</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Newcastle</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Wollongong</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Sunshine Coast</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">New South Wales</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Victoria</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Queensland</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Western Australia</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">South Australia</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Tasmania</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Northern Territory</div>
+                            </div>
+                            <div class="region-card bg-gray-50 dark:bg-gray-700 p-4 rounded-lg border border-gray-200 dark:border-gray-600 text-center">
+                                <div class="text-primary-600 dark:text-primary-400 font-bold">Australian Capital Territory</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Australia guarantee -->
+                        <div class="mt-8 bg-primary-50 dark:bg-primary-900/20 rounded-lg p-6">
+                            <div class="flex items-center">
+                                <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mr-4">
+                                    <i class="ri-shield-check-line text-primary-600 dark:text-primary-400 text-xl"></i>
+                                </div>
+                                <div>
+                                    <h4 class="font-bold text-gray-900 dark:text-white mb-1">Australia-Wide Coverage</h4>
+                                    <p class="text-gray-700 dark:text-gray-300 text-sm">
+                                        We ensure that construction stakeholders across Australia receive the utmost 
+                                        precision and professionalism in their project estimates.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise Section -->
+        <section class="states-bg py-16 lg:py-24 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="text-center mb-12">
+                    <h2 class="section-title text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                        Local Expertise, Global Standards
+                    </h2>
+                    <p class="text-lg text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
+                        Our expansive service areas are backed by a team of skilled professionals who possess 
+                        local expertise while adhering to global standards of accuracy and quality.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
+                    <!-- Expertise Card 1 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-award-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Expertise Beyond Measure</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Our extensive service coverage means that our estimators are well-versed in the 
+                            construction practices and costs specific to each state.
+                        </p>
+                    </div>
+
+                    <!-- Expertise Card 2 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-government-line text-green-600 dark:text-green-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Regulatory Awareness</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            We understand that construction regulations can vary from state to state and 
+                            country to country.
+                        </p>
+                    </div>
+
+                    <!-- Expertise Card 3 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-tools-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Material & Labor Variations</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            The availability and costs of materials and labor can differ significantly 
+                            between regions.
+                        </p>
+                    </div>
+
+                    <!-- Expertise Card 4 -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mb-4">
+                            <i class="ri-settings-3-line text-orange-600 dark:text-orange-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Tailored Solutions</h3>
+                        <p class="text-gray-600 dark:text-gray-300">
+                            Whether you're constructing a residential building in Sydney or an industrial 
+                            facility in Texas, we tailor our services.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fast & Accurate Section -->
+        <section class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-800 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="flex flex-col lg:flex-row gap-12 items-center">
+                    <div class="lg:w-1/2">
+                        <h2 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+                            Fast and Accurate Construction Cost Estimates
+                        </h2>
+                        <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+                            Construction cost estimation demands attention to detail and accuracy. An estimate 
+                            that's too low can lead to financial losses, while one that's too high could cost 
+                            you a valuable customer.
+                        </p>
+                        <p class="text-gray-600 dark:text-gray-300 mb-8">
+                            At Benny Estimates, we've spent over a decade perfecting our methods. Don't be 
+                            swayed by expensive estimating software; it's only as good as the knowledge and 
+                            data behind it. We possess advanced software and the experience needed to provide 
+                            you with a realistic estimate for your project.
+                        </p>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-check-line text-green-600 dark:text-green-400"></i>
+                            </div>
+                            <span class="text-gray-700 dark:text-gray-300 font-medium">10+ Years Experience</span>
+                        </div>
+                    </div>
+                    <div class="lg:w-1/2">
+                        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg">
+                            <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                                <i class="ri-list-check text-primary-600 dark:text-primary-400 mr-2"></i>
+                                Our Expertise Extends To
+                            </h3>
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <!-- Service tags - First column -->
+                                <div class="space-y-3">
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Cost Estimating</span>
+                                    </div>
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Estimating Consultant</span>
+                                    </div>
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Commercial Estimating</span>
+                                    </div>
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Residential Estimating</span>
+                                    </div>
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Industrial Estimating</span>
+                                    </div>
+                                </div>
+                                <!-- Service tags - Second column -->
+                                <div class="space-y-3">
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Construction Takeoff</span>
+                                    </div>
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Quantity Takeoff</span>
+                                    </div>
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Concrete Takeoff</span>
+                                    </div>
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Masonry Takeoff</span>
+                                    </div>
+                                    <div class="service-tag bg-gray-50 dark:bg-gray-700 p-3 rounded-lg border border-gray-200 dark:border-gray-600">
+                                        <span class="text-gray-800 dark:text-gray-200 font-medium">Lumber Takeoff</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p class="text-gray-600 dark:text-gray-400 text-sm mt-6 text-center">
+                                <i class="ri-check-double-line text-green-500 mr-2"></i>
+                                Plus 20+ more specialized takeoff services
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Unbeatable Offers Section -->
+        <section class="py-16 lg:py-24 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="text-center text-white mb-12">
+                    <h2 class="text-3xl lg:text-4xl font-bold mb-6">
+                        Get Ahead of the Competition with Unbeatable Offers!
+                    </h2>
+                    <p class="text-xl mb-8 max-w-3xl mx-auto">
+                        Unlock 30% off your first estimate and Save up to 60% on monthly estimating expenses
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <!-- Monthly Package Card -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                        <div class="flex items-center mb-6">
+                            <div class="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center mr-4">
+                                <i class="ri-calendar-check-line text-white text-2xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-2xl font-bold text-white">Monthly Takeoff Package</h3>
+                                <p class="text-white/80">Cost-effective subscription service</p>
+                            </div>
+                        </div>
+                        <div class="space-y-4">
+                            <div class="flex items-center text-white">
+                                <i class="ri-check-line mr-3 text-xl"></i>
+                                <span>Unlimited estimates per month</span>
+                            </div>
+                            <div class="flex items-center text-white">
+                                <i class="ri-check-line mr-3 text-xl"></i>
+                                <span>Priority support & faster turnaround</span>
+                            </div>
+                            <div class="flex items-center text-white">
+                                <i class="ri-check-line mr-3 text-xl"></i>
+                                <span>Dedicated account manager</span>
+                            </div>
+                        </div>
+                        <div class="mt-8 text-center">
+                            <div class="text-4xl font-bold text-white mb-2">$499<span class="text-xl">/month</span></div>
+                            <div class="text-white/80">Save 40% vs individual estimates</div>
+                        </div>
+                    </div>
+
+                    <!-- Service For Card -->
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 border border-white/20">
+                        <h3 class="text-2xl font-bold text-white mb-6">Our Estimating Services For</h3>
+                        <div class="space-y-4">
+                            <div class="bg-white/5 p-4 rounded-lg">
+                                <h4 class="font-bold text-white mb-2">Architects & Designers</h4>
+                                <p class="text-white/80 text-sm">Ensure your proposed designs stay within clients' budgets.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg">
+                                <h4 class="font-bold text-white mb-2">Builders</h4>
+                                <p class="text-white/80 text-sm">Win more projects and stay updated with market rates.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg">
+                                <h4 class="font-bold text-white mb-2">Homeowners</h4>
+                                <p class="text-white/80 text-sm">Avoid overpriced builders and stay in control of your budget.</p>
+                            </div>
+                            <div class="bg-white/5 p-4 rounded-lg">
+                                <h4 class="font-bold text-white mb-2">Developers</h4>
+                                <p class="text-white/80 text-sm">Partner with us to increase your profits.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Trust Partner Message -->
+                <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-center">
+                    <p class="text-white text-lg italic mb-4">
+                        "Benny Estimates is your trusted partner across the building and construction 
+                        industries. With our unwavering commitment to precision, integrity, and client 
+                        satisfaction, we've consistently exceeded expectations for years."
+                    </p>
+                    <div class="flex items-center justify-center">
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-award-line text-white"></i>
+                        </div>
+                        <span class="text-white font-medium">10+ Years of Excellence</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bottom CTA Section - Updated with Benny Estimates contact info -->
+        <section class="py-16 lg:py-24 bg-gray-50 dark:bg-gray-800 animate-fade-in">
+            <div class="container mx-auto px-4">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Portfolio/Explore Column -->
+                    <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 border border-gray-200 dark:border-gray-700 shadow-lg">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
+                            Explore Our Services & Portfolio
+                        </h3>
+                        <div class="space-y-6">
+                            <div class="flex items-center justify-between p-4 bg-gray-50 dark:bg-gray-700 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                                <div class="flex items-center">
+                                    <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mr-4">
+                                        <i class="ri-briefcase-line text-primary-600 dark:text-primary-400"></i>
+                                    </div>
+                                    <span class="font-medium text-gray-900 dark:text-white">View Portfolio</span>
+                                </div>
+                                <i class="ri-arrow-right-line text-gray-400"></i>
+                            </div>
+                            <div class="space-y-4">
+                                <h4 class="font-bold text-gray-900 dark:text-white">Our Services</h4>
+                                <div class="grid grid-cols-2 gap-3">
+                                    <span class="text-sm text-gray-600 dark:text-gray-300">• Cost Estimating</span>
+                                    <span class="text-sm text-gray-600 dark:text-gray-300">• Construction Takeoff</span>
+                                    <span class="text-sm text-gray-600 dark:text-gray-300">• Quantity Takeoff Services</span>
+                                    <span class="text-sm text-gray-600 dark:text-gray-300">• Residential Estimating</span>
+                                    <span class="text-sm text-gray-600 dark:text-gray-300">• Commercial Estimating</span>
+                                    <span class="text-sm text-gray-600 dark:text-gray-300">• Industrial Estimating</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Final CTA Column - Updated with Benny Estimates contact info -->
+                    <div class="bg-gradient-to-br from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 rounded-2xl p-8 text-white shadow-lg">
+                        <h3 class="text-2xl font-bold mb-6">Experience the Difference with Benny Estimates Now!</h3>
+                        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-6">
+                            <div class="text-center mb-4">
+                                <div class="text-3xl font-bold mb-2">Get Estimate At 30% OFF</div>
+                                <div class="text-lg">TURNAROUND TIME: 24-48 hrs!</div>
+                            </div>
+                            <div class="space-y-4">
+                                <!-- Location - Updated -->
+                                <div class="flex items-center">
+                                    <i class="ri-map-pin-line mr-3 text-xl"></i>
+                                    <div>
+                                        <div class="font-medium">96 Jones Street, New York, USA</div>
+                                        <div class="text-white/80 text-sm">Head Office</div>
+                                    </div>
+                                </div>
+                                <!-- Phone - Updated -->
+                                <div class="flex items-center">
+                                    <i class="ri-phone-line mr-3 text-xl"></i>
+                                    <div>
+                                        <div class="font-medium">+1 (289) 801-7224</div>
+                                        <div class="text-white/80 text-sm">Call us any time</div>
+                                    </div>
+                                </div>
+                                <!-- Email - Updated -->
+                                <div class="flex items-center">
+                                    <i class="ri-mail-line mr-3 text-xl"></i>
+                                    <div>
+                                        <div class="font-medium break-all">Ben@bennyestimates.com</div>
+                                        <div class="text-white/80 text-sm">Email Support</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="mailto:Ben@bennyestimates.com" class="w-full inline-block text-center bg-white text-primary-600 hover:bg-gray-100 font-bold py-4 px-6 rounded-lg transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl">
+                            <i class="ri-calendar-check-line mr-2"></i>
+                            Get Your Estimate Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+<%- include('../footer.ejs') %>
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            if (themeIcon && themeText) updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (themeIcon && themeText) updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle if exists
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon && themeText) updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon && themeText) updateThemeUI('light');
+                }
+            }
+        });
+
+        // Region card hover effects
+        document.querySelectorAll('.region-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                card.style.transform = 'translateY(-5px)';
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Service tag hover effects
+        document.querySelectorAll('.service-tag').forEach(tag => {
+            tag.addEventListener('mouseenter', () => {
+                tag.style.transform = 'translateY(-2px)';
+            });
+            
+            tag.addEventListener('mouseleave', () => {
+                tag.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href');
+                if (targetId !== '#') {
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            });
+        });
+
+        // Initialize animations on scroll
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fade-in');
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections for animation
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construct Estimates - About Us</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-in-left': 'slideInLeft 0.5s ease-out',
+                        'slide-in-right': 'slideInRight 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideInLeft: {
+                            '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        },
+                        slideInRight: {
+                            '0%': { transform: 'translateX(30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Custom styles */
+        .stat-card {
+            transition: all 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .dark .stat-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.2);
+        }
+        
+        .light .stat-card:hover {
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Gradient text */
+        .gradient-text {
+            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .dark .gradient-text {
+            background: linear-gradient(135deg, #60a5fa 0%, #a78bfa 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Section background */
+        .about-section-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .about-section-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Theme Toggle Demo -->
+    <div class="container mx-auto px-4 py-4 flex justify-end">
+        <button id="themeToggle" class="flex items-center px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- About Us Section -->
+    <section class="about-section-bg py-12 lg:py-20 animate-fade-in">
+        <div class="container mx-auto px-4">
+            <!-- Parent Container -->
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 xl:gap-16">
+                
+                <!-- Child 1: Content Section -->
+                <div class="lg:w-1/2 animate-slide-in-left">
+                    <!-- Section Label -->
+                    <div class="inline-flex items-center mb-4">
+                        <div class="w-12 h-0.5 bg-primary-500 dark:bg-primary-400 mr-3"></div>
+                        <span class="text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider text-sm">
+                            <i class="ri-information-line mr-2"></i>
+                            ABOUT US
+                        </span>
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                        Transform Your Projects into 
+                        <span class="gradient-text">Profitable Realities</span>
+                    </h1>
+
+                    <!-- Description Paragraph 1 -->
+                    <div class="mb-6">
+                        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            <i class="ri-checkbox-circle-fill text-primary-500 dark:text-primary-400 mr-2"></i>
+                            <span class="font-medium">Construct Estimates</span> is your trusted partner in construction estimating and material takeoff services to make the bidding process easier for contractors and builders.
+                        </p>
+                    </div>
+
+                    <!-- Description Paragraph 2 -->
+                    <div class="mb-8">
+                        <p class="text-gray-600 dark:text-gray-300 leading-relaxed">
+                            With our comprehensive services, we specialize in providing accurate local pricing estimates and taking off entire projects. Our goal is to transform contractors' potential projects into profitable realities, allowing them to focus on other aspects of their business.
+                        </p>
+                    </div>
+
+                    <!-- Description Paragraph 3 -->
+                    <div class="mb-10">
+                        <div class="bg-primary-50 dark:bg-primary-900/20 border-l-4 border-primary-500 dark:border-primary-400 p-4 rounded-r-lg">
+                            <p class="text-gray-700 dark:text-gray-300">
+                                <i class="ri-lightbulb-flash-line text-primary-600 dark:text-primary-400 mr-2"></i>
+                                With over <span class="font-bold text-primary-600 dark:text-primary-400">10 years of experience</span> in the construction industry, Construct Estimates has built a solid reputation for delivering accurate material estimates. Residential, commercial, civil, or industrial projects—whatever the scope, our construction managers and quantity surveyors have the expertise and references spanning hundreds of satisfied clients.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Statistics Section -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mb-8">
+                        <!-- Stat 1 -->
+                        <div class="stat-card bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="ri-projector-2-line text-primary-600 dark:text-primary-400 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-bold text-gray-900 dark:text-white">8000+</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Projects Completed</div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                Successful estimates delivered across various construction sectors.
+                            </p>
+                        </div>
+
+                        <!-- Stat 2 -->
+                        <div class="stat-card bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="ri-user-smile-line text-green-600 dark:text-green-400 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-bold text-gray-900 dark:text-white">700+</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Happy Clients</div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                Satisfied contractors and builders who trust our estimating services.
+                            </p>
+                        </div>
+
+                        <!-- Stat 3 -->
+                        <div class="stat-card bg-white dark:bg-gray-800 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                            <div class="flex items-center mb-3">
+                                <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
+                                    <i class="ri-award-line text-purple-600 dark:text-purple-400 text-2xl"></i>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-bold text-gray-900 dark:text-white">25+</div>
+                                    <div class="text-sm text-gray-600 dark:text-gray-400">Years Experience</div>
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 dark:text-gray-400">
+                                Combined experience of our certified estimating professionals.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="flex flex-wrap gap-4">
+                        <button class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-semibold py-3 px-8 rounded-lg transition-all duration-300 hover:shadow-lg flex items-center">
+                            <i class="ri-book-open-line mr-2"></i>
+                            Learn More About Us
+                        </button>
+                        <button class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-3 px-8 rounded-lg transition-all duration-300 flex items-center">
+                            <i class="ri-download-line mr-2"></i>
+                            Download Brochure
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Child 2: Image Section -->
+                <div class="lg:w-1/2 animate-slide-in-right">
+                    <div class="relative">
+                        <!-- Main Image Container -->
+                        <div class="relative z-10">
+                            <div class="bg-gradient-to-br from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-800 rounded-2xl p-2 shadow-2xl">
+                                <div class="bg-white dark:bg-gray-800 rounded-2xl p-6">
+                                    <!-- Image Placeholder with Construction Theme -->
+                                    <div class="aspect-square bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-700 dark:to-gray-900 rounded-xl flex items-center justify-center p-8">
+                                        <div class="text-center">
+                                            <div class="w-24 h-24 mx-auto bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-6">
+                                                <i class="ri-team-line text-primary-600 dark:text-primary-400 text-4xl"></i>
+                                            </div>
+                                            <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-3">Our Expert Team</h3>
+                                            <p class="text-gray-600 dark:text-gray-300 mb-6">
+                                                Certified estimators with decades of industry experience
+                                            </p>
+                                            
+                                            <!-- Team Stats inside image -->
+                                            <div class="grid grid-cols-2 gap-4">
+                                                <div class="bg-primary-50 dark:bg-gray-700 p-3 rounded-lg">
+                                                    <div class="text-xl font-bold text-primary-600 dark:text-primary-400">10+</div>
+                                                    <div class="text-sm text-gray-600 dark:text-gray-300">Experts</div>
+                                                </div>
+                                                <div class="bg-primary-50 dark:bg-gray-700 p-3 rounded-lg">
+                                                    <div class="text-xl font-bold text-primary-600 dark:text-primary-400">100%</div>
+                                                    <div class="text-sm text-gray-600 dark:text-gray-300">Certified</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Floating Badges -->
+                                    <div class="flex justify-center gap-4 mt-6">
+                                        <div class="bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-200 px-4 py-2 rounded-full text-sm font-semibold flex items-center">
+                                            <i class="ri-medal-line mr-2"></i>
+                                            Award Winning
+                                        </div>
+                                        <div class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-4 py-2 rounded-full text-sm font-semibold flex items-center">
+                                            <i class="ri-shield-check-line mr-2"></i>
+                                            Verified
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Decorative Elements -->
+                        <div class="absolute -top-4 -left-4 w-20 h-20 bg-yellow-400 dark:bg-yellow-600 rounded-full opacity-20 blur-xl"></div>
+                        <div class="absolute -bottom-6 -right-6 w-28 h-28 bg-blue-400 dark:bg-blue-600 rounded-full opacity-20 blur-xl"></div>
+                        
+                        <!-- Floating Card 1 -->
+                        <div class="absolute -bottom-6 left-0 bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4 border border-gray-200 dark:border-gray-700 w-48">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                                    <i class="ri-check-double-line text-green-600 dark:text-green-400"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800 dark:text-gray-100">Accuracy</div>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400">Guaranteed results</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Floating Card 2 -->
+                        <div class="absolute -top-6 right-8 bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4 border border-gray-200 dark:border-gray-700 w-48">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-3">
+                                    <i class="ri-time-line text-purple-600 dark:text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800 dark:text-gray-100">Fast Turnaround</div>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400">24-48 hours</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Additional Company Info -->
+    <div class="container mx-auto px-4 py-12">
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700">
+            <h2 class="text-2xl font-bold text-gray-900 dark:text-white mb-6 text-center">Why Choose Construct Estimates?</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="w-16 h-16 mx-auto bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-file-copy-line text-primary-600 dark:text-primary-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Detailed Reports</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Comprehensive estimating reports with itemized costs</p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="w-16 h-16 mx-auto bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-money-dollar-circle-line text-green-600 dark:text-green-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Cost Savings</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Reduce estimating costs by up to 40%</p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="w-16 h-16 mx-auto bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-global-line text-purple-600 dark:text-purple-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Global Service</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Serving clients across United States, Canada & Australia</p>
+                </div>
+                <div class="text-center p-6 bg-gray-50 dark:bg-gray-700 rounded-xl">
+                    <div class="w-16 h-16 mx-auto bg-yellow-100 dark:bg-yellow-900 rounded-full flex items-center justify-center mb-4">
+                        <i class="ri-customer-service-2-line text-yellow-600 dark:text-yellow-400 text-2xl"></i>
+                    </div>
+                    <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Dedicated Support</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">24/7 customer support for all your queries</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Demo Footer Note -->
+    <div class="container mx-auto px-4 py-8 text-center">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">
+            This About Us section integrates perfectly with your existing theme system. Copy and paste it into your main website file.
+        </p>
+    </div>
+
+    <script>
+        // Theme functionality (same as your existing system)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

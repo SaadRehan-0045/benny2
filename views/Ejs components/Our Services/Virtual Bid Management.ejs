@@ -1,0 +1,1314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Bid Management - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        violet: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        cyan: {
+                            50: '#ecfeff',
+                            100: '#cffafe',
+                            200: '#a5f3fc',
+                            300: '#67e8f9',
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            700: '#0e7490',
+                            800: '#155e75',
+                            900: '#164e63',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'float-tech': 'floatTech 3s ease-in-out infinite',
+                        'pulse-digital': 'pulseDigital 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        floatTech: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        pulseDigital: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(139, 92, 246, 0.4)' },
+                            '50%': { boxShadow: '0 0 0 15px rgba(139, 92, 246, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .virtual-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+        }
+        .dark .virtual-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+        }
+        .virtual-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.25);
+            border-color: #8b5cf6;
+        }
+        .vbm-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #8b5cf6;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            cursor: pointer;
+        }
+        .gradient-text-virtual {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .plan-card {
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .plan-card:hover {
+            transform: translateY(-8px);
+            border-color: #8b5cf6;
+        }
+        .plan-card.popular {
+            border-color: #8b5cf6;
+            box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.1);
+        }
+        .digital-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            animation: pulseDigital 3s infinite;
+            z-index: 0;
+        }
+
+        /* SWOT Analysis - New Modern Design */
+        .swot-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        
+        .swot-card {
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+        
+        .swot-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 35px -10px rgba(0, 0, 0, 0.15);
+        }
+        
+        .swot-card.strength {
+            background: linear-gradient(145deg, #f0fdf4, #dcfce7);
+            border-color: #22c55e;
+        }
+        .dark .swot-card.strength {
+            background: linear-gradient(145deg, #14532d, #166534);
+            border-color: #4ade80;
+        }
+        
+        .swot-card.weakness {
+            background: linear-gradient(145deg, #fef2f2, #fee2e2);
+            border-color: #ef4444;
+        }
+        .dark .swot-card.weakness {
+            background: linear-gradient(145deg, #7f1d1d, #991b1b);
+            border-color: #f87171;
+        }
+        
+        .swot-card.opportunity {
+            background: linear-gradient(145deg, #eff6ff, #dbeafe);
+            border-color: #3b82f6;
+        }
+        .dark .swot-card.opportunity {
+            background: linear-gradient(145deg, #1e3a8a, #1e40af);
+            border-color: #60a5fa;
+        }
+        
+        .swot-card.threat {
+            background: linear-gradient(145deg, #fffbeb, #fef3c7);
+            border-color: #f59e0b;
+        }
+        .dark .swot-card.threat {
+            background: linear-gradient(145deg, #78350f, #92400e);
+            border-color: #fbbf24;
+        }
+        
+        .swot-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        
+        .swot-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 16px;
+            font-size: 2rem;
+            background: rgba(255, 255, 255, 0.9);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .dark .swot-icon {
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        .strength .swot-icon {
+            color: #16a34a;
+        }
+        .weakness .swot-icon {
+            color: #dc2626;
+        }
+        .opportunity .swot-icon {
+            color: #2563eb;
+        }
+        .threat .swot-icon {
+            color: #d97706;
+        }
+        
+        .swot-title {
+            font-size: 1.8rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+        
+        .strength .swot-title {
+            color: #15803d;
+        }
+        .dark .strength .swot-title {
+            color: #86efac;
+        }
+        
+        .weakness .swot-title {
+            color: #b91c1c;
+        }
+        .dark .weakness .swot-title {
+            color: #fca5a5;
+        }
+        
+        .opportunity .swot-title {
+            color: #1d4ed8;
+        }
+        .dark .opportunity .swot-title {
+            color: #93c5fd;
+        }
+        
+        .threat .swot-title {
+            color: #b45309;
+        }
+        .dark .threat .swot-title {
+            color: #fcd34d;
+        }
+        
+        .swot-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .swot-stat {
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 12px;
+            padding: 12px;
+            text-align: center;
+            backdrop-filter: blur(4px);
+        }
+        
+        .dark .swot-stat {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .swot-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+        .swot-stat-label {
+            font-size: 0.75rem;
+            font-weight: 500;
+            opacity: 0.8;
+        }
+        
+        .swot-features {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .swot-feature {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            background: rgba(255, 255, 255, 0.5);
+            border-radius: 10px;
+            backdrop-filter: blur(4px);
+        }
+        
+        .dark .swot-feature {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        
+        .swot-feature i {
+            font-size: 1.2rem;
+        }
+        
+        .swot-footer {
+            margin-top: 20px;
+            padding-top: 16px;
+            border-top: 2px solid rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .dark .swot-footer {
+            border-top-color: rgba(255, 255, 255, 0.1);
+        }
+        
+        .swot-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            padding: 8px 16px;
+            border-radius: 30px;
+            background: white;
+            color: #1f2937;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .swot-action {
+            background: #374151;
+            color: white;
+        }
+        
+        .swot-action:hover {
+            transform: translateX(5px);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .virtual-card {
+                padding: 1rem !important;
+            }
+            .swot-container {
+                gap: 16px;
+            }
+            .swot-card {
+                padding: 20px;
+            }
+            .swot-title {
+                font-size: 1.5rem;
+            }
+            .swot-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+  <%- include('../header.ejs') %>
+<body class="bg-gradient-to-br from-violet-50 to-cyan-50 dark:from-gray-900 dark:to-violet-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+  
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-slide-in-left">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-violet-600 to-cyan-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-cloud-fill mr-2"></i>
+                Digital Bid Management
+            </div>
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text-virtual">Virtual Bid</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Management</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Streamline Your Construction Bidding Process with Virtual Bid Management
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800 relative">
+            <div class="digital-pulse"></div>
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Virtual Bid Management" 
+                 class="w-full h-64 md:h-96 object-cover relative z-10">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-violet-50 to-cyan-50 dark:from-violet-900/20 dark:to-cyan-900/20 rounded-2xl p-8 border border-violet-200 dark:border-violet-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-rocket-line text-violet-600 mr-2"></i>
+                    Elevate Your Bidding Process
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                    Seamless Bidding Process Management for Increased Success Rates
+                </p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Gone are the days of manual data compilation and endless communication loops. 
+                    Our Virtual Bid Manager compiles and updates subcontractor and vendor contacts, 
+                    meticulously reviews project plans, and manages the entire bidding process.
+                </p>
+                <button onclick="openModal(1)" class="mt-2 text-violet-600 dark:text-violet-400 font-medium hover:text-violet-800 dark:hover:text-violet-300 inline-flex items-center cursor-pointer">
+                    Learn More About VBM <i class="ri-arrow-right-line ml-1"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Unleash Your Potential with a Virtual Bid Manager
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="virtual-card p-6 relative">
+                    <div class="vbm-badge" style="background: #06b6d4;" onclick="openModal(2)">Communication</div>
+                    <div class="feature-icon bg-cyan-100 dark:bg-cyan-900" onclick="openModal(2)">
+                        <i class="ri-chat-3-line text-cyan-600 dark:text-cyan-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Unmatched Communication</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Timely updates and seamless coordination keeping all parties informed and aligned throughout the bidding journey.
+                    </p>
+                    <button onclick="openModal(2)" class="text-violet-600 dark:text-violet-400 font-medium text-sm hover:text-violet-800 dark:hover:text-violet-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                
+                <div class="virtual-card p-6 relative">
+                    <div class="vbm-badge" onclick="openModal(3)">Analysis</div>
+                    <div class="feature-icon bg-violet-100 dark:bg-violet-900" onclick="openModal(3)">
+                        <i class="ri-line-chart-line text-violet-600 dark:text-violet-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Refined Bid Analysis</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Leverage historical bid data to refine your bidding strategies with in-depth analysis of past results.
+                    </p>
+                    <button onclick="openModal(3)" class="text-violet-600 dark:text-violet-400 font-medium text-sm hover:text-violet-800 dark:hover:text-violet-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                
+                <div class="virtual-card p-6 relative">
+                    <div class="vbm-badge" style="background: #10b981;" onclick="openModal(4)">SWOT</div>
+                    <div class="feature-icon bg-green-100 dark:bg-green-900" onclick="openModal(4)">
+                        <i class="ri-bar-chart-2-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Insightful SWOT Analysis</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Comprehensive strengths, weaknesses, opportunities, and threats analysis to empower your bidding strategies.
+                    </p>
+                    <button onclick="openModal(4)" class="text-violet-600 dark:text-violet-400 font-medium text-sm hover:text-violet-800 dark:hover:text-violet-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-flow-chart text-violet-600 mr-2"></i>
+                Our Virtual Bid Management Process
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="openModal(5)" class="virtual-card p-5 cursor-pointer">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-violet-100 dark:bg-violet-900 rounded-lg flex items-center justify-center mr-3 text-violet-600 dark:text-violet-400">
+                            <i class="ri-group-line"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Local Sub-Contractors</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Compile and update your network of subcontractors and vendors with ease.
+                    </p>
+                </div>
+
+                <div onclick="openModal(6)" class="virtual-card p-5 cursor-pointer">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-cyan-100 dark:bg-cyan-900 rounded-lg flex items-center justify-center mr-3 text-cyan-600 dark:text-cyan-400">
+                            <i class="ri-file-search-line"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Strategic Plan Review</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Meticulous review of project plans to identify projects with highest potential.
+                    </p>
+                </div>
+
+                <div onclick="openModal(7)" class="virtual-card p-5 cursor-pointer">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3 text-blue-600 dark:text-blue-400">
+                            <i class="ri-list-check-3"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Process Management</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Managing addendums, change orders, and ensuring timely communication.
+                    </p>
+                </div>
+
+                <div onclick="openModal(8)" class="virtual-card p-5 cursor-pointer">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3 text-green-600 dark:text-green-400">
+                            <i class="ri-lightbulb-flash-line"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Intelligent Strategies</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Data-driven strategies that enhance your bids and secure projects with higher margins.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SWOT Analysis - NEW MODERN DESIGN -->
+        <div class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Comprehensive SWOT Analysis
+            </h2>
+            <div class="swot-container">
+                <!-- Strengths Card -->
+                <div onclick="openModal(9)" class="swot-card strength">
+                    <div class="swot-header">
+                        <div class="swot-icon">
+                            <i class="ri-checkbox-circle-line"></i>
+                        </div>
+                        <div class="swot-title">STRENGTHS</div>
+                    </div>
+                    
+                    <div class="swot-stats">
+                        <div class="swot-stat">
+                            <div class="swot-stat-value">98%</div>
+                            <div class="swot-stat-label">Success Rate</div>
+                        </div>
+                        <div class="swot-stat">
+                            <div class="swot-stat-value">10+</div>
+                            <div class="swot-stat-label">Years Exp</div>
+                        </div>
+                    </div>
+                    
+                    <div class="swot-features">
+                        <div class="swot-feature">
+                            <i class="ri-check-line" style="color: #16a34a;"></i>
+                            <span>Specialized bid management expertise</span>
+                        </div>
+                        <div class="swot-feature">
+                            <i class="ri-check-line" style="color: #16a34a;"></i>
+                            <span>Advanced digital platform</span>
+                        </div>
+                        <div class="swot-feature">
+                            <i class="ri-check-line" style="color: #16a34a;"></i>
+                            <span>Professional certified team</span>
+                        </div>
+                    </div>
+                    
+                    <div class="swot-footer">
+                        <span class="text-sm font-medium opacity-75">Click to learn more</span>
+                        <div class="swot-action">
+                            View Details <i class="ri-arrow-right-line"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Weaknesses Card -->
+                <div onclick="openModal(10)" class="swot-card weakness">
+                    <div class="swot-header">
+                        <div class="swot-icon">
+                            <i class="ri-alert-line"></i>
+                        </div>
+                        <div class="swot-title">WEAKNESSES</div>
+                    </div>
+                    
+                    <div class="swot-stats">
+                        <div class="swot-stat">
+                            <div class="swot-stat-value">60%</div>
+                            <div class="swot-stat-label">Manual Process</div>
+                        </div>
+                        <div class="swot-stat">
+                            <div class="swot-stat-value">2x</div>
+                            <div class="swot-stat-label">Longer Time</div>
+                        </div>
+                    </div>
+                    
+                    <div class="swot-features">
+                        <div class="swot-feature">
+                            <i class="ri-close-line" style="color: #dc2626;"></i>
+                            <span>Manual bid processes without VBM</span>
+                        </div>
+                        <div class="swot-feature">
+                            <i class="ri-close-line" style="color: #dc2626;"></i>
+                            <span>Inconsistent communication</span>
+                        </div>
+                        <div class="swot-feature">
+                            <i class="ri-close-line" style="color: #dc2626;"></i>
+                            <span>Limited bid capacity</span>
+                        </div>
+                    </div>
+                    
+                    <div class="swot-footer">
+                        <span class="text-sm font-medium opacity-75">Click to learn more</span>
+                        <div class="swot-action">
+                            View Details <i class="ri-arrow-right-line"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Opportunities Card -->
+                <div onclick="openModal(11)" class="swot-card opportunity">
+                    <div class="swot-header">
+                        <div class="swot-icon">
+                            <i class="ri-guide-line"></i>
+                        </div>
+                        <div class="swot-title">OPPORTUNITIES</div>
+                    </div>
+                    
+                    <div class="swot-stats">
+                        <div class="swot-stat">
+                            <div class="swot-stat-value">+45%</div>
+                            <div class="swot-stat-label">Win Rate</div>
+                        </div>
+                        <div class="swot-stat">
+                            <div class="swot-stat-value">3x</div>
+                            <div class="swot-stat-label">More Bids</div>
+                        </div>
+                    </div>
+                    
+                    <div class="swot-features">
+                        <div class="swot-feature">
+                            <i class="ri-arrow-up-line" style="color: #2563eb;"></i>
+                            <span>Increased bid win rates</span>
+                        </div>
+                        <div class="swot-feature">
+                            <i class="ri-arrow-up-line" style="color: #2563eb;"></i>
+                            <span>Market expansion potential</span>
+                        </div>
+                        <div class="swot-feature">
+                            <i class="ri-arrow-up-line" style="color: #2563eb;"></i>
+                            <span>New client acquisition</span>
+                        </div>
+                    </div>
+                    
+                    <div class="swot-footer">
+                        <span class="text-sm font-medium opacity-75">Click to learn more</span>
+                        <div class="swot-action">
+                            View Details <i class="ri-arrow-right-line"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Threats Card -->
+                <div onclick="openModal(12)" class="swot-card threat">
+                    <div class="swot-header">
+                        <div class="swot-icon">
+                            <i class="ri-shield-cross-line"></i>
+                        </div>
+                        <div class="swot-title">THREATS</div>
+                    </div>
+                    
+                    <div class="swot-stats">
+                        <div class="swot-stat">
+                            <div class="swot-stat-value">25%</div>
+                            <div class="swot-stat-label">Competition</div>
+                        </div>
+                        <div class="swot-stat">
+                            <div class="swot-stat-value">5+</div>
+                            <div class="swot-stat-label">New Rivals</div>
+                        </div>
+                    </div>
+                    
+                    <div class="swot-features">
+                        <div class="swot-feature">
+                            <i class="ri-alert-line" style="color: #d97706;"></i>
+                            <span>Competitive market landscape</span>
+                        </div>
+                        <div class="swot-feature">
+                            <i class="ri-alert-line" style="color: #d97706;"></i>
+                            <span>Rising material costs</span>
+                        </div>
+                        <div class="swot-feature">
+                            <i class="ri-alert-line" style="color: #d97706;"></i>
+                            <span>Labor shortages</span>
+                        </div>
+                    </div>
+                    
+                    <div class="swot-footer">
+                        <span class="text-sm font-medium opacity-75">Click to learn more</span>
+                        <div class="swot-action">
+                            View Details <i class="ri-arrow-right-line"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Plans -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Choose Your Virtual Bid Management Plan
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div onclick="openModal(13)" class="plan-card virtual-card p-6 text-center cursor-pointer">
+                    <div class="inline-flex items-center px-4 py-1 bg-violet-100 dark:bg-violet-900 text-violet-800 dark:text-violet-300 rounded-full text-sm font-bold mb-4">
+                        <i class="ri-file-line mr-2"></i>
+                        Project Base
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Single Project</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Tailored for individual jobs with affordable per-project rates
+                    </p>
+                    <div class="text-3xl font-bold text-violet-600 dark:text-violet-400 mb-6">$499<span class="text-sm font-normal text-gray-500">/project</span></div>
+                    <ul class="space-y-2 mb-6 text-sm text-left">
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>One-time project management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Basic bid analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Subcontractor coordination</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div onclick="openModal(14)" class="plan-card virtual-card p-6 text-center popular cursor-pointer">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <span class="px-4 py-1 bg-gradient-to-r from-violet-600 to-cyan-600 text-white rounded-full text-sm font-bold">
+                            Most Popular
+                        </span>
+                    </div>
+                    <div class="inline-flex items-center px-4 py-1 bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-300 rounded-full text-sm font-bold mb-4 mt-4">
+                        <i class="ri-calendar-line mr-2"></i>
+                        Month Base
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Monthly Package</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        For businesses bidding on 3 to 4 projects per month
+                    </p>
+                    <div class="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-6">$1,299<span class="text-sm font-normal text-gray-500">/month</span></div>
+                    <ul class="space-y-2 mb-6 text-sm text-left">
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Up to 4 projects monthly</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Advanced bid analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>SWOT analysis included</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div onclick="openModal(15)" class="plan-card virtual-card p-6 text-center cursor-pointer">
+                    <div class="inline-flex items-center px-4 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 rounded-full text-sm font-bold mb-4">
+                        <i class="ri-star-line mr-2"></i>
+                        Dedicated
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Dedicated VBM</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        For companies bidding on 5 to 8 projects per month
+                    </p>
+                    <div class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-6">$2,499<span class="text-sm font-normal text-gray-500">/month</span></div>
+                    <ul class="space-y-2 mb-6 text-sm text-left">
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>5-8 projects monthly</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Dedicated bid manager</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Full SWOT & market analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>24/7 priority support</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">
+                Why Choose Virtual Bid Management?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="openModal(16)" class="virtual-card p-6 text-center cursor-pointer">
+                    <div class="feature-icon bg-violet-100 dark:bg-violet-900 mx-auto">
+                        <i class="ri-medal-line text-violet-600 dark:text-violet-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Specialized Expertise</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Data-driven bidding strategies that drive success</p>
+                </div>
+                
+                <div onclick="openModal(17)" class="virtual-card p-6 text-center cursor-pointer">
+                    <div class="feature-icon bg-green-100 dark:bg-green-900 mx-auto">
+                        <i class="ri-money-dollar-circle-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Cost-Effective</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">No full-time staff costs, maximize your ROI</p>
+                </div>
+                
+                <div onclick="openModal(18)" class="virtual-card p-6 text-center cursor-pointer">
+                    <div class="feature-icon bg-blue-100 dark:bg-blue-900 mx-auto">
+                        <i class="ri-time-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Time-Efficient</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Free up time to focus on business growth</p>
+                </div>
+                
+                <div onclick="openModal(19)" class="virtual-card p-6 text-center cursor-pointer">
+                    <div class="feature-icon bg-cyan-100 dark:bg-cyan-900 mx-auto">
+                        <i class="ri-cloud-line text-cyan-600 dark:text-cyan-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Flexible Support</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Remote expertise available when you need it</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-violet-600 to-cyan-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl">
+            <h3 class="text-2xl font-bold mb-4">Your Bid Management Revolution Starts Here</h3>
+            <p class="mb-6 opacity-90">Ready to revolutionize your bidding process? Get started today with professional bid management</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button onclick="openModal(20)" class="px-8 py-3 bg-white text-violet-700 font-bold rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                    Free Consultation
+                </button>
+                <button onclick="openModal(21)" class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+                    Choose Plan
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Virtual Bid Management Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content (keeping the same as before)
+        const serviceData = {
+            1: {
+                title: "Virtual Bid Management Overview",
+                content: `<p class="mb-4">At Benny Estimates, our Virtual Bid Management service streamlines the entire construction bidding process, helping contractors win more projects with less effort. Our experienced bid managers handle the complex coordination required for successful bids.</p>
+                <p class="mb-4">Virtual Bid Management (VBM) is a comprehensive service that manages your entire bidding process remotely. We compile subcontractor contacts, review project plans, coordinate addendums, and ensure timely communication throughout the bid period.</p>
+                <p class="mb-4">With VBM, you can focus on your core business while we handle the time-consuming task of bid coordination. Our service increases your bid capacity and improves win rates through professional management.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to learn how VBM can transform your bidding process.</p>`
+            },
+            2: {
+                title: "Unmatched Communication in Bid Management",
+                content: `<p class="mb-4">Communication is the cornerstone of successful bidding. Our Virtual Bid Management service provides timely updates and seamless coordination keeping all parties informed and aligned throughout the bidding journey.</p>
+                <p class="mb-4">We manage all communication between your team, subcontractors, vendors, and project owners. From initial bid inquiries to final submissions, we ensure everyone has the information they need when they need it.</p>
+                <p class="mb-4">Our communication protocols include regular status updates, automated reminders for bid deadlines, and centralized documentation of all bid-related correspondence. This eliminates confusion and reduces the risk of missed deadlines.</p>
+                <p>Effective communication leads to better bids and higher win rates. Let us handle the communication while you focus on winning projects.</p>`
+            },
+            3: {
+                title: "Refined Bid Analysis Services",
+                content: `<p class="mb-4">Data-driven bid analysis is essential for improving your win rates and profitability. Our Virtual Bid Management service leverages historical bid data to refine your bidding strategies with in-depth analysis of past results.</p>
+                <p class="mb-4">We analyze your win/loss patterns to identify what works and what doesn't. By understanding your competitive position, we help you focus on projects where you have the best chance of success.</p>
+                <p class="mb-4">Our analysis includes competitor assessment, pricing trends, and market conditions that affect bid outcomes. We provide actionable insights that improve your decision-making and increase your win rates.</p>
+                <p>Let our bid analysis expertise help you win more profitable work.</p>`
+            },
+            4: {
+                title: "Insightful SWOT Analysis for Bidding",
+                content: `<p class="mb-4">SWOT analysis is a powerful tool for understanding your competitive position. Our Virtual Bid Management service provides comprehensive strengths, weaknesses, opportunities, and threats analysis to empower your bidding strategies.</p>
+                <p class="mb-4">We assess your organization's capabilities relative to project requirements and competitor strengths. This analysis helps you identify projects where you have competitive advantages and those where you may struggle.</p>
+                <p class="mb-4">SWOT analysis also reveals opportunities for improvement in your bidding process and identifies threats that could undermine your success. We provide recommendations for addressing weaknesses and mitigating threats.</p>
+                <p>Contact us to learn how SWOT analysis can improve your bidding outcomes.</p>`
+            },
+            5: {
+                title: "Local Sub-Contractor Management",
+                content: `<p class="mb-4">Managing subcontractor relationships is critical for successful bidding. Our Virtual Bid Management service helps you compile and update your network of subcontractors and vendors with ease.</p>
+                <p class="mb-4">We maintain comprehensive databases of qualified subcontractors for all trades, ensuring you have access to reliable partners for every project. Our relationships with subcontractors facilitate competitive pricing and reliable performance.</p>
+                <p class="mb-4">We manage the entire subcontractor solicitation process, from initial invitations to quote collection and analysis. This saves you time and ensures you receive competitive pricing from qualified partners.</p>
+                <p>Let us handle subcontractor coordination while you focus on winning projects.</p>`
+            },
+            6: {
+                title: "Strategic Plan Review for Bidding",
+                content: `<p class="mb-4">Not all projects are worth bidding. Our Virtual Bid Management service provides strategic plan review to identify projects with the highest potential for success and profitability.</p>
+                <p class="mb-4">We analyze project plans, specifications, and requirements to assess your competitive position and the likelihood of winning. This helps you focus your bidding efforts on opportunities where you have the best chance of success.</p>
+                <p class="mb-4">Our strategic review considers project size, complexity, location, schedule, and your organization's capabilities relative to requirements. We provide recommendations on which projects to pursue and which to pass.</p>
+                <p>Strategic plan review improves your bid hit rate and saves valuable estimating resources.</p>`
+            },
+            7: {
+                title: "Bid Process Management",
+                content: `<p class="mb-4">Managing the bid process requires attention to detail and organizational skills. Our Virtual Bid Management service handles all aspects of process management including addendums, change orders, and ensuring timely communication.</p>
+                <p class="mb-4">We track all bid documents, addendums, and changes throughout the bid period, ensuring your team always works with current information. We coordinate with subcontractors and vendors to incorporate their pricing and scopes.</p>
+                <p class="mb-4">Our process management includes deadline tracking, submission coordination, and post-bid follow-up. We ensure your bids are complete, compliant, and submitted on time.</p>
+                <p>Professional process management reduces errors and improves bid quality.</p>`
+            },
+            8: {
+                title: "Intelligent Bidding Strategies",
+                content: `<p class="mb-4">Data-driven strategies enhance your bids and secure projects with higher margins. Our Virtual Bid Management service provides intelligent bidding strategies based on market analysis and historical performance.</p>
+                <p class="mb-4">We analyze market conditions, competitor behavior, and project characteristics to develop optimal bidding strategies. Our recommendations help you position your bids for success while maintaining profitability.</p>
+                <p class="mb-4">Intelligent bidding strategies consider factors like project timing, workload, strategic importance, and competitive landscape. We help you make informed decisions about pricing and approach.</p>
+                <p>Contact us to learn how intelligent bidding strategies can improve your win rates and margins.</p>`
+            },
+            9: {
+                title: "Strengths - Bid Management Expertise",
+                content: `<p class="mb-4">Our Virtual Bid Management service brings specialized bid management expertise to your organization. We have extensive experience across project types, markets, and bid requirements.</p>
+                <p class="mb-4">Strengths include our professional bid managers who understand the nuances of successful bidding. We bring best practices and proven methodologies to every client engagement.</p>
+                <p class="mb-4">Our technology platform supports efficient bid management, while our relationships with subcontractors facilitate competitive pricing. We continuously refine our approach based on results.</p>
+                <p>Let our strengths work for you through professional bid management.</p>`
+            },
+            10: {
+                title: "Weaknesses - Manual Bid Processes",
+                content: `<p class="mb-4">Manual bid processes without Virtual Bid Management create significant weaknesses in your bidding operation. These weaknesses can cost you projects and reduce profitability.</p>
+                <p class="mb-4">Manual processes are time-consuming, error-prone, and difficult to scale. They often result in missed deadlines, incomplete bids, and poor coordination with subcontractors.</p>
+                <p class="mb-4">Without professional bid management, you may struggle to compete effectively against firms with dedicated bid resources. Our VBM service addresses these weaknesses through professional management.</p>
+                <p>Overcome your bidding weaknesses with Virtual Bid Management from Benny Estimates.</p>`
+            },
+            11: {
+                title: "Opportunities - Increased Win Rates",
+                content: `<p class="mb-4">Virtual Bid Management creates significant opportunities for increased bid win rates. Professional management improves bid quality, coordination, and strategic positioning.</p>
+                <p class="mb-4">With VBM, you can bid on more projects while maintaining quality. Our efficient processes increase your bid capacity and improve your chances of success.</p>
+                <p class="mb-4">Improved win rates translate directly to business growth and increased revenue. VBM helps you capitalize on market opportunities that manual processes might miss.</p>
+                <p>Seize the opportunity to increase your win rates with Virtual Bid Management.</p>`
+            },
+            12: {
+                title: "Threats - Competitive Market Landscape",
+                content: `<p class="mb-4">The construction bidding landscape is increasingly competitive. Firms that fail to adapt risk losing market share to competitors with more sophisticated bid processes.</p>
+                <p class="mb-4">Competitors with dedicated bid management resources have advantages in speed, quality, and coordination. They can bid on more projects and submit higher-quality proposals.</p>
+                <p class="mb-4">Without professional bid management, you face the threat of being outmaneuvered by better-organized competitors. VBM helps you compete effectively in this challenging environment.</p>
+                <p>Protect your market position with Virtual Bid Management from Benny Estimates.</p>`
+            },
+            13: {
+                title: "Single Project Bid Management Plan",
+                content: `<p class="mb-4">Our Single Project plan provides comprehensive bid management for individual jobs with affordable per-project rates. Ideal for occasional bidders or firms testing our services.</p>
+                <p class="mb-4">This plan includes one-time project management, basic bid analysis, and subcontractor coordination for a single project. We handle all aspects of the bid process from start to finish.</p>
+                <p class="mb-4">The Single Project plan is perfect for firms that bid occasionally or want to experience the benefits of professional bid management before committing to a monthly package.</p>
+                <p>Contact us to learn more about our Single Project plan and how it can benefit your next bid.</p>`
+            },
+            14: {
+                title: "Monthly Virtual Bid Management Package",
+                content: `<p class="mb-4">Our Monthly Package is designed for businesses bidding on 3 to 4 projects per month. This comprehensive plan includes advanced bid analysis, SWOT analysis, and priority support.</p>
+                <p class="mb-4">With the Monthly Package, you get up to 4 projects managed monthly, advanced bid analysis using historical data, SWOT analysis for strategic insights, and priority support from our team.</p>
+                <p class="mb-4">This is our most popular plan, offering the best value for firms with regular bidding activity. The monthly subscription provides consistent, professional bid management support.</p>
+                <p>Choose the Monthly Package for comprehensive, ongoing bid management support.</p>`
+            },
+            15: {
+                title: "Dedicated Virtual Bid Manager Plan",
+                content: `<p class="mb-4">Our Dedicated VBM plan provides a dedicated bid manager for companies bidding on 5 to 8 projects per month. This premium service includes full SWOT analysis, market analysis, and 24/7 priority support.</p>
+                <p class="mb-4">With a dedicated bid manager, you get personalized attention and deep understanding of your business. Your dedicated manager learns your preferences, strengths, and strategic goals.</p>
+                <p class="mb-4">This plan includes unlimited project management within the monthly volume, comprehensive market analysis, and round-the-clock support when you need it.</p>
+                <p>Contact us to learn how our Dedicated VBM plan can transform your bidding operation.</p>`
+            },
+            16: {
+                title: "Specialized Bid Management Expertise",
+                content: `<p class="mb-4">Our team brings specialized expertise in construction bid management. We understand the nuances of successful bidding across project types and markets.</p>
+                <p class="mb-4">With years of experience in the construction industry, our bid managers bring insights that improve your win rates. We stay current with market trends and best practices.</p>
+                <p class="mb-4">Specialized expertise means we can help you navigate complex bid requirements, coordinate effectively with subcontractors, and present your capabilities persuasively.</p>
+                <p>Trust our specialized expertise to improve your bidding success.</p>`
+            },
+            17: {
+                title: "Cost-Effective Bid Management",
+                content: `<p class="mb-4">Virtual Bid Management is a cost-effective alternative to hiring full-time bid staff. You get professional bid management without the overhead of additional employees.</p>
+                <p class="mb-4">Our flexible plans let you scale services based on your bidding volume, paying only for what you need. This maximizes your return on investment and improves profitability.</p>
+                <p class="mb-4">With VBM, you avoid costs associated with recruitment, training, benefits, and overhead. You get professional expertise exactly when you need it.</p>
+                <p>Choose cost-effective bid management with Benny Estimates VBM.</p>`
+            },
+            18: {
+                title: "Time-Efficient Bid Management",
+                content: `<p class="mb-4">Time is your most valuable resource. Virtual Bid Management frees up your time to focus on business growth, project execution, and strategic priorities.</p>
+                <p class="mb-4">Our bid managers handle the time-consuming tasks of subcontractor coordination, document management, and bid assembly. This saves your team countless hours each week.</p>
+                <p class="mb-4">With VBM, you can bid on more projects without increasing your internal workload. Our efficient processes maximize your bid capacity while maintaining quality.</p>
+                <p>Reclaim your time with Virtual Bid Management from Benny Estimates.</p>`
+            },
+            19: {
+                title: "Flexible Support for Bid Management",
+                content: `<p class="mb-4">Our Virtual Bid Management service provides flexible support that adapts to your needs. Whether you need occasional assistance or ongoing management, we're here to help.</p>
+                <p class="mb-4">Flexible support means you can scale services up or down based on your bidding volume. We work with you to provide the right level of support for your business.</p>
+                <p class="mb-4">Our remote expertise is available when you need it, without the constraints of in-house staffing. This flexibility helps you manage workload fluctuations efficiently.</p>
+                <p>Experience flexible bid management support with Benny Estimates.</p>`
+            },
+            20: {
+                title: "Free Consultation - Virtual Bid Management",
+                content: `<p class="mb-4">Ready to transform your bidding process? Schedule a free consultation with our bid management experts. We'll discuss your current process and how VBM can improve your results.</p>
+                <p class="mb-4">During your consultation, we'll learn about your bidding volume, challenges, and goals. We'll provide recommendations for implementing VBM in your organization.</p>
+                <p class="mb-4">Our consultations are no-obligation and tailored to your specific situation. We'll help you understand the potential benefits of professional bid management.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to schedule your free consultation.</p>`
+            },
+            21: {
+                title: "Choose Your VBM Plan",
+                content: `<p class="mb-4">Ready to get started with Virtual Bid Management? Choose the plan that best fits your needs. Our team will help you implement VBM and start winning more projects.</p>
+                <p class="mb-4">We offer three plans tailored to different bidding volumes. Each plan includes professional bid management, subcontractor coordination, and strategic analysis.</p>
+                <p class="mb-4">Our team will work with you to select the right plan and get started quickly. We provide onboarding support to ensure a smooth transition to professional bid management.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to choose your plan.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const themeEmoji = document.getElementById('themeEmoji');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText, themeEmoji);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText, themeEmoji) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                        if (themeEmoji) themeEmoji.textContent = '☀️';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                        if (themeEmoji) themeEmoji.textContent = '🌙';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText, themeEmoji);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+
+        // Animate SWOT items on scroll
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const swotItems = entry.target.querySelectorAll('.swot-card');
+                    swotItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Set initial styles for SWOT items
+        document.querySelectorAll('.swot-card').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        // Observe SWOT section
+        const swotSection = document.querySelector('.swot-container');
+        if (swotSection) {
+            observer.observe(swotSection);
+        }
+
+        console.log('Virtual Bid Management Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

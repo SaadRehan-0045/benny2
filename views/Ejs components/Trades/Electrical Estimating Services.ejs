@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Estimating Services - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        electric: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'spark': 'spark 2s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        spark: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Electrical theme styling */
+        .electric-gradient {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+        }
+        
+        .dark .electric-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        }
+        
+        .spark-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spark-border:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #0ea5e9, transparent);
+            animation: sparkLine 3s infinite;
+        }
+        
+        @keyframes sparkLine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Electric card hover effect */
+        .electric-card {
+            border-left: 4px solid #0ea5e9;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .electric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.15);
+        }
+        
+        .dark .electric-card:hover {
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3);
+        }
+        
+        /* Circuit pattern background */
+        .circuit-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(14, 165, 233, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .electric-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+
+        /* New button color - orange theme */
+        .btn-upload {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+            border: none;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-upload:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4) !important;
+        }
+        
+        .dark .btn-upload {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+        
+        .dark .btn-upload:hover {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        }
+
+        /* Benefits cards with black/white detection */
+        .benefit-card {
+            background-color: #ffffff;
+            border: 2px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+        
+        .dark .benefit-card {
+            background-color: #1f2937;
+            border-color: #374151;
+        }
+        
+        .benefit-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: #f97316;
+        }
+        
+        .benefit-title {
+            color: #0f172a !important;
+            font-weight: 700;
+        }
+        
+        .dark .benefit-title {
+            color: #f8fafc !important;
+        }
+        
+        .benefit-text {
+            color: #334155 !important;
+        }
+        
+        .dark .benefit-text {
+            color: #cbd5e1 !important;
+        }
+
+        /* Force Tailwind colors to apply */
+        .text-electric-600 {
+            color: #0284c7 !important;
+        }
+        .dark .text-electric-400 {
+            color: #38bdf8 !important;
+        }
+        .bg-electric-600 {
+            background-color: #0284c7 !important;
+        }
+        .bg-electric-600:hover {
+            background-color: #0369a1 !important;
+        }
+        .bg-electric-100 {
+            background-color: #e0f2fe !important;
+        }
+        .dark .bg-electric-900 {
+            background-color: #0c4a6e !important;
+        }
+    </style>
+</head>
+<!-- Header Include - ABOVE BODY TAG -->
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                    Electrical Estimating Services
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-electric-600 dark:text-electric-400">
+                    Professional Electrical Cost Estimation Solutions
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                    <div class="electric-gradient text-white p-6 rounded-2xl shadow-xl mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Uplead Plan & Get 30% Off Estimate!</h3>
+                        <p class="mb-4">
+                            Our team of experienced estimators is dedicated to providing accurate cost estimates for your electrical projects. With our expertise and attention to detail, we ensure that your estimates are precise.
+                        </p>
+                        <button onclick="openModal(1)" class="btn-upload px-6 py-3 rounded-lg font-semibold transition duration-300 mt-4 animate-spark cursor-pointer">
+                            Upload Your Plans Now
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-electric-100 dark:bg-electric-900 p-3 rounded-lg mr-4">
+                                <i class="ri-flashlight-fill text-electric-600 dark:text-electric-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Industry-Leading Software</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">ConEst, Planswift, Accubid & Bluebeam</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            We specialize in providing exceptional Electrical Estimating Services to contractors, engineers, vendors, and homeowners across residential, commercial, and industrial projects.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Electrical Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Electrical estimating and construction" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Residential Electrical Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Residential Electrical Estimating</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+                        For electricians and electrical traders involved in residential projects, our services offer invaluable support. We provide detailed estimates for everything from improvements and additions to new homes, apartments, eco-homes, and smart homes.
+                    </p>
+                    
+                    <div class="bg-electric-50 dark:bg-gray-800 p-6 rounded-xl border-l-4 border-electric-500 mb-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">We Cover All Electrical Systems:</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div onclick="openModal(2)" class="flex items-center cursor-pointer hover:text-electric-600 dark:hover:text-electric-400">
+                                <i class="ri-check-line text-electric-600 dark:text-electric-400 mr-2"></i>
+                                <span class="text-gray-700 dark:text-gray-300">Lighting Systems</span>
+                            </div>
+                            <div onclick="openModal(3)" class="flex items-center cursor-pointer hover:text-electric-600 dark:hover:text-electric-400">
+                                <i class="ri-check-line text-electric-600 dark:text-electric-400 mr-2"></i>
+                                <span class="text-gray-700 dark:text-gray-300">Home Security</span>
+                            </div>
+                            <div onclick="openModal(4)" class="flex items-center cursor-pointer hover:text-electric-600 dark:hover:text-electric-400">
+                                <i class="ri-check-line text-electric-600 dark:text-electric-400 mr-2"></i>
+                                <span class="text-gray-700 dark:text-gray-300">Solar Panels</span>
+                            </div>
+                            <div onclick="openModal(5)" class="flex items-center cursor-pointer hover:text-electric-600 dark:hover:text-electric-400">
+                                <i class="ri-check-line text-electric-600 dark:text-electric-400 mr-2"></i>
+                                <span class="text-gray-700 dark:text-gray-300">HVAC Systems</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div onclick="openModal(6)" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+                    <div class="text-electric-600 dark:text-electric-400 text-4xl mb-4">
+                        <i class="ri-home-wifi-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Complete Coverage</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        We cover all aspects including power transmission lines, service panels, electric meters, wiring, switches, lighting, and more.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-electric-500 rounded-full mr-3"></div>
+                            <span>Building Automation Systems</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-electric-500 rounded-full mr-3"></div>
+                            <span>Network & Communication Systems</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-electric-500 rounded-full mr-3"></div>
+                            <span>Electric Heating Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Estimators Section -->
+        <section class="mb-16 circuit-bg p-8 rounded-2xl">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Expert Electrical Estimators</h2>
+                <p class="text-xl text-gray-700 dark:text-gray-300">
+                    Quick, Accurate, and Detailed Estimates for Winning More Bids
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div onclick="openModal(7)" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm electric-card cursor-pointer">
+                    <div class="text-electric-600 dark:text-electric-400 text-4xl mb-4">
+                        <i class="ri-award-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Industry Expertise</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Our team stands out with expertise, proficiency, and up-to-date electrical estimating software.
+                    </p>
+                </div>
+                
+                <div onclick="openModal(8)" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm electric-card cursor-pointer">
+                    <div class="text-electric-600 dark:text-electric-400 text-4xl mb-4">
+                        <i class="ri-user-star-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Independent Estimators</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Unbiased evaluations ensuring accurate, reliable estimates tailored to your specific project.
+                    </p>
+                </div>
+                
+                <div onclick="openModal(9)" class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm electric-card cursor-pointer">
+                    <div class="text-electric-600 dark:text-electric-400 text-4xl mb-4">
+                        <i class="ri-line-chart-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Increased Win Rate</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Gain an edge in the industry, increasing your chances of winning more bids and securing projects.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How To Outsource Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">How To Outsource Your Electrical Projects?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div onclick="openModal(10)" class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+                    <div class="w-20 h-20 bg-electric-100 dark:bg-electric-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-upload-cloud-2-fill text-electric-600 dark:text-electric-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Start with Ease</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Upload Your Plans in multiple formats</p>
+                    <button onclick="openModal(10)" class="bg-electric-600 hover:bg-electric-700 text-white px-4 py-2 rounded-lg text-sm transition duration-300 cursor-pointer">
+                        Upload Plans Here!
+                    </button>
+                </div>
+                
+                <div onclick="openModal(11)" class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+                    <div class="w-20 h-20 bg-electric-100 dark:bg-electric-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-price-tag-3-fill text-electric-600 dark:text-electric-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Get Quick Quote</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Receive transparent, competitive pricing</p>
+                    <div class="text-electric-600 dark:text-electric-400 font-bold text-lg">24-48 Hour Turnaround</div>
+                </div>
+                
+                <div onclick="openModal(12)" class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg cursor-pointer hover:shadow-xl transition-shadow">
+                    <div class="w-20 h-20 bg-electric-100 dark:bg-electric-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-file-text-fill text-electric-600 dark:text-electric-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Professional Proposals</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Detailed bids for your success</p>
+                    <div class="text-electric-600 dark:text-electric-400 font-bold text-lg">Win More Projects</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section - UPDATED with black/white text detection -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Experience the Benefits of Professional Electrical Estimating</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div onclick="openModal(13)" class="benefit-card p-6 rounded-xl cursor-pointer">
+                    <div class="text-4xl mb-4 text-electric-600 dark:text-electric-400">
+                        <i class="ri-check-double-fill"></i>
+                    </div>
+                    <h4 class="benefit-title text-lg mb-2">Accuracy & Reliability</h4>
+                    <p class="benefit-text text-sm">Precise estimates you can trust</p>
+                </div>
+                
+                <div onclick="openModal(14)" class="benefit-card p-6 rounded-xl cursor-pointer">
+                    <div class="text-4xl mb-4 text-electric-600 dark:text-electric-400">
+                        <i class="ri-time-fill"></i>
+                    </div>
+                    <h4 class="benefit-title text-lg mb-2">Timely Delivery</h4>
+                    <p class="benefit-text text-sm">48-hour top-notch services</p>
+                </div>
+                
+                <div onclick="openModal(15)" class="benefit-card p-6 rounded-xl cursor-pointer">
+                    <div class="text-4xl mb-4 text-electric-600 dark:text-electric-400">
+                        <i class="ri-money-dollar-circle-fill"></i>
+                    </div>
+                    <h4 class="benefit-title text-lg mb-2">Cost-Effective</h4>
+                    <p class="benefit-text text-sm">Save up to 50% on estimates</p>
+                </div>
+                
+                <!-- 24/7 Support - KEPT but with updated styling -->
+                <div onclick="openModal(16)" class="benefit-card p-6 rounded-xl cursor-pointer">
+                    <div class="text-4xl mb-4 text-electric-600 dark:text-electric-400">
+                        <i class="ri-customer-service-2-fill"></i>
+                    </div>
+                    <h4 class="benefit-title text-lg mb-2">24/7 Support</h4>
+                    <p class="benefit-text text-sm">Exceptional customer service</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- We Work With Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">We Work With</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div onclick="openModal(17)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-electric-400 dark:hover:border-electric-500 transition-colors">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-building-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">General Contractors</span>
+                </div>
+                
+                <div onclick="openModal(18)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-electric-400 dark:hover:border-electric-500 transition-colors">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-flashlight-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Electrical Contractors</span>
+                </div>
+                
+                <div onclick="openModal(19)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-electric-400 dark:hover:border-electric-500 transition-colors">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-battery-low-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Low Voltage Contractors</span>
+                </div>
+                
+                <div onclick="openModal(20)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-electric-400 dark:hover:border-electric-500 transition-colors">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-temp-hot-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">HVAC Contractors</span>
+                </div>
+                
+                <div onclick="openModal(21)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-electric-400 dark:hover:border-electric-500 transition-colors">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-cpu-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">EPC Contractors</span>
+                </div>
+                
+                <div onclick="openModal(22)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-electric-400 dark:hover:border-electric-500 transition-colors">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-settings-5-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Instrumentation Contractors</span>
+                </div>
+                
+                <div onclick="openModal(23)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-electric-400 dark:hover:border-electric-500 transition-colors">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-tools-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Electricians</span>
+                </div>
+                
+                <div onclick="openModal(24)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 cursor-pointer hover:border-electric-400 dark:hover:border-electric-500 transition-colors">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-store-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Electrical Vendors</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transform CTA -->
+        <section class="mb-16 text-center">
+            <div class="bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-700 dark:to-pink-800 text-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-3xl font-bold mb-6">Transform Your Construction Game</h3>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Partner with us for accurate and comprehensive Electrical Estimating Services. Make informed decisions, optimize budgets, and successfully complete your projects.
+                </p>
+                <button onclick="openModal(25)" class="bg-white text-purple-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 cursor-pointer">
+                    Request a Quote Now!
+                </button>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Complete electrical estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div onclick="openModal(26)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Sydney</span>
+                        </div>
+                        <div onclick="openModal(27)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div onclick="openModal(28)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Brisbane</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-red-600 dark:text-red-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Nationwide electrical estimating</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div onclick="openModal(29)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div onclick="openModal(30)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Commercial Projects</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Expertise</span>
+                        </div>
+                        <div onclick="openModal(31)" class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors">
+                            <span class="font-medium">Industrial Systems</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Specialized</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <button onclick="openModal(32)" class="inline-flex items-center text-electric-600 dark:text-electric-400 hover:text-electric-700 dark:hover:text-electric-300 font-semibold cursor-pointer">
+                    <i class="ri-folder-open-fill mr-2"></i>
+                    Explore our diverse portfolio to gain an understanding of our project exposure
+                </button>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Electrical Estimating Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content (keeping all the same content)
+        const serviceData = {
+            1: {
+                title: "Upload Your Electrical Plans",
+                content: `<p class="mb-4">Ready to get started with your electrical estimate? Upload your plans, blueprints, or specifications through our secure platform. We accept PDF, CAD, and BIM formats.</p>
+                <p class="mb-4">Our expert estimators will review your project and provide a comprehensive electrical estimate within 24-48 hours. Your estimate includes detailed material takeoffs, labor costs, and budget projections.</p>
+                <p class="mb-4">We analyze all electrical components including lighting systems, power distribution, controls, and specialty systems to ensure nothing is overlooked.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to discuss your electrical project needs.</p>`
+            },
+            2: {
+                title: "Lighting Systems Estimating",
+                content: `<p class="mb-4">Our lighting systems estimating service provides detailed cost analysis for all types of lighting installations. From residential to commercial and industrial applications, we ensure accurate material quantities and labor costs.</p>
+                <p class="mb-4">We analyze lighting fixture specifications, control systems, wiring requirements, and installation complexity. Our estimates help you budget accurately for lighting projects of any scale.</p>
+                <p class="mb-4">Whether you're planning interior lighting, exterior lighting, or specialty lighting systems, our estimates provide the detail you need for successful project planning.</p>
+                <p>Contact us for specialized lighting system estimating for your electrical project.</p>`
+            },
+            3: {
+                title: "Home Security Systems Estimating",
+                content: `<p class="mb-4">Home security systems require specialized estimating expertise. Our service provides detailed cost analysis for security cameras, alarm systems, access control, and monitoring equipment.</p>
+                <p class="mb-4">We quantify all components including sensors, control panels, wiring, and installation requirements. Our estimates account for system complexity and integration requirements.</p>
+                <p class="mb-4">Accurate security system estimates help you budget effectively and ensure your projects meet client expectations for safety and functionality.</p>
+                <p>Contact us for specialized home security system estimating.</p>`
+            },
+            4: {
+                title: "Solar Panel Systems Estimating",
+                content: `<p class="mb-4">Solar panel installations require specialized estimating knowledge. Our service provides detailed cost analysis for photovoltaic systems, including panels, inverters, mounting hardware, and electrical connections.</p>
+                <p class="mb-4">We account for system size, panel efficiency, installation complexity, and local utility requirements. Our estimates help you understand the complete cost of solar installations.</p>
+                <p class="mb-4">With growing demand for renewable energy, accurate solar estimates are essential for successful projects. Let our expertise support your solar installation business.</p>
+                <p>Contact us for specialized solar panel estimating services.</p>`
+            },
+            5: {
+                title: "HVAC Systems Electrical Estimating",
+                content: `<p class="mb-4">HVAC systems have significant electrical requirements that must be accurately estimated. Our service provides detailed cost analysis for all HVAC electrical components including power connections, controls, and wiring.</p>
+                <p class="mb-4">We analyze equipment specifications, control system requirements, and installation complexity to ensure comprehensive estimates. Our work helps you avoid costly surprises during installation.</p>
+                <p class="mb-4">Whether you're installing residential HVAC systems or complex commercial applications, our estimates provide the detail you need for successful project execution.</p>
+                <p>Contact us for specialized HVAC electrical estimating.</p>`
+            },
+            6: {
+                title: "Complete Electrical Coverage",
+                content: `<p class="mb-4">Our electrical estimating service provides complete coverage for all electrical systems in your project. We analyze power transmission lines, service panels, electric meters, wiring, switches, lighting, and specialty systems.</p>
+                <p class="mb-4">We cover building automation systems, network and communication systems, and electric heating systems. Our comprehensive approach ensures no electrical component is overlooked in your estimate.</p>
+                <p class="mb-4">Whether you're working on residential, commercial, or industrial projects, our complete electrical estimates provide the foundation for successful bidding and project execution.</p>
+                <p>Contact us to discuss your complete electrical estimating needs.</p>`
+            },
+            7: {
+                title: "Industry Expertise in Electrical Estimating",
+                content: `<p class="mb-4">Our team stands out with expertise, proficiency, and up-to-date electrical estimating software. We stay current with industry standards, code requirements, and best practices.</p>
+                <p class="mb-4">With years of experience in electrical construction, our estimators understand the nuances that affect costs. We identify opportunities and risks that others might miss.</p>
+                <p class="mb-4">Our expertise ensures your electrical estimates are accurate, competitive, and comprehensive. We help you win more bids and execute projects profitably.</p>
+                <p>Trust Benny Estimates for industry-leading electrical estimating expertise.</p>`
+            },
+            8: {
+                title: "Independent Estimators for Unbiased Evaluations",
+                content: `<p class="mb-4">Our independent estimators provide unbiased evaluations ensuring accurate, reliable estimates tailored to your specific project. We have no vested interest in material suppliers or contractors.</p>
+                <p class="mb-4">Independent estimating means you get objective cost analysis based on real market conditions, not inflated numbers or preferential treatment. Our estimates reflect true project costs.</p>
+                <p class="mb-4">Whether you're evaluating bids, planning budgets, or seeking competitive advantage, our independent estimates provide the objective information you need.</p>
+                <p>Contact us for unbiased electrical estimating services.</p>`
+            },
+            9: {
+                title: "Increased Win Rate with Professional Estimating",
+                content: `<p class="mb-4">Professional estimating support helps you gain an edge in the industry, increasing your chances of winning more bids and securing projects. Our accurate estimates improve your competitive position.</p>
+                <p class="mb-4">With better estimates, you can bid more competitively while maintaining profitability. Our analysis helps you understand where to position your bids for success.</p>
+                <p class="mb-4">Don't let estimating accuracy limit your growth. Let Benny Estimates help you win more electrical projects with professional estimating support.</p>
+                <p>Contact us to learn how we can improve your bid win rate.</p>`
+            },
+            10: {
+                title: "Start with Ease - Upload Your Plans",
+                content: `<p class="mb-4">Getting started with your electrical estimate is easy. Simply upload your plans, drawings, or specifications through our secure platform. We accept PDF, CAD, and BIM formats.</p>
+                <p class="mb-4">Include as much information as possible about your project, including scope, materials, and any special requirements. Even preliminary drawings can be used for early-stage estimates.</p>
+                <p class="mb-4">Once we receive your plans, we'll acknowledge receipt and provide an estimated timeline for your estimate. Most electrical estimates are completed within 24-48 hours.</p>
+                <p>Ready to begin? Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> to submit your plans today.</p>`
+            },
+            11: {
+                title: "Get Quick Quote for Electrical Estimates",
+                content: `<p class="mb-4">After reviewing your project requirements, we provide a transparent quote for our estimating services. Our quotes are based on project scope and complexity with competitive pricing.</p>
+                <p class="mb-4">We offer options for different levels of detail based on your needs, from preliminary budgets to detailed construction estimates. Our quotes include expected delivery timelines.</p>
+                <p class="mb-4">Once you approve the quote, we begin work on your estimate immediately. Most electrical estimates are completed within 24-48 hours, with complex projects scheduled accordingly.</p>
+                <p>Contact us to receive your personalized quote for electrical estimating services.</p>`
+            },
+            12: {
+                title: "Professional Proposals for Electrical Projects",
+                content: `<p class="mb-4">Your completed electrical estimate includes comprehensive cost breakdowns for all project components. We provide detailed material quantities, labor estimates, equipment requirements, and cost projections.</p>
+                <p class="mb-4">Estimates are delivered in clear, organized formats that are easy to understand and present to clients, lenders, or project stakeholders. We include supporting documentation and assumptions.</p>
+                <p class="mb-4">After delivery, we're available to answer questions and provide additional information as needed. We stand behind our estimates and support you throughout your project planning process.</p>
+                <p>Contact us today to receive your comprehensive electrical estimate.</p>`
+            },
+            13: {
+                title: "Accuracy & Reliability in Electrical Estimating",
+                content: `<p class="mb-4">Our estimates are known for accuracy and reliability. We provide precise estimates you can trust for your electrical projects. Every detail is meticulously calculated and verified.</p>
+                <p class="mb-4">Accuracy in electrical estimating is essential for successful project planning and execution. Our estimates help you avoid cost overruns and make informed decisions.</p>
+                <p class="mb-4">We provide detailed breakdowns that make it easy to understand where costs are allocated, supporting transparent communication with clients and stakeholders.</p>
+                <p>When you need reliable electrical estimates, Benny Estimates delivers the accuracy you can count on.</p>`
+            },
+            14: {
+                title: "Timely Delivery of Electrical Estimates",
+                content: `<p class="mb-4">We understand that construction projects operate on tight schedules. That's why we deliver most electrical estimates within 24-48 hours of receiving complete project information.</p>
+                <p class="mb-4">Our streamlined estimating process combines experienced estimators with advanced technology to deliver results quickly without sacrificing accuracy.</p>
+                <p class="mb-4">When you need estimates fast, Benny Estimates delivers the speed you need without compromising on accuracy or detail.</p>
+                <p>Contact us for timely electrical estimating for your next project.</p>`
+            },
+            15: {
+                title: "Cost-Effective Electrical Estimating",
+                content: `<p class="mb-4">Our estimating services are cost-effective compared to maintaining in-house estimating capabilities. You get professional estimates without the overhead of dedicated staff and software.</p>
+                <p class="mb-4">With savings up to 50% compared to in-house estimating, our services maximize your return on investment. You pay only for the estimates you need, when you need them.</p>
+                <p class="mb-4">Cost-effective estimating helps you maintain profitability while expanding your bidding capacity. Let us provide the estimates you need at a price you can afford.</p>
+                <p>Contact us to learn how our cost-effective solutions can benefit your electrical business.</p>`
+            },
+            16: {
+                title: "24/7 Customer Support for Electrical Estimating",
+                content: `<p class="mb-4">Our team is available around the clock to answer questions and provide support for your estimating needs. We understand that construction never sleeps, and neither do we.</p>
+                <p class="mb-4">Whether you have questions about an estimate, need to submit plans, or require urgent support, our team is always available to help. We're committed to your success.</p>
+                <p class="mb-4">24/7 support means you can work on your schedule and get the help you need when you need it most.</p>
+                <p>Contact us anytime at <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> or email <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a>.</p>`
+            },
+            17: {
+                title: "Estimating for General Contractors",
+                content: `<p class="mb-4">General contractors rely on accurate electrical estimates for successful project delivery. Our estimating services provide the detailed information you need for competitive bidding and project management.</p>
+                <p class="mb-4">We understand the unique requirements of general contractors including coordination with multiple trades, comprehensive project coverage, and reliable cost data.</p>
+                <p class="mb-4">Our estimates support your bidding process and help you manage electrical subcontractors effectively. Let us provide the electrical estimating support you need.</p>
+                <p>Contact us to discuss your general contracting electrical estimating needs.</p>`
+            },
+            18: {
+                title: "Estimating for Electrical Contractors",
+                content: `<p class="mb-4">Electrical contractors need accurate estimates to win work and deliver profitable projects. Our estimating services provide the detailed information you need for successful bidding.</p>
+                <p class="mb-4">We understand the electrical trade thoroughly, from residential wiring to complex industrial systems. Our estimates reflect real-world costs and installation requirements.</p>
+                <p class="mb-4">With professional estimating support, you can bid on more projects and improve your win rate. Let us handle the estimates while you focus on installation.</p>
+                <p>Contact us for specialized estimating support for electrical contractors.</p>`
+            },
+            19: {
+                title: "Estimating for Low Voltage Contractors",
+                content: `<p class="mb-4">Low voltage systems require specialized estimating knowledge. Our service provides detailed cost analysis for data cabling, security systems, audio-visual installations, and control systems.</p>
+                <p class="mb-4">We quantify all components including cabling, devices, racks, and installation labor. Our estimates account for system complexity and integration requirements.</p>
+                <p class="mb-4">Accurate low voltage estimates help you bid competitively and deliver profitable projects. Let our expertise support your low voltage contracting business.</p>
+                <p>Contact us for specialized low voltage estimating services.</p>`
+            },
+            20: {
+                title: "Estimating for HVAC Contractors",
+                content: `<p class="mb-4">HVAC systems have significant electrical requirements that must be accurately estimated. Our service provides detailed cost analysis for all HVAC electrical components.</p>
+                <p class="mb-4">We analyze equipment power requirements, control systems, and installation complexity to ensure comprehensive estimates. Our work helps you avoid costly surprises during installation.</p>
+                <p class="mb-4">Whether you're installing residential HVAC systems or complex commercial applications, our estimates provide the detail you need for successful project execution.</p>
+                <p>Contact us for specialized HVAC electrical estimating support.</p>`
+            },
+            21: {
+                title: "Estimating for EPC Contractors",
+                content: `<p class="mb-4">EPC (Engineering, Procurement, Construction) contractors need comprehensive electrical estimates for large-scale projects. Our service provides the detailed cost analysis you need.</p>
+                <p class="mb-4">We handle complex electrical systems including power distribution, controls, instrumentation, and specialty systems. Our estimates support your engineering and procurement decisions.</p>
+                <p class="mb-4">With professional estimating support, you can prepare competitive bids and manage project costs effectively. Let us provide the electrical estimating expertise you need.</p>
+                <p>Contact us to discuss your EPC project electrical estimating needs.</p>`
+            },
+            22: {
+                title: "Estimating for Instrumentation Contractors",
+                content: `<p class="mb-4">Instrumentation systems require precise estimating for successful project delivery. Our service provides detailed cost analysis for all instrumentation components and installation requirements.</p>
+                <p class="mb-4">We quantify instruments, controls, wiring, and installation labor. Our estimates account for system complexity and calibration requirements.</p>
+                <p class="mb-4">Accurate instrumentation estimates help you bid competitively and deliver profitable projects. Let our expertise support your instrumentation contracting business.</p>
+                <p>Contact us for specialized instrumentation estimating services.</p>`
+            },
+            23: {
+                title: "Estimating for Electricians",
+                content: `<p class="mb-4">Electricians need accurate estimates for successful project bidding and execution. Our estimating services provide the detailed information you need for all types of electrical work.</p>
+                <p class="mb-4">From residential service upgrades to commercial installations, our estimates reflect real-world costs and installation requirements. We help you bid with confidence.</p>
+                <p class="mb-4">With professional estimating support, you can focus on installation while we handle the complex calculations. Let us provide the estimates you need to grow your business.</p>
+                <p>Contact us for estimating support for your electrical business.</p>`
+            },
+            24: {
+                title: "Estimating for Electrical Vendors",
+                content: `<p class="mb-4">Electrical vendors need accurate takeoffs to support contractor quotes and material planning. Our estimating service provides detailed material quantity reports for your projects.</p>
+                <p class="mb-4">We quantify all electrical materials from plans and specifications, providing accurate counts for ordering and quoting. Our reports help you serve contractor clients effectively.</p>
+                <p class="mb-4">With professional takeoff support, you can provide better service to your customers and improve your business efficiency.</p>
+                <p>Contact us for electrical material takeoff services for vendors.</p>`
+            },
+            25: {
+                title: "Request an Electrical Quote",
+                content: `<p class="mb-4">Ready to discuss your electrical project and request a quote for estimating services? Contact our team today. We'll discuss your project requirements and provide transparent pricing.</p>
+                <p class="mb-4">We offer competitive rates for electrical estimates, with options for different levels of detail based on your needs. Our quotes include expected delivery timelines.</p>
+                <p class="mb-4">Whether you need a preliminary budget estimate for feasibility analysis or a detailed construction estimate for bidding, we can structure services to meet your needs.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to request your electrical quote.</p>`
+            },
+            26: {
+                title: "Electrical Estimating in New South Wales",
+                content: `<p class="mb-4">Benny Estimates provides comprehensive electrical estimating services throughout New South Wales, Australia. Our team understands the local construction market and requirements.</p>
+                <p class="mb-4">We serve clients in Sydney and regional NSW, providing accurate electrical estimates that reflect local market conditions, building codes, and material availability.</p>
+                <p class="mb-4">Whether you're planning residential, commercial, or industrial electrical projects in New South Wales, our estimates provide the accuracy you need.</p>
+                <p>Contact us to discuss your New South Wales electrical project and estimating needs.</p>`
+            },
+            27: {
+                title: "Electrical Estimating in Victoria",
+                content: `<p class="mb-4">Victoria's electrical construction sector includes diverse projects from residential wiring to commercial installations. Benny Estimates provides comprehensive estimating services throughout Victoria.</p>
+                <p class="mb-4">We serve clients in Melbourne and regional Victoria, providing accurate electrical estimates that reflect local market conditions. Our estimators understand Victorian construction requirements.</p>
+                <p class="mb-4">From residential to commercial electrical systems, our estimates support successful project delivery across Victoria.</p>
+                <p>Contact us to discuss your Victorian electrical project and estimating needs.</p>`
+            },
+            28: {
+                title: "Electrical Estimating in Queensland",
+                content: `<p class="mb-4">Queensland's electrical construction sector includes residential, commercial, and industrial projects. Benny Estimates provides comprehensive estimating services throughout Queensland.</p>
+                <p class="mb-4">We serve clients in Brisbane, the Gold Coast, and regional Queensland, providing accurate electrical estimates that reflect local market conditions. Our estimators understand Queensland's construction environment.</p>
+                <p class="mb-4">From residential wiring to commercial systems, our estimates support successful electrical project delivery across Queensland.</p>
+                <p>Contact us to discuss your Queensland electrical project and estimating needs.</p>`
+            },
+            29: {
+                title: "Electrical Estimating Across All 50 States",
+                content: `<p class="mb-4">Benny Estimates provides nationwide electrical estimating services across all 50 United States. We understand regional variations in building codes, labor rates, and material costs.</p>
+                <p class="mb-4">From California to New York, Texas to Florida, our estimators have the local knowledge needed for accurate electrical estimates. We account for regional code requirements and practices.</p>
+                <p class="mb-4">Whether your project is in major metropolitan areas or rural communities, our estimates reflect local market conditions for electrical work.</p>
+                <p>Contact us to discuss your US electrical project and estimating needs.</p>`
+            },
+            30: {
+                title: "Commercial Electrical Estimating",
+                content: `<p class="mb-4">Commercial electrical projects require specialized estimating expertise. Our service provides detailed cost analysis for office buildings, retail centers, restaurants, and medical facilities.</p>
+                <p class="mb-4">We quantify all electrical components including power distribution, lighting, controls, and specialty systems. Our estimates account for commercial requirements and building codes.</p>
+                <p class="mb-4">Accurate commercial electrical estimates help you bid competitively and deliver profitable projects. Let our expertise support your commercial electrical work.</p>
+                <p>Contact us for specialized commercial electrical estimating.</p>`
+            },
+            31: {
+                title: "Industrial Electrical Estimating",
+                content: `<p class="mb-4">Industrial electrical projects have unique requirements including high power systems, controls, and instrumentation. Our service provides specialized cost analysis for industrial applications.</p>
+                <p class="mb-4">We quantify motor control centers, power distribution, instrumentation, and specialty systems. Our estimates account for industrial requirements and safety standards.</p>
+                <p class="mb-4">Accurate industrial electrical estimates help you bid competitively on manufacturing, processing, and heavy industrial projects.</p>
+                <p>Contact us for specialized industrial electrical estimating.</p>`
+            },
+            32: {
+                title: "Explore Our Electrical Portfolio",
+                content: `<p class="mb-4">Our diverse portfolio showcases our expertise across residential, commercial, and industrial electrical projects. We've provided estimating services for projects of all sizes and complexities.</p>
+                <p class="mb-4">From small residential rewires to large industrial installations, our team has the experience needed for accurate estimates. Our portfolio demonstrates our commitment to quality.</p>
+                <p class="mb-4">Contact us to learn more about our electrical estimating experience and how we can support your specific project needs.</p>
+                <p>Reach out today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to discuss your project.</p>`
+            },
+            33: {
+                title: "Get Your Electrical Estimate",
+                content: `<p class="mb-4">Ready to get started with your electrical estimate? Contact our team today. We'll discuss your project requirements and provide transparent pricing for our estimating services.</p>
+                <p class="mb-4">Our estimates help you bid with confidence, plan your budget accurately, and execute your electrical projects successfully. Don't let estimating challenges hold you back.</p>
+                <p class="mb-4">Whether you need a preliminary budget estimate or detailed construction estimate, we have the expertise to support your needs.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to get started.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+
+        // Add electrical spark effects
+        document.querySelectorAll('.animate-spark').forEach(element => {
+            setInterval(() => {
+                element.classList.add('spark');
+                setTimeout(() => {
+                    element.classList.remove('spark');
+                }, 2000);
+            }, 4000);
+        });
+        
+        // Add hover effects to electric cards
+        document.querySelectorAll('.electric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 20px 50px rgba(14, 165, 233, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 15px 40px rgba(14, 165, 233, 0.15)';
+            });
+        });
+        
+        console.log('Electrical Estimating Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

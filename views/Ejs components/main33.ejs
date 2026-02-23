@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny Estimates - Specialized Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Service card hover effects */
+        .service-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .service-card:hover .service-image {
+            transform: scale(1.1);
+        }
+        
+        /* Image container */
+        .image-container {
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        /* Gradient backgrounds */
+        .services-gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .dark .services-gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Services Section -->
+    <section class="services-gradient-bg py-12 lg:py-20 animate-fade-in">
+        <div class="container mx-auto px-4">
+            
+           
+
+            <!-- Simple "Our Services" Heading -->
+            <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-12 text-center">
+               Trades
+            </h1>
+
+            <!-- Services Grid - 10 cards in 3 rows (4+4+2) with images -->
+            <div class="animate-slide-up">
+                <!-- Row 1 - First 4 Services -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 mb-4 sm:mb-5 lg:mb-6">
+                    <!-- Service 1: Electrical Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-yellow-300 dark:hover:border-yellow-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/3825581/pexels-photo-3825581.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Electrician working on electrical panel" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Electrical Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Precise electrical quantity takeoffs, conduit and wire measurements, panel schedules, and fixture counts for residential and commercial projects.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Concrete Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/1799799/pexels-photo-1799799.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Concrete pouring and foundation work" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Concrete Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Accurate concrete volume calculations, rebar quantities, formwork measurements, and foundation estimates for all types of structures.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Opening Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-blue-300 dark:hover:border-blue-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/280232/pexels-photo-280232.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Modern windows and doors installation" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Opening Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Detailed door and window schedules, frame measurements, hardware takeoffs, and glass quantity calculations for commercial and residential projects.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: Masonry Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/129600/pexels-photo-129600.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Brick masonry wall construction" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Masonry Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Comprehensive brick, block, and stone quantity takeoffs, mortar calculations, and labor estimates for all masonry work.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2 - Next 4 Services -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 mb-4 sm:mb-5 lg:mb-6">
+                    <!-- Service 5: MEP Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/257736/pexels-photo-257736.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="HVAC and mechanical systems" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                MEP Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Complete mechanical, electrical, and plumbing estimates including HVAC equipment, piping systems, and fixtures for commercial buildings.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 6: Metal Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-cyan-300 dark:hover:border-cyan-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/163183/steel-structure-industry-metal-construction-163183.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Structural steel framework" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Metal Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Precise structural steel, rebar, metal decking, and miscellaneous metal takeoffs for industrial and commercial construction projects.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 7: SiteWork Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-amber-300 dark:hover:border-amber-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/259986/pexels-photo-259986.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Excavation and earthwork site" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                SiteWork Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Comprehensive earthwork, excavation, grading, utilities, and site preparation quantity takeoffs for development projects.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 8: Lumber Takeoff Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-orange-300 dark:hover:border-orange-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/129600/wood-lumber-timber-construction-129600.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Stacked lumber and timber" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Lumber Takeoff Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Detailed framing lumber, plywood, dimensional lumber, and engineered wood product takeoffs for residential and commercial framing.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 3 - Last 2 Services (centered) -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+                    <!-- Service 9: Thermal & Moisture Protection -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-xl h-full flex flex-col lg:col-start-2">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/280235/pexels-photo-280235.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Roofing and insulation installation" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Thermal & Moisture Protection
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Accurate roofing, insulation, waterproofing, and air barrier material takeoffs for building envelope protection systems.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 10: Interior & Exterior Finishes -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/1722183/pexels-photo-1722183.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Interior painting and finishing work" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Interior & Exterior Finishes
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Comprehensive drywall, painting, flooring, ceiling, and exterior cladding quantity takeoffs for complete finish work.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple Footer Note -->
+           
+        </div>
+    </section>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            if (updateThemeUI) updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (updateThemeUI) updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                if (themeIcon) themeIcon.className = 'ri-sun-line mr-2';
+                if (themeText) themeText.textContent = 'Light Mode';
+            } else {
+                if (themeIcon) themeIcon.className = 'ri-moon-line mr-2';
+                if (themeText) themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle if exists
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

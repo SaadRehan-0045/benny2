@@ -1,0 +1,1648 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thermal & Moisture Protection Estimating Services | BENNY ESTIMATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        thermal: {
+                            50: '#fffbeb',
+                            100: '#fef3c7',
+                            200: '#fde68a',
+                            300: '#fcd34d',
+                            400: '#fbbf24',
+                            500: '#f59e0b',
+                            600: '#d97706',
+                            700: '#b45309',
+                            800: '#92400e',
+                            900: '#78350f',
+                        },
+                        orange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'water-drop': 'waterDrop 2s ease-in-out infinite',
+                        'heat-wave': 'heatWave 3s ease-in-out infinite',
+                        'modal-enter': 'modalEnter 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        waterDrop: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        heatWave: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.7' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Thermal theme styling */
+        .thermal-gradient {
+            background: linear-gradient(135deg, #d97706 0%, #b45309 100%);
+        }
+        
+        .dark .thermal-gradient {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+        }
+        
+        /* Water drop pattern */
+        .water-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(217, 119, 6, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, rgba(217, 119, 6, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 40% 80%, rgba(217, 119, 6, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+        }
+        
+        .dark .water-pattern {
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(245, 158, 11, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 70% 60%, rgba(245, 158, 11, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 40% 80%, rgba(245, 158, 11, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+        }
+        
+        /* Thermal card effect */
+        .thermal-card {
+            border: 2px solid #fde68a;
+            border-top: 5px solid #d97706;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .thermal-card:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(217, 119, 6, 0.05) 100%);
+            z-index: 0;
+        }
+        
+        .thermal-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(217, 119, 6, 0.15);
+            border-color: #fcd34d;
+        }
+        
+        .dark .thermal-card {
+            border-color: #92400e;
+        }
+        
+        .dark .thermal-card:hover {
+            box-shadow: 0 15px 40px rgba(245, 158, 11, 0.2);
+            border-color: #f59e0b;
+        }
+        
+        /* Heat wave pattern */
+        .heat-pattern {
+            background: linear-gradient(90deg, 
+                transparent 0%, 
+                rgba(245, 158, 11, 0.1) 25%, 
+                rgba(245, 158, 11, 0.2) 50%, 
+                rgba(245, 158, 11, 0.1) 75%, 
+                transparent 100%);
+            background-size: 200% 100%;
+            animation: heatWave 3s ease-in-out infinite;
+        }
+        
+        /* Water barrier effect */
+        .barrier-effect {
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .barrier-effect:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #06b6d4, #3b82f6, #06b6d4);
+            background-size: 200% 100%;
+            animation: heatWave 2s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .barrier-effect:hover:after {
+            opacity: 1;
+        }
+        
+        /* Thermal insulation effect */
+        .insulation-effect {
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 5px,
+                rgba(217, 119, 6, 0.05) 5px,
+                rgba(217, 119, 6, 0.05) 10px
+            );
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 1rem;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border: 1px solid #374151;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-thumb {
+            background: #fb923c;
+        }
+
+        /* Ensure buttons are clickable */
+        button, .cursor-pointer, [onclick] {
+            cursor: pointer;
+        }
+
+        /* Button color override - Orange theme for all CTAs */
+        .btn-estimate {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+            border: none !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-estimate:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4) !important;
+        }
+        
+        .dark .btn-estimate {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+        
+        .dark .btn-estimate:hover {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        }
+        
+        .btn-estimate i {
+            color: white !important;
+        }
+
+        /* Orange theme for secondary buttons */
+        .btn-secondary {
+            background: transparent !important;
+            color: white !important;
+            border: 2px solid white !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1) !important;
+            transform: translateY(-2px);
+        }
+        
+        .dark .btn-secondary {
+            border-color: #fb923c !important;
+            color: #fb923c !important;
+        }
+        
+        .dark .btn-secondary:hover {
+            background: rgba(249, 115, 22, 0.1) !important;
+        }
+
+        /* Orange gradient for featured cards */
+        .orange-gradient-card {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+        }
+        
+        .dark .orange-gradient-card {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+
+        /* Orange text for highlights */
+        .text-orange-highlight {
+            color: #f97316 !important;
+        }
+        
+        .dark .text-orange-highlight {
+            color: #fb923c !important;
+        }
+
+        /* Orange border for cards */
+        .border-orange-highlight {
+            border-color: #f97316 !important;
+        }
+        
+        .dark .border-orange-highlight {
+            border-color: #fb923c !important;
+        }
+
+        /* Orange background for icons */
+        .bg-orange-light {
+            background-color: #fff7ed !important;
+        }
+        
+        .dark .bg-orange-light {
+            background-color: #7c2d12 !important;
+        }
+
+        /* Responsive typography */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 1.75rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .card-title {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Header spacing fix */
+        .main-content {
+            padding-top: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                padding-top: 6rem;
+            }
+        }
+
+        /* Remove default margin/padding for body */
+        body {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col">
+    <!-- Main Content with header padding -->
+    <main class="main-content flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        
+        <!-- Hero Section -->
+        <section class="mb-6 sm:mb-8 lg:mb-12">
+            <div class="text-center mb-4 sm:mb-6 lg:mb-8">
+                <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 lg:mb-4 animate-fade-in leading-tight">
+                    Thermal & Moisture Protection Estimating Services
+                </h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-thermal-600 dark:text-thermal-400 px-2">
+                    Estimating Services That Shield Your Project with Precision
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center mb-4 sm:mb-6 lg:mb-8">
+                <div>
+                    <div class="thermal-gradient text-white p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl mb-3 sm:mb-4 lg:mb-6">
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">Save Big - Request Your 50% Off Estimate!</h3>
+                        <p class="mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base">
+                            Protecting your property from thermal and moisture elements is paramount. BENNY ESTIMATES provides accurate cost estimates tailored to your specific needs.
+                        </p>
+                        <button onclick="openModal('success')" class="btn-estimate px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 cursor-pointer w-full sm:w-auto">
+                            <span class="flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="ri-shield-fill"></i>
+                                Supercharge Your Success
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div onclick="openModal('expertProtection')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                        <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                            <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                                <i class="ri-shield-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl lg:text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm sm:text-base lg:text-lg">Expert Protection</h4>
+                                <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Waterproofing, roofing, fire-stopping & more</p>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-300">
+                            Our thorough knowledge in thermal and moisture protection makes us the trusted choice for all your estimation requirements.
+                        </p>
+                        <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                            Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 sm:mt-4 lg:mt-0">
+                    <!-- Thermal/Moisture Protection Image -->
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Thermal and moisture protection in construction" 
+                         class="w-full h-auto rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg object-cover max-h-[250px] sm:max-h-[300px] lg:max-h-none">
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 water-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Experience Accurate and Efficient Protection Services</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('residential')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm thermal-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-home-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Residential Services</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Homes, apartments, condominiums, townhouses, and renovation projects with reliable thermal moisture estimation.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('commercial')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm thermal-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4 animate-water-drop">
+                        <i class="ri-building-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Commercial Services</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Office buildings, retail spaces, hospitals, and commercial facilities with comprehensive protection solutions.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('industrial')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm thermal-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4 animate-heat-wave">
+                        <i class="ri-factory-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Industrial Services</h3>
+                    <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 flex-grow">Chemical plants, manufacturing facilities, and industrial complexes with specialized thermal protection.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expertise Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Expertise in a Wide Range of Protective Measures</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+                <div onclick="openModal('waterproofing')" class="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-water-percent-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Waterproofing</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('roofing')" class="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-home-5-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Roofing Systems</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('fireStopping')" class="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-fire-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Fire-stopping</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('caulking')" class="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-tools-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Caulking & Sealants</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('siding')" class="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-layout-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Siding Systems</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('vaporBarriers')" class="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-shield-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Vapor Barriers</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('insulation')" class="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-temp-hot-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Insulation</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('sheetMetal')" class="p-3 sm:p-4 bg-white dark:bg-gray-800 rounded-lg text-center shadow-sm barrier-effect cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-xl sm:text-2xl mb-2">
+                        <i class="ri-settings-5-fill"></i>
+                    </div>
+                    <span class="text-xs sm:text-sm font-medium">Sheet Metal Flashing</span>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Detailed Services -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 insulation-effect p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md">
+                <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Enhance Your Building with Exceptional Protection Services</h2>
+                
+                <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 sm:gap-3 lg:gap-4">
+                    <div onclick="openModal('roofCurbs')" class="p-3 sm:p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-lg sm:text-xl mb-1 sm:mb-2">
+                            <i class="ri-wind-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-xs sm:text-sm mb-0.5 sm:mb-1">Roof Curbs</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs">Seamless integration</p>
+                        <div class="mt-1 sm:mt-2 text-orange-600 dark:text-orange-400 text-[10px] sm:text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('jointSeals')" class="p-3 sm:p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-lg sm:text-xl mb-1 sm:mb-2">
+                            <i class="ri-scissors-cut-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-xs sm:text-sm mb-0.5 sm:mb-1">Joint Seals</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs">Precise measurements</p>
+                        <div class="mt-1 sm:mt-2 text-orange-600 dark:text-orange-400 text-[10px] sm:text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('vaporBarriersDetail')" class="p-3 sm:p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-lg sm:text-xl mb-1 sm:mb-2">
+                            <i class="ri-shield-check-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-xs sm:text-sm mb-0.5 sm:mb-1">Vapor Barriers</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs">Moisture control</p>
+                        <div class="mt-1 sm:mt-2 text-orange-600 dark:text-orange-400 text-[10px] sm:text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('waterproofingDetail')" class="p-3 sm:p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-lg sm:text-xl mb-1 sm:mb-2">
+                            <i class="ri-drop-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-xs sm:text-sm mb-0.5 sm:mb-1">Waterproofing</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs">Complete protection</p>
+                        <div class="mt-1 sm:mt-2 text-orange-600 dark:text-orange-400 text-[10px] sm:text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('fireproofing')" class="p-3 sm:p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-lg sm:text-xl mb-1 sm:mb-2">
+                            <i class="ri-fire-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-xs sm:text-sm mb-0.5 sm:mb-1">Fireproofing</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs">Intumescent systems</p>
+                        <div class="mt-1 sm:mt-2 text-orange-600 dark:text-orange-400 text-[10px] sm:text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('sidingPanels')" class="p-3 sm:p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-lg sm:text-xl mb-1 sm:mb-2">
+                            <i class="ri-layout-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-xs sm:text-sm mb-0.5 sm:mb-1">Siding Panels</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs">Exterior protection</p>
+                        <div class="mt-1 sm:mt-2 text-orange-600 dark:text-orange-400 text-[10px] sm:text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('reflectiveInsulation')" class="p-3 sm:p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-lg sm:text-xl mb-1 sm:mb-2">
+                            <i class="ri-sun-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-xs sm:text-sm mb-0.5 sm:mb-1">Reflective Insulation</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs">Thermal efficiency</p>
+                        <div class="mt-1 sm:mt-2 text-orange-600 dark:text-orange-400 text-[10px] sm:text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('weatherBarriers')" class="p-3 sm:p-4 border border-thermal-200 dark:border-thermal-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-lg sm:text-xl mb-1 sm:mb-2">
+                            <i class="ri-cloud-windy-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-xs sm:text-sm mb-0.5 sm:mb-1">Weather Barriers</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-[10px] sm:text-xs">Climate protection</p>
+                        <div class="mt-1 sm:mt-2 text-orange-600 dark:text-orange-400 text-[10px] sm:text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Fire Proofing Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 heat-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md">
+                <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Thorough Fire Proofing & Fire Stopping Estimations</h2>
+                
+                <div class="grid md:grid-cols-2 gap-4 sm:gap-5 lg:gap-8">
+                    <div onclick="openModal('fireProofingDetail')" class="cursor-pointer hover:shadow-md transition-all p-3 sm:p-4 rounded-lg">
+                        <div class="flex items-center mb-3 sm:mb-4">
+                            <div class="bg-orange-light p-2 sm:p-3 rounded-lg mr-3 sm:mr-4">
+                                <i class="ri-fire-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-sm sm:text-base lg:text-lg font-bold">Attention to Detail</h3>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Crucial for fire protection</p>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm text-gray-700 dark:text-gray-300 mb-4 sm:mb-5 lg:mb-6">
+                            Our estimators excel in providing detailed descriptions and takeoffs of plans, including fireproofing ratings and structural assemblies such as beams, columns, walls, and framing.
+                        </p>
+                        
+                        <div class="space-y-2 sm:space-y-3">
+                            <div class="flex items-center text-xs sm:text-sm">
+                                <i class="ri-check-line text-green-500 mr-2 flex-shrink-0"></i>
+                                <span>Accurate insulation thickness measurements</span>
+                            </div>
+                            <div class="flex items-center text-xs sm:text-sm">
+                                <i class="ri-check-line text-green-500 mr-2 flex-shrink-0"></i>
+                                <span>Detailed structural assembly analysis</span>
+                            </div>
+                            <div class="flex items-center text-xs sm:text-sm">
+                                <i class="ri-check-line text-green-500 mr-2 flex-shrink-0"></i>
+                                <span>Comprehensive bid development support</span>
+                            </div>
+                        </div>
+                        <div class="mt-3 sm:mt-4 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('projectPortfolio')" class="orange-gradient-card p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-xl transition-all transform hover:-translate-y-1">
+                        <h3 class="text-base sm:text-lg lg:text-xl font-bold mb-3 sm:mb-4 text-white">Project Portfolio</h3>
+                        <p class="text-xs sm:text-sm mb-3 sm:mb-4 text-white/90">Successful projects across multiple sectors:</p>
+                        <div class="grid grid-cols-2 gap-2 sm:gap-3">
+                            <div class="bg-white/20 p-2 sm:p-3 rounded-lg">
+                                <div class="font-bold text-xs sm:text-sm text-white">Schools</div>
+                                <div class="text-[10px] sm:text-xs text-white/70">Educational facilities</div>
+                            </div>
+                            <div class="bg-white/20 p-2 sm:p-3 rounded-lg">
+                                <div class="font-bold text-xs sm:text-sm text-white">Hospitals</div>
+                                <div class="text-[10px] sm:text-xs text-white/70">Healthcare buildings</div>
+                            </div>
+                            <div class="bg-white/20 p-2 sm:p-3 rounded-lg">
+                                <div class="font-bold text-xs sm:text-sm text-white">Commercial</div>
+                                <div class="text-[10px] sm:text-xs text-white/70">Office complexes</div>
+                            </div>
+                            <div class="bg-white/20 p-2 sm:p-3 rounded-lg">
+                                <div class="font-bold text-xs sm:text-sm text-white">Retail</div>
+                                <div class="text-[10px] sm:text-xs text-white/70">Shopping centers</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Waterproofing Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Streamlined Material Takeoff for Waterproofing</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('foundationProtection')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                        <i class="ri-drop-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-1 sm:mb-2">Foundation Protection</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Accurate material takeoffs for foundations, footings, and below-grade slabs.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('airVaporBarriers')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                        <i class="ri-wind-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-1 sm:mb-2">Air Vapor Barriers</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Precise information on required material quantities for vapor control.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('sealantsApplication')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                        <i class="ri-tools-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-1 sm:mb-2">Sealants Application</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Detailed guidance on application of necessary materials for contractors.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 text-center">
+            <div class="orange-gradient-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-xl">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-4 sm:gap-5 lg:gap-8">
+                    <div class="text-left">
+                        <h3 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-3 sm:mb-4 text-white">Ready to Take the Next Step?</h3>
+                        <p class="text-xs sm:text-sm lg:text-base mb-3 sm:mb-4 max-w-2xl text-white/90">
+                            Roofing contractors regard us as the best roofing estimates company, and for good reason. We value our partnership with contractors and prioritize delivering estimates that meet their specific requirements.
+                        </p>
+                        <div class="flex items-center">
+                            <i class="ri-customer-service-2-fill text-lg sm:text-xl lg:text-2xl mr-2 sm:mr-3 text-white"></i>
+                            <div>
+                                <div class="font-bold text-xs sm:text-sm text-white">24/7 Support</div>
+                                <div class="text-[10px] sm:text-xs text-white/80">Always available to address any queries or concerns</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex flex-col gap-2 sm:gap-3 w-full lg:w-auto">
+                        <button onclick="openModal('uploadPlan')" class="btn-estimate px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 w-full">
+                            <i class="ri-upload-cloud-2-line mr-1 sm:mr-2"></i>
+                            Upload Plan
+                        </button>
+                        <button onclick="openModal('transformGame')" class="btn-secondary px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg transition-all duration-300 transform hover:-translate-y-1 w-full">
+                            Transform Your Construction Game
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-4 sm:mb-6 lg:mb-8 text-center orange-gradient-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-xl">
+            <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">Expert Thermal & Moisture Protection Estimates</h2>
+            <div class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">
+                Shield Your Project with Precision<br>
+                <span class="text-xs sm:text-sm lg:text-base text-white/80">Accurate Estimates for Waterproofing, Fireproofing, and Thermal Protection</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6 max-w-2xl mx-auto">
+                <div onclick="openModal('thermalProtection')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Thermal Protection</div>
+                    <div class="text-xs text-white/80">Insulation & Barriers</div>
+                </div>
+                <div onclick="openModal('moistureControl')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Moisture Control</div>
+                    <div class="text-xs text-white/80">Waterproofing Systems</div>
+                </div>
+                <div onclick="openModal('fireProtection')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Fire Protection</div>
+                    <div class="text-xs text-white/80">Fireproofing Solutions</div>
+                </div>
+            </div>
+            
+            <button onclick="openModal('estimate')" class="bg-white text-orange-600 hover:bg-gray-100 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <i class="ri-shield-fill mr-1 sm:mr-2"></i>
+                Request a Quote Now!
+            </button>
+        </section>
+
+    </main>
+    
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-2 sm:mb-3">
+                <h2 id="modalTitle" class="text-base sm:text-lg lg:text-xl font-bold text-orange-600 dark:text-orange-400">Thermal & Moisture Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-lg sm:text-xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here dynamically -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="ri-shield-fill text-orange-600 dark:text-orange-400 text-sm sm:text-base"></i>
+                        <div>
+                            <span class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">BENNY ESTIMATES</span>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">96 Jones Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <a href="mailto:Ben@bennyestimates.com" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-xs">
+                            <i class="ri-mail-send-line mr-1"></i>Email
+                        </a>
+                        <a href="tel:+12898017224" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs">
+                            <i class="ri-phone-line mr-1"></i>Call
+                        </a>
+                        <button onclick="closeModal()" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-xs">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BENNY ESTIMATES contact information template
+        const bennyInfo = `
+            <div class="bg-orange-50 dark:bg-gray-700 p-3 sm:p-4 rounded-lg mt-3 border-l-4 border-orange-600">
+                <p class="font-semibold text-orange-700 dark:text-orange-400 flex items-center text-xs sm:text-sm">
+                    <i class="ri-shield-fill mr-2"></i>
+                    BENNY ESTIMATES
+                </p>
+                <p class="mt-2 text-xs"><i class="ri-map-pin-line mr-2 text-orange-600"></i>96 Jones Street, New York, USA</p>
+                <p class="text-xs"><i class="ri-mail-line mr-2 text-orange-600"></i><a href="mailto:Ben@bennyestimates.com" class="hover:underline">Ben@bennyestimates.com</a></p>
+                <p class="text-xs"><i class="ri-phone-line mr-2 text-orange-600"></i><a href="tel:+12898017224" class="hover:underline">+1 (289) 801-7224</a></p>
+                <p class="text-xs mt-2 text-gray-600 dark:text-gray-400"><i class="ri-time-line mr-1"></i>Call us any time</p>
+            </div>
+        `;
+
+        // Modal content data structure
+        const thermalData = {
+            success: {
+                title: 'Supercharge Your Success',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Ready to Get Started?</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your thermal and moisture protection needs. Our team of certified estimators is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">What We Need From You:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project plans and specifications (PDF, CAD, or digital formats)</li>
+                            <li>Thermal and moisture protection requirements</li>
+                            <li>Scope of work details</li>
+                            <li>Project timeline and delivery requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            expertProtection: {
+                title: 'Expert Protection Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Thermal & Moisture Protection</p>
+                        <p class="text-xs sm:text-sm">Our thorough knowledge in thermal and moisture protection makes us the trusted choice for all your estimation requirements. We cover waterproofing, roofing, fire-stopping, and all related systems.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Expertise Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Waterproofing systems - below grade, above grade</li>
+                            <li>Roofing systems - all types and materials</li>
+                            <li>Fire-stopping and fireproofing</li>
+                            <li>Insulation and vapor barriers</li>
+                            <li>Caulking and sealants</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            residential: {
+                title: 'Residential Thermal & Moisture Protection',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Protecting Homes and Residential Buildings</p>
+                        <p class="text-xs sm:text-sm">Our residential thermal and moisture protection services cover homes, apartments, condominiums, townhouses, and renovation projects. We provide reliable estimates for all types of residential protection systems.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Residential Services Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Roofing systems for homes</li>
+                            <li>Waterproofing for basements and foundations</li>
+                            <li>Insulation for walls and attics</li>
+                            <li>Vapor barriers and moisture control</li>
+                            <li>Siding and exterior cladding</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            commercial: {
+                title: 'Commercial Thermal & Moisture Protection',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Protection for Commercial Buildings</p>
+                        <p class="text-xs sm:text-sm">Our commercial thermal and moisture protection services cover office buildings, retail spaces, hospitals, and commercial facilities. We provide comprehensive protection solutions for all types of commercial projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Commercial Services Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial roofing systems</li>
+                            <li>Waterproofing for parking structures</li>
+                            <li>Fire-stopping and fireproofing</li>
+                            <li>Curtain wall and storefront sealing</li>
+                            <li>Insulation for large commercial spaces</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            industrial: {
+                title: 'Industrial Thermal & Moisture Protection',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Specialized Protection for Industrial Facilities</p>
+                        <p class="text-xs sm:text-sm">Our industrial thermal and moisture protection services cover chemical plants, manufacturing facilities, and industrial complexes. We provide specialized protection solutions for harsh industrial environments.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Industrial Services Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>High-temperature insulation</li>
+                            <li>Chemical-resistant coatings</li>
+                            <li>Fireproofing for structural steel</li>
+                            <li>Industrial roofing systems</li>
+                            <li>Vapor barriers for process areas</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            waterproofing: {
+                title: 'Waterproofing Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Waterproofing Solutions</p>
+                        <p class="text-xs sm:text-sm">Our waterproofing estimating service provides accurate cost projections for all types of waterproofing systems, from below-grade foundations to above-grade walls and decks.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Waterproofing Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Below-grade waterproofing - foundations, footings</li>
+                            <li>Above-grade waterproofing - walls, balconies</li>
+                            <li>Deck and plaza waterproofing</li>
+                            <li>Liquid-applied membranes</li>
+                            <li>Sheet membranes and drainage systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            roofing: {
+                title: 'Roofing Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Roofing Estimates</p>
+                        <p class="text-xs sm:text-sm">Our roofing estimating service provides accurate cost projections for all types of roofing systems, from residential shingles to commercial membrane roofs.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Roofing Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Asphalt shingles and composition roofing</li>
+                            <li>Metal roofing - standing seam, corrugated</li>
+                            <li>Membrane roofing - EPDM, TPO, PVC</li>
+                            <li>Built-up roofing (BUR)</li>
+                            <li>Tile and slate roofing</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fireStopping: {
+                title: 'Fire-stopping Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Critical Fire Protection</p>
+                        <p class="text-xs sm:text-sm">Our fire-stopping estimating service provides accurate quantification of all materials needed for fire protection systems. We account for all types of fire-stopping materials and installation requirements to meet building codes.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fire-stopping Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Firestop sealants and caulking</li>
+                            <li>Firestop pillows and putty pads</li>
+                            <li>Firestop collars for plastic pipe</li>
+                            <li>Fire-rated assemblies</li>
+                            <li>Smoke seals and gaskets</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            caulking: {
+                title: 'Caulking & Sealants',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Sealing Solutions</p>
+                        <p class="text-xs sm:text-sm">Our caulking and sealants estimating service provides accurate quantification of all sealant materials for joints, penetrations, and transitions in building envelopes.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Sealant Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Joint sealants - expansion joints, control joints</li>
+                            <li>Perimeter sealants - windows, doors</li>
+                            <li>Acoustical sealants</li>
+                            <li>Fire-rated sealants</li>
+                            <li>Weatherproofing sealants</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            siding: {
+                title: 'Siding Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Exterior Cladding Solutions</p>
+                        <p class="text-xs sm:text-sm">Our siding estimating service provides accurate cost projections for all types of exterior cladding systems, including wood, vinyl, fiber cement, and metal siding.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Siding Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Vinyl siding - horizontal, vertical, shakes</li>
+                            <li>Fiber cement siding - lap, panel, shingle</li>
+                            <li>Wood siding - clapboard, board and batten</li>
+                            <li>Metal siding - corrugated, standing seam</li>
+                            <li>Stucco and EIFS systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            vaporBarriers: {
+                title: 'Vapor Barriers',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Moisture Control Systems</p>
+                        <p class="text-xs sm:text-sm">Our vapor barrier estimating service provides accurate quantification of all materials needed to control moisture migration through building assemblies.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Vapor Barrier Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Polyethylene vapor barriers</li>
+                            <li>Foil-faced insulation facings</li>
+                            <li>Kraft-faced insulation</li>
+                            <li>Smart vapor retarders</li>
+                            <li>Liquid-applied vapor barriers</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            insulation: {
+                title: 'Insulation Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Thermal Protection Solutions</p>
+                        <p class="text-xs sm:text-sm">Our insulation estimating service provides accurate cost projections for all types of thermal insulation systems for walls, roofs, and mechanical systems.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Insulation Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Fiberglass batts and rolls</li>
+                            <li>Spray foam insulation - open cell, closed cell</li>
+                            <li>Rigid foam board - EPS, XPS, polyiso</li>
+                            <li>Mineral wool insulation</li>
+                            <li>Cellulose insulation</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sheetMetal: {
+                title: 'Sheet Metal Flashing',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Flashing Systems</p>
+                        <p class="text-xs sm:text-sm">Our sheet metal flashing estimating service provides accurate quantification of all flashings and sheet metal components for roofing, walls, and transitions.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Flashing Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Roof flashing - step, valley, chimney</li>
+                            <li>Wall flashing - head, sill, through-wall</li>
+                            <li>Counterflashing and reglets</li>
+                            <li>Drip edges and gravel stops</li>
+                            <li>Custom sheet metal fabrications</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            roofCurbs: {
+                title: 'Roof Curbs',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Seamless Integration for Roof Penetrations</p>
+                        <p class="text-xs sm:text-sm">Our roof curb estimating service provides accurate quantification of curbs for HVAC equipment, skylights, and other roof penetrations. We account for size, height, and insulation requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Curb Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Equipment curbs for HVAC units</li>
+                            <li>Skylight curbs and supports</li>
+                            <li>Pipe and vent curbs</li>
+                            <li>Curb adapters and extensions</li>
+                            <li>Insulated and uninsulated curbs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            jointSeals: {
+                title: 'Joint Seals',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precise Joint Sealing Solutions</p>
+                        <p class="text-xs sm:text-sm">Our joint seal estimating service provides accurate quantification of all joint seal materials for expansion joints, control joints, and construction joints in buildings and structures.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Joint Seal Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Expansion joint systems</li>
+                            <li>Control joint sealants</li>
+                            <li>Compression seals and gaskets</li>
+                            <li>Waterstop systems</li>
+                            <li>Preformed joint fillers</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            vaporBarriersDetail: {
+                title: 'Vapor Barrier Details',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Moisture Control</p>
+                        <p class="text-xs sm:text-sm">Our detailed vapor barrier estimating service provides comprehensive quantification of all materials needed for effective moisture control in wall, roof, and foundation assemblies.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Vapor Barrier Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Wall vapor barriers - interior and exterior</li>
+                            <li>Roof vapor retarders</li>
+                            <li>Below-slab vapor barriers</li>
+                            <li>Underslab vapor barriers</li>
+                            <li>Through-wall flashing and weep systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            waterproofingDetail: {
+                title: 'Waterproofing Details',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Complete Waterproofing Solutions</p>
+                        <p class="text-xs sm:text-sm">Our detailed waterproofing estimating service provides comprehensive quantification of all waterproofing systems and components for complete building envelope protection.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Waterproofing Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Foundation and below-grade waterproofing</li>
+                            <li>Balcony and deck waterproofing</li>
+                            <li>Green roof waterproofing systems</li>
+                            <li>Plaza deck waterproofing</li>
+                            <li>Wet room and shower pan waterproofing</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fireproofing: {
+                title: 'Fireproofing Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Structural Fire Protection</p>
+                        <p class="text-xs sm:text-sm">Our fireproofing estimating service provides accurate quantification of all materials needed for structural fire protection. We account for intumescent coatings, spray-applied fireproofing, and fire-resistant boards.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fireproofing Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Spray-applied fireproofing (SFRM)</li>
+                            <li>Intumescent coatings for steel</li>
+                            <li>Fireproofing boards and wraps</li>
+                            <li>Concrete encasement</li>
+                            <li>Fire-rated gypsum assemblies</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sidingPanels: {
+                title: 'Siding Panels',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Exterior Cladding Systems</p>
+                        <p class="text-xs sm:text-sm">Our siding panel estimating service provides accurate quantification of all panel materials for exterior cladding systems, including panel sizes, attachments, and trim.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Panel Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Metal composite panels (MCM)</li>
+                            <li>Fiber cement panels</li>
+                            <li>Wood composite panels</li>
+                            <li>Insulated metal panels</li>
+                            <li>Architectural precast panels</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            reflectiveInsulation: {
+                title: 'Reflective Insulation',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Radiant Barrier Solutions</p>
+                        <p class="text-xs sm:text-sm">Our reflective insulation estimating service provides accurate quantification of radiant barrier materials for attics, walls, and roof assemblies. We account for foil facings, bubble pack, and installation requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Reflective Insulation Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Foil-faced insulation</li>
+                            <li>Radiant barrier sheathing</li>
+                            <li>Bubble pack insulation</li>
+                            <li>Reflective foil laminates</li>
+                            <li>Multi-layer reflective systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            weatherBarriers: {
+                title: 'Weather Barriers',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Climate Protection Systems</p>
+                        <p class="text-xs sm:text-sm">Our weather barrier estimating service provides accurate quantification of air barriers, water-resistive barriers, and weather-resistant membranes for complete building envelope protection.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Weather Barrier Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>House wraps and building papers</li>
+                            <li>Fluid-applied air barriers</li>
+                            <li>Self-adhered membranes</li>
+                            <li>Drainable weather barriers</li>
+                            <li>Fully-adhered WRB systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fireProofingDetail: {
+                title: 'Fire Proofing & Fire Stopping',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Attention to Detail in Fire Protection</p>
+                        <p class="text-xs sm:text-sm">Our estimators excel in providing detailed descriptions and takeoffs of plans, including fireproofing ratings and structural assemblies such as beams, columns, walls, and framing. We ensure all fire protection requirements are accurately quantified.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Fire Protection Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Fireproofing thickness measurements</li>
+                            <li>Structural assembly analysis</li>
+                            <li>Fire-stopping at penetrations</li>
+                            <li>Fire-rated wall assemblies</li>
+                            <li>Comprehensive bid development support</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            projectPortfolio: {
+                title: 'Project Portfolio',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Successful Projects Across Multiple Sectors</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES has completed successful thermal and moisture protection projects across diverse sectors. Our portfolio demonstrates our expertise and reliability.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Project Sectors:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Educational facilities - schools, universities</li>
+                            <li>Healthcare buildings - hospitals, clinics</li>
+                            <li>Commercial complexes - offices, retail</li>
+                            <li>Industrial facilities - plants, warehouses</li>
+                            <li>Residential developments - homes, apartments</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a> to request our full portfolio.</p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            foundationProtection: {
+                title: 'Foundation Protection',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Below-Grade Waterproofing</p>
+                        <p class="text-xs sm:text-sm">Our foundation protection estimating service provides accurate material takeoffs for foundations, footings, and below-grade slabs. We account for all waterproofing, drainage, and protection board requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Foundation Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Below-grade waterproofing membranes</li>
+                            <li>Protection boards and drainage mats</li>
+                            <li>Foundation drainage systems</li>
+                            <li>Waterstop systems</li>
+                            <li>Backfill protection</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            airVaporBarriers: {
+                title: 'Air Vapor Barriers',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precise Vapor Control Information</p>
+                        <p class="text-xs sm:text-sm">Our air vapor barrier estimating service provides precise information on required material quantities for vapor control in wall and roof assemblies. We ensure proper vapor retarder placement and continuity.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Vapor Barrier Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Wall vapor barriers</li>
+                            <li>Roof vapor retarders</li>
+                            <li>Slab vapor barriers</li>
+                            <li>Ceiling vapor barriers</li>
+                            <li>Mechanical room vapor control</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sealantsApplication: {
+                title: 'Sealants Application',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Guidance for Contractors</p>
+                        <p class="text-xs sm:text-sm">Our sealants application estimating service provides detailed guidance on application of necessary materials for contractors. We account for joint sizes, sealant types, and backup materials.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Sealant Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Perimeter sealing around openings</li>
+                            <li>Control joint sealing</li>
+                            <li>Expansion joint systems</li>
+                            <li>Glazing and curtain wall seals</li>
+                            <li>Acoustical joint seals</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            uploadPlan: {
+                title: 'Upload Your Plans',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Easy Plan Submission</p>
+                        <p class="text-xs sm:text-sm">Getting started with BENNY ESTIMATES is simple. Upload your plans through our secure platform in PDF, CAD, or other digital formats.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Supported Formats:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>PDF drawings and specifications</li>
+                            <li>CAD files (DWG, DXF)</li>
+                            <li>Bluebeam files</li>
+                            <li>Revit/BIM models</li>
+                            <li>Roof and wall details</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Email your plans to <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a></p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            transformGame: {
+                title: 'Transform Your Construction Game',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Elevate Your Construction Projects</p>
+                        <p class="text-xs sm:text-sm">Partner with BENNY ESTIMATES to transform your construction workflow. Our accurate thermal and moisture protection estimates help you bid confidently, reduce waste, and deliver superior projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">How We Transform Your Business:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Accurate estimates for confident bidding</li>
+                            <li>Reduced material waste through precise quantities</li>
+                            <li>Faster turnaround times</li>
+                            <li>Expert support throughout your project</li>
+                            <li>Proven track record of success</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            thermalProtection: {
+                title: 'Thermal Protection Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Insulation & Barrier Systems</p>
+                        <p class="text-xs sm:text-sm">Our thermal protection estimating service provides accurate cost projections for all types of insulation and thermal barrier systems, helping you optimize energy efficiency and comfort.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Thermal Protection Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Building insulation - walls, roofs, floors</li>
+                            <li>Mechanical insulation - pipes, ducts</li>
+                            <li>Reflective and radiant barriers</li>
+                            <li>Thermal breaks and isolators</li>
+                            <li>Fire-resistant thermal barriers</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            moistureControl: {
+                title: 'Moisture Control Systems',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Waterproofing & Moisture Protection</p>
+                        <p class="text-xs sm:text-sm">Our moisture control estimating service provides accurate cost projections for all types of waterproofing and moisture protection systems, ensuring your building remains dry and durable.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Moisture Control Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Below-grade waterproofing</li>
+                            <li>Above-grade waterproofing</li>
+                            <li>Vapor barriers and retarders</li>
+                            <li>Drainage systems</li>
+                            <li>Dampproofing and sealants</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fireProtection: {
+                title: 'Fire Protection Solutions',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Fireproofing & Fire-stopping</p>
+                        <p class="text-xs sm:text-sm">Our fire protection estimating service provides accurate cost projections for all types of fireproofing and fire-stopping systems, ensuring your building meets all safety codes.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fire Protection Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Structural fireproofing</li>
+                            <li>Fire-stopping systems</li>
+                            <li>Fire-resistant assemblies</li>
+                            <li>Intumescent coatings</li>
+                            <li>Fire-rated sealants</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            estimate: {
+                title: 'Get Your Thermal & Moisture Estimate',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Ready to Get Started?</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your thermal and moisture protection needs. Our team of certified estimators is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">What We Need From You:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project plans and specifications (PDF, CAD, or digital formats)</li>
+                            <li>Thermal and moisture protection requirements</li>
+                            <li>Roof and wall details</li>
+                            <li>Scope of work details</li>
+                            <li>Project timeline and delivery requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            }
+        };
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, modal functionality ready');
+            
+            // Add water drop animation
+            document.querySelectorAll('.animate-water-drop').forEach(element => {
+                element.style.animationPlayState = 'running';
+            });
+            
+            // Add heat wave animation
+            document.querySelectorAll('.animate-heat-wave').forEach(element => {
+                element.style.animationPlayState = 'running';
+            });
+        });
+
+        // Open modal function - defined globally
+        window.openModal = function(modalKey) {
+            console.log('Opening modal for:', modalKey);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Check if data exists
+            if (thermalData[modalKey]) {
+                modalTitle.textContent = thermalData[modalKey].title;
+                modalBody.innerHTML = thermalData[modalKey].content;
+            } else {
+                console.warn('Data not found for key:', modalKey, 'using fallback');
+                modalTitle.textContent = 'Thermal & Moisture Protection Services';
+                modalBody.innerHTML = `
+                    <p class="text-xs sm:text-sm">Detailed information about this thermal and moisture protection service is available. Contact BENNY ESTIMATES for more information.</p>
+                    ${bennyInfo}
+                `;
+            }
+            
+            // Show modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modalOverlay = document.getElementById('modalOverlay');
+                if (modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            }
+        });
+
+        // Make sure all clickable elements work even if they have nested elements
+        document.querySelectorAll('[onclick]').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Prevent event from bubbling up if clicked on a child
+                if (e.target !== this && e.target.closest('[onclick]') !== this) {
+                    return;
+                }
+                // The onclick attribute will handle the rest
+            });
+        });
+        
+        console.log('Thermal & Moisture Protection page loaded with orange theme and modal functionality');
+    </script>
+</body>
+</html>

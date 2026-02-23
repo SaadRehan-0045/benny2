@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sustainable Construction - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        green: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            200: '#bbf7d0',
+                            300: '#86efac',
+                            400: '#4ade80',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        },
+                        emerald: {
+                            50: '#ecfdf5',
+                            100: '#d1fae5',
+                            200: '#a7f3d0',
+                            300: '#6ee7b7',
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                            800: '#065f46',
+                            900: '#064e3b',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'float-slow': 'float 8s ease-in-out infinite',
+                        'spin-slow': 'spin 20s linear infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
+                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .sustainable-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 1px solid #e2e8f0;
+        }
+        .dark .sustainable-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 1px solid #374151;
+        }
+        .sustainable-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(34, 197, 94, 0.25);
+        }
+        .eco-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .leaf-icon {
+            filter: drop-shadow(0 4px 6px rgba(34, 197, 94, 0.3));
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #10b981, #3b82f6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stats-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .sustainable-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+        
+        /* Remove any download buttons */
+        .download-btn {
+            display: none;
+        }
+    </style>
+</head>
+ <%- include('../header.ejs') %>
+<body class="bg-gradient-to-br from-green-50 to-emerald-50 dark:from-gray-900 dark:to-emerald-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+   
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-leaf-fill mr-2 animate-pulse"></i>
+                Eco-Friendly Construction Solutions
+            </div>
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text">Sustainable & Advanced</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Construction</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Discover eco-friendly building practices, green technologies, and sustainable construction methods for a better tomorrow
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Sustainable Green Building" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Sustainable Projects Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Backyard Shed -->
+            <article class="sustainable-card rounded-2xl overflow-hidden shadow-xl relative">
+                <div class="eco-badge bg-green-500 text-white">DIY Project</div>
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600585154340-043788447eb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Backyard Shed" 
+                         class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3 leaf-icon">
+                            <i class="ri-home-3-line text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">Backyard Shed – Costs, Types & Sizes</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        A backyard shed is one of the most versatile additions you can make to a home. Whether you need extra storage, a dedicated workspace, or a garden retreat, sheds come in various styles and sizes to match your needs. From traditional wooden structures to modern metal designs, we'll help you choose the right shed and estimate costs for materials, foundation, and installation.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-green-600 dark:text-green-400 text-sm font-medium">Sustainable Materials Guide</span>
+                        <button onclick="openModal(1)" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 cursor-pointer">
+                            <i class="ri-arrow-right-up-line text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Sitework -->
+            <article class="sustainable-card rounded-2xl overflow-hidden shadow-xl relative">
+                <div class="eco-badge bg-blue-500 text-white">Site Preparation</div>
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Construction Sitework" 
+                         class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-landscape-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">What is Sitework in Construction?</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Before any building rises from the ground, there's a lot of work that needs to happen to prepare the land. This essential phase is called sitework, encompassing everything from clearing vegetation and grading the terrain to installing utilities and creating proper drainage. Sustainable sitework practices minimize environmental impact while ensuring a stable foundation for your project.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-blue-600 dark:text-blue-400 text-sm font-medium">Eco-Friendly Prep</span>
+                        <button onclick="openModal(2)" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 cursor-pointer">
+                            <i class="ri-arrow-right-up-line text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Earthwork -->
+            <article class="sustainable-card rounded-2xl overflow-hidden shadow-xl relative">
+                <div class="eco-badge bg-amber-500 text-white">Earth Management</div>
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Earthwork Construction" 
+                         class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-amber-100 dark:bg-amber-900 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-earth-line text-amber-600 dark:text-amber-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">What is Earthwork?</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Earthwork is a vital part of construction, landscaping, and agriculture that shapes the ground to create stable and functional spaces. It involves moving and processing soil, rock, and other materials to achieve desired grades and contours. Modern earthwork techniques emphasize soil conservation, erosion control, and minimal disturbance to natural drainage patterns.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-amber-600 dark:text-amber-400 text-sm font-medium">Sustainable Grading</span>
+                        <button onclick="openModal(3)" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 cursor-pointer">
+                            <i class="ri-arrow-right-up-line text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Green Building Estimates -->
+            <article class="sustainable-card rounded-2xl overflow-hidden shadow-xl relative">
+                <div class="eco-badge bg-emerald-500 text-white">Green Planning</div>
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Green Building" 
+                         class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-900 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-building-line text-emerald-600 dark:text-emerald-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">Green Building Estimates</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        In the evolving landscape of construction, the concept of green building has emerged as a cornerstone for sustainable development. Green building estimates account for eco-friendly materials, energy-efficient systems, renewable energy integration, and sustainable construction practices. While initial costs may be higher, long-term savings through reduced energy consumption and operational expenses make green building financially attractive.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-emerald-600 dark:text-emerald-400 text-sm font-medium">Eco Cost Analysis</span>
+                        <button onclick="openModal(4)" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 cursor-pointer">
+                            <i class="ri-arrow-right-up-line text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Solar High Rise -->
+            <article class="sustainable-card rounded-2xl overflow-hidden shadow-xl relative">
+                <div class="eco-badge bg-purple-500 text-white">Solar Energy</div>
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Solar Building" 
+                         class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-sun-line text-purple-600 dark:text-purple-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">High Rise Building with Solar</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        These days, sustainability is a major buzz word. For most people, the term refers to a product or service that is easier on the environment. High rise buildings with integrated solar panels represent the future of urban development, combining dense population centers with renewable energy generation. Building-integrated photovoltaics (BIPV) can replace traditional cladding materials, turning entire facades into power generators.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-purple-600 dark:text-purple-400 text-sm font-medium">Renewable Integration</span>
+                        <button onclick="openModal(5)" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 cursor-pointer">
+                            <i class="ri-arrow-right-up-line text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Construction Statistics -->
+            <article class="sustainable-card rounded-2xl overflow-hidden shadow-xl relative">
+                <div class="eco-badge bg-red-500 text-white">Industry Data</div>
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Construction Statistics" 
+                         class="w-full h-full object-cover transition-transform duration-700 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-full flex items-center justify-center mr-3">
+                            <i class="ri-line-chart-line text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">65 Must-Know Construction Statistics</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        To be successful in the construction industry, it has become increasingly important to pay attention to the statistics, trends, and data that shape the market. Understanding these numbers helps contractors, developers, and homeowners make informed decisions about projects, investments, and sustainable practices. From material costs to labor productivity, these statistics provide valuable insights for planning.
+                    </p>
+                    <div class="flex items-center justify-between">
+                        <span class="text-red-600 dark:text-red-400 text-sm font-medium">2024 Insights</span>
+                        <button onclick="openModal(6)" class="text-emerald-600 dark:text-emerald-400 hover:text-emerald-800 dark:hover:text-emerald-300 cursor-pointer">
+                            <i class="ri-arrow-right-up-line text-lg"></i>
+                        </button>
+                    </div>
+                </div>
+            </article>
+        </div>
+
+        <!-- Sustainability Stats -->
+        <div class="bg-gradient-to-r from-green-500 to-emerald-600 rounded-2xl p-8 mb-12 text-white shadow-2xl">
+            <h2 class="text-2xl font-bold mb-6 text-center">Sustainable Construction Impact</h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <div class="text-center">
+                    <div class="stats-circle bg-white/20 backdrop-blur-sm mb-3">
+                        <span class="text-2xl font-bold">40%</span>
+                    </div>
+                    <p class="text-sm font-medium">Energy Reduction</p>
+                    <p class="text-xs opacity-80">With green building</p>
+                </div>
+                <div class="text-center">
+                    <div class="stats-circle bg-white/20 backdrop-blur-sm mb-3">
+                        <span class="text-2xl font-bold">30%</span>
+                    </div>
+                    <p class="text-sm font-medium">Water Savings</p>
+                    <p class="text-xs opacity-80">Efficient systems</p>
+                </div>
+                <div class="text-center">
+                    <div class="stats-circle bg-white/20 backdrop-blur-sm mb-3">
+                        <span class="text-2xl font-bold">50%</span>
+                    </div>
+                    <p class="text-sm font-medium">Waste Reduction</p>
+                    <p class="text-xs opacity-80">Recycling materials</p>
+                </div>
+                <div class="text-center">
+                    <div class="stats-circle bg-white/20 backdrop-blur-sm mb-3">
+                        <span class="text-2xl font-bold">25%</span>
+                    </div>
+                    <p class="text-sm font-medium">Cost Savings</p>
+                    <p class="text-xs opacity-80">Long-term operation</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Articles -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 flex items-center">
+                <i class="ri-leaf-fill mr-2 text-green-500"></i> More Sustainable Practices
+            </h2>
+            <div class="space-y-4">
+                <!-- Remedial Work -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-green-200 dark:border-green-800 hover:bg-white dark:hover:bg-gray-800 transition-all">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4 mt-1">
+                            <i class="ri-tools-line text-green-600 dark:text-green-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100">Remedial Work in Construction</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Buildings and structures can develop cracks, leaks, or other issues over time, compromising their stability and safety. Remedial work addresses these problems through careful diagnosis and repair, extending building life and preventing costly replacements. Sustainable remediation uses eco-friendly materials and techniques to restore structural integrity while minimizing environmental impact.</p>
+                        </div>
+                    </div>
+                    <button onclick="openModal(7)" class="mt-3 md:mt-0 md:ml-4 px-4 py-2 bg-green-600 hover:bg-green-700 text-white text-sm font-medium rounded-lg transition-colors cursor-pointer">
+                        Read Guide
+                    </button>
+                </div>
+
+                <!-- Construction Financing -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-blue-200 dark:border-blue-800 hover:bg-white dark:hover:bg-gray-800 transition-all">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4 mt-1">
+                            <i class="ri-bank-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100">Construction Financing Guide</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">Construction owners deal with a lot of different obstacles in their profession. From competitors to seasonality and material costs, financing a construction project requires careful planning and understanding of available options. This guide covers traditional loans, lines of credit, construction-to-permanent financing, and green building incentives that can make sustainable projects more affordable.</p>
+                        </div>
+                    </div>
+                    <button onclick="openModal(8)" class="mt-3 md:mt-0 md:ml-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white text-sm font-medium rounded-lg transition-colors cursor-pointer">
+                        Learn More
+                    </button>
+                </div>
+
+                <!-- Cost Reduction -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm rounded-xl p-5 border border-amber-200 dark:border-amber-800 hover:bg-white dark:hover:bg-gray-800 transition-all">
+                    <div class="flex items-start">
+                        <div class="w-8 h-8 bg-amber-100 dark:bg-amber-900 rounded-lg flex items-center justify-center mr-4 mt-1">
+                            <i class="ri-money-dollar-circle-line text-amber-600 dark:text-amber-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-gray-800 dark:text-gray-100">How to Reduce Construction Costs</h4>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm mt-1">If you're planning a construction project, whether it's a home renovation or a commercial building, controlling costs is essential for success. This guide explores strategies for reducing expenses without sacrificing quality, including value engineering, bulk material purchasing, efficient scheduling, and sustainable choices that offer long-term savings through energy efficiency and durability.</p>
+                        </div>
+                    </div>
+                    <button onclick="openModal(9)" class="mt-3 md:mt-0 md:ml-4 px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white text-sm font-medium rounded-lg transition-colors cursor-pointer">
+                        Cost Tips
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Green Certification -->
+        <div class="bg-white dark:bg-gray-800 rounded-2xl p-8 mb-12 shadow-xl border border-green-200 dark:border-green-800">
+            <div class="flex items-center mb-6">
+                <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-xl flex items-center justify-center mr-4">
+                    <i class="ri-award-line text-green-600 dark:text-green-400 text-2xl"></i>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100">Green Building Certifications</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Recognized standards for sustainable construction</p>
+                </div>
+            </div>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="text-center p-4 bg-green-50 dark:bg-green-900/30 rounded-lg">
+                    <div class="text-green-600 dark:text-green-400 text-2xl mb-2">LEED</div>
+                    <p class="text-xs text-gray-600 dark:text-gray-300">Leadership in Energy & Environmental Design</p>
+                </div>
+                <div class="text-center p-4 bg-emerald-50 dark:bg-emerald-900/30 rounded-lg">
+                    <div class="text-emerald-600 dark:text-emerald-400 text-2xl mb-2">BREEAM</div>
+                    <p class="text-xs text-gray-600 dark:text-gray-300">Building Research Establishment Environmental Assessment</p>
+                </div>
+                <div class="text-center p-4 bg-blue-50 dark:bg-blue-900/30 rounded-lg">
+                    <div class="text-blue-600 dark:text-blue-400 text-2xl mb-2">WELL</div>
+                    <p class="text-xs text-gray-600 dark:text-gray-300">Building Standard focused on human health</p>
+                </div>
+                <div class="text-center p-4 bg-teal-50 dark:bg-teal-900/30 rounded-lg">
+                    <div class="text-teal-600 dark:text-teal-400 text-2xl mb-2">GREEN STAR</div>
+                    <p class="text-xs text-gray-600 dark:text-gray-300">Australian sustainable building certification</p>
+                </div>
+            </div>
+        </div>
+
+    
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Article Title</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Article content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content
+        const articleData = {
+            1: {
+                title: "Backyard Shed – Costs, Types & Sizes",
+                content: `<p class="mb-4">A backyard shed is one of the most versatile additions you can make to a home. Whether you need extra storage, a dedicated workspace, or a garden retreat, sheds come in various styles and sizes to match your needs. From traditional wooden structures to modern metal designs, we'll help you choose the right shed and estimate costs for materials, foundation, and installation.</p>
+                <p class="mb-4">Shed types include wooden sheds (classic appearance, customizable), metal sheds (durable, low maintenance), vinyl sheds (weather-resistant, easy to clean), and resin sheds (lightweight, portable). Each material offers different benefits in terms of durability, appearance, and cost.</p>
+                <p class="mb-4">Cost factors include size (8x10 to 12x20), foundation requirements (gravel, concrete, or skids), doors and windows, insulation, electrical work, and finishing. Sustainable options include reclaimed wood, recycled materials, and green roofs that support local ecology and reduce stormwater runoff.</p>
+                <p>Our comprehensive guide covers permitting requirements, DIY vs. professional installation, and long-term maintenance to help you make an informed decision that adds value to your property while minimizing environmental impact.</p>`
+            },
+            2: {
+                title: "What is Sitework in Construction?",
+                content: `<p class="mb-4">Before any building rises from the ground, there's a lot of work that needs to happen to prepare the land. This essential phase is called sitework, encompassing everything from clearing vegetation and grading the terrain to installing utilities and creating proper drainage. Sustainable sitework practices minimize environmental impact while ensuring a stable foundation for your project.</p>
+                <p class="mb-4">Key sitework activities include surveying and staking, clearing and grubbing, earthwork and grading, excavation, utility installation (water, sewer, electric, gas), and erosion control measures. Each step must be carefully planned and executed to prevent future problems.</p>
+                <p class="mb-4">Sustainable sitework emphasizes minimal disturbance to existing topography, preservation of native vegetation, soil conservation, and stormwater management. Techniques include silt fencing, sediment basins, and phased construction to reduce exposed soil areas.</p>
+                <p>Proper sitework is critical for project success, affecting everything from foundation stability to drainage and utility access. Investing in quality sitework prevents costly issues during construction and throughout the building's life.</p>`
+            },
+            3: {
+                title: "What is Earthwork?",
+                content: `<p class="mb-4">Earthwork is a vital part of construction, landscaping, and agriculture that shapes the ground to create stable and functional spaces. It involves moving and processing soil, rock, and other materials to achieve desired grades and contours. Modern earthwork techniques emphasize soil conservation, erosion control, and minimal disturbance to natural drainage patterns.</p>
+                <p class="mb-4">Common earthwork operations include cut and fill (balancing material removal and placement), excavation for foundations and utilities, grading for proper drainage, compaction to ensure stability, and backfilling around structures. Each operation requires careful calculation and execution.</p>
+                <p class="mb-4">Sustainable earthwork practices focus on maintaining topsoil for reuse, minimizing haul distances to reduce fuel consumption, using erosion control measures, and designing with natural topography rather than against it. Geotechnical analysis ensures soil conditions are properly understood.</p>
+                <p>Accurate earthwork estimating is essential for project budgeting, as unexpected soil conditions or volume discrepancies can significantly impact costs. Our estimating services account for soil types, compaction requirements, and disposal or import costs.</p>`
+            },
+            4: {
+                title: "Green Building Estimates",
+                content: `<p class="mb-4">In the evolving landscape of construction, the concept of green building has emerged as a cornerstone for sustainable development. Green building estimates account for eco-friendly materials, energy-efficient systems, renewable energy integration, and sustainable construction practices. While initial costs may be higher, long-term savings through reduced energy consumption and operational expenses make green building financially attractive.</p>
+                <p class="mb-4">Key elements of green building include high-performance insulation, energy-efficient windows and doors, LED lighting, ENERGY STAR appliances, solar panels, rainwater harvesting systems, and sustainable materials like bamboo, reclaimed wood, and recycled content products.</p>
+                <p class="mb-4">Green building certification programs like LEED, BREEAM, and WELL provide frameworks for measuring sustainability and can qualify projects for tax incentives, grants, and higher property values. Our estimates include costs for certification processes and documentation.</p>
+                <p>Lifecycle cost analysis helps clients understand the long-term financial benefits of green building, including reduced utility bills, lower maintenance costs, and improved occupant health and productivity. Contact us for detailed green building estimates tailored to your project.</p>`
+            },
+            5: {
+                title: "High Rise Building with Solar",
+                content: `<p class="mb-4">These days, sustainability is a major buzz word. For most people, the term refers to a product or service that is easier on the environment. High rise buildings with integrated solar panels represent the future of urban development, combining dense population centers with renewable energy generation. Building-integrated photovoltaics (BIPV) can replace traditional cladding materials, turning entire facades into power generators.</p>
+                <p class="mb-4">Solar integration in high rises presents unique challenges and opportunities. Rooftop space is limited, so facade integration becomes crucial. BIPV systems can be incorporated into curtain walls, spandrel panels, and even window glazing, generating significant power while maintaining aesthetic appeal.</p>
+                <p class="mb-4">Energy storage systems, smart building management, and grid integration allow high rises to maximize solar benefits, reducing peak demand and providing backup power. Net-zero energy buildings are becoming achievable through comprehensive solar strategies combined with efficiency measures.</p>
+                <p>Cost estimating for solar high rises requires specialized knowledge of photovoltaic systems, structural considerations, electrical integration, and local utility regulations. Our estimates help developers understand payback periods, incentives, and long-term operational savings.</p>`
+            },
+            6: {
+                title: "65 Must-Know Construction Statistics",
+                content: `<p class="mb-4">To be successful in the construction industry, it has become increasingly important to pay attention to the statistics, trends, and data that shape the market. Understanding these numbers helps contractors, developers, and homeowners make informed decisions about projects, investments, and sustainable practices. From material costs to labor productivity, these statistics provide valuable insights for planning.</p>
+                <p class="mb-4">Key statistics include construction industry growth rates, material cost trends (lumber, steel, concrete), labor shortages and wage increases, project failure rates, safety statistics, and sustainability adoption rates. Regional variations affect all these factors significantly.</p>
+                <p class="mb-4">Green building statistics show increasing adoption of LEED certification, growing demand for energy-efficient buildings, and measurable reductions in operating costs for sustainable projects. These trends influence construction practices and investment decisions.</p>
+                <p>Our comprehensive database of construction statistics helps clients benchmark their projects, identify opportunities, and avoid common pitfalls. We provide context and analysis to turn raw data into actionable insights for your specific situation.</p>`
+            },
+            7: {
+                title: "Remedial Work in Construction",
+                content: `<p class="mb-4">Buildings and structures can develop cracks, leaks, or other issues over time, compromising their stability and safety. Remedial work addresses these problems through careful diagnosis and repair, extending building life and preventing costly replacements. Sustainable remediation uses eco-friendly materials and techniques to restore structural integrity while minimizing environmental impact.</p>
+                <p class="mb-4">Common remedial work includes foundation repairs, crack injection, waterproofing, structural strengthening, facade restoration, and roof repairs. Each requires specialized knowledge of materials, building science, and construction methods to ensure lasting results.</p>
+                <p class="mb-4">Diagnostic tools like moisture meters, thermal imaging, and structural analysis help identify root causes of problems rather than just treating symptoms. This approach ensures effective repairs that address underlying issues.</p>
+                <p>Sustainable remediation prioritizes preservation over replacement, reducing waste and embodied carbon. Techniques include epoxy injection for cracks, carbon fiber reinforcement, and breathable waterproofing systems that allow buildings to perform optimally while lasting longer.</p>`
+            },
+            8: {
+                title: "Construction Financing Guide",
+                content: `<p class="mb-4">Construction owners deal with a lot of different obstacles in their profession. From competitors to seasonality and material costs, financing a construction project requires careful planning and understanding of available options. This guide covers traditional loans, lines of credit, construction-to-permanent financing, and green building incentives that can make sustainable projects more affordable.</p>
+                <p class="mb-4">Construction loans differ from traditional mortgages, with interest-only payments during construction and conversion to permanent financing upon completion. Lenders require detailed plans, budgets, and contractor qualifications before approval. Draw schedules release funds as project milestones are completed.</p>
+                <p class="mb-4">Green building incentives include energy-efficient mortgages (EEMs), Property Assessed Clean Energy (PACE) financing, tax credits for solar and efficiency improvements, and grants for sustainable construction. These can significantly reduce project costs.</p>
+                <p>Understanding financing options helps developers and homeowners choose the best path for their projects, balancing short-term costs with long-term benefits. Our consulting services help clients navigate financing complexities and identify opportunities for savings.</p>`
+            },
+            9: {
+                title: "How to Reduce Construction Costs",
+                content: `<p class="mb-4">If you're planning a construction project, whether it's a home renovation or a commercial building, controlling costs is essential for success. This guide explores strategies for reducing expenses without sacrificing quality, including value engineering, bulk material purchasing, efficient scheduling, and sustainable choices that offer long-term savings through energy efficiency and durability.</p>
+                <p class="mb-4">Value engineering analyzes project components to identify cost-effective alternatives that maintain functionality and quality. This might involve different materials, construction methods, or design modifications that reduce costs without compromising performance.</p>
+                <p class="mb-4">Bulk purchasing and early procurement can secure better material prices, while efficient scheduling minimizes labor costs and equipment rental. Prefabrication and modular construction reduce on-site labor and waste, often lowering overall project costs.</p>
+                <p>Sustainable choices like high-performance insulation, efficient HVAC systems, and durable materials may increase initial costs but provide significant long-term savings through reduced energy consumption and maintenance. Lifecycle cost analysis helps balance upfront and ongoing expenses.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(articleId) {
+            console.log('Opening modal for article:', articleId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const article = articleData[articleId];
+            if (article) {
+                modalTitle.textContent = article.title;
+                modalBody.innerHTML = article.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Article not found:', articleId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const themeEmoji = document.getElementById('themeEmoji');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+            } else {
+                document.documentElement.classList.remove('dark');
+                if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText, themeEmoji);
+            }
+            
+            // Add event listener for theme toggle if exists
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    toggleTheme(themeIcon, themeText, themeEmoji);
+                });
+            }
+        });
+
+        // Update theme UI elements
+        function updateThemeUI(theme, themeIcon, themeText, themeEmoji) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+                if (themeEmoji) themeEmoji.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+                if (themeEmoji) themeEmoji.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme(themeIcon, themeText, themeEmoji) {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light', themeIcon, themeText, themeEmoji);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+            }
+        }
+
+        // Stats animation
+        const stats = document.querySelectorAll('.stats-circle span');
+        stats.forEach(stat => {
+            const target = parseInt(stat.textContent);
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                stat.textContent = Math.round(current) + '%';
+            }, 30);
+        });
+
+        console.log('Sustainable Construction Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

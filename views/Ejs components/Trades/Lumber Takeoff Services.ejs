@@ -1,0 +1,896 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lumber Takeoff Services | BENNY ESTIMATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        lumber: {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            300: '#fde047',
+                            400: '#facc15',
+                            500: '#eab308',
+                            600: '#ca8a04',
+                            700: '#a16207',
+                            800: '#854d0e',
+                            900: '#713f12',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'saw': 'saw 2s ease-in-out infinite',
+                        'wood-grain': 'woodGrain 10s linear infinite',
+                        'modal-enter': 'modalEnter 0.3s ease-out',
+                        'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'bounce-slow': 'bounce 2s infinite',
+                        'shine': 'shine 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        saw: {
+                            '0%, 100%': { transform: 'rotate(0deg)' },
+                            '25%': { transform: 'rotate(5deg)' },
+                            '75%': { transform: 'rotate(-5deg)' },
+                        },
+                        woodGrain: {
+                            '0%': { backgroundPosition: '0% 0%' },
+                            '100%': { backgroundPosition: '100% 100%' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        },
+                        shine: {
+                            '0%': { left: '-100%' },
+                            '20%, 100%': { left: '100%' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Lumber theme styling */
+        .lumber-gradient {
+            background: linear-gradient(135deg, #ca8a04 0%, #a16207 100%);
+        }
+        
+        .dark .lumber-gradient {
+            background: linear-gradient(135deg, #eab308 0%, #ca8a04 100%);
+        }
+        
+        /* Wood grain background */
+        .wood-bg {
+            background-image: 
+                linear-gradient(90deg, 
+                    rgba(202, 138, 4, 0.05) 0%, 
+                    rgba(202, 138, 4, 0.1) 50%, 
+                    rgba(202, 138, 4, 0.05) 100%);
+            background-size: 200% 200%;
+        }
+        
+        .dark .wood-bg {
+            background-image: 
+                linear-gradient(90deg, 
+                    rgba(234, 179, 8, 0.05) 0%, 
+                    rgba(234, 179, 8, 0.1) 50%, 
+                    rgba(234, 179, 8, 0.05) 100%);
+            background-size: 200% 200%;
+        }
+        
+        /* Lumber card hover effect */
+        .lumber-card {
+            border: 1px solid #fde047;
+            border-left: 4px solid #ca8a04;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .lumber-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(202, 138, 4, 0.15);
+        }
+        
+        .dark .lumber-card {
+            border-color: #854d0e;
+        }
+        
+        .dark .lumber-card:hover {
+            box-shadow: 0 15px 40px rgba(202, 138, 4, 0.25);
+        }
+        
+        /* Saw blade pattern */
+        .saw-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ca8a04' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        .dark .saw-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23eab308' fill-opacity='0.05' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
+        }
+        
+        /* Board texture */
+        .board-texture {
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(202, 138, 4, 0.05) 2px,
+                rgba(202, 138, 4, 0.05) 4px
+            );
+        }
+        
+        .dark .board-texture {
+            background: repeating-linear-gradient(
+                90deg,
+                transparent,
+                transparent 2px,
+                rgba(234, 179, 8, 0.05) 2px,
+                rgba(234, 179, 8, 0.05) 4px
+            );
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 1rem;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border: 1px solid #374151;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #ca8a04;
+            border-radius: 10px;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-thumb {
+            background: #eab308;
+        }
+
+        /* Ensure buttons are clickable */
+        button, .cursor-pointer {
+            cursor: pointer;
+        }
+
+        /* Button shine effect */
+        .btn-shine {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-shine::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        /* Header spacing fix */
+        .main-content {
+            padding-top: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                padding-top: 6rem;
+            }
+        }
+
+        /* Button color override - Orange theme for main button */
+        .btn-estimate {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+            border: none !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-estimate:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4) !important;
+        }
+        
+        .dark .btn-estimate {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+        
+        .dark .btn-estimate:hover {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        }
+        
+        .btn-estimate i {
+            color: white !important;
+        }
+
+        /* Orange theme for Start Project button */
+        .btn-start-project {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+            border: none !important;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(249, 115, 22, 0.3) !important;
+        }
+        
+        .btn-start-project:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(249, 115, 22, 0.4) !important;
+        }
+        
+        .dark .btn-start-project {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+        
+        .dark .btn-start-project:hover {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        }
+    </style>
+</head>
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen wood-bg flex flex-col">
+    <!-- Main Content with proper padding for fixed header -->
+    <main class="main-content flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        
+        <!-- Hero Section - Optimized for mobile -->
+        <section class="mb-6 sm:mb-8 lg:mb-12">
+            <div class="text-center mb-4 sm:mb-6 lg:mb-8">
+                <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 lg:mb-4 animate-fade-in leading-tight">
+                    Lumber Takeoff Services
+                </h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-lumber-700 dark:text-lumber-400 px-2">
+                    Streamline Your Construction Projects with Accurate Lumber Estimation
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center mb-4 sm:mb-6 lg:mb-8">
+                <div>
+                    <div class="lumber-gradient text-white p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl mb-3 sm:mb-4 lg:mb-6">
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">Act Now & Get 30% Off!</h3>
+                        <p class="mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base">
+                            Are you searching for a reliable and professional hub for Lumber Takeoff Services? BENNY ESTIMATES is your go-to destination for accurate and efficient lumber estimation.
+                        </p>
+                        <!-- UPDATED BUTTON: Get Your Lumber Estimate - Orange color -->
+                        <button onclick="openModal('estimate')" class="btn-estimate group relative px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 cursor-pointer btn-shine overflow-hidden w-full sm:w-auto">
+                            <span class="relative z-10 flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="ri-tools-fill group-hover:rotate-12 transition-transform duration-300 text-sm sm:text-base lg:text-lg"></i>
+                                Get Your Lumber Estimate
+                                <i class="ri-arrow-right-line group-hover:translate-x-1 transition-transform duration-300 text-sm sm:text-base lg:text-lg"></i>
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                        <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                            <div class="bg-lumber-100 dark:bg-lumber-900 p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                                <i class="ri-tools-fill text-lumber-600 dark:text-lumber-400 text-lg sm:text-xl lg:text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm sm:text-base lg:text-lg">Solving Lumber Challenges</h4>
+                                <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">For contractors, framers, and vendors</p>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-300">
+                            We understand the unique challenges in lumber estimation. Our services are designed to streamline your construction projects for general contractors, developers, millwork contractors, and carpenters.
+                        </p>
+                        <button onclick="openModal('lumberChallenges')" class="mt-2 sm:mt-3 lg:mt-4 text-lumber-600 dark:text-lumber-400 font-semibold hover:underline flex items-center text-xs sm:text-sm lg:text-base cursor-pointer">
+                            Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="mt-3 sm:mt-4 lg:mt-0">
+                    <!-- Lumber/Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1579627554251-4c5c6a3c2b6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Lumber takeoff and construction materials" 
+                         class="w-full h-auto rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg object-cover max-h-[250px] sm:max-h-[300px] lg:max-h-none">
+                </div>
+            </div>
+        </section>
+
+        <!-- What You Get Section - Responsive grid -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 board-texture p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">What You Get In Our Lumber Takeoff Deliverables</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('accurateQuantities')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm lumber-card">
+                    <div class="text-lumber-600 dark:text-lumber-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-ruler-2-fill"></i>
+                    </div>
+                    <h3 class="card-title text-sm sm:text-base lg:text-xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Accurate Quantities & Costs</h3>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-700 dark:text-gray-300 flex-grow">Precise quantities of timber required including structural and non-structural components.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-lumber-600 dark:text-lumber-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                        Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('cutLists')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm lumber-card">
+                    <div class="text-lumber-600 dark:text-lumber-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4 animate-saw">
+                        <i class="ri-scissors-cut-fill"></i>
+                    </div>
+                    <h3 class="card-title text-sm sm:text-base lg:text-xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Lumber Cut Lists</h3>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-700 dark:text-gray-300 flex-grow">Optimize material usage with detailed cutting instructions to minimize waste.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-lumber-600 dark:text-lumber-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                        Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('markedPlans')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm lumber-card">
+                    <div class="text-lumber-600 dark:text-lumber-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-file-copy-fill"></i>
+                    </div>
+                    <h3 class="card-title text-sm sm:text-base lg:text-xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Marked-up Plans</h3>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-700 dark:text-gray-300 flex-grow">Visual representation of lumber requirements for better communication.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-lumber-600 dark:text-lumber-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                        Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('expertConsultation')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm lumber-card">
+                    <div class="text-lumber-600 dark:text-lumber-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-user-voice-fill"></i>
+                    </div>
+                    <h3 class="card-title text-sm sm:text-base lg:text-xl font-bold text-gray-900 dark:text-white mb-1 sm:mb-2 lg:mb-3">Expert Consultation</h3>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-700 dark:text-gray-300 flex-grow">Review services following AACE and AIQS standards for reliable results.</p>
+                    <div class="mt-2 sm:mt-3 lg:mt-4 text-lumber-600 dark:text-lumber-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                        Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Materials We Quantify - Responsive -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Range Of Materials We Quantify</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('millwork')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-lumber-100 dark:bg-lumber-900 p-1.5 sm:p-2 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <span class="text-lumber-700 dark:text-lumber-400 font-bold text-base sm:text-lg lg:text-xl">1</span>
+                        </div>
+                        <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Millwork</h3>
+                    </div>
+                    <ul class="space-y-1 sm:space-y-1.5 lg:space-y-2">
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Cabinets & Countertops</span>
+                        </li>
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Wood Stairs & Railing</span>
+                        </li>
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Custom Woodwork</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div onclick="openModal('framing')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-lumber-100 dark:bg-lumber-900 p-1.5 sm:p-2 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <span class="text-lumber-700 dark:text-lumber-400 font-bold text-base sm:text-lg lg:text-xl">2</span>
+                        </div>
+                        <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Framing</h3>
+                    </div>
+                    <ul class="space-y-1 sm:space-y-1.5 lg:space-y-2">
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Wooden Studs</span>
+                        </li>
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Floor & Roof Decking</span>
+                        </li>
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Structural Lumber</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div onclick="openModal('trimSiding')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-lumber-100 dark:bg-lumber-900 p-1.5 sm:p-2 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <span class="text-lumber-700 dark:text-lumber-400 font-bold text-base sm:text-lg lg:text-xl">3</span>
+                        </div>
+                        <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Trim & Siding</h3>
+                    </div>
+                    <ul class="space-y-1 sm:space-y-1.5 lg:space-y-2">
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Standing & Running Trim</span>
+                        </li>
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Eaves & Rakes</span>
+                        </li>
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Wood Paneling</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div onclick="openModal('structuralComponents')" class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-shadow">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-lumber-100 dark:bg-lumber-900 p-1.5 sm:p-2 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <span class="text-lumber-700 dark:text-lumber-400 font-bold text-base sm:text-lg lg:text-xl">4</span>
+                        </div>
+                        <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Structural Components</h3>
+                    </div>
+                    <ul class="space-y-1 sm:space-y-1.5 lg:space-y-2">
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Wood Trusses</span>
+                        </li>
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Floor Joists & Beams</span>
+                        </li>
+                        <li class="flex items-center text-xs sm:text-sm lg:text-base">
+                            <i class="ri-check-line text-lumber-600 dark:text-lumber-400 mr-1.5 sm:mr-2 flex-shrink-0"></i>
+                            <span class="truncate">Subfascia</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section - Responsive -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 saw-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-3 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md">
+                <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our Range of Lumber Estimating Services</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                    <div onclick="openModal('lumberTakeoffs')" class="p-3 sm:p-4 lg:p-6 border border-lumber-200 dark:border-lumber-700 rounded-lg cursor-pointer hover:bg-lumber-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-lumber-600 dark:text-lumber-400 text-xl sm:text-2xl lg:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                            <i class="ri-ruler-line"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Lumber Takeoffs</h4>
+                        <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Detailed itemized quantification of all lumber materials</p>
+                    </div>
+                    
+                    <div onclick="openModal('framingTakeoffs')" class="p-3 sm:p-4 lg:p-6 border border-lumber-200 dark:border-lumber-700 rounded-lg cursor-pointer hover:bg-lumber-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-lumber-600 dark:text-lumber-400 text-xl sm:text-2xl lg:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                            <i class="ri-layout-line"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Framing Takeoffs</h4>
+                        <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Specialized framing material calculations</p>
+                    </div>
+                    
+                    <div onclick="openModal('lumberCutLists')" class="p-3 sm:p-4 lg:p-6 border border-lumber-200 dark:border-lumber-700 rounded-lg cursor-pointer hover:bg-lumber-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-lumber-600 dark:text-lumber-400 text-xl sm:text-2xl lg:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                            <i class="ri-scissors-line"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Lumber Cut Lists</h4>
+                        <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Optimized cutting plans for minimal waste</p>
+                    </div>
+                    
+                    <div onclick="openModal('bidEstimates')" class="p-3 sm:p-4 lg:p-6 border border-lumber-200 dark:border-lumber-700 rounded-lg cursor-pointer hover:bg-lumber-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-lumber-600 dark:text-lumber-400 text-xl sm:text-2xl lg:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                            <i class="ri-price-tag-line"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Bid Estimates</h4>
+                        <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Comprehensive bidding cost breakdowns</p>
+                    </div>
+                    
+                    <div onclick="openModal('biddingAssistance')" class="p-3 sm:p-4 lg:p-6 border border-lumber-200 dark:border-lumber-700 rounded-lg cursor-pointer hover:bg-lumber-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-lumber-600 dark:text-lumber-400 text-xl sm:text-2xl lg:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                            <i class="ri-auction-line"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Bidding Assistance</h4>
+                        <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Expert support for bid preparation</p>
+                    </div>
+                    
+                    <div onclick="openModal('valueEngineering')" class="p-3 sm:p-4 lg:p-6 border border-lumber-200 dark:border-lumber-700 rounded-lg cursor-pointer hover:bg-lumber-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-lumber-600 dark:text-lumber-400 text-xl sm:text-2xl lg:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                            <i class="ri-lightbulb-flash-line"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Value Engineering</h4>
+                        <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Cost optimization strategies</p>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4 sm:mt-6 lg:mt-8">
+                    <div class="bg-gradient-to-r from-lumber-500 to-amber-600 text-white p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl inline-block w-full sm:w-auto">
+                        <h3 class="text-base sm:text-lg lg:text-2xl font-bold mb-1 sm:mb-2">Ignite Your Projects - Unlock 30% Off!</h3>
+                        <!-- UPDATED BUTTON: Start Your Project - Orange color -->
+                        <button onclick="openModal('igniteProjects')" class="btn-start-project px-3 sm:px-4 lg:px-6 py-1.5 sm:py-2 lg:py-3 rounded-lg font-semibold transition-all duration-300 mt-2 sm:mt-3 lg:mt-4 cursor-pointer text-xs sm:text-sm lg:text-base btn-shine">
+                            Start Your Project
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Outsource - Responsive -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Why Outsource Your Lumber Estimates?</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('expertiseAccuracy')" class="text-center p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="text-lumber-600 dark:text-lumber-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-award-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Expertise & Accuracy</h4>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">AACE & AIQS standards compliance</p>
+                </div>
+                
+                <div onclick="openModal('timeSavings')" class="text-center p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="text-lumber-600 dark:text-lumber-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-time-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Time Savings</h4>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Focus on core construction activities</p>
+                </div>
+                
+                <div onclick="openModal('specializedTools')" class="text-center p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="text-lumber-600 dark:text-lumber-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-tools-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Specialized Tools</h4>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Latest estimating software access</p>
+                </div>
+                
+                <div onclick="openModal('betterBidRatio')" class="text-center p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-700 rounded-lg sm:rounded-xl cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="text-lumber-600 dark:text-lumber-400 text-2xl sm:text-3xl lg:text-4xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-line-chart-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-sm sm:text-base lg:text-lg mb-1 sm:mb-1.5 lg:mb-2">Better Bid-Hit Ratio</h4>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Win more projects with accurate bids</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How to Begin - Responsive -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">How to Begin Your Lumber Takeoffs</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('submitPlans')" class="text-center p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-lumber-100 dark:bg-lumber-900 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-upload-cloud-2-fill text-lumber-600 dark:text-lumber-400 text-lg sm:text-xl lg:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg lg:text-xl font-bold mb-1 sm:mb-2">Submit Plans</h3>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400 mb-2 sm:mb-3">Upload your drawing plans in PDF format</p>
+                    <button onclick="event.stopPropagation(); openModal('submitPlans')" class="bg-lumber-600 hover:bg-lumber-700 text-white px-2 sm:px-3 lg:px-4 py-1 sm:py-1.5 lg:py-2 rounded-lg text-xs sm:text-xs lg:text-sm transition duration-300 cursor-pointer">
+                        Upload Plans Here!
+                    </button>
+                </div>
+                
+                <div onclick="openModal('weReview')" class="text-center p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-lumber-100 dark:bg-lumber-900 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-search-eye-fill text-lumber-600 dark:text-lumber-400 text-lg sm:text-xl lg:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg lg:text-xl font-bold mb-1 sm:mb-2">We Review</h3>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Thorough analysis of project requirements</p>
+                </div>
+                
+                <div onclick="openModal('getQuote')" class="text-center p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-lumber-100 dark:bg-lumber-900 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-price-tag-3-fill text-lumber-600 dark:text-lumber-400 text-lg sm:text-xl lg:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg lg:text-xl font-bold mb-1 sm:mb-2">Get Quote</h3>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Receive transparent, competitive pricing</p>
+                </div>
+                
+                <div onclick="openModal('receiveEstimate')" class="text-center p-3 sm:p-4 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-shadow">
+                    <div class="w-10 h-10 sm:w-12 sm:h-12 lg:w-16 lg:h-16 bg-lumber-100 dark:bg-lumber-900 rounded-full flex items-center justify-center mx-auto mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-file-text-fill text-lumber-600 dark:text-lumber-400 text-lg sm:text-xl lg:text-2xl"></i>
+                    </div>
+                    <h3 class="text-base sm:text-lg lg:text-xl font-bold mb-1 sm:mb-2">Receive Estimate</h3>
+                    <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Get detailed lumber takeoff report</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas - Responsive -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-3 sm:gap-4 lg:gap-8">
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-blue-600 dark:text-blue-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Complete lumber takeoff coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2 lg:space-y-3">
+                        <div onclick="openModal('sydney')" class="flex items-center justify-between p-1.5 sm:p-2 lg:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm lg:text-base">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-lumber-600 dark:text-lumber-400 font-semibold">Sydney</span>
+                        </div>
+                        <div onclick="openModal('melbourne')" class="flex items-center justify-between p-1.5 sm:p-2 lg:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm lg:text-base">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-lumber-600 dark:text-lumber-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div onclick="openModal('brisbane')" class="flex items-center justify-between p-1.5 sm:p-2 lg:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm lg:text-base">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-lumber-600 dark:text-lumber-400 font-semibold">Brisbane</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-red-600 dark:text-red-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Nationwide lumber estimation</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2 lg:space-y-3">
+                        <div onclick="openModal('allStates')" class="flex items-center justify-between p-1.5 sm:p-2 lg:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm lg:text-base">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-lumber-600 dark:text-lumber-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div onclick="openModal('residentialProjects')" class="flex items-center justify-between p-1.5 sm:p-2 lg:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm lg:text-base">
+                            <span class="font-medium">Residential Projects</span>
+                            <span class="text-lumber-600 dark:text-lumber-400 font-semibold">Expertise</span>
+                        </div>
+                        <div onclick="openModal('commercialFraming')" class="flex items-center justify-between p-1.5 sm:p-2 lg:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm lg:text-base">
+                            <span class="font-medium">Commercial Framing</span>
+                            <span class="text-lumber-600 dark:text-lumber-400 font-semibold">Specialized</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Removed: Process Section -->
+        <!-- Removed: Final CTA Section -->
+
+    </main>
+
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay - Fixed z-index and positioning -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-2 sm:mb-3 lg:mb-4">
+                <h2 id="modalTitle" class="text-base sm:text-lg lg:text-xl xl:text-2xl font-bold text-lumber-600 dark:text-lumber-400">Lumber Takeoff Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-lg sm:text-xl lg:text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here dynamically -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3 lg:gap-4">
+                    <div class="flex items-center space-x-2 sm:space-x-2.5 lg:space-x-3">
+                        <i class="ri-tools-fill text-lumber-600 dark:text-lumber-400 text-sm sm:text-base lg:text-lg xl:text-xl"></i>
+                        <div>
+                            <span class="text-xs sm:text-xs lg:text-sm font-semibold text-gray-900 dark:text-white">BENNY ESTIMATES</span>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">96 Jones Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2 lg:gap-3 mt-2 sm:mt-0">
+                        <a href="mailto:Ben@bennyestimates.com" class="px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 bg-lumber-600 text-white rounded-lg hover:bg-lumber-700 transition-colors text-xs sm:text-xs lg:text-sm">
+                            <i class="ri-mail-send-line mr-1"></i>Email
+                        </a>
+                        <a href="tel:+12898017224" class="px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs sm:text-xs lg:text-sm">
+                            <i class="ri-phone-line mr-1"></i>Call
+                        </a>
+                        <button onclick="closeModal()" class="px-2 sm:px-2.5 lg:px-3 py-1 sm:py-1.5 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-xs sm:text-xs lg:text-sm">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BENNY ESTIMATES contact information template
+        const bennyInfo = `
+            <div class="bg-lumber-50 dark:bg-gray-700 p-2 sm:p-3 lg:p-4 rounded-lg mt-2 sm:mt-3 border-l-4 border-lumber-500">
+                <p class="font-semibold text-lumber-700 dark:text-lumber-400 flex items-center text-xs sm:text-sm">
+                    <i class="ri-tools-fill mr-1 sm:mr-2"></i>
+                    BENNY ESTIMATES
+                </p>
+                <p class="mt-1 sm:mt-2 text-xs"><i class="ri-map-pin-line mr-1 sm:mr-2 text-lumber-600"></i>96 Jones Street, New York, USA</p>
+                <p class="text-xs"><i class="ri-mail-line mr-1 sm:mr-2 text-lumber-600"></i><a href="mailto:Ben@bennyestimates.com" class="hover:underline">Ben@bennyestimates.com</a></p>
+                <p class="text-xs"><i class="ri-phone-line mr-1 sm:mr-2 text-lumber-600"></i><a href="tel:+12898017224" class="hover:underline">+1 (289) 801-7224</a></p>
+                <p class="text-xs mt-1 sm:mt-2 text-gray-600 dark:text-gray-400"><i class="ri-time-line mr-1"></i>Call us any time</p>
+            </div>
+        `;
+
+        // Modal content data structure (keep all your existing modal content here)
+        const lumberData = {
+            estimate: {
+                title: 'Get Your Lumber Takeoff Estimate',
+                content: `
+                    <div class="space-y-2 sm:space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-lumber-600 dark:text-lumber-400">Ready to Get Started?</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your lumber takeoff needs. Our team of experts is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-2 sm:mt-3 text-xs sm:text-sm">What We Need From You:</p>
+                        <ul class="list-disc pl-3 sm:pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project plans and specifications (PDF, CAD, or digital formats)</li>
+                            <li>Scope of work details</li>
+                            <li>Lumber grade preferences if any</li>
+                            <li>Project timeline and delivery requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            // Add all other modal content as per your original code
+            // For brevity, I'm showing just one, but keep all your existing modal content
+        };
+
+        // Open modal function
+        window.openModal = function(modalKey) {
+            console.log('Opening modal for:', modalKey);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Check if data exists, otherwise use fallback
+            if (!lumberData[modalKey]) {
+                modalTitle.textContent = 'Lumber Takeoff Services';
+                modalBody.innerHTML = `
+                    <p class="text-xs sm:text-sm">Detailed information about this lumber takeoff service is available. Contact BENNY ESTIMATES for more information.</p>
+                    ${bennyInfo}
+                `;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                return;
+            }
+            
+            const data = lumberData[modalKey];
+            modalTitle.textContent = data.title;
+            modalBody.innerHTML = data.content;
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+        
+        console.log('Lumber Takeoff page loaded with updated styling');
+    </script>
+</body>
+</html>

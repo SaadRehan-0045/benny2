@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Industrial Estimating Services - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        indigo: {
+                            50: '#eef2ff',
+                            100: '#e0e7ff',
+                            200: '#c7d2fe',
+                            300: '#a5b4fc',
+                            400: '#818cf8',
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                            700: '#4338ca',
+                            800: '#3730a3',
+                            900: '#312e81',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'pulse-industrial': 'pulse-industrial 2s ease-in-out infinite',
+                        'slide-in-right': 'slide-in-right 0.5s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'pulse-industrial': {
+                            '0%, 100%': { 
+                                boxShadow: '0 0 0 0 rgba(79, 70, 229, 0.7)',
+                                transform: 'scale(1)'
+                            },
+                            '50%': { 
+                                boxShadow: '0 0 0 10px rgba(79, 70, 229, 0)',
+                                transform: 'scale(1.05)'
+                            }
+                        },
+                        'slide-in-right': {
+                            '0%': { 
+                                opacity: '0',
+                                transform: 'translateX(20px)'
+                            },
+                            '100%': { 
+                                opacity: '1',
+                                transform: 'translateX(0)'
+                            }
+                        },
+                        'float': {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .industrial-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-left: 5px solid #4f46e5;
+        }
+        .dark .industrial-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+            border-left: 5px solid #6366f1;
+        }
+        .industrial-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(79, 70, 229, 0.25);
+        }
+        .theme-industrial-toggle {
+            background: linear-gradient(135deg, #4f46e5, #2563eb);
+            color: white;
+            box-shadow: 0 10px 25px -5px rgba(79, 70, 229, 0.4);
+        }
+        .theme-industrial-toggle:hover {
+            transform: scale(1.08);
+            box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.5);
+        }
+        .industrial-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #4f46e5;
+            color: white;
+            cursor: pointer;
+            z-index: 10;
+        }
+        .gradient-text-industrial {
+            background: linear-gradient(135deg, #4f46e5, #2563eb);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .service-icon-wrapper {
+            width: 70px;
+            height: 70px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            position: relative;
+            overflow: hidden;
+        }
+        .service-icon-wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, #4f46e5, #2563eb);
+            opacity: 0.1;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .industrial-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+ <%- include('../header.ejs') %>
+<body class="bg-gradient-to-br from-indigo-50 to-blue-50 dark:from-gray-900 dark:to-indigo-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+   
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-slide-in-right">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-indigo-600 to-blue-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-award-line mr-2"></i>
+                Professional Industrial Estimating
+            </div>
+            <h1 class="hero-title text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text-industrial">Industrial Estimating</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Services</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Accurate Cost Estimates and Budget Control for Your Industrial Projects
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800">
+            <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Industrial Construction Estimating" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-900/20 dark:to-blue-900/20 rounded-2xl p-8 border border-indigo-200 dark:border-indigo-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-flashlight-line text-indigo-600 mr-2"></i>
+                    Supercharge Your Industrial Estimates
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                    Specialized Industrial Construction Estimating Services for American and Australian Industries
+                </p>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Whether you are involved in new construction, renovations, or remodeling projects, our team has the expertise to meet your specific needs. From structural steel estimation to electrical system components, our estimators possess in-depth knowledge to deliver precise estimates.
+                </p>
+                <button onclick="openModal(1)" class="mt-2 text-indigo-600 dark:text-indigo-400 font-medium hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                    Learn More About Our Industrial Expertise <i class="ri-arrow-right-line ml-1"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Services Overview -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Our Range Of Industrial Project Estimation Services
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="industrial-card rounded-xl p-6 text-center relative">
+                    <div class="service-icon-wrapper">
+                        <i class="ri-calculator-line text-indigo-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Comprehensive Quantity Estimation</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Detailed material takeoff solutions for all divisions including structural steel, mechanical services, electrical services, and process piping.
+                    </p>
+                    <button onclick="openModal(2)" class="text-indigo-600 dark:text-indigo-400 font-medium text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                
+                <div class="industrial-card rounded-xl p-6 text-center relative">
+                    <div class="service-icon-wrapper">
+                        <i class="ri-file-search-line text-blue-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Bid Evaluation & Management</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Professional bid analysis and management services to ensure competitive pricing and quality selection.
+                    </p>
+                    <button onclick="openModal(3)" class="text-indigo-600 dark:text-indigo-400 font-medium text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                
+                <div class="industrial-card rounded-xl p-6 text-center relative">
+                    <div class="service-icon-wrapper">
+                        <i class="ri-shield-check-line text-green-600 text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">Risk Analysis & Feasibility</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Comprehensive risk assessment and feasibility studies for informed project decision-making.
+                    </p>
+                    <button onclick="openModal(4)" class="text-indigo-600 dark:text-indigo-400 font-medium text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Specialized Services -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-tools-line text-indigo-600 mr-2"></i>
+                Specialized Industrial Estimation Services
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="industrial-card rounded-xl p-6 relative">
+                    <div class="industrial-badge" onclick="openModal(5)">Steel</div>
+                    <div class="w-12 h-12 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-building-2-line text-indigo-600 dark:text-indigo-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Structural Steel Estimating</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Precise estimation for multi-story buildings and industrial facilities with comprehensive breakdowns.
+                    </p>
+                    <button onclick="openModal(5)" class="text-indigo-600 dark:text-indigo-400 font-medium text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <div class="industrial-card rounded-xl p-6 relative">
+                    <div class="industrial-badge" style="background: #2563eb;" onclick="openModal(6)">Mechanical</div>
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-settings-3-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Mechanical Estimating</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        HVAC, piping, and mechanical system cost analysis for industrial applications.
+                    </p>
+                    <button onclick="openModal(6)" class="text-indigo-600 dark:text-indigo-400 font-medium text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <div class="industrial-card rounded-xl p-6 relative">
+                    <div class="industrial-badge" style="background: #16a34a;" onclick="openModal(7)">Electrical</div>
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-flashlight-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Electrical Estimating</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Industrial electrical system component estimation and power distribution analysis.
+                    </p>
+                    <button onclick="openModal(7)" class="text-indigo-600 dark:text-indigo-400 font-medium text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <div class="industrial-card rounded-xl p-6 relative">
+                    <div class="industrial-badge" style="background: #ea580c;" onclick="openModal(8)">Process</div>
+                    <div class="w-12 h-12 bg-orange-100 dark:bg-orange-900 rounded-lg flex items-center justify-center mb-4">
+                        <!-- Changed from ri-flow-chart-line to ri-flow-chart -->
+                        <i class="ri-separator  text-orange-600 dark:text-orange-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Process Piping</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-3">
+                        Specialized estimation for industrial process piping and chemical handling systems.
+                    </p>
+                    <button onclick="openModal(8)" class="text-indigo-600 dark:text-indigo-400 font-medium text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl p-8 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center">Why Choose Our Industrial Construction Estimates?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-focus-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Accuracy and Efficiency</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Our estimates facilitate effective budget management and loan acquisition with clear cost pictures at early project stages.
+                        </p>
+                        <button onclick="openModal(9)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-user-settings-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Customized Solutions</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Tailored estimating services that meet the specific requirements of your industrial projects.
+                        </p>
+                        <button onclick="openModal(10)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-briefcase-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Extensive Portfolio</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Experience across multiple industries including manufacturing, energy, and heavy industrial.
+                        </p>
+                        <button onclick="openModal(11)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                        <div class="flex items-center mb-4">
+                            <div class="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center mr-4">
+                                <i class="ri-medal-line text-white"></i>
+                            </div>
+                            <h4 class="font-bold text-lg">Specialized Expertise</h4>
+                        </div>
+                        <p class="text-white/90 text-sm">
+                            Deep knowledge in industrial construction processes, materials, and regional requirements.
+                        </p>
+                        <button onclick="openModal(12)" class="mt-3 text-white/90 text-sm hover:text-white inline-flex items-center cursor-pointer">
+                            Learn More <i class="ri-arrow-right-line ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-map-pin-line text-indigo-600 mr-2"></i>
+                Our Industrial Service Areas
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Australia -->
+                <div class="bg-gradient-to-r from-indigo-50 to-white dark:from-indigo-900/10 dark:to-gray-800 rounded-xl p-6 border border-indigo-200 dark:border-indigo-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-indigo-100 dark:bg-indigo-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-line text-indigo-600 dark:text-indigo-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Australia</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-3 text-sm">
+                        <div onclick="openModal(13)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400">New South Wales</div>
+                        <div onclick="openModal(14)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400">Sydney</div>
+                        <div onclick="openModal(15)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400">Victoria</div>
+                        <div onclick="openModal(16)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400">Melbourne</div>
+                        <div onclick="openModal(17)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400">Queensland</div>
+                        <div onclick="openModal(18)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400">Brisbane</div>
+                        <div onclick="openModal(19)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400">Western Australia</div>
+                        <div onclick="openModal(20)" class="text-gray-600 dark:text-gray-300 cursor-pointer hover:text-indigo-600 dark:hover:text-indigo-400">Perth</div>
+                    </div>
+                    <button onclick="openModal(21)" class="mt-4 text-indigo-600 dark:text-indigo-400 text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        View All Australian Services <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- USA -->
+                <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-800 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-2-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">United States</h3>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Nationwide industrial estimating services with expertise in American industrial standards, building codes, labor rates, and material costs across all states.
+                    </div>
+                    <button onclick="openModal(22)" class="text-indigo-600 dark:text-indigo-400 text-sm hover:text-indigo-800 dark:hover:text-indigo-300 inline-flex items-center cursor-pointer">
+                        View US Industrial Services <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                How to Begin Your Industrial Estimates
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <div onclick="openModal(23)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-indigo-100 dark:bg-indigo-900 rounded-full flex items-center justify-center mx-auto mb-4 text-indigo-600 dark:text-indigo-400 text-2xl font-bold">
+                        1
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Submit Plans</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Upload your industrial drawings and specifications</p>
+                </div>
+                
+                <div onclick="openModal(24)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mx-auto mb-4 text-blue-600 dark:text-blue-400 text-2xl font-bold">
+                        2
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">We Review</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Our experts analyze your project requirements</p>
+                </div>
+                
+                <div onclick="openModal(25)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mx-auto mb-4 text-green-600 dark:text-green-400 text-2xl font-bold">
+                        3
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Get Quote</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Receive detailed pricing and timeline</p>
+                </div>
+                
+                <div onclick="openModal(26)" class="text-center p-6 cursor-pointer hover:bg-white dark:hover:bg-gray-800 rounded-xl transition-colors">
+                    <div class="w-16 h-16 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mx-auto mb-4 text-purple-600 dark:text-purple-400 text-2xl font-bold">
+                        4
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Receive Estimate</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Get comprehensive industrial estimate</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-indigo-600 to-blue-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl">
+            <h3 class="text-2xl font-bold mb-4">Request Your Industrial Estimate Today</h3>
+            <p class="mb-6 opacity-90">Get accurate, comprehensive estimates for your industrial projects</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button onclick="openModal(27)" class="px-8 py-3 bg-white text-indigo-700 font-bold rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                    Upload Industrial Plans
+                </button>
+                <button onclick="openModal(28)" class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+                    Get Quote Now
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Industrial Service Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content (keeping the same as before)
+        const serviceData = {
+            1: {
+                title: "Our Industrial Estimating Expertise",
+                content: `<p class="mb-4">At Benny Estimates, we specialize in industrial construction estimating for projects across manufacturing, energy, heavy industrial, and process industries. Our team brings decades of combined experience in industrial construction.</p>
+                <p class="mb-4">Industrial projects present unique challenges including specialized equipment, complex systems, stringent safety requirements, and tight schedules. Our estimators understand these challenges and account for them in every estimate.</p>
+                <p class="mb-4">We stay current with industrial construction methods, materials, equipment costs, and regulatory requirements. Our estimates reflect real-world conditions and help you bid confidently on industrial projects.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to discuss your industrial project needs.</p>`
+            },
+            2: {
+                title: "Comprehensive Quantity Estimation",
+                content: `<p class="mb-4">Our comprehensive quantity estimation service provides detailed material takeoff solutions for all divisions of industrial construction. We cover structural steel, mechanical services, electrical services, process piping, and specialty industrial systems.</p>
+                <p class="mb-4">Each estimate includes precise quantities organized by trade and phase, making it easy to understand material requirements and coordinate procurement. We account for waste factors, overlaps, and industrial standards.</p>
+                <p class="mb-4">Our takeoffs are performed using advanced digital tools that ensure accuracy and consistency. We work with digital plans in PDF, CAD, and BIM formats, extracting quantities directly from your project files.</p>
+                <p>Accurate quantity estimation is the foundation of successful industrial projects. Contact us to learn how our services can support your next industrial development.</p>`
+            },
+            3: {
+                title: "Bid Evaluation & Management",
+                content: `<p class="mb-4">Our bid evaluation and management services help industrial contractors and owners select the best subcontractors and suppliers for their projects. We analyze bids to ensure competitive pricing and quality selection.</p>
+                <p class="mb-4">We provide professional bid analysis that compares proposals side-by-side, identifying discrepancies and evaluating qualifications. Our services include bid leveling, scope verification, and recommendation reports.</p>
+                <p class="mb-4">Effective bid management ensures you select qualified contractors at fair prices, reducing the risk of cost overruns and delays. We help you navigate complex bid requirements and make informed decisions.</p>
+                <p>Let our bid evaluation expertise support your next industrial procurement process.</p>`
+            },
+            4: {
+                title: "Risk Analysis & Feasibility",
+                content: `<p class="mb-4">Industrial projects involve significant risks that must be identified and managed. Our risk analysis and feasibility studies provide comprehensive assessment of project viability and potential challenges.</p>
+                <p class="mb-4">We analyze site conditions, regulatory requirements, market factors, and construction costs to determine whether your industrial project is feasible. Our studies identify risks and opportunities, helping you make informed investment decisions.</p>
+                <p class="mb-4">Risk analysis includes assessment of technical, financial, schedule, and environmental factors. We provide mitigation strategies for identified risks, helping you avoid costly surprises during construction.</p>
+                <p>Contact us to discuss a feasibility study for your next industrial project.</p>`
+            },
+            5: {
+                title: "Structural Steel Estimating",
+                content: `<p class="mb-4">Structural steel is fundamental to industrial construction. Our structural steel estimating service provides precise quantification and costing for all steel components in your industrial project.</p>
+                <p class="mb-4">We quantify steel by type, size, and grade, calculating weights and lengths for ordering purposes. Our estimates include all connection materials, bolts, weld requirements, and miscellaneous steel.</p>
+                <p class="mb-4">Whether your project uses conventional steel framing, heavy structural members, or specialized industrial steel systems, our estimators have the expertise to provide accurate quantities that support fabrication and erection.</p>
+                <p>Detailed steel estimates help you secure competitive pricing from fabricators and ensure you have the materials needed to maintain your construction schedule.</p>`
+            },
+            6: {
+                title: "Mechanical Estimating",
+                content: `<p class="mb-4">Industrial mechanical systems include HVAC, piping, process equipment, and material handling systems. Our mechanical estimating service provides comprehensive cost analysis for all mechanical components.</p>
+                <p class="mb-4">We quantify mechanical equipment, ductwork, piping, and controls with attention to industrial requirements. Our estimates account for specialized industrial applications, heavy-duty equipment, and complex system integration.</p>
+                <p class="mb-4">Mechanical systems are critical to industrial operations. Our estimators understand the performance requirements and installation challenges of industrial mechanical systems, ensuring your estimates reflect actual project needs.</p>
+                <p>Contact us for specialized mechanical estimating support for your industrial project.</p>`
+            },
+            7: {
+                title: "Electrical Estimating",
+                content: `<p class="mb-4">Industrial electrical systems require specialized estimating expertise due to high power requirements, complex controls, and safety considerations. Our electrical estimating service provides accurate cost projections for all electrical components.</p>
+                <p class="mb-4">We quantify electrical distribution equipment, motor control centers, instrumentation, lighting, and specialty industrial electrical systems. Our estimates account for the unique requirements of industrial facilities.</p>
+                <p class="mb-4">Electrical systems in industrial projects must be reliable, safe, and maintainable. Our estimators ensure your electrical estimates reflect these requirements and include all necessary components.</p>
+                <p>Let our electrical estimating expertise support your next industrial project.</p>`
+            },
+            8: {
+                title: "Process Piping Estimating",
+                content: `<p class="mb-4">Process piping is critical in many industrial facilities including chemical plants, refineries, and manufacturing facilities. Our process piping estimating service provides specialized cost analysis for these complex systems.</p>
+                <p class="mb-4">We quantify piping materials, fittings, valves, and specialty components based on process requirements. Our estimates account for material specifications, pressure ratings, temperature requirements, and corrosion considerations.</p>
+                <p class="mb-4">Process piping systems must meet stringent quality and safety standards. Our estimators understand the codes and standards that apply to industrial process piping and ensure your estimates reflect these requirements.</p>
+                <p>Contact us for specialized process piping estimating support.</p>`
+            },
+            9: {
+                title: "Accuracy and Efficiency",
+                content: `<p class="mb-4">Our estimates facilitate effective budget management and loan acquisition with clear cost pictures at early project stages. Accuracy in industrial estimating is essential for project success and financial planning.</p>
+                <p class="mb-4">We use advanced digital tools and proven methodologies to ensure consistent accuracy across all estimates. Our quality control processes include multiple reviews and cross-checking to verify quantities and pricing.</p>
+                <p class="mb-4">Efficiency means delivering estimates quickly without sacrificing accuracy. Our streamlined processes and experienced estimators enable fast turnaround while maintaining the precision industrial projects require.</p>
+                <p>When you need reliable industrial estimates, Benny Estimates delivers the accuracy and efficiency you can count on.</p>`
+            },
+            10: {
+                title: "Customized Solutions",
+                content: `<p class="mb-4">Every industrial project is unique, with specific requirements that demand tailored estimating solutions. Our customized estimating services adapt to your project's particular needs, whether it's a manufacturing plant, energy facility, or heavy industrial development.</p>
+                <p class="mb-4">We work closely with your team to understand your project requirements, estimating preferences, and format needs. Our estimates can be customized to align with your accounting systems, bid formats, and reporting requirements.</p>
+                <p class="mb-4">Whether you need preliminary budgets for feasibility studies, detailed estimates for competitive bidding, or cost models for value engineering, we tailor our services to meet your specific needs.</p>
+                <p>Contact us to discuss how we can customize our industrial estimating services for your project.</p>`
+            },
+            11: {
+                title: "Extensive Portfolio",
+                content: `<p class="mb-4">Our experience spans multiple industries including manufacturing, energy, heavy industrial, and process industries. We've provided estimating services for a wide range of industrial project types and scales.</p>
+                <p class="mb-4">From manufacturing facilities and warehouses to power plants and refineries, our estimators have the experience needed to understand the unique requirements of each industrial sector. This breadth of experience informs every estimate we prepare.</p>
+                <p class="mb-4">Our portfolio includes projects across the United States and Australia, giving us insight into regional variations in costs, regulations, and construction practices that affect industrial projects.</p>
+                <p>When you work with Benny Estimates, you benefit from our extensive industrial experience.</p>`
+            },
+            12: {
+                title: "Specialized Expertise",
+                content: `<p class="mb-4">Industrial construction requires specialized knowledge of processes, materials, equipment, and regulations. Our estimators have deep expertise in industrial construction that sets us apart from general estimating services.</p>
+                <p class="mb-4">We understand industrial construction methods, material requirements, equipment costs, and installation challenges. Our team includes specialists in structural steel, mechanical systems, electrical systems, and process piping.</p>
+                <p class="mb-4">This specialized expertise ensures that your industrial estimates account for all project requirements, including specialized equipment, complex systems, and regulatory compliance. We identify cost factors that general estimators might miss.</p>
+                <p>Trust Benny Estimates for the specialized expertise your industrial project deserves.</p>`
+            },
+            13: {
+                title: "Industrial Services in New South Wales",
+                content: `<p class="mb-4">Benny Estimates provides comprehensive industrial estimating services throughout New South Wales, Australia. Our team understands the local industrial market, regulatory requirements, and construction practices specific to NSW.</p>
+                <p class="mb-4">We serve industrial projects across the state, from Sydney's industrial areas to regional industrial developments. Our local knowledge ensures accurate estimates that reflect NSW market conditions.</p>
+                <p class="mb-4">Whether you're planning a manufacturing facility, warehouse, or industrial complex in New South Wales, our estimating services provide the accuracy and local expertise your project requires.</p>
+                <p>Contact us to discuss your New South Wales industrial project.</p>`
+            },
+            14: {
+                title: "Industrial Services in Sydney",
+                content: `<p class="mb-4">Sydney's industrial sector is diverse and dynamic. Benny Estimates provides specialized industrial estimating services for projects throughout the Sydney metropolitan area.</p>
+                <p class="mb-4">We understand the unique requirements of Sydney industrial projects including local planning regulations, labor markets, and material availability. Our estimates reflect Sydney-specific costs and conditions.</p>
+                <p class="mb-4">Whether you're developing industrial facilities in western Sydney, the CBD fringe, or suburban industrial areas, our estimating services provide the accuracy you need for successful project delivery.</p>
+                <p>Contact us to discuss your Sydney industrial project.</p>`
+            },
+            15: {
+                title: "Industrial Services in Victoria",
+                content: `<p class="mb-4">Victoria's industrial sector includes manufacturing, logistics, and heavy industrial facilities. Benny Estimates provides comprehensive estimating services for industrial projects throughout Victoria.</p>
+                <p class="mb-4">We serve clients in Melbourne and regional Victoria, providing accurate estimates that reflect local market conditions. Our estimators understand Victorian industrial requirements including building codes and planning regulations.</p>
+                <p class="mb-4">From manufacturing plants to distribution centers, our industrial estimating services support successful project delivery across Victoria.</p>
+                <p>Contact us to discuss your Victorian industrial project.</p>`
+            },
+            16: {
+                title: "Industrial Services in Melbourne",
+                content: `<p class="mb-4">Melbourne is a major center for industrial development in Australia. Benny Estimates provides specialized industrial estimating services for projects throughout the Melbourne metropolitan area.</p>
+                <p class="mb-4">We understand Melbourne's industrial markets, labor conditions, and material availability. Our estimates reflect local costs and help you bid competitively on Melbourne industrial projects.</p>
+                <p class="mb-4">Whether you're developing industrial facilities in Melbourne's western suburbs, northern industrial areas, or southeastern manufacturing districts, our estimating services support your success.</p>
+                <p>Contact us to discuss your Melbourne industrial project.</p>`
+            },
+            17: {
+                title: "Industrial Services in Queensland",
+                content: `<p class="mb-4">Queensland's industrial sector includes mining support, manufacturing, and logistics facilities. Benny Estimates provides comprehensive estimating services for industrial projects throughout Queensland.</p>
+                <p class="mb-4">We serve clients in Brisbane, the Gold Coast, and regional Queensland, providing accurate estimates that reflect local market conditions. Our estimators understand Queensland's industrial requirements and regulatory environment.</p>
+                <p class="mb-4">From manufacturing plants to industrial warehouses, our estimating services support successful project delivery across Queensland.</p>
+                <p>Contact us to discuss your Queensland industrial project.</p>`
+            },
+            18: {
+                title: "Industrial Services in Brisbane",
+                content: `<p class="mb-4">Brisbane's industrial sector is growing rapidly. Benny Estimates provides specialized industrial estimating services for projects throughout the Brisbane metropolitan area.</p>
+                <p class="mb-4">We understand Brisbane's industrial markets, labor conditions, and material availability. Our estimates reflect local costs and help you bid competitively on Brisbane industrial projects.</p>
+                <p class="mb-4">Whether you're developing industrial facilities in Brisbane's industrial precincts or surrounding areas, our estimating services support your success.</p>
+                <p>Contact us to discuss your Brisbane industrial project.</p>`
+            },
+            19: {
+                title: "Industrial Services in Western Australia",
+                content: `<p class="mb-4">Western Australia's industrial sector includes resource-related facilities and heavy industrial projects. Benny Estimates provides comprehensive estimating services for industrial projects throughout WA.</p>
+                <p class="mb-4">We serve clients in Perth and regional Western Australia, providing accurate estimates that reflect local market conditions. Our estimators understand the unique requirements of WA industrial projects including remote location considerations.</p>
+                <p class="mb-4">From mining support facilities to heavy industrial developments, our estimating services support successful project delivery across Western Australia.</p>
+                <p>Contact us to discuss your Western Australian industrial project.</p>`
+            },
+            20: {
+                title: "Industrial Services in Perth",
+                content: `<p class="mb-4">Perth is a major center for resource industry support and industrial development. Benny Estimates provides specialized industrial estimating services for projects throughout the Perth metropolitan area.</p>
+                <p class="mb-4">We understand Perth's industrial markets, labor conditions, and material availability. Our estimates reflect local costs and help you bid competitively on Perth industrial projects.</p>
+                <p class="mb-4">Whether you're developing industrial facilities in Perth's industrial areas or surrounding regions, our estimating services support your success.</p>
+                <p>Contact us to discuss your Perth industrial project.</p>`
+            },
+            21: {
+                title: "Australian Industrial Services",
+                content: `<p class="mb-4">Benny Estimates provides comprehensive industrial estimating services throughout Australia, with local expertise in all major industrial markets. Our team understands Australian industrial standards, regulations, and construction practices.</p>
+                <p class="mb-4">We serve clients across New South Wales, Victoria, Queensland, Western Australia, and other states, providing accurate estimates that reflect regional market conditions.</p>
+                <p class="mb-4">Australian industrial projects have unique requirements including local building codes, material availability, and labor considerations. Our estimators have the local knowledge needed for accurate estimates.</p>
+                <p>Contact us to discuss your Australian industrial project and learn how our estimating services can support your success.</p>`
+            },
+            22: {
+                title: "US Industrial Services",
+                content: `<p class="mb-4">Benny Estimates provides nationwide industrial estimating services across the United States, with expertise in American industrial standards, building codes, labor rates, and material costs.</p>
+                <p class="mb-4">From manufacturing facilities in the Midwest to energy projects in Texas and industrial developments on the coasts, our estimators understand regional variations that affect industrial construction costs.</p>
+                <p class="mb-4">US industrial projects must comply with federal, state, and local regulations. Our estimators stay current with requirements across jurisdictions, ensuring your estimates reflect all applicable standards.</p>
+                <p>Contact us to discuss your US industrial project and discover why American industrial developers trust Benny Estimates.</p>`
+            },
+            23: {
+                title: "Step 1: Submit Your Industrial Plans",
+                content: `<p class="mb-4">Getting started with your industrial estimate is easy. Simply upload your industrial drawings, plans, and specifications through our secure platform. We accept PDF, CAD, and BIM formats.</p>
+                <p class="mb-4">Include as much information as possible about your project including scope, materials, and any special requirements. This helps us provide the most accurate estimate possible.</p>
+                <p class="mb-4">Once we receive your plans, we'll acknowledge receipt and provide an estimated timeline for your estimate. Most industrial projects receive preliminary estimates within 24-48 hours.</p>
+                <p>Ready to begin? Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> to submit your plans today.</p>`
+            },
+            24: {
+                title: "Step 2: We Review Your Project",
+                content: `<p class="mb-4">After receiving your industrial plans, our expert estimators conduct a thorough review of your project requirements. We analyze drawings, specifications, and any additional information you've provided.</p>
+                <p class="mb-4">During review, we identify key project components including structural elements, mechanical systems, electrical requirements, and process systems. We note any special considerations that might affect costs.</p>
+                <p class="mb-4">Our review process ensures we understand your project completely before beginning the estimate. This attention to detail results in more accurate and comprehensive estimates.</p>
+                <p>We'll contact you if we have questions or need additional information during the review process.</p>`
+            },
+            25: {
+                title: "Step 3: Get Your Quote",
+                content: `<p class="mb-4">Based on our review, we prepare a detailed quote for your industrial estimating services. Our quotes are transparent, with clear pricing based on project scope and complexity.</p>
+                <p class="mb-4">We provide competitive pricing for industrial estimates, with options for different levels of detail based on your needs. Our quotes include expected delivery timelines so you know when to expect your estimate.</p>
+                <p class="mb-4">Once you approve the quote, we begin work on your estimate immediately. Most industrial projects are completed within 24-48 hours, with complex projects scheduled accordingly.</p>
+                <p>Contact us to receive your personalized quote for industrial estimating services.</p>`
+            },
+            26: {
+                title: "Step 4: Receive Your Estimate",
+                content: `<p class="mb-4">Your completed industrial estimate includes comprehensive cost breakdowns for all project components. We provide detailed material quantities, labor estimates, equipment requirements, and subcontractor pricing.</p>
+                <p class="mb-4">Estimates are delivered in clear, organized formats that are easy to understand and present to clients, lenders, or project stakeholders. We include supporting documentation and quantity takeoffs.</p>
+                <p class="mb-4">After delivery, we're available to answer questions and provide additional information as needed. We stand behind our estimates and support you throughout your bidding and construction process.</p>
+                <p>Contact us today to receive your comprehensive industrial estimate.</p>`
+            },
+            27: {
+                title: "Upload Your Industrial Plans",
+                content: `<p class="mb-4">Ready to get started with your industrial estimate? Upload your construction plans, blueprints, or drawings and receive a comprehensive cost estimate.</p>
+                <p class="mb-4">Simply upload your digital files through our secure platform. We accept PDF, CAD, and BIM formats. Once received, our estimators will review your project and provide a detailed cost breakdown within 24-48 hours.</p>
+                <p class="mb-4">Your estimate includes complete material takeoffs, labor cost analysis, equipment requirements, and comprehensive budget documentation. We'll also provide value engineering suggestions to help optimize your project costs.</p>
+                <p>Upload your industrial plans today and discover why industrial developers trust Benny Estimates.</p>`
+            },
+            28: {
+                title: "Get Your Industrial Quote Now",
+                content: `<p class="mb-4">Ready to discuss your industrial project? Request a quote for our estimating services today. Our team will provide transparent pricing based on your project scope and requirements.</p>
+                <p class="mb-4">We offer competitive rates for industrial estimating services, with volume discounts for multiple projects and ongoing relationships. Our quotes include detailed scope descriptions and delivery timelines.</p>
+                <p class="mb-4">Whether you need a one-time estimate for a specific project or ongoing estimating support, we can structure services to meet your needs.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to request your industrial quote.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const themeEmoji = document.getElementById('themeEmoji');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText, themeEmoji);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText, themeEmoji) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                        if (themeEmoji) themeEmoji.textContent = '☀️';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                        if (themeEmoji) themeEmoji.textContent = '🌙';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText, themeEmoji);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeEmoji);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+
+        // Animate service cards on scroll
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe industrial cards
+        document.querySelectorAll('.industrial-card').forEach(card => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            observer.observe(card);
+        });
+
+        console.log('Industrial Estimating Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

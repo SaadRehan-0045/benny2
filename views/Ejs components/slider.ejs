@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>BHC Services Cards Slider | Professional Services</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Remixicon Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <!-- Swiper CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Professional Cards Styling - OPTIMIZED FOR MOBILE */
+        .service-card-modern {
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border-radius: 20px;
+            padding: 1.5rem 1rem;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 5px 10px -5px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(37, 99, 235, 0.1);
+            position: relative;
+            overflow: hidden;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+        
+        .dark .service-card-modern {
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border-color: rgba(96, 165, 250, 0.15);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+        
+        .service-card-modern:active {
+            transform: scale(0.98);
+        }
+        
+        .card-modern-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+            background: linear-gradient(135deg, #2563eb, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0.25;
+            position: absolute;
+            top: 0.5rem;
+            right: 0.8rem;
+            font-family: 'Arial Black', sans-serif;
+        }
+        
+        .dark .card-modern-number {
+            background: linear-gradient(135deg, #60a5fa, #93c5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            opacity: 0.3;
+        }
+        
+        .card-modern-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            color: white;
+            font-size: 1.6rem;
+            box-shadow: 0 8px 15px -5px rgba(37, 99, 235, 0.4);
+        }
+        
+        .dark .card-modern-icon {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            box-shadow: 0 8px 15px -5px rgba(59, 130, 246, 0.3);
+        }
+        
+        .card-modern-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            line-height: 1.3;
+            margin-bottom: 0.5rem;
+            color: #1e293b;
+            text-transform: uppercase;
+            letter-spacing: -0.01em;
+            word-break: break-word;
+        }
+        
+        .dark .card-modern-title {
+            color: #f1f5f9;
+        }
+        
+        .card-modern-subtitle {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-bottom: 0.75rem;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+            flex-wrap: wrap;
+        }
+        
+        .dark .card-modern-subtitle {
+            color: #94a3b8;
+        }
+        
+        .card-modern-subtitle i {
+            color: #2563eb;
+            font-size: 0.85rem;
+        }
+        
+        .card-modern-divider {
+            width: 40px;
+            height: 3px;
+            background: linear-gradient(90deg, #2563eb, #60a5fa);
+            border-radius: 3px;
+            margin: 0.5rem 0 0.75rem 0;
+        }
+        
+        .card-modern-features {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+        
+        .card-modern-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            font-size: 0.7rem;
+            color: #475569;
+        }
+        
+        .dark .card-modern-feature {
+            color: #cbd5e1;
+        }
+        
+        .card-modern-feature i {
+            color: #2563eb;
+            font-size: 0.8rem;
+            flex-shrink: 0;
+        }
+        
+        .card-modern-explore {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #2563eb, #3b82f6);
+            color: white;
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            transition: all 0.3s ease;
+            margin-top: 0.25rem;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 10px -3px #2563eb;
+            text-decoration: none;
+            width: fit-content;
+            -webkit-tap-highlight-color: transparent;
+        }
+        
+        .card-modern-explore i {
+            margin-left: 0.3rem;
+            font-size: 0.8rem;
+            transition: transform 0.3s ease;
+        }
+        
+        .card-modern-explore:active {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px -3px #2563eb;
+        }
+        
+        .card-modern-explore:active i {
+            transform: translateX(3px);
+        }
+        
+        /* Swiper Customization - MOBILE OPTIMIZED */
+        .swiper {
+            padding: 0.5rem 0.25rem 2rem 0.25rem;
+            width: 100%;
+            margin: 0 auto;
+        }
+        
+        .swiper-slide {
+            height: auto;
+            display: flex;
+            opacity: 0.9;
+            transition: opacity 0.3s ease;
+        }
+        
+        .swiper-slide-active {
+            opacity: 1;
+        }
+        
+        .swiper-pagination {
+            position: relative;
+            margin-top: 1rem;
+            bottom: 0 !important;
+        }
+        
+        .swiper-pagination-bullet {
+            width: 6px;
+            height: 6px;
+            background: #2563eb;
+            opacity: 0.3;
+            transition: all 0.3s ease;
+            margin: 0 3px !important;
+        }
+        
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            width: 18px;
+            border-radius: 4px;
+            background: #2563eb;
+        }
+        
+        .dark .swiper-pagination-bullet {
+            background: #60a5fa;
+        }
+        
+        /* Hide navigation on mobile, show on desktop */
+        .swiper-button-prev,
+        .swiper-button-next {
+            display: none;
+        }
+        
+        @media (min-width: 1024px) {
+            .swiper-button-prev,
+            .swiper-button-next {
+                display: flex;
+                width: 40px;
+                height: 40px;
+                background: white;
+                border-radius: 50%;
+                box-shadow: 0 5px 20px -5px rgba(0, 0, 0, 0.2);
+                color: #2563eb;
+                transition: all 0.3s ease;
+            }
+            
+            .dark .swiper-button-prev,
+            .dark .swiper-button-next {
+                background: #1e293b;
+                color: #60a5fa;
+                box-shadow: 0 5px 20px -5px rgba(0, 0, 0, 0.4);
+            }
+            
+            .swiper-button-prev:after,
+            .swiper-button-next:after {
+                font-size: 1.2rem;
+                font-weight: bold;
+            }
+            
+            .swiper-button-prev:hover,
+            .swiper-button-next:hover {
+                background: #2563eb;
+                color: white;
+                transform: scale(1.1);
+            }
+            
+            .dark .swiper-button-prev:hover,
+            .dark .swiper-button-next:hover {
+                background: #3b82f6;
+                color: white;
+            }
+        }
+        
+        /* Section Header - MOBILE OPTIMIZED */
+        .section-header {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            padding: 0 1rem;
+        }
+        
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: #1e293b;
+            text-transform: uppercase;
+            letter-spacing: -0.02em;
+            margin-bottom: 0.35rem;
+            line-height: 1.2;
+        }
+        
+        .dark .section-title {
+            color: #f1f5f9;
+        }
+        
+        .section-subtitle {
+            font-size: 0.75rem;
+            color: #64748b;
+            max-width: 280px;
+            margin: 0 auto;
+            line-height: 1.4;
+        }
+        
+        .dark .section-subtitle {
+            color: #94a3b8;
+        }
+        
+        .title-highlight {
+            color: #2563eb;
+            display: inline-block;
+        }
+        
+        .dark .title-highlight {
+            color: #60a5fa;
+        }
+        
+        /* Extra Small Devices (phones, 320px and up) */
+        @media (min-width: 320px) {
+            .service-card-modern {
+                padding: 1.2rem 0.8rem;
+            }
+            
+            .card-modern-number {
+                font-size: 2.2rem;
+                top: 0.4rem;
+                right: 0.6rem;
+            }
+            
+            .card-modern-icon {
+                width: 45px;
+                height: 45px;
+                font-size: 1.4rem;
+                border-radius: 12px;
+            }
+            
+            .card-modern-title {
+                font-size: 1rem;
+            }
+            
+            .card-modern-subtitle {
+                font-size: 0.7rem;
+            }
+            
+            .card-modern-feature {
+                font-size: 0.65rem;
+            }
+            
+            .card-modern-explore {
+                padding: 0.5rem 1rem;
+                font-size: 0.65rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+        }
+        
+        /* Small Devices (phones, 375px and up) */
+        @media (min-width: 375px) {
+            .service-card-modern {
+                padding: 1.5rem 1rem;
+            }
+            
+            .card-modern-number {
+                font-size: 2.5rem;
+            }
+            
+            .card-modern-title {
+                font-size: 1.1rem;
+            }
+            
+            .card-modern-subtitle {
+                font-size: 0.75rem;
+            }
+            
+            .card-modern-feature {
+                font-size: 0.7rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .section-subtitle {
+                font-size: 0.8rem;
+                max-width: 300px;
+            }
+        }
+        
+        /* Medium Devices (phones, 425px and up) */
+        @media (min-width: 425px) {
+            .service-card-modern {
+                padding: 1.5rem 1.2rem;
+            }
+            
+            .card-modern-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.6rem;
+            }
+            
+            .card-modern-title {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .section-subtitle {
+                max-width: 350px;
+            }
+        }
+        
+        /* Tablets */
+        @media (min-width: 768px) {
+            .service-card-modern {
+                padding: 1.8rem 1.2rem;
+            }
+            
+            .card-modern-icon {
+                width: 55px;
+                height: 55px;
+                font-size: 1.8rem;
+            }
+            
+            .card-modern-title {
+                font-size: 1.3rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .section-subtitle {
+                font-size: 0.9rem;
+                max-width: 500px;
+            }
+        }
+        
+        /* Prevent overflow */
+        .overflow-x-hidden {
+            overflow-x: hidden;
+        }
+        
+        /* Smooth scrolling */
+        .swiper-wrapper {
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        /* Better touch handling */
+        .swiper-slide {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen overflow-x-hidden py-4 sm:py-6">
+    
+    
+
+    <!-- Professional Cards Slider Section - Mobile First -->
+    <div class="max-w-7xl mx-auto px-3 sm:px-4 lg:px-6">
+        <!-- Swiper Container -->
+        <div class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                
+                <!-- Card 1 - BUILDING CONSTRUCTION -->
+                <div class="swiper-slide">
+                    <div class="service-card-modern">
+                        <div class="card-modern-number">01</div>
+                        <div class="card-modern-icon">
+                            <i class="ri-building-line"></i>
+                        </div>
+                        <h3 class="card-modern-title">BUILDING<br>CONSTRUCTION</h3>
+                        <div class="card-modern-subtitle">
+                            <i class="ri-calendar-line"></i> Since 09,01,2024
+                        </div>
+                        <div class="card-modern-divider"></div>
+                        <div class="card-modern-features">
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Residential & Commercial
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Modern Techniques
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Expert Team
+                            </div>
+                        </div>
+                        <a href="#" class="card-modern-explore">
+                            EXPLORE <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 2 - GENERAL CONSTRUCTION -->
+                <div class="swiper-slide">
+                    <div class="service-card-modern">
+                        <div class="card-modern-number">02</div>
+                        <div class="card-modern-icon">
+                            <i class="ri-tools-fill"></i>
+                        </div>
+                        <h3 class="card-modern-title">GENERAL<br>CONSTRUCTION</h3>
+                        <div class="card-modern-subtitle">
+                            <i class="ri-calendar-line"></i> Since 09,01,2024
+                        </div>
+                        <div class="card-modern-divider"></div>
+                        <div class="card-modern-features">
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Infrastructure
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Project Management
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Quality Assurance
+                            </div>
+                        </div>
+                        <a href="#" class="card-modern-explore">
+                            EXPLORE <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 3 - REMODELING -->
+                <div class="swiper-slide">
+                    <div class="service-card-modern">
+                        <div class="card-modern-number">03</div>
+                        <div class="card-modern-icon">
+                            <i class="ri-paint-brush-line"></i>
+                        </div>
+                        <h3 class="card-modern-title">REMODELING</h3>
+                        <div class="card-modern-subtitle">
+                            <i class="ri-calendar-line"></i> Since 09,01,2024
+                        </div>
+                        <div class="card-modern-divider"></div>
+                        <div class="card-modern-features">
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Interior Design
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Home Renovation
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Space Planning
+                            </div>
+                        </div>
+                        <a href="#" class="card-modern-explore">
+                            EXPLORE <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 4 - ARCHITECTURE -->
+                <div class="swiper-slide">
+                    <div class="service-card-modern">
+                        <div class="card-modern-number">04</div>
+                        <div class="card-modern-icon">
+                            <i class="ri-pencil-ruler-2-line"></i>
+                        </div>
+                        <h3 class="card-modern-title">ARCHITECTURE</h3>
+                        <div class="card-modern-subtitle">
+                            <i class="ri-calendar-line"></i> Since 09,01,2024
+                        </div>
+                        <div class="card-modern-divider"></div>
+                        <div class="card-modern-features">
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Modern Design
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> 3D Visualization
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Sustainable Plans
+                            </div>
+                        </div>
+                        <a href="#" class="card-modern-explore">
+                            EXPLORE <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 5 - INTERIOR DESIGN -->
+                <div class="swiper-slide">
+                    <div class="service-card-modern">
+                        <div class="card-modern-number">05</div>
+                        <div class="card-modern-icon">
+                            <i class="ri-home-8-line"></i>
+                        </div>
+                        <h3 class="card-modern-title">INTERIOR<br>DESIGN</h3>
+                        <div class="card-modern-subtitle">
+                            <i class="ri-calendar-line"></i> Since 09,01,2024
+                        </div>
+                        <div class="card-modern-divider"></div>
+                        <div class="card-modern-features">
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Modern Interiors
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Space Optimization
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Luxury Finishes
+                            </div>
+                        </div>
+                        <a href="#" class="card-modern-explore">
+                            EXPLORE <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Card 6 - CONSULTATION -->
+                <div class="swiper-slide">
+                    <div class="service-card-modern">
+                        <div class="card-modern-number">06</div>
+                        <div class="card-modern-icon">
+                            <i class="ri-customer-service-2-line"></i>
+                        </div>
+                        <h3 class="card-modern-title">CONSULTATION</h3>
+                        <div class="card-modern-subtitle">
+                            <i class="ri-calendar-line"></i> Since 09,01,2024
+                        </div>
+                        <div class="card-modern-divider"></div>
+                        <div class="card-modern-features">
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Expert Advice
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Cost Estimation
+                            </div>
+                            <div class="card-modern-feature">
+                                <i class="ri-check-line"></i> Project Planning
+                            </div>
+                        </div>
+                        <a href="#" class="card-modern-explore">
+                            EXPLORE <i class="ri-arrow-right-line"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Pagination - Mobile Friendly -->
+            <div class="swiper-pagination"></div>
+            
+            <!-- Navigation Buttons - Hidden on Mobile -->
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    
+    <!-- Initialize Swiper - Mobile Optimized -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var swiper = new Swiper(".mySwiper", {
+                // Mobile first configuration
+                slidesPerView: 1.2,
+                spaceBetween: 12,
+                centeredSlides: false,
+                loop: true,
+                
+                // Pagination
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                    dynamicBullets: true,
+                    dynamicMainBullets: 5,
+                },
+                
+                // Autoplay - Slower on mobile for better readability
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: true,
+                    pauseOnMouseEnter: true,
+                },
+                
+                // Responsive breakpoints
+                breakpoints: {
+                    // Small phones
+                    320: {
+                        slidesPerView: 1.1,
+                        spaceBetween: 10,
+                    },
+                    // Regular phones
+                    375: {
+                        slidesPerView: 1.2,
+                        spaceBetween: 12,
+                    },
+                    // Large phones
+                    425: {
+                        slidesPerView: 1.3,
+                        spaceBetween: 15,
+                    },
+                    // Tablets
+                    640: {
+                        slidesPerView: 2,
+                        spaceBetween: 15,
+                    },
+                    768: {
+                        slidesPerView: 2,
+                        spaceBetween: 18,
+                    },
+                    // Small desktops
+                    1024: {
+                        slidesPerView: 3,
+                        spaceBetween: 20,
+                    },
+                    // Large desktops
+                    1280: {
+                        slidesPerView: 4,
+                        spaceBetween: 24,
+                    },
+                },
+                
+                // Performance optimizations
+                speed: 600,
+                grabCursor: true,
+                preventClicks: true,
+                preventClicksPropagation: true,
+                touchRatio: 1.5, // More responsive touch
+                resistance: true,
+                resistanceRatio: 0.5,
+                
+                // Keyboard control
+                keyboard: {
+                    enabled: true,
+                    onlyInViewport: true,
+                },
+                
+                // Accessibility
+                a11y: {
+                    enabled: true,
+                    prevSlideMessage: 'Previous slide',
+                    nextSlideMessage: 'Next slide',
+                },
+            });
+            
+            // Pause autoplay when user interacts
+            const swiperContainer = document.querySelector('.swiper');
+            swiperContainer.addEventListener('touchstart', function() {
+                swiper.autoplay.stop();
+            });
+            
+            swiperContainer.addEventListener('touchend', function() {
+                swiper.autoplay.start();
+            });
+        });
+    </script>
+</body>
+</html>

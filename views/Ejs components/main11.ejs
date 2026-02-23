@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construct Estimates - Blog & Articles</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Blog card hover effects */
+        .blog-card {
+            transition: all 0.3s ease;
+        }
+        
+        .blog-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .blog-card:hover .blog-image {
+            transform: scale(1.05);
+        }
+        
+        .blog-card:hover .read-more {
+            transform: translateX(5px);
+        }
+        
+        /* Blog image overlay */
+        .blog-image-container {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .blog-image {
+            transition: transform 0.5s ease;
+        }
+        
+        .blog-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 50%);
+            opacity: 0.3;
+        }
+        
+        .blog-badge {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 9999px;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+        
+        .dark .blog-badge {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+        }
+        
+        /* Section background */
+        .blog-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .blog-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        
+        /* Category filter */
+        .category-filter {
+            transition: all 0.3s ease;
+        }
+        
+        .category-filter:hover {
+            transform: translateY(-2px);
+        }
+        
+        .category-filter.active {
+            background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+            color: white;
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+        }
+        
+        .dark .category-filter.active {
+            background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
+            box-shadow: 0 4px 12px rgba(96, 165, 250, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+ 
+
+    
+
+    <!-- Blog & Articles Section -->
+    <section class="blog-bg py-12 lg:py-20 animate-fade-in">
+        <div class="container mx-auto px-4">
+            <!-- Parent 1: Header Section -->
+            <div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-6 mb-12 lg:mb-16 animate-slide-up">
+                <!-- Child 1: Text Content -->
+                <div class="lg:w-2/3">
+                    <!-- Section Label -->
+                    <div class="inline-flex items-center mb-4">
+                        <div class="w-12 h-0.5 bg-primary-500 dark:bg-primary-400 mr-3"></div>
+                        <span class="text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider text-sm flex items-center">
+                            <i class="ri-article-line mr-2"></i>
+                            BLOG & ARTICLES
+                        </span>
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+                        Latest Construction Estimating 
+                        <span class="text-primary-600 dark:text-primary-400">Insights & Guides</span>
+                    </h1>
+
+                    <!-- Description -->
+                    <div class="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                        <p class="text-lg text-gray-600 dark:text-gray-300 leading-relaxed">
+                            Stay updated with the latest trends, tips, and insights in construction estimating. 
+                            Our expert articles help you make informed decisions and optimize your projects.
+                        </p>
+                        
+                        <!-- Stats Row -->
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 pt-6 border-t border-gray-200 dark:border-gray-700">
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-primary-600 dark:text-primary-400">150+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Articles</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-primary-600 dark:text-primary-400">10K+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Readers</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-primary-600 dark:text-primary-400">50+</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Expert Writers</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-xl font-bold text-primary-600 dark:text-primary-400">Weekly</div>
+                                <div class="text-sm text-gray-600 dark:text-gray-400">Updates</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Child 2: CTA Button -->
+                <div class="lg:w-1/3 flex justify-center lg:justify-end">
+                    <a href="#" class="group relative bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 text-white font-bold py-4 px-8 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center animate-float">
+                        <span class="relative z-10">View All Articles</span>
+                        <div class="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center ml-3 group-hover:bg-white/30 transition-colors duration-300">
+                            <i class="ri-arrow-right-line"></i>
+                        </div>
+                        <div class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-700 dark:from-primary-700 dark:to-primary-800 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Category Filter -->
+            <div class="flex flex-wrap gap-3 mb-8 justify-center">
+                <button class="category-filter active px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full font-medium transition-all duration-300 flex items-center">
+                    <i class="ri-newspaper-line mr-2"></i>
+                    All Articles
+                </button>
+                <button class="category-filter px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full font-medium transition-all duration-300 flex items-center">
+                    <i class="ri-map-pin-line mr-2"></i>
+                    State Guides
+                </button>
+                <button class="category-filter px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full font-medium transition-all duration-300 flex items-center">
+                    <i class="ri-calculator-line mr-2"></i>
+                    Estimating Tips
+                </button>
+                <button class="category-filter px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full font-medium transition-all duration-300 flex items-center">
+                    <i class="ri-tools-line mr-2"></i>
+                    Trade Guides
+                </button>
+                <button class="category-filter px-6 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-full font-medium transition-all duration-300 flex items-center">
+                    <i class="ri-trending-up-line mr-2"></i>
+                    Industry News
+                </button>
+            </div>
+
+            <!-- Parent 2: Blog Articles Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 animate-slide-up">
+                <!-- Article 1 -->
+                <article class="blog-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+                    <div class="blog-image-container h-48">
+                        <img src="https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                             alt="Montana Construction" 
+                             class="blog-image w-full h-full object-cover">
+                        <div class="blog-overlay"></div>
+                        <div class="blog-badge">State Guide</div>
+                        <!-- Article Date -->
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center text-white text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Jan 15, 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Article Meta -->
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mr-2">
+                                    <i class="ri-map-pin-line text-blue-600 dark:text-blue-400 text-sm"></i>
+                                </div>
+                                <span class="text-blue-600 dark:text-blue-400 text-sm font-medium">Montana</span>
+                            </div>
+                            <div class="text-gray-500 dark:text-gray-400 text-sm">
+                                <i class="ri-time-line mr-1"></i>
+                                5 min read
+                            </div>
+                        </div>
+                        
+                        <!-- Article Title -->
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 hover:text-primary-600 dark:hover:text-primary-400 cursor-pointer">
+                            Montana Construction Estimating Services Near You
+                        </h3>
+                        
+                        <!-- Article Excerpt -->
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+                            Looking for accurate, reliable, and local construction estimating services in Montana? 
+                            Our comprehensive guide covers everything you need to know about construction costs, 
+                            regulations, and finding the right estimators in the Treasure State.
+                        </p>
+                        
+                        <!-- Article Tags -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #Montana
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #LocalServices
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #CostGuide
+                            </span>
+                        </div>
+                        
+                        <!-- Read More Button -->
+                        <a href="#" class="read-more text-primary-600 dark:text-primary-400 font-medium flex items-center transition-all duration-300">
+                            <span>Read Full Article</span>
+                            <i class="ri-arrow-right-line ml-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 2 -->
+                <article class="blog-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+                    <div class="blog-image-container h-48">
+                        <img src="https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                             alt="Indiana Construction" 
+                             class="blog-image w-full h-full object-cover">
+                        <div class="blog-overlay"></div>
+                        <div class="blog-badge" style="background: linear-gradient(135deg, #10b981 0%, #059669 100%);">Fast Service</div>
+                        <!-- Article Date -->
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center text-white text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Jan 12, 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Article Meta -->
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-2">
+                                    <i class="ri-map-pin-line text-green-600 dark:text-green-400 text-sm"></i>
+                                </div>
+                                <span class="text-green-600 dark:text-green-400 text-sm font-medium">Indiana</span>
+                            </div>
+                            <div class="text-gray-500 dark:text-gray-400 text-sm">
+                                <i class="ri-time-line mr-1"></i>
+                                4 min read
+                            </div>
+                        </div>
+                        
+                        <!-- Article Title -->
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 hover:text-green-600 dark:hover:text-green-400 cursor-pointer">
+                            Indiana Construction Estimating Services: Estimates Within 24 Hours
+                        </h3>
+                        
+                        <!-- Article Excerpt -->
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+                            Need construction estimates in Indiana fast? Our guide covers how to get accurate 
+                            estimates within 24 hours, local material costs, labor rates, and top estimating 
+                            services across the Hoosier State.
+                        </p>
+                        
+                        <!-- Article Tags -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #Indiana
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #FastTurnaround
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #QuickQuotes
+                            </span>
+                        </div>
+                        
+                        <!-- Read More Button -->
+                        <a href="#" class="read-more text-green-600 dark:text-green-400 font-medium flex items-center transition-all duration-300">
+                            <span>Read Full Article</span>
+                            <i class="ri-arrow-right-line ml-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 3 -->
+                <article class="blog-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+                    <div class="blog-image-container h-48">
+                        <img src="https://images.pexels.com/photos/259966/pexels-photo-259966.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                             alt="Virginia Construction" 
+                             class="blog-image w-full h-full object-cover">
+                        <div class="blog-overlay"></div>
+                        <div class="blog-badge" style="background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);">Express Service</div>
+                        <!-- Article Date -->
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center text-white text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Jan 10, 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Article Meta -->
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mr-2">
+                                    <i class="ri-map-pin-line text-purple-600 dark:text-purple-400 text-sm"></i>
+                                </div>
+                                <span class="text-purple-600 dark:text-purple-400 text-sm font-medium">Virginia</span>
+                            </div>
+                            <div class="text-gray-500 dark:text-gray-400 text-sm">
+                                <i class="ri-time-line mr-1"></i>
+                                6 min read
+                            </div>
+                        </div>
+                        
+                        <!-- Article Title -->
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 hover:text-purple-600 dark:hover:text-purple-400 cursor-pointer">
+                            Construction Estimating Services in Virginia — Get in Hours
+                        </h3>
+                        
+                        <!-- Article Excerpt -->
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+                            Looking for accurate, reliable, and local construction estimating services in Virginia? 
+                            Discover how to get same-day estimates, understand local building codes, and find the 
+                            best estimators in the Old Dominion State.
+                        </p>
+                        
+                        <!-- Article Tags -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #Virginia
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #SameDay
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #BuildingCodes
+                            </span>
+                        </div>
+                        
+                        <!-- Read More Button -->
+                        <a href="#" class="read-more text-purple-600 dark:text-purple-400 font-medium flex items-center transition-all duration-300">
+                            <span>Read Full Article</span>
+                            <i class="ri-arrow-right-line ml-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Article 4 -->
+                <article class="blog-card bg-white dark:bg-gray-800 rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-lg">
+                    <div class="blog-image-container h-48">
+                        <img src="https://images.pexels.com/photos/414550/pexels-photo-414550.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2" 
+                             alt="Texas Construction" 
+                             class="blog-image w-full h-full object-cover">
+                        <div class="blog-overlay"></div>
+                        <div class="blog-badge" style="background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);">Trending</div>
+                        <!-- Article Date -->
+                        <div class="absolute bottom-4 left-4">
+                            <div class="flex items-center text-white text-sm">
+                                <i class="ri-calendar-line mr-2"></i>
+                                <span>Jan 8, 2024</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-6">
+                        <!-- Article Meta -->
+                        <div class="flex items-center justify-between mb-3">
+                            <div class="flex items-center">
+                                <div class="w-8 h-8 bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mr-2">
+                                    <i class="ri-map-pin-line text-orange-600 dark:text-orange-400 text-sm"></i>
+                                </div>
+                                <span class="text-orange-600 dark:text-orange-400 text-sm font-medium">Texas</span>
+                            </div>
+                            <div class="text-gray-500 dark:text-gray-400 text-sm">
+                                <i class="ri-time-line mr-1"></i>
+                                7 min read
+                            </div>
+                        </div>
+                        
+                        <!-- Article Title -->
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3 hover:text-orange-600 dark:hover:text-orange-400 cursor-pointer">
+                            Texas Construction Estimating Services: Comprehensive Guide
+                        </h3>
+                        
+                        <!-- Article Excerpt -->
+                        <p class="text-gray-600 dark:text-gray-300 text-sm mb-4 line-clamp-2">
+                            Looking for accurate, reliable, and local construction estimating services in Texas? 
+                            Our comprehensive guide covers major cities like Houston, Dallas, and Austin, including 
+                            material costs, labor rates, and regulatory considerations.
+                        </p>
+                        
+                        <!-- Article Tags -->
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #Texas
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #Houston
+                            </span>
+                            <span class="bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-200 text-xs px-3 py-1 rounded-full">
+                                #Dallas
+                            </span>
+                        </div>
+                        
+                        <!-- Read More Button -->
+                        <a href="#" class="read-more text-orange-600 dark:text-orange-400 font-medium flex items-center transition-all duration-300">
+                            <span>Read Full Article</span>
+                            <i class="ri-arrow-right-line ml-2 transition-transform"></i>
+                        </a>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Newsletter Subscription -->
+            <div class="mt-16 bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 rounded-2xl p-8 shadow-2xl">
+                <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                    <div class="lg:w-2/3">
+                        <h3 class="text-2xl font-bold text-white mb-4">Subscribe to Our Newsletter</h3>
+                        <p class="text-white/90 mb-6">
+                            Get the latest construction estimating tips, state guides, and industry insights 
+                            delivered directly to your inbox. Join 10,000+ construction professionals who read our newsletter.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <input type="email" 
+                                   placeholder="Your email address" 
+                                   class="flex-grow px-6 py-3 rounded-lg bg-white/10 border border-white/20 text-white placeholder-white/60 focus:outline-none focus:ring-2 focus:ring-white/30">
+                            <button class="bg-white text-primary-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300 flex items-center justify-center">
+                                <i class="ri-mail-send-line mr-2"></i>
+                                Subscribe Now
+                            </button>
+                        </div>
+                        <p class="text-white/70 text-sm mt-4">
+                            <i class="ri-shield-check-line mr-2"></i>
+                            We respect your privacy. No spam, ever.
+                        </p>
+                    </div>
+                    <div class="lg:w-1/3 flex justify-center">
+                        <div class="w-32 h-32 bg-white/10 rounded-full flex items-center justify-center">
+                            <i class="ri-newspaper-line text-white text-5xl"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Popular Categories -->
+            <div class="mt-16">
+                <h3 class="text-2xl font-bold text-gray-900 dark:text-white text-center mb-8">Popular Article Categories</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <a href="#" class="group bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 transition-all duration-300 text-center">
+                        <div class="w-16 h-16 mx-auto bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center mb-4 group-hover:bg-blue-200 dark:group-hover:bg-blue-800">
+                            <i class="ri-map-pin-line text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 dark:text-white mb-2">State Guides</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Local estimating insights</p>
+                    </a>
+                    
+                    <a href="#" class="group bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-600 transition-all duration-300 text-center">
+                        <div class="w-16 h-16 mx-auto bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mb-4 group-hover:bg-green-200 dark:group-hover:bg-green-800">
+                            <i class="ri-calculator-line text-green-600 dark:text-green-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 dark:text-white mb-2">Estimating Tips</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Improve your accuracy</p>
+                    </a>
+                    
+                    <a href="#" class="group bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 transition-all duration-300 text-center">
+                        <div class="w-16 h-16 mx-auto bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center mb-4 group-hover:bg-purple-200 dark:group-hover:bg-purple-800">
+                            <i class="ri-tools-line text-purple-600 dark:text-purple-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 dark:text-white mb-2">Trade Guides</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Specialized estimating</p>
+                    </a>
+                    
+                    <a href="#" class="group bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-orange-300 dark:hover:border-orange-600 transition-all duration-300 text-center">
+                        <div class="w-16 h-16 mx-auto bg-orange-100 dark:bg-orange-900 rounded-full flex items-center justify-center mb-4 group-hover:bg-orange-200 dark:group-hover:bg-orange-800">
+                            <i class="ri-trending-up-line text-orange-600 dark:text-orange-400 text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-900 dark:text-white mb-2">Industry News</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Latest trends & updates</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <script>
+        // Theme functionality (same as your existing system)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+
+        // Category filter functionality
+        document.querySelectorAll('.category-filter').forEach(button => {
+            button.addEventListener('click', () => {
+                // Remove active class from all buttons
+                document.querySelectorAll('.category-filter').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                // Add active class to clicked button
+                button.classList.add('active');
+                
+                // Here you would typically filter articles based on category
+                const category = button.textContent.trim();
+                console.log(`Filtering articles by category: ${category}`);
+            });
+        });
+
+        // Blog card hover effects
+        document.querySelectorAll('.blog-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const image = card.querySelector('.blog-image');
+                if (image) {
+                    image.style.transform = 'scale(1.05)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const image = card.querySelector('.blog-image');
+                if (image) {
+                    image.style.transform = 'scale(1)';
+                }
+            });
+        });
+
+        // Read more button hover effects
+        document.querySelectorAll('.read-more').forEach(link => {
+            link.addEventListener('mouseenter', () => {
+                const icon = link.querySelector('.ri-arrow-right-line');
+                if (icon) {
+                    icon.style.transform = 'translateX(5px)';
+                }
+            });
+            
+            link.addEventListener('mouseleave', () => {
+                const icon = link.querySelector('.ri-arrow-right-line');
+                if (icon) {
+                    icon.style.transform = 'translateX(0)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

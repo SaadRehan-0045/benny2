@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construct Estimates - Hero Section</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        success: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        
+        /* Gradient background for hero */
+        .hero-gradient {
+            background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%);
+        }
+        
+        .dark .hero-gradient {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+        }
+        
+        /* Custom button hover effect */
+        .btn-hover-effect {
+            transition: all 0.3s ease;
+        }
+        
+        .btn-hover-effect:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.3);
+        }
+        
+        .dark .btn-hover-effect:hover {
+            box-shadow: 0 10px 25px -5px rgba(96, 165, 250, 0.3);
+        }
+        
+        /* Feature card hover */
+        .feature-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .dark .feature-card:hover {
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Theme Toggle Demo -->
+    <div class="container mx-auto px-4 py-4 flex justify-end">
+        <button id="themeToggle" class="flex items-center px-4 py-2 rounded-lg bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 btn-hover-effect">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-gradient animate-fade-in">
+        <div class="container mx-auto px-4 py-12 lg:py-20">
+            <!-- Parent Container -->
+            <div class="flex flex-col lg:flex-row items-center gap-8 lg:gap-12">
+                
+                <!-- Child 1: Content Section -->
+                <div class="lg:w-1/2 animate-slide-up">
+                    <!-- Main Heading -->
+                    <h1 class="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+                        Construction Estimating Services for 
+                        <span class="text-primary-600 dark:text-primary-400">Precise Project Planning</span>
+                    </h1>
+                    
+                    <!-- Subheading -->
+                    <p class="text-lg text-gray-600 dark:text-gray-300 mb-8">
+                        Get accurate construction estimates that help you bid confidently, 
+                        manage budgets effectively, and complete projects successfully.
+                    </p>
+
+                    <!-- Feature List Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+                        <!-- Feature 1 -->
+                        <div class="flex items-start p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 feature-card">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center">
+                                    <i class="ri-building-line text-primary-600 dark:text-primary-400 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-1">Any Trade or Any Kind of Project</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Residential, commercial, industrial, and specialty trades.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 2 -->
+                        <div class="flex items-start p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 feature-card">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center">
+                                    <i class="ri-check-double-line text-green-600 dark:text-green-400 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-1">Ensure up to 100% Accuracy</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Precision estimates with detailed quantity takeoffs.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 3 -->
+                        <div class="flex items-start p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 feature-card">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center">
+                                    <i class="ri-refund-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-1">Refund Policy (Risk Free)</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">100% satisfaction guarantee with our refund policy.</p>
+                            </div>
+                        </div>
+
+                        <!-- Feature 4 -->
+                        <div class="flex items-start p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 feature-card">
+                            <div class="flex-shrink-0">
+                                <div class="w-10 h-10 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center">
+                                    <i class="ri-price-tag-3-line text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                                </div>
+                            </div>
+                            <div class="ml-4">
+                                <h3 class="font-bold text-gray-800 dark:text-gray-100 mb-1">No Hidden Charges</h3>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Transparent pricing with all costs upfront.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cost Saving Banner -->
+                    <div class="mb-8">
+                        <div class="bg-gradient-to-r from-primary-500 to-primary-600 dark:from-primary-600 dark:to-primary-700 text-white p-6 rounded-xl shadow-lg">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 mr-4">
+                                    <div class="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center">
+                                        <i class="ri-arrow-down-line text-2xl"></i>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 class="text-xl font-bold mb-1">Reduce Your Estimating Expenses Up to 30%</h3>
+                                    <p class="text-primary-100">Outsource your estimating needs and focus on what you do best.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Benefits Row -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-8">
+                        <!-- Benefit 1 -->
+                        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <div class="flex-shrink-0 mr-3">
+                                <div class="w-8 h-8 bg-blue-100 dark:bg-blue-900 rounded-full flex items-center justify-center">
+                                    <i class="ri-checkbox-circle-line text-blue-600 dark:text-blue-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-gray-100">No hassle</h4>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Simple process</p>
+                            </div>
+                        </div>
+
+                        <!-- Benefit 2 -->
+                        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <div class="flex-shrink-0 mr-3">
+                                <div class="w-8 h-8 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center">
+                                    <i class="ri-customer-service-2-line text-green-600 dark:text-green-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-gray-100">24/7 support</h4>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Always available</p>
+                            </div>
+                        </div>
+
+                        <!-- Benefit 3 -->
+                        <div class="flex items-center p-4 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <div class="flex-shrink-0 mr-3">
+                                <div class="w-8 h-8 bg-purple-100 dark:bg-purple-900 rounded-full flex items-center justify-center">
+                                    <i class="ri-award-line text-purple-600 dark:text-purple-400"></i>
+                                </div>
+                            </div>
+                            <div>
+                                <h4 class="font-semibold text-gray-800 dark:text-gray-100">Accurate result</h4>
+                                <p class="text-xs text-gray-600 dark:text-gray-400">Guaranteed precision</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CTA Buttons -->
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="bg-primary-600 hover:bg-primary-700 dark:bg-primary-500 dark:hover:bg-primary-600 text-white font-semibold py-3 px-8 rounded-lg btn-hover-effect flex items-center justify-center">
+                            <i class="ri-calendar-check-line mr-2"></i>
+                            Get Free Quote
+                        </button>
+                        <button class="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-gray-800 dark:text-gray-200 font-semibold py-3 px-8 rounded-lg btn-hover-effect flex items-center justify-center">
+                            <i class="ri-phone-line mr-2"></i>
+                            Call Now: (346) 660-2440
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Child 2: Image Section -->
+                <div class="lg:w-1/2 animate-slide-up">
+                    <div class="relative">
+                        <!-- Main Image Container -->
+                        <div class="relative z-10">
+                            <div class="bg-gradient-to-br from-primary-500 to-primary-700 dark:from-primary-600 dark:to-primary-800 rounded-2xl p-1 shadow-2xl">
+                                <div class="bg-white dark:bg-gray-800 rounded-2xl p-4">
+                                    <!-- Placeholder for image -->
+                                    <div class="aspect-video bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-700 dark:to-gray-900 rounded-xl flex items-center justify-center">
+                                        <div class="text-center p-8">
+                                            <div class="w-20 h-20 mx-auto bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mb-6">
+                                                <i class="ri-building-4-line text-primary-600 dark:text-primary-400 text-3xl"></i>
+                                            </div>
+                                            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-2">Construction Estimating</h3>
+                                            <p class="text-gray-600 dark:text-gray-300">Professional estimating services for all project types</p>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Image Overlay Stats -->
+                                    <div class="grid grid-cols-3 gap-4 mt-6">
+                                        <div class="text-center p-3 bg-primary-50 dark:bg-gray-700 rounded-lg">
+                                            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">500+</div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-300">Projects</div>
+                                        </div>
+                                        <div class="text-center p-3 bg-primary-50 dark:bg-gray-700 rounded-lg">
+                                            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">98%</div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-300">Accuracy</div>
+                                        </div>
+                                        <div class="text-center p-3 bg-primary-50 dark:bg-gray-700 rounded-lg">
+                                            <div class="text-2xl font-bold text-primary-600 dark:text-primary-400">24/7</div>
+                                            <div class="text-sm text-gray-600 dark:text-gray-300">Support</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Decorative Elements -->
+                        <div class="absolute -top-4 -right-4 w-24 h-24 bg-yellow-400 dark:bg-yellow-600 rounded-full opacity-20 blur-xl"></div>
+                        <div class="absolute -bottom-6 -left-6 w-32 h-32 bg-blue-400 dark:bg-blue-600 rounded-full opacity-20 blur-xl"></div>
+                        
+                        <!-- Floating Elements -->
+                        <div class="absolute -bottom-4 right-8 bg-white dark:bg-gray-800 shadow-xl rounded-lg p-4 border border-gray-200 dark:border-gray-700 animate-bounce">
+                            <div class="flex items-center">
+                                <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-full flex items-center justify-center mr-3">
+                                    <i class="ri-check-line text-green-600 dark:text-green-400"></i>
+                                </div>
+                                <div>
+                                    <div class="font-bold text-gray-800 dark:text-gray-100">Expert Team</div>
+                                    <div class="text-xs text-gray-600 dark:text-gray-400">Certified estimators</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Footer Note -->
+    <div class="container mx-auto px-4 py-8 text-center">
+        <p class="text-gray-500 dark:text-gray-400 text-sm">
+            This hero section integrates with your existing theme system. Copy and paste it into your main website file.
+        </p>
+    </div>
+
+    <script>
+        // Theme functionality (same as your existing system)
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

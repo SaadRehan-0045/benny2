@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Bid Management - Apni Bhook Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        violet: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            200: '#ddd6fe',
+                            300: '#c4b5fd',
+                            400: '#a78bfa',
+                            500: '#8b5cf6',
+                            600: '#7c3aed',
+                            700: '#6d28d9',
+                            800: '#5b21b6',
+                            900: '#4c1d95',
+                        },
+                        cyan: {
+                            50: '#ecfeff',
+                            100: '#cffafe',
+                            200: '#a5f3fc',
+                            300: '#67e8f9',
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            600: '#0891b2',
+                            700: '#0e7490',
+                            800: '#155e75',
+                            900: '#164e63',
+                        }
+                    },
+                    animation: {
+                        'slide-in-left': 'slideInLeft 0.6s ease-out',
+                        'float-tech': 'floatTech 3s ease-in-out infinite',
+                        'pulse-digital': 'pulseDigital 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        slideInLeft: {
+                            '0%': { opacity: '0', transform: 'translateX(-30px)' },
+                            '100%': { opacity: '1', transform: 'translateX(0)' }
+                        },
+                        floatTech: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-15px)' }
+                        },
+                        pulseDigital: {
+                            '0%, 100%': { boxShadow: '0 0 0 0 rgba(139, 92, 246, 0.4)' },
+                            '50%': { boxShadow: '0 0 0 15px rgba(139, 92, 246, 0)' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .virtual-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            background: linear-gradient(145deg, #ffffff, #f8fafc);
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+        }
+        .dark .virtual-card {
+            background: linear-gradient(145deg, #1f2937, #111827);
+            border: 2px solid #374151;
+        }
+        .virtual-card:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 25px 50px -12px rgba(139, 92, 246, 0.25);
+            border-color: #8b5cf6;
+        }
+        .theme-virtual-toggle {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            color: white;
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.3);
+        }
+        .theme-virtual-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 25px rgba(139, 92, 246, 0.4);
+        }
+        .vbm-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            background: #8b5cf6;
+            color: white;
+        }
+        .feature-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+        .gradient-text-virtual {
+            background: linear-gradient(135deg, #8b5cf6, #06b6d4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        .plan-card {
+            transition: all 0.4s ease;
+            border: 3px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+        .plan-card:hover {
+            transform: translateY(-8px);
+            border-color: #8b5cf6;
+        }
+        .plan-card.popular {
+            border-color: #8b5cf6;
+            box-shadow: 0 20px 25px -5px rgba(139, 92, 246, 0.1);
+        }
+        .digital-pulse {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+            animation: pulseDigital 3s infinite;
+            z-index: 0;
+        }
+        .swot-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+        .swot-item {
+            padding: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-violet-50 to-cyan-50 dark:from-gray-900 dark:to-violet-900/10 text-gray-900 dark:text-gray-100 min-h-screen">
+    <!-- Virtual Bid Management Theme Toggle Button -->
+    <div class="fixed top-6 right-6 z-50 animate-float-tech">
+        <button id="themeToggle" class="theme-virtual-toggle flex items-center gap-2 px-5 py-3 rounded-full font-medium transition-all duration-300 animate-pulse-digital">
+            <i id="themeIcon" class="ri-cloud-line text-lg"></i>
+            <span id="themeText" class="hidden md:inline font-semibold">Virtual</span>
+            <span id="themeEmoji" class="md:hidden">☁️</span>
+        </button>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm border-b border-gray-200 dark:border-gray-700 py-3">
+        <div class="container mx-auto px-4">
+            <nav class="flex items-center space-x-2 text-sm">
+                <a href="#" class="text-violet-600 dark:text-violet-400 hover:text-violet-800 dark:hover:text-violet-300 transition-colors">Home</a>
+                <i class="ri-arrow-right-s-line text-gray-400"></i>
+                <span class="text-gray-600 dark:text-gray-400 font-medium">Virtual Bid Management</span>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 animate-slide-in-left">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-violet-600 to-cyan-600 text-white rounded-full text-sm font-bold mb-6 shadow-lg">
+                <i class="ri-cloud-fill mr-2"></i>
+                Digital Bid Management
+            </div>
+            <h1 class="text-4xl md:text-6xl font-bold mb-4">
+                <span class="gradient-text-virtual">Virtual Bid</span>
+                <br>
+                <span class="text-gray-800 dark:text-gray-100">Management</span>
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Streamline Your Construction Bidding Process with Virtual Bid Management
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-3xl overflow-hidden mb-12 shadow-2xl border-4 border-white dark:border-gray-800 relative">
+            <div class="digital-pulse"></div>
+            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Virtual Bid Management" 
+                 class="w-full h-64 md:h-96 object-cover relative z-10">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-violet-50 to-cyan-50 dark:from-violet-900/20 dark:to-cyan-900/20 rounded-2xl p-8 border border-violet-200 dark:border-violet-800">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-rocket-line text-violet-600 mr-2"></i>
+                    Elevate Your Bidding Process
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6 text-lg">
+                    Seamless Bidding Process Management for Increased Success Rates
+                </p>
+                <p class="text-gray-600 dark:text-gray-300">
+                    Gone are the days of manual data compilation and endless communication loops. 
+                    Our Virtual Bid Manager compiles and updates subcontractor and vendor contacts, 
+                    meticulously reviews project plans, and manages the entire bidding process.
+                </p>
+            </div>
+        </div>
+
+        <!-- Key Features -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Unleash Your Potential with a Virtual Bid Manager
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="virtual-card p-6 relative">
+                    <div class="vbm-badge" style="background: #06b6d4;">Communication</div>
+                    <div class="feature-icon bg-cyan-100 dark:bg-cyan-900">
+                        <i class="ri-chat-3-line text-cyan-600 dark:text-cyan-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Unmatched Communication</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Timely updates and seamless coordination keeping all parties informed and aligned throughout the bidding journey.
+                    </p>
+                </div>
+                
+                <div class="virtual-card p-6 relative">
+                    <div class="vbm-badge">Analysis</div>
+                    <div class="feature-icon bg-violet-100 dark:bg-violet-900">
+                        <i class="ri-line-chart-line text-violet-600 dark:text-violet-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Refined Bid Analysis</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Leverage historical bid data to refine your bidding strategies with in-depth analysis of past results.
+                    </p>
+                </div>
+                
+                <div class="virtual-card p-6 relative">
+                    <div class="vbm-badge" style="background: #10b981;">SWOT</div>
+                    <div class="feature-icon bg-green-100 dark:bg-green-900">
+                        <i class="ri-bar-chart-2-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-3">Insightful SWOT Analysis</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Comprehensive strengths, weaknesses, opportunities, and threats analysis to empower your bidding strategies.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Process Steps -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-flow-chart text-violet-600 mr-2"></i>
+                Our Virtual Bid Management Process
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="virtual-card p-5">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-violet-100 dark:bg-violet-900 rounded-lg flex items-center justify-center mr-3 text-violet-600 dark:text-violet-400">
+                            <i class="ri-group-line"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Local Sub-Contractors</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Compile and update your network of subcontractors and vendors with ease.
+                    </p>
+                </div>
+
+                <div class="virtual-card p-5">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-cyan-100 dark:bg-cyan-900 rounded-lg flex items-center justify-center mr-3 text-cyan-600 dark:text-cyan-400">
+                            <i class="ri-file-search-line"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Strategic Plan Review</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Meticulous review of project plans to identify projects with highest potential.
+                    </p>
+                </div>
+
+                <div class="virtual-card p-5">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3 text-blue-600 dark:text-blue-400">
+                            <i class="ri-process-line"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Process Management</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Managing addendums, change orders, and ensuring timely communication.
+                    </p>
+                </div>
+
+                <div class="virtual-card p-5">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-3 text-green-600 dark:text-green-400">
+                            <i class="ri-lightbulb-flash-line"></i>
+                        </div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100">Intelligent Strategies</h4>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Data-driven strategies that enhance your bids and secure projects with higher margins.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- SWOT Analysis -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-violet-600 to-cyan-600 rounded-2xl p-8 text-white">
+                <h2 class="text-2xl font-bold mb-6 text-center">Comprehensive SWOT Analysis</h2>
+                <div class="swot-grid">
+                    <div class="swot-item bg-white/10">
+                        <i class="ri-checkbox-circle-line text-green-300 mr-3 text-xl"></i>
+                        <div>
+                            <h4 class="font-bold">Strengths</h4>
+                            <p class="text-sm opacity-90">Specialized bid management expertise</p>
+                        </div>
+                    </div>
+                    <div class="swot-item bg-white/10">
+                        <i class="ri-alert-line text-red-300 mr-3 text-xl"></i>
+                        <div>
+                            <h4 class="font-bold">Weaknesses</h4>
+                            <p class="text-sm opacity-90">Manual bid processes without VBM</p>
+                        </div>
+                    </div>
+                    <div class="swot-item bg-white/10">
+                        <i class="ri-trending-up-line text-blue-300 mr-3 text-xl"></i>
+                        <div>
+                            <h4 class="font-bold">Opportunities</h4>
+                            <p class="text-sm opacity-90">Increased bid win rates</p>
+                        </div>
+                    </div>
+                    <div class="swot-item bg-white/10">
+                        <i class="ri-shield-cross-line text-yellow-300 mr-3 text-xl"></i>
+                        <div>
+                            <h4 class="font-bold">Threats</h4>
+                            <p class="text-sm opacity-90">Competitive market landscape</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pricing Plans -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-8 text-center">
+                Choose Your Virtual Bid Management Plan
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="plan-card virtual-card p-6 text-center">
+                    <div class="inline-flex items-center px-4 py-1 bg-violet-100 dark:bg-violet-900 text-violet-800 dark:text-violet-300 rounded-full text-sm font-bold mb-4">
+                        <i class="ri-file-line mr-2"></i>
+                        Project Base
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Single Project</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Tailored for individual jobs with affordable per-project rates
+                    </p>
+                    <div class="text-3xl font-bold text-violet-600 dark:text-violet-400 mb-6">$499<span class="text-sm font-normal text-gray-500">/project</span></div>
+                    <ul class="space-y-2 mb-6 text-sm text-left">
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>One-time project management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Basic bid analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Subcontractor coordination</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-2 bg-violet-600 hover:bg-violet-700 text-white rounded-lg font-medium transition-colors">
+                        Select Plan
+                    </button>
+                </div>
+
+                <div class="plan-card virtual-card p-6 text-center popular">
+                    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                        <span class="px-4 py-1 bg-gradient-to-r from-violet-600 to-cyan-600 text-white rounded-full text-sm font-bold">
+                            Most Popular
+                        </span>
+                    </div>
+                    <div class="inline-flex items-center px-4 py-1 bg-cyan-100 dark:bg-cyan-900 text-cyan-800 dark:text-cyan-300 rounded-full text-sm font-bold mb-4 mt-4">
+                        <i class="ri-calendar-line mr-2"></i>
+                        Month Base
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Monthly Package</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        For businesses bidding on 3 to 4 projects per month
+                    </p>
+                    <div class="text-3xl font-bold text-cyan-600 dark:text-cyan-400 mb-6">$1,299<span class="text-sm font-normal text-gray-500">/month</span></div>
+                    <ul class="space-y-2 mb-6 text-sm text-left">
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Up to 4 projects monthly</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Advanced bid analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>SWOT analysis included</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Priority support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-2 bg-gradient-to-r from-violet-600 to-cyan-600 hover:opacity-90 text-white rounded-lg font-medium transition-all">
+                        Select Plan
+                    </button>
+                </div>
+
+                <div class="plan-card virtual-card p-6 text-center">
+                    <div class="inline-flex items-center px-4 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 rounded-full text-sm font-bold mb-4">
+                        <i class="ri-star-line mr-2"></i>
+                        Dedicated
+                    </div>
+                    <h3 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-2">Dedicated VBM</h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        For companies bidding on 5 to 8 projects per month
+                    </p>
+                    <div class="text-3xl font-bold text-purple-600 dark:text-purple-400 mb-6">$2,499<span class="text-sm font-normal text-gray-500">/month</span></div>
+                    <ul class="space-y-2 mb-6 text-sm text-left">
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>5-8 projects monthly</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Dedicated bid manager</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>Full SWOT & market analysis</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="ri-check-line text-green-500 mr-2"></i>
+                            <span>24/7 priority support</span>
+                        </li>
+                    </ul>
+                    <button class="w-full py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors">
+                        Select Plan
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">
+                Why Choose Virtual Bid Management?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="virtual-card p-6 text-center">
+                    <div class="feature-icon bg-violet-100 dark:bg-violet-900 mx-auto">
+                        <i class="ri-medal-line text-violet-600 dark:text-violet-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Specialized Expertise</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Data-driven bidding strategies that drive success</p>
+                </div>
+                
+                <div class="virtual-card p-6 text-center">
+                    <div class="feature-icon bg-green-100 dark:bg-green-900 mx-auto">
+                        <i class="ri-money-dollar-circle-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Cost-Effective</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">No full-time staff costs, maximize your ROI</p>
+                </div>
+                
+                <div class="virtual-card p-6 text-center">
+                    <div class="feature-icon bg-blue-100 dark:bg-blue-900 mx-auto">
+                        <i class="ri-time-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Time-Efficient</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Free up time to focus on business growth</p>
+                </div>
+                
+                <div class="virtual-card p-6 text-center">
+                    <div class="feature-icon bg-cyan-100 dark:bg-cyan-900 mx-auto">
+                        <i class="ri-cloud-line text-cyan-600 dark:text-cyan-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Flexible Support</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Remote expertise available when you need it</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-violet-600 to-cyan-600 rounded-2xl p-8 mb-12 text-white text-center shadow-2xl">
+            <h3 class="text-2xl font-bold mb-4">Your Bid Management Revolution Starts Here</h3>
+            <p class="mb-6 opacity-90">Ready to revolutionize your bidding process? Get started today and save 30%</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button class="px-8 py-3 bg-white text-violet-700 font-bold rounded-lg hover:bg-gray-100 transition-colors">
+                    Free Consultation
+                </button>
+                <button class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                    Choose Plan
+                </button>
+            </div>
+        </div>
+
+        <!-- Contact Info -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-violet-600 dark:text-violet-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">US Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(737) 273-3314</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-phone-line text-cyan-600 dark:text-cyan-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">AUS Contact</h4>
+                <p class="text-gray-600 dark:text-gray-300">(048) 862-0354</p>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 text-center">
+                <i class="ri-mail-line text-green-600 dark:text-green-400 text-2xl mb-3"></i>
+                <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Email</h4>
+                <p class="text-gray-600 dark:text-gray-300">info@constructestimates.com</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 dark:bg-gray-900 text-gray-300">
+        <div class="container mx-auto px-4 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                        <i class="ri-cloud-line text-violet-400 mr-2"></i>
+                        Virtual Bid Management
+                    </h3>
+                    <p class="text-gray-400 text-sm">
+                        Digital bid management solutions streamlining construction bidding processes for increased success rates.
+                    </p>
+                    <div class="mt-4 flex space-x-3">
+                        <div class="w-8 h-8 bg-violet-700 rounded-full flex items-center justify-center">
+                            <i class="ri-cloud-fill text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-cyan-600 rounded-full flex items-center justify-center">
+                            <i class="ri-chat-3-line text-sm"></i>
+                        </div>
+                        <div class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center">
+                            <i class="ri-line-chart-line text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">VBM Services</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-violet-400 transition-colors text-sm">Bid Analysis</a></li>
+                        <li><a href="#" class="hover:text-violet-400 transition-colors text-sm">SWOT Analysis</a></li>
+                        <li><a href="#" class="hover:text-violet-400 transition-colors text-sm">Subcontractor Coordination</a></li>
+                        <li><a href="#" class="hover:text-violet-400 transition-colors text-sm">Bid Strategy</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Coverage Areas</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors text-sm">United States</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors text-sm">Australia</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors text-sm">Sydney, AUS</a></li>
+                        <li><a href="#" class="hover:text-cyan-400 transition-colors text-sm">Melbourne, AUS</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-xl font-bold text-white mb-4">Start Virtual Management</h3>
+                    <p class="text-gray-400 text-sm mb-4">Transform your bidding process with virtual bid management.</p>
+                    <a href="#" class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-violet-600 to-cyan-600 hover:opacity-90 text-white rounded-lg text-sm font-medium transition-all">
+                        <i class="ri-calendar-schedule-line mr-2"></i> Free Consultation
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 pt-8 border-t border-gray-700 text-center">
+                <p class="text-gray-500 text-sm">© 2024 Virtual Bid Management Services. Digital solutions for construction bid success.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        const themeEmoji = document.getElementById('themeEmoji');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line text-lg';
+                themeText.textContent = 'Light Mode';
+                themeEmoji.textContent = '☀️';
+            } else {
+                themeIcon.className = 'ri-moon-line text-lg';
+                themeText.textContent = 'Dark Mode';
+                themeEmoji.textContent = '🌙';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+
+        // Plan card hover effects
+        document.querySelectorAll('.plan-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+            });
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+
+        // Animate SWOT items on scroll
+        const observerOptions = {
+            threshold: 0.3,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const swotItems = entry.target.querySelectorAll('.swot-item');
+                    swotItems.forEach((item, index) => {
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'translateY(0)';
+                        }, index * 200);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Set initial styles for SWOT items
+        document.querySelectorAll('.swot-item').forEach(item => {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+        });
+
+        // Observe SWOT section
+        const swotSection = document.querySelector('.bg-gradient-to-r');
+        if (swotSection) {
+            observer.observe(swotSection);
+        }
+
+        console.log('Virtual Bid Management Page Loaded');
+        console.log('Current Theme:', currentTheme);
+        console.log('Theme Toggle: Cloud themed button with digital pulse');
+        console.log('Features: SWOT analysis, pricing plans, process management');
+    </script>
+</body>
+</html>

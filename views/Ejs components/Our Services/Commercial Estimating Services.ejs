@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commercial Estimating Services - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        blue: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                        'pulse-glow': 'pulse-glow 2s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        'pulse-glow': {
+                            '0%, 100%': { 
+                                boxShadow: '0 0 0 0 rgba(37, 99, 235, 0.7)',
+                                transform: 'scale(1)'
+                            },
+                            '50%': { 
+                                boxShadow: '0 0 0 10px rgba(37, 99, 235, 0)',
+                                transform: 'scale(1.05)'
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .commercial-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-left: 4px solid #3b82f6;
+        }
+        .commercial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .theme-commercial-toggle {
+            background: linear-gradient(135deg, #2563eb, #1e40af);
+            color: white;
+            box-shadow: 0 4px 20px rgba(37, 99, 235, 0.3);
+        }
+        .theme-commercial-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(37, 99, 235, 0.4);
+        }
+        .gradient-border {
+            position: relative;
+            border: 2px solid transparent;
+            background: linear-gradient(white, white) padding-box,
+                        linear-gradient(135deg, #3b82f6, #60a5fa) border-box;
+        }
+        .dark .gradient-border {
+            background: linear-gradient(#1f2937, #1f2937) padding-box,
+                        linear-gradient(135deg, #3b82f6, #60a5fa) border-box;
+        }
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #3b82f6, #60a5fa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .commercial-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+  <%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+  
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12 relative">
+            <div class="inline-flex items-center px-5 py-2 bg-gradient-to-r from-blue-600 to-blue-800 text-white rounded-full text-sm font-bold mb-6">
+                <i class="ri-award-line mr-2"></i>
+                Professional Commercial Estimating
+            </div>
+            <h1 class="hero-title text-4xl md:text-6xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Commercial Estimating Services
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Professional cost estimation services for commercial construction projects with fast turnaround time
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-2xl overflow-hidden mb-12 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Commercial Construction Estimating" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Intro Section -->
+        <div class="mb-12">
+            <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/20 dark:to-gray-800 rounded-2xl p-8 gradient-border animate-slide-up">
+                <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                    <i class="ri-building-line text-blue-600 mr-2"></i>
+                    Drive Your Construction Success in Estimating Commercial Projects
+                </h2>
+                <p class="text-gray-600 dark:text-gray-300 mb-6">
+                    Benny Estimates, your trusted partner for accurate and efficient commercial estimating services. Our precise and detailed approach empowers Contractors, Subcontractors, Architects, and commercial zone developers to make informed decisions, win projects, and achieve their business goals.
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <div class="stat-number">30%</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Cost Savings</p>
+                    </div>
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <div class="stat-number">48h</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Fast Turnaround</p>
+                    </div>
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <div class="stat-number">98%</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Accuracy Rate</p>
+                    </div>
+                    <div class="text-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow">
+                        <div class="stat-number">1000+</div>
+                        <p class="text-sm text-gray-600 dark:text-gray-300">Projects</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Services Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+            <!-- For Contractors -->
+            <div class="commercial-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center mb-4">
+                    <div class="service-icon bg-blue-100 dark:bg-blue-900">
+                        <i class="ri-user-star-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 ml-4">For Commercial Contractors</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Streamline your construction projects and enhance your bidding success rate with our professional commercial construction estimating services. With nationwide experience, we understand your challenges in balancing job site management and accurate project estimates.
+                </p>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Accurate Commercial Cost Estimates</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Pre-Construction Final Estimates</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Material, Labor & Equipment Pricing</span>
+                    </li>
+                </ul>
+                <button onclick="openModal(1)" class="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center cursor-pointer">
+                    Learn More <i class="ri-arrow-right-line ml-1"></i>
+                </button>
+            </div>
+
+            <!-- For Developers -->
+            <div class="commercial-card bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                <div class="flex items-center mb-4">
+                    <div class="service-icon bg-green-100 dark:bg-green-900">
+                        <i class="ri-building-2-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 ml-4">For Commercial Developers</h3>
+                </div>
+                <p class="text-gray-600 dark:text-gray-300 mb-4">
+                    Our commercial estimating services help developers make informed investment decisions with precise cost projections and feasibility studies for commercial real estate projects.
+                </p>
+                <ul class="space-y-2 mb-4">
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Feasibility Studies</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">Investment Analysis</span>
+                    </li>
+                    <li class="flex items-center">
+                        <i class="ri-checkbox-circle-line text-green-500 mr-2"></i>
+                        <span class="text-sm">ROI Projections</span>
+                    </li>
+                </ul>
+                <button onclick="openModal(2)" class="text-blue-600 dark:text-blue-400 font-medium hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center cursor-pointer">
+                    Learn More <i class="ri-arrow-right-line ml-1"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Why Choose Us -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 text-center">
+                Why Choose Our Commercial Estimating Services?
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-medal-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Experience & Expertise</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Our professional estimators have extensive industry experience and expertise in commercial construction projects.
+                    </p>
+                    <button onclick="openModal(3)" class="mt-3 text-blue-600 dark:text-blue-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-global-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Wide Coverage</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Services available throughout USA and Australia, with local knowledge of construction factors.
+                    </p>
+                    <button onclick="openModal(4)" class="mt-3 text-blue-600 dark:text-blue-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-time-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Fast Turnaround</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">
+                        Delivering accurate estimates within 24-48 hours to meet your bid deadlines.
+                    </p>
+                    <button onclick="openModal(5)" class="mt-3 text-blue-600 dark:text-blue-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Service Areas -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-map-pin-line text-blue-600 mr-2"></i>
+                Our Service Areas
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Australia -->
+                <div class="bg-gradient-to-r from-blue-50 to-white dark:from-blue-900/10 dark:to-gray-800 rounded-xl p-6 border border-blue-200 dark:border-blue-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-line text-blue-600 dark:text-blue-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">Australia</h3>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 text-sm">
+                        <div class="text-gray-600 dark:text-gray-300">New South Wales</div>
+                        <div class="text-gray-600 dark:text-gray-300">Sydney</div>
+                        <div class="text-gray-600 dark:text-gray-300">Victoria</div>
+                        <div class="text-gray-600 dark:text-gray-300">Melbourne</div>
+                        <div class="text-gray-600 dark:text-gray-300">Queensland</div>
+                        <div class="text-gray-600 dark:text-gray-300">Brisbane</div>
+                        <div class="text-gray-600 dark:text-gray-300">Western Australia</div>
+                        <div class="text-gray-600 dark:text-gray-300">Perth</div>
+                    </div>
+                    <button onclick="openModal(6)" class="mt-4 text-blue-600 dark:text-blue-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center cursor-pointer">
+                        View Services in Australia <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- USA -->
+                <div class="bg-gradient-to-r from-red-50 to-white dark:from-red-900/10 dark:to-gray-800 rounded-xl p-6 border border-red-200 dark:border-red-800">
+                    <div class="flex items-center mb-4">
+                        <div class="w-10 h-10 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-3">
+                            <i class="ri-flag-2-line text-red-600 dark:text-red-400"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100">United States</h3>
+                    </div>
+                    <div class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Nationwide commercial estimating services with expertise in local building codes, labor rates, and material costs across all states.
+                    </div>
+                    <button onclick="openModal(7)" class="text-blue-600 dark:text-blue-400 text-sm hover:text-blue-800 dark:hover:text-blue-300 inline-flex items-center cursor-pointer">
+                        View Services in USA <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Portfolio -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">
+                <i class="ri-briefcase-line text-blue-600 mr-2"></i>
+                Our Commercial Portfolio
+            </h2>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div onclick="openModal(8)" class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-colors cursor-pointer">
+                    <i class="ri-building-2-line text-blue-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Office Buildings</p>
+                </div>
+                <div onclick="openModal(9)" class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-green-400 dark:hover:border-green-500 transition-colors cursor-pointer">
+                    <i class="ri-shopping-cart-line text-green-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Retail Centers</p>
+                </div>
+                <div onclick="openModal(10)" class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-purple-400 dark:hover:border-purple-500 transition-colors cursor-pointer">
+                    <i class="ri-restaurant-line text-purple-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Restaurants</p>
+                </div>
+                <div onclick="openModal(11)" class="bg-white dark:bg-gray-800 rounded-lg p-4 text-center border border-gray-200 dark:border-gray-700 hover:border-amber-400 dark:hover:border-amber-500 transition-colors cursor-pointer">
+                    <i class="ri-hospital-line text-amber-500 text-2xl mb-2"></i>
+                    <p class="text-sm font-medium">Medical Facilities</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="bg-gradient-to-r from-blue-600 to-blue-800 rounded-2xl p-8 mb-12 text-white text-center">
+            <h3 class="text-2xl font-bold mb-4">Get Your Commercial Estimate Now!</h3>
+            <p class="mb-6 opacity-90">30% OFF on your first commercial construction estimate</p>
+            <div class="flex flex-col md:flex-row gap-4 justify-center">
+                <button onclick="openModal(12)" class="px-8 py-3 bg-white text-blue-700 font-bold rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                    Upload Plans
+                </button>
+                <button onclick="openModal(13)" class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors cursor-pointer">
+                    Schedule Call
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Service Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content
+        const serviceData = {
+            1: {
+                title: "For Commercial Contractors - Detailed Services",
+                content: `<p class="mb-4">Our commercial estimating services for contractors are designed to streamline your construction projects and enhance your bidding success rate. With nationwide experience, we understand your challenges in balancing job site management and accurate project estimates.</p>
+                <p class="mb-4">We provide comprehensive commercial cost estimates including material quantities, labor costs, equipment requirements, and subcontractor pricing. Our detailed takeoffs ensure you have all the information needed for competitive bidding.</p>
+                <p class="mb-4">Our estimators have decades of combined experience across various commercial project types including office buildings, retail centers, restaurants, and medical facilities. We stay current with local material pricing, labor rates, and market conditions.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to discuss your commercial project needs.</p>`
+            },
+            2: {
+                title: "For Commercial Developers - Investment Analysis",
+                content: `<p class="mb-4">Our commercial estimating services help developers make informed investment decisions with precise cost projections and feasibility studies for commercial real estate projects.</p>
+                <p class="mb-4">We provide comprehensive feasibility studies that analyze site conditions, market demand, regulatory requirements, construction costs, and potential return on investment. Our analysis helps you identify viable opportunities and avoid costly mistakes.</p>
+                <p class="mb-4">Our investment analysis includes detailed ROI projections, sensitivity analysis, and risk assessment. We help you understand the financial implications of design decisions and identify opportunities for value engineering.</p>
+                <p>Whether you're planning a new development or renovation, our commercial estimating services provide the financial clarity you need for successful project delivery.</p>`
+            },
+            3: {
+                title: "Experience & Expertise",
+                content: `<p class="mb-4">Our professional estimators have extensive industry experience and expertise in commercial construction projects. Each estimator on our team has worked in the construction industry before transitioning to estimating, giving them practical knowledge of how projects are actually built.</p>
+                <p class="mb-4">We continuously invest in professional development, ensuring our team stays current with new materials, construction techniques, and industry standards. Many of our estimators hold certifications from professional estimating organizations.</p>
+                <p class="mb-4">Their expertise ensures that your estimates account for local market conditions, labor rates, and material availability, providing you with realistic and reliable projections that stand up to scrutiny.</p>
+                <p>With years of experience across diverse commercial project types, our team brings unparalleled knowledge to every estimate we prepare.</p>`
+            },
+            4: {
+                title: "Wide Coverage - USA & Australia",
+                content: `<p class="mb-4">Our commercial estimating services are available throughout the United States and Australia, with local knowledge of construction factors, building codes, labor rates, and material costs specific to each region.</p>
+                <p class="mb-4">In the USA, we provide nationwide coverage with expertise in all 50 states. We understand the variations in building codes, climate considerations, and market conditions that affect construction costs from coast to coast.</p>
+                <p class="mb-4">In Australia, we serve major cities including Sydney, Melbourne, Brisbane, Perth, and regional areas throughout New South Wales, Victoria, Queensland, and Western Australia. Our local knowledge ensures accurate estimates for Australian projects.</p>
+                <p>Wherever your commercial project is located, our estimating services provide the local expertise you need for accurate cost projections.</p>`
+            },
+            5: {
+                title: "Fast Turnaround Service",
+                content: `<p class="mb-4">We understand that construction bidding operates on tight deadlines. That's why we deliver accurate estimates within 24-48 hours to meet your bid deadlines and keep your projects moving forward.</p>
+                <p class="mb-4">Our streamlined estimating process combines experienced estimators with advanced digital takeoff technology to deliver results quickly without sacrificing accuracy. We prioritize urgent projects while maintaining our quality standards.</p>
+                <p class="mb-4">For standard commercial projects, we typically deliver preliminary estimates within 24 hours and detailed takeoffs within 48 hours. For larger, more complex projects, we work with you to establish realistic timelines that meet your needs.</p>
+                <p>Fast turnaround doesn't mean cutting corners. Our efficient processes ensure you receive comprehensive, accurate estimates when you need them.</p>`
+            },
+            6: {
+                title: "Commercial Estimating Services in Australia",
+                content: `<p class="mb-4">Our commercial estimating services in Australia cover major cities and regions throughout the country, including Sydney, Melbourne, Brisbane, Perth, and regional areas.</p>
+                <p class="mb-4">We understand the unique aspects of Australian construction including local building codes, material availability, labor rates, and climate considerations that affect project costs. Our estimators stay current with Australian market conditions.</p>
+                <p class="mb-4">Whether you're planning a commercial development in Sydney CBD, retail center in Melbourne, or office building in Brisbane, our estimating services provide the accuracy and local knowledge your project requires.</p>
+                <p>Contact us to discuss your Australian commercial project and learn how our estimating services can support your success.</p>`
+            },
+            7: {
+                title: "Commercial Estimating Services in USA",
+                content: `<p class="mb-4">Our nationwide commercial estimating services cover all 50 states, with expertise in local building codes, labor rates, material costs, and regional construction practices across the United States.</p>
+                <p class="mb-4">From New York to California, Texas to Florida, our estimators understand the variations in construction costs and requirements that affect commercial projects in different regions. We provide accurate estimates that reflect local market conditions.</p>
+                <p class="mb-4">Whether you're planning a commercial development in major metropolitan areas or smaller communities, our estimating services provide the localized expertise needed for accurate cost projections.</p>
+                <p>Contact us to discuss your US commercial project and discover why contractors nationwide trust Benny Estimates for their estimating needs.</p>`
+            },
+            8: {
+                title: "Office Buildings - Commercial Portfolio",
+                content: `<p class="mb-4">Our commercial estimating portfolio includes a wide range of office building projects, from small professional offices to large corporate headquarters and high-rise developments.</p>
+                <p class="mb-4">Office building estimates require careful attention to structural systems, MEP requirements, interior finishes, and building systems. Our estimators have extensive experience with all types of office construction.</p>
+                <p class="mb-4">We provide comprehensive takeoffs for all office building components including structural frame, exterior cladding, HVAC systems, electrical distribution, plumbing, fire protection, and interior finishes. Our estimates include detailed breakdowns by trade and phase.</p>
+                <p>Whether you're planning a build-to-suit office, speculative development, or office renovation, our estimating services provide the accuracy you need.</p>`
+            },
+            9: {
+                title: "Retail Centers - Commercial Portfolio",
+                content: `<p class="mb-4">Our commercial estimating portfolio includes diverse retail projects ranging from single tenant buildings to large shopping centers and mixed-use developments.</p>
+                <p class="mb-4">Retail construction presents unique challenges including storefront systems, interior finishes, specialized MEP requirements, and site development considerations. Our estimators understand these requirements and account for them in their estimates.</p>
+                <p class="mb-4">We provide detailed takeoffs for all retail components including shell construction, tenant improvements, site work, parking areas, and landscaping. Our estimates help you budget accurately for successful retail development.</p>
+                <p>Contact us to discuss your retail project and learn how our estimating services can support your development goals.</p>`
+            },
+            10: {
+                title: "Restaurants - Commercial Portfolio",
+                content: `<p class="mb-4">Restaurant construction requires specialized estimating expertise due to unique kitchen requirements, exhaust systems, plumbing demands, and finish standards. Our estimators understand these special requirements.</p>
+                <p class="mb-4">We provide comprehensive takeoffs for all restaurant components including kitchen equipment, hood systems, grease traps, specialized plumbing, exhaust fans, and dining area finishes. Our estimates account for the unique challenges of restaurant construction.</p>
+                <p class="mb-4">Whether you're planning a fast-food restaurant, casual dining, or fine dining establishment, our estimating services provide the accuracy needed for successful restaurant development.</p>
+                <p>Contact us to discuss your restaurant project and learn how our specialized estimating services can support your success.</p>`
+            },
+            11: {
+                title: "Medical Facilities - Commercial Portfolio",
+                content: `<p class="mb-4">Medical facility construction requires specialized estimating expertise due to stringent regulatory requirements, specialized MEP systems, and finish standards. Our estimators have extensive experience with medical projects.</p>
+                <p class="mb-4">We provide comprehensive takeoffs for all medical facility components including exam rooms, operating suites, laboratories, imaging centers, and administrative areas. Our estimates account for specialized equipment, finishes, and systems.</p>
+                <p class="mb-4">Medical facilities require careful attention to infection control, air handling, plumbing requirements, and regulatory compliance. Our estimators understand these requirements and ensure they're reflected in your estimates.</p>
+                <p>Contact us to discuss your medical facility project and learn how our specialized estimating services can support your healthcare development.</p>`
+            },
+            12: {
+                title: "Upload Your Commercial Plans",
+                content: `<p class="mb-4">Ready to get started with your commercial construction estimate? Upload your plans, blueprints, or drawings and receive a comprehensive cost estimate with 30% off your first order.</p>
+                <p class="mb-4">Simply upload your digital files through our secure platform. We accept PDF, CAD, and BIM formats. Once received, our estimators will review your project and provide a detailed cost breakdown within 24-48 hours.</p>
+                <p class="mb-4">Your discounted estimate includes complete material takeoffs, labor cost analysis, equipment requirements, and comprehensive budget documentation. We'll also provide value engineering suggestions to help optimize your project costs.</p>
+                <p>Don't wait – this limited-time offer won't last forever. Upload your plans today and discover why commercial developers trust Benny Estimates for their most important projects.</p>`
+            },
+            13: {
+                title: "Schedule a Consultation Call",
+                content: `<p class="mb-4">Ready to discuss your commercial project? Schedule a call with our estimating team to discuss your project requirements, timeline, and how our services can help you achieve your goals.</p>
+                <p class="mb-4">During your consultation, we'll discuss your project scope, budget constraints, timeline requirements, and any special considerations. We'll explain our estimating process and how we can tailor our services to your specific needs.</p>
+                <p class="mb-4">Our team is available to answer questions about our estimating process, provide references from satisfied clients, and discuss how we've helped other commercial developers succeed with accurate cost projections.</p>
+                <p>Contact us today at <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> or email <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> to schedule your consultation.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            const themeIndicator = document.getElementById('themeIndicator');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeIndicator);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText, themeIndicator);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText, themeIndicator) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                        if (themeIndicator) themeIndicator.textContent = '☀️';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                        if (themeIndicator) themeIndicator.textContent = '🌙';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText, themeIndicator);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText, themeIndicator);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+
+        // Animate stats on scroll
+        const observerOptions = {
+            threshold: 0.5
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const statElements = entry.target.querySelectorAll('.stat-number');
+                    statElements.forEach(stat => {
+                        const target = parseInt(stat.textContent);
+                        let current = 0;
+                        const increment = target / 50;
+                        const timer = setInterval(() => {
+                            current += increment;
+                            if (current >= target) {
+                                current = target;
+                                clearInterval(timer);
+                            }
+                            stat.textContent = Math.round(current) + (stat.textContent.includes('%') ? '%' : '');
+                        }, 30);
+                    });
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe the stats section
+        const statsSection = document.querySelector('.bg-gradient-to-r');
+        if (statsSection) {
+            observer.observe(statsSection);
+        }
+
+        console.log('Commercial Estimating Page Loaded');
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Business Management - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .article-image {
+            transition: transform 0.3s ease;
+        }
+        .article-image:hover {
+            transform: scale(1.02);
+        }
+        
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .article-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            cursor: pointer;
+            font-size: 1.5rem;
+            color: #6b7280;
+        }
+
+        .modal-close:hover {
+            color: #374151;
+        }
+
+        .dark .modal-close:hover {
+            color: #9ca3af;
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    <%- include('../header.ejs') %>
+    
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="mb-10">
+            <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">Construction Business Management</h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg">Expert insights and guides for managing successful construction businesses</p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="mb-12 rounded-xl overflow-hidden shadow-2xl article-image">
+            <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Construction Business Management" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Blog Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 mb-12">
+            <!-- Article 1 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Drywall Estimator" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-primary-100 dark:bg-primary-900 text-primary-800 dark:text-primary-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Estimating
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Drywall Estimator Near You - Get Precise Estimates for Your Project
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        When it comes to construction projects, the difference between a successful, on-budget build and a costly mistake often comes down to one key element: accurate estimating. A drywall estimator plays a crucial role in determining material quantities, labor costs, and project timelines. Whether you're a contractor bidding on a commercial project or a homeowner planning a renovation, having precise drywall estimates can save you thousands of dollars and prevent costly delays.
+                    </p>
+                    <button onclick="openModal(1)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Quantity Surveyor" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Surveying
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Need a Quantity Surveyor Company? Read This First
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        A quantity surveyor company plays a pivotal role in the construction industry by managing and optimizing project costs from inception to completion. These professionals help contractors, developers, and homeowners navigate the complex financial aspects of construction projects, ensuring budgets are maintained and value is maximized. Before hiring a quantity surveyor, it's essential to understand their qualifications, experience, and the specific services they offer. A reputable quantity surveyor company will provide detailed cost estimates, feasibility studies, procurement advice, and contract administration.
+                    </p>
+                    <button onclick="openModal(2)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Quantity Surveyor Career" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Career Guide
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        What is a Quantity Surveyor and How to Become?
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        A quantity surveyor plays a central role across residential, commercial, and infrastructure developments. They are construction industry professionals who manage all costs relating to building and civil engineering projects, from the initial calculations to the final figures. Quantity surveyors ensure that projects are completed within budget and that resources are used efficiently. To become a quantity surveyor, one typically needs a bachelor's degree in quantity surveying, construction management, or a related field, followed by professional certification and practical experience.
+                    </p>
+                    <button onclick="openModal(3)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Masonry Estimator" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Masonry
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Masonry Estimator Guide for Contractors and Homeowners
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        Masonry estimating is the backbone of successful brickwork and stonework projects. Whether you're planning a new fireplace, retaining wall, or complete building facade, accurate masonry estimates are essential for budgeting and planning. A professional masonry estimator considers material costs (bricks, blocks, stone, mortar), labor rates, equipment needs, and project complexity. They also account for waste factors, site conditions, and local building codes to ensure comprehensive and reliable estimates.
+                    </p>
+                    <button onclick="openModal(4)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600585154340-043788447eb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Drywall Installation Cost" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Cost Guide
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        How Much Does it Cost to Install Drywall – 2025 Guide
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        If you're planning a project, whether it's a bedroom remodel or finishing your basement, having a clear idea of drywall installation costs helps you budget effectively. In 2025, drywall installation costs typically range from $1.50 to $3.50 per square foot, depending on factors like room size, ceiling height, complexity, and local labor rates. Additional costs may include materials (drywall sheets, joint compound, tape, screws), finishing (taping, mudding, sanding), and any special features like curved walls or soundproofing.
+                    </p>
+                    <button onclick="openModal(5)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Quantity Surveyor vs Estimator" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Comparison
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Quantity Surveyor and Estimator – What's the Difference Between Them?
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        In the construction industry, there are numerous roles that keep a project moving from concept to completion. Two positions that are often confused are quantity surveyors and estimators. While both roles deal with project costs, they have distinct responsibilities. Estimators focus on calculating project costs before construction begins, analyzing blueprints and specifications to determine material quantities and labor needs. Quantity surveyors manage costs throughout the entire project lifecycle, from initial estimates to final accounts, handling procurement, contracts, and cost control.
+                    </p>
+                    <button onclick="openModal(6)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 7 - Commercial Concrete Contractors -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Concrete Contractors" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Contractors
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Commercial Concrete Contractors in Houston, TX
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        Building a commercial property is a considerable investment, and hiring the wrong concrete contractor can lead to delays, cost overruns, and structural issues. In Houston, TX, commercial concrete contractors specialize in large-scale projects including office buildings, retail centers, parking structures, and industrial facilities. They handle everything from foundation work and structural concrete to decorative finishes and site preparation. When selecting a contractor, look for proven experience, proper licensing and insurance, and a portfolio of completed commercial projects.
+                    </p>
+                    <button onclick="openModal(7)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 8 - Concrete Contractors Sydney -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Concrete Contractors Sydney" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Contractors
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Reliable Concrete Contractors in Sydney – Quality You Can Trust
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        Sydney is a city that never stops growing. Concrete is everywhere, from new homes and driveways to commercial buildings and infrastructure projects. Reliable concrete contractors in Sydney understand local building codes, climate considerations, and material availability. They provide services including concrete pouring, stamping, polishing, and repairs. When choosing a contractor, look for those with strong industry certifications, positive client testimonials, and transparent pricing. Quality concrete work ensures durability, safety, and aesthetic appeal for years to come.
+                    </p>
+                    <button onclick="openModal(8)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 9 - Plumbing Contractors Sydney -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Plumbing Contractors Sydney" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Plumbing
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Best Plumbing Contractors in Sydney – Services & Costs
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        Plumbing plays a considerable role in keeping homes and businesses in Sydney running smoothly. From new construction plumbing to renovations and emergency repairs, professional plumbing contractors ensure systems function properly and meet code requirements. Services typically include pipe installation, fixture fitting, drainage systems, hot water systems, and gas fitting. Costs vary based on project scope, with hourly rates ranging from $80 to $150 for licensed plumbers. Always request detailed quotes and verify licenses and insurance before hiring.
+                    </p>
+                    <button onclick="openModal(9)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 10 - Quantity Surveyor Sydney (Final Article) -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Quantity Surveyor Sydney" 
+                         class="w-full h-full object-cover article-image">
+                </div>
+                <div class="p-5 md:p-6">
+                    <span class="inline-block px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300 text-xs md:text-sm font-medium rounded-full mb-3">
+                        Surveying
+                    </span>
+                    <h3 class="text-lg md:text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 hover:text-primary-600 dark:hover:text-primary-400 transition-colors">
+                        Everything You Need to Know About Quantity Surveyor in Sydney
+                    </h3>
+                    <p class="text-sm md:text-base text-gray-600 dark:text-gray-300 mb-4 line-clamp-2">
+                        In Sydney, the need for experienced quantity surveyors is vital. The city's construction industry is booming, and quantity surveyors help developers, contractors, and homeowners manage costs effectively. They prepare detailed cost plans, conduct feasibility studies, handle procurement, and manage contracts. For residential projects, quantity surveyors can help with depreciation schedules for tax purposes. When hiring a quantity surveyor in Sydney, look for AIQS (Australian Institute of Quantity Surveyors) accreditation and experience with similar projects in your area.
+                    </p>
+                    <button onclick="openModal(10)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm md:text-base cursor-pointer">
+                        Read More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Article Title</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Article content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <%- include('../footer.ejs') %>
+
+    <script>
+        // Article data for modal content
+        const articleData = {
+            1: {
+                title: "Drywall Estimator Near You - Get Precise Estimates for Your Project",
+                content: `<p class="mb-4">When it comes to construction projects, the difference between a successful, on-budget build and a costly mistake often comes down to one key element: accurate estimating. A drywall estimator plays a crucial role in determining material quantities, labor costs, and project timelines.</p>
+                <p class="mb-4">Whether you're a contractor bidding on a commercial project or a homeowner planning a renovation, having precise drywall estimates can save you thousands of dollars and prevent costly delays. Professional estimators consider factors like room dimensions, ceiling height, door and window openings, waste factors, and local labor rates.</p>
+                <p class="mb-4">Modern drywall estimating software can help streamline the process, but experienced estimators bring valuable knowledge about regional pricing, installation techniques, and potential challenges. They also account for special requirements like fire-rated drywall, soundproofing, or moisture-resistant materials.</p>
+                <p>When hiring a drywall estimator, look for professionals with proven experience, positive references, and a clear understanding of your project type. The right estimator will provide detailed breakdowns of material quantities, labor hours, equipment needs, and contingency allowances.</p>`
+            },
+            2: {
+                title: "Need a Quantity Surveyor Company? Read This First",
+                content: `<p class="mb-4">A quantity surveyor company plays a pivotal role in the construction industry by managing and optimizing project costs from inception to completion. These professionals help contractors, developers, and homeowners navigate the complex financial aspects of construction projects, ensuring budgets are maintained and value is maximized.</p>
+                <p class="mb-4">Before hiring a quantity surveyor, it's essential to understand their qualifications, experience, and the specific services they offer. A reputable quantity surveyor company will provide detailed cost estimates, feasibility studies, procurement advice, and contract administration.</p>
+                <p class="mb-4">They also assist with value engineering, helping you find cost-effective alternatives without compromising quality. Quantity surveyors are particularly valuable for large-scale projects where cost control is critical, but they can also benefit smaller residential projects by preventing budget overruns.</p>
+                <p>When selecting a quantity surveyor company, check their professional certifications (such as AIQS or RICS), review their portfolio of similar projects, and request client references. A good quantity surveyor will communicate clearly and provide transparent pricing for their services.</p>`
+            },
+            3: {
+                title: "What is a Quantity Surveyor and How to Become?",
+                content: `<p class="mb-4">A quantity surveyor plays a central role across residential, commercial, and infrastructure developments. They are construction industry professionals who manage all costs relating to building and civil engineering projects, from the initial calculations to the final figures. Quantity surveyors ensure that projects are completed within budget and that resources are used efficiently.</p>
+                <p class="mb-4">To become a quantity surveyor, one typically needs a bachelor's degree in quantity surveying, construction management, or a related field. This is followed by professional certification and practical experience. In many countries, quantity surveyors must be licensed or chartered through professional bodies like the Royal Institution of Chartered Surveyors (RICS) or the Australian Institute of Quantity Surveyors (AIQS).</p>
+                <p class="mb-4">The role requires strong analytical skills, attention to detail, knowledge of construction methods and materials, and excellent communication abilities. Quantity surveyors work closely with architects, engineers, contractors, and clients throughout the project lifecycle.</p>
+                <p>Career prospects for quantity surveyors are excellent, with growing demand in the construction industry worldwide. Experienced quantity surveyors can advance to senior positions, specialize in particular project types, or start their own consulting firms.</p>`
+            },
+            4: {
+                title: "Masonry Estimator Guide for Contractors and Homeowners",
+                content: `<p class="mb-4">Masonry estimating is the backbone of successful brickwork and stonework projects. Whether you're planning a new fireplace, retaining wall, or complete building facade, accurate masonry estimates are essential for budgeting and planning.</p>
+                <p class="mb-4">A professional masonry estimator considers material costs (bricks, blocks, stone, mortar), labor rates, equipment needs, and project complexity. They also account for waste factors, site conditions, and local building codes to ensure comprehensive and reliable estimates.</p>
+                <p class="mb-4">For contractors, accurate estimates help win bids while maintaining profitability. For homeowners, they provide peace of mind and help avoid unexpected costs. Modern estimating software can assist with calculations, but experienced estimators bring valuable knowledge about regional material pricing and installation techniques.</p>
+                <p>Key factors in masonry estimating include wall thickness, pattern complexity, reinforcement requirements, and finishing details. Estimators must also consider site access, scaffolding needs, and weather conditions that might affect installation timelines.</p>`
+            },
+            5: {
+                title: "How Much Does it Cost to Install Drywall – 2025 Guide",
+                content: `<p class="mb-4">If you're planning a project, whether it's a bedroom remodel or finishing your basement, having a clear idea of drywall installation costs helps you budget effectively. In 2025, drywall installation costs typically range from $1.50 to $3.50 per square foot, depending on various factors.</p>
+                <p class="mb-4">Room size, ceiling height, complexity, and local labor rates all impact the final cost. Additional costs may include materials (drywall sheets, joint compound, tape, screws), finishing (taping, mudding, sanding), and any special features like curved walls or soundproofing.</p>
+                <p class="mb-4">Labor costs usually account for 60-70% of the total project cost, with materials making up the remainder. Factors that can increase costs include high ceilings (requiring scaffolding), textured finishes, multiple layers for soundproofing, and moisture-resistant or fire-rated drywall.</p>
+                <p>To get accurate estimates, obtain multiple quotes from licensed contractors who can assess your specific project requirements. Always verify that quotes include all materials, labor, cleanup, and disposal fees.</p>`
+            },
+            6: {
+                title: "Quantity Surveyor and Estimator – What's the Difference Between Them?",
+                content: `<p class="mb-4">In the construction industry, there are numerous roles that keep a project moving from concept to completion. Two positions that are often confused are quantity surveyors and estimators. While both roles deal with project costs, they have distinct responsibilities.</p>
+                <p class="mb-4">Estimators focus on calculating project costs before construction begins, analyzing blueprints and specifications to determine material quantities and labor needs. They typically work during the bidding phase, helping contractors prepare competitive proposals for potential projects.</p>
+                <p class="mb-4">Quantity surveyors manage costs throughout the entire project lifecycle, from initial estimates to final accounts. They handle procurement, contracts, cost control, progress payments, and final settlements. Quantity surveyors may also be involved in value engineering, helping optimize project costs without compromising quality.</p>
+                <p>While estimators focus on pre-construction cost prediction, quantity surveyors provide ongoing financial management throughout the project. Both roles are essential for successful project delivery, and professionals in either field require strong analytical skills and construction knowledge.</p>`
+            },
+            7: {
+                title: "Commercial Concrete Contractors in Houston, TX",
+                content: `<p class="mb-4">Building a commercial property is a considerable investment, and hiring the wrong concrete contractor can lead to delays, cost overruns, and structural issues. In Houston, TX, commercial concrete contractors specialize in large-scale projects including office buildings, retail centers, parking structures, and industrial facilities.</p>
+                <p class="mb-4">They handle everything from foundation work and structural concrete to decorative finishes and site preparation. When selecting a contractor, look for proven experience, proper licensing and insurance, and a portfolio of completed commercial projects.</p>
+                <p class="mb-4">Commercial concrete work requires specialized equipment and expertise, including understanding of load-bearing requirements, reinforcement techniques, and curing processes. Contractors must also navigate local building codes and inspection requirements.</p>
+                <p>Before hiring, request detailed proposals, check references, and verify that the contractor has experience with projects similar to yours. A reputable contractor will provide transparent pricing and clear timelines for completion.</p>`
+            },
+            8: {
+                title: "Reliable Concrete Contractors in Sydney – Quality You Can Trust",
+                content: `<p class="mb-4">Sydney is a city that never stops growing. Concrete is everywhere, from new homes and driveways to commercial buildings and infrastructure projects. Reliable concrete contractors in Sydney understand local building codes, climate considerations, and material availability.</p>
+                <p class="mb-4">They provide services including concrete pouring, stamping, polishing, and repairs. When choosing a contractor, look for those with strong industry certifications, positive client testimonials, and transparent pricing. Quality concrete work ensures durability, safety, and aesthetic appeal for years to come.</p>
+                <p class="mb-4">Sydney contractors must also navigate specific challenges like soil conditions, coastal environments, and heritage requirements in certain areas. Experienced contractors will assess site conditions and recommend appropriate concrete mixes and reinforcement techniques.</p>
+                <p>Whether you need a new driveway, commercial slab, or decorative concrete, investing in quality contractors saves money and headaches in the long run. Always obtain multiple quotes and verify credentials before making a decision.</p>`
+            },
+            9: {
+                title: "Best Plumbing Contractors in Sydney – Services & Costs",
+                content: `<p class="mb-4">Plumbing plays a considerable role in keeping homes and businesses in Sydney running smoothly. From new construction plumbing to renovations and emergency repairs, professional plumbing contractors ensure systems function properly and meet code requirements.</p>
+                <p class="mb-4">Services typically include pipe installation, fixture fitting, drainage systems, hot water systems, and gas fitting. Costs vary based on project scope, with hourly rates ranging from $80 to $150 for licensed plumbers. Always request detailed quotes and verify licenses and insurance before hiring.</p>
+                <p class="mb-4">Emergency plumbing services may cost more but provide peace of mind when issues arise. For larger projects, contractors should provide fixed-price quotes after assessing the scope of work. Look for plumbers with experience in your specific type of project, whether residential or commercial.</p>
+                <p>Quality plumbing contractors use modern materials and techniques, provide warranties on their work, and maintain clear communication throughout the project. They should also be familiar with Sydney's water regulations and sustainability requirements.</p>`
+            },
+            10: {
+                title: "Everything You Need to Know About Quantity Surveyor in Sydney",
+                content: `<p class="mb-4">In Sydney, the need for experienced quantity surveyors is vital. The city's construction industry is booming, and quantity surveyors help developers, contractors, and homeowners manage costs effectively. They prepare detailed cost plans, conduct feasibility studies, handle procurement, and manage contracts.</p>
+                <p class="mb-4">For residential projects, quantity surveyors can help with depreciation schedules for tax purposes, potentially saving thousands of dollars annually. When hiring a quantity surveyor in Sydney, look for AIQS (Australian Institute of Quantity Surveyors) accreditation and experience with similar projects in your area.</p>
+                <p class="mb-4">Sydney's diverse construction landscape includes everything from heritage restorations to high-rise developments, each with unique cost considerations. Experienced quantity surveyors understand local market conditions, material availability, and labor costs specific to Sydney.</p>
+                <p>Whether you're planning a new build, renovation, or commercial development, a qualified quantity surveyor provides invaluable guidance and cost management throughout your project. Their expertise helps prevent budget overruns and ensures successful project outcomes.</p>`
+            }
+        };
+
+        // Open modal function - make sure it's globally accessible
+        window.openModal = function(articleId) {
+            console.log('Opening modal for article:', articleId); // Debug log
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const article = articleData[articleId];
+            if (article) {
+                modalTitle.textContent = article.title;
+                modalBody.innerHTML = article.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden'; // Prevent background scrolling
+            } else {
+                console.error('Article not found:', articleId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+            } else {
+                document.documentElement.classList.remove('dark');
+                if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+            }
+            
+            // Add event listener for theme toggle if exists
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    toggleTheme(themeIcon, themeText);
+                });
+            }
+        });
+
+        // Update theme UI elements
+        function updateThemeUI(theme, themeIcon, themeText) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme(themeIcon, themeText) {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light', themeIcon, themeText);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark', themeIcon, themeText);
+            }
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+                }
+            }
+        });
+
+        // Log that script is loaded
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

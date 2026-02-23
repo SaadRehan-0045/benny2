@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benny Estimates - Our Services</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'slide-up': 'slideUp 0.5s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Service card hover effects */
+        .service-card {
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .service-card:hover .service-image {
+            transform: scale(1.1);
+        }
+        
+        /* Image container */
+        .image-container {
+            width: 100%;
+            height: 160px;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+        
+        .service-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        /* Gradient backgrounds */
+        .services-gradient-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        }
+        
+        .dark .services-gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+    
+    <!-- Services Section -->
+    <section class="services-gradient-bg py-12 lg:py-20 animate-fade-in">
+        <div class="container mx-auto px-4">
+            
+           
+
+            <!-- Simple "Our Services" Heading -->
+            <h1 class="text-3xl lg:text-4xl xl:text-5xl font-bold text-gray-900 dark:text-white mb-12 text-center">
+                Our Services
+            </h1>
+
+            <!-- Services Grid - 8 cards in 2 rows of 4 with images -->
+            <div class="animate-slide-up">
+                <!-- Row 1 - First 4 Services -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6 mb-4 sm:mb-5 lg:mb-6">
+                    <!-- Service 1: Cost Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-primary-300 dark:hover:border-primary-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Construction cost estimation with blueprints and calculator" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Cost Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Detailed cost analysis and budget forecasting for construction projects of all sizes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Construction Takeoff Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-green-300 dark:hover:border-green-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/159306/construction-site-build-construction-work-159306.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Construction takeoff with blueprints and hard hat" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Construction Takeoff Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Accurate quantity takeoffs for all construction materials with detailed measurements.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Residential Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-purple-300 dark:hover:border-purple-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/106399/pexels-photo-106399.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Residential construction house with blueprint" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Residential Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Specialized estimating for single-family homes, apartments, and residential complexes.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: Commercial Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-yellow-300 dark:hover:border-yellow-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/323705/pexels-photo-323705.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Commercial building construction with glass facade" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Commercial Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Comprehensive estimating for offices, retail spaces, and commercial developments.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2 - Next 4 Services -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 lg:gap-6">
+                    <!-- Service 5: Industrial Estimating Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-red-300 dark:hover:border-red-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/159306/industrial-factory-manufacturing-plant-159306.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Industrial factory and manufacturing plant" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Industrial Estimating Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Specialized estimates for industrial facilities, warehouses, and manufacturing plants.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 6: Preliminary Estimate Services -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-indigo-300 dark:hover:border-indigo-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/416405/pexels-photo-416405.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Architect working on preliminary blueprints" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Preliminary Estimate Services
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Quick initial cost estimates for project feasibility and budget planning.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 7: Virtual Bid Management -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-pink-300 dark:hover:border-pink-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/3184418/pexels-photo-3184418.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Business team reviewing virtual bid documents" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Virtual Bid Management
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Comprehensive bid package preparation and management for successful project bids.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Service 8: Construction Estimating Consultant -->
+                    <div class="service-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden border border-gray-200 dark:border-gray-700 hover:border-cyan-300 dark:hover:border-cyan-600 hover:shadow-xl h-full flex flex-col">
+                        <div class="image-container">
+                            <img src="https://images.pexels.com/photos/5668856/pexels-photo-5668856.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2" 
+                                 alt="Construction consultant reviewing plans with client" 
+                                 class="service-image"
+                                 loading="lazy">
+                        </div>
+                        <div class="p-5 sm:p-6">
+                            <h3 class="text-lg sm:text-xl font-bold text-gray-900 dark:text-white mb-3">
+                                Construction Estimating Consultant
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm sm:text-base">
+                                Expert consulting services to optimize your estimating processes and improve accuracy.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Simple Footer Note -->
+            
+        </div>
+    </section>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference or use default
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            if (updateThemeUI) updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            if (updateThemeUI) updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                if (themeIcon) themeIcon.className = 'ri-sun-line mr-2';
+                if (themeText) themeText.textContent = 'Light Mode';
+            } else {
+                if (themeIcon) themeIcon.className = 'ri-moon-line mr-2';
+                if (themeText) themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle if exists
+        if (themeToggle) {
+            themeToggle.addEventListener('click', toggleTheme);
+        }
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

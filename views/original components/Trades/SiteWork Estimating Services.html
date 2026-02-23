@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SiteWork Estimating Services | Construct Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        sitework: {
+                            50: '#faf5ff',
+                            100: '#f3e8ff',
+                            200: '#e9d5ff',
+                            300: '#d8b4fe',
+                            400: '#c084fc',
+                            500: '#a855f7',
+                            600: '#9333ea',
+                            700: '#7e22ce',
+                            800: '#6b21a8',
+                            900: '#581c87',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'ground-shift': 'groundShift 3s ease-in-out infinite',
+                        'rise-up': 'riseUp 1s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        groundShift: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-5px)' },
+                        },
+                        riseUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* SiteWork theme styling */
+        .sitework-gradient {
+            background: linear-gradient(135deg, #9333ea 0%, #7e22ce 100%);
+        }
+        
+        .dark .sitework-gradient {
+            background: linear-gradient(135deg, #c084fc 0%, #9333ea 100%);
+        }
+        
+        /* Ground pattern */
+        .ground-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(147, 51, 234, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(147, 51, 234, 0.1) 2px, transparent 2px);
+            background-size: 60px 60px;
+        }
+        
+        .dark .ground-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(192, 132, 252, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(192, 132, 252, 0.1) 2px, transparent 2px);
+            background-size: 60px 60px;
+        }
+        
+        /* SiteWork card effect */
+        .sitework-card {
+            border: 2px solid #e9d5ff;
+            border-bottom: 5px solid #9333ea;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .sitework-card:before {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 0;
+            background: linear-gradient(to top, rgba(147, 51, 234, 0.1), transparent);
+            transition: height 0.3s ease;
+        }
+        
+        .sitework-card:hover:before {
+            height: 100%;
+        }
+        
+        .sitework-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(147, 51, 234, 0.15);
+            border-color: #d8b4fe;
+        }
+        
+        .dark .sitework-card {
+            border-color: #6b21a8;
+        }
+        
+        .dark .sitework-card:hover {
+            box-shadow: 0 15px 40px rgba(192, 132, 252, 0.2);
+            border-color: #c084fc;
+        }
+        
+        /* Excavation pattern */
+        .excavation-pattern {
+            background-image: 
+                linear-gradient(45deg, transparent 65%, rgba(147, 51, 234, 0.05) 65%, rgba(147, 51, 234, 0.05) 75%, transparent 75%),
+                linear-gradient(-45deg, transparent 65%, rgba(147, 51, 234, 0.05) 65%, rgba(147, 51, 234, 0.05) 75%, transparent 75%);
+            background-size: 30px 30px;
+        }
+        
+        .dark .excavation-pattern {
+            background-image: 
+                linear-gradient(45deg, transparent 65%, rgba(192, 132, 252, 0.05) 65%, rgba(192, 132, 252, 0.05) 75%, transparent 75%),
+                linear-gradient(-45deg, transparent 65%, rgba(192, 132, 252, 0.05) 65%, rgba(192, 132, 252, 0.05) 75%, transparent 75%);
+            background-size: 30px 30px;
+        }
+        
+        /* Terrain elevation effect */
+        .terrain-effect {
+            position: relative;
+        }
+        
+        .terrain-effect:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, #9333ea, transparent);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .terrain-effect:hover:after {
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+
+    <!-- Theme Toggle Button (Top Right) -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="flex items-center px-4 py-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium text-sm">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+        
+        <!-- Breadcrumb -->
+        <nav class="mb-8 text-sm text-gray-600 dark:text-gray-400">
+            <a href="#" class="hover:text-sitework-600 dark:hover:text-sitework-400">Home</a>
+            <span class="mx-2">»</span>
+            <span class="text-gray-800 dark:text-gray-300 font-medium">SiteWork Estimating Services</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                    SiteWork Estimating Services
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-sitework-600 dark:text-sitework-400">
+                    Your Premier Source for Site Work Estimating
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                    <div class="sitework-gradient text-white p-6 rounded-2xl shadow-xl mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Act Now and Save 50% on First Estimate!</h3>
+                        <p class="mb-4">
+                            We understand the challenges faced by site work contractors, landscaping contractors, land developers, and general contractors.
+                        </p>
+                        <button class="bg-white text-sitework-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300 mt-4">
+                            Transform Your Construction Workflow
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-sitework-100 dark:bg-sitework-900 p-3 rounded-lg mr-4">
+                                <i class="ri-landscape-fill text-sitework-600 dark:text-sitework-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Outsource to Experts</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">Reliable excavation estimating services</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            We cater to busy excavation contractors who need reliable and cost-effective estimation services for public, commercial, and residential projects.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <!-- SiteWork Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Site work and earthmoving construction" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Deliverables Section -->
+        <section class="mb-16 ground-pattern p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Comprehensive Deliverables to Support Your Projects</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm sitework-card animate-rise-up">
+                    <div class="text-sitework-600 dark:text-sitework-400 text-4xl mb-4 animate-ground-shift">
+                        <i class="ri-ruler-2-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Cut & Fill Takeoff</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Comprehensive list with detailed takeoff summary for your convenience.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 0.2s;">
+                    <div class="text-sitework-600 dark:text-sitework-400 text-4xl mb-4">
+                        <i class="ri-mountain-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Earth Volumes</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Accurate calculation of earthwork quantities and surface grading.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 0.4s;">
+                    <div class="text-sitework-600 dark:text-sitework-400 text-4xl mb-4">
+                        <i class="ri-map-2-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">3D Mapping Reports</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Visual 3D reports and reviewed bid documents for better planning.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 0.6s;">
+                    <div class="text-sitework-600 dark:text-sitework-400 text-4xl mb-4">
+                        <i class="ri-tree-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Landscaping Estimate</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Detailed landscaping cost analysis and material takeoffs.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 0.8s;">
+                    <div class="text-sitework-600 dark:text-sitework-400 text-4xl mb-4">
+                        <i class="ri-file-text-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Site Excavation Report</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Comprehensive report detailing site excavation requirements.</p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm sitework-card animate-rise-up" style="animation-delay: 1s;">
+                    <div class="text-sitework-600 dark:text-sitework-400 text-4xl mb-4">
+                        <i class="ri-calculator-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Volume Reports</h3>
+                    <p class="text-gray-700 dark:text-gray-300">Cut/fill quantities and top soil spread calculations.</p>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <a href="#" class="inline-flex items-center text-sitework-600 dark:text-sitework-400 hover:text-sitework-700 dark:hover:text-sitework-300 font-semibold">
+                    <i class="ri-folder-open-line mr-2"></i>
+                    Site Work Cut & Fill Grading Sample
+                </a>
+            </div>
+        </section>
+
+        <!-- Services Coverage -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">What We Cover in Our SiteWork Estimation Services</h2>
+            
+            <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg terrain-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sitework-100 dark:bg-sitework-900 p-3 rounded-lg mr-4">
+                            <i class="ri-calculator-line text-sitework-600 dark:text-sitework-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Quantity Takeoffs</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Quick and accurate estimates for preliminary, comparison, conceptual, budget, and bid purposes.</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg terrain-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sitework-100 dark:bg-sitework-900 p-3 rounded-lg mr-4">
+                            <i class="ri-search-line text-sitework-600 dark:text-sitework-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Feasibility Analysis</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Sitework feasibility analysis and land development consultation.</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg terrain-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sitework-100 dark:bg-sitework-900 p-3 rounded-lg mr-4">
+                            <i class="ri-auction-line text-sitework-600 dark:text-sitework-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Bidding Assistance</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Expert assistance with bidding and design phase estimating.</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg terrain-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sitework-100 dark:bg-sitework-900 p-3 rounded-lg mr-4">
+                            <i class="ri-scale-line text-sitework-600 dark:text-sitework-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Legal Claims Assistance</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Support with legal claims assistance and change order management.</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg terrain-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sitework-100 dark:bg-sitework-900 p-3 rounded-lg mr-4">
+                            <i class="ri-lightbulb-flash-line text-sitework-600 dark:text-sitework-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Value Engineering</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Cost optimization through value engineering and project analysis.</p>
+                </div>
+                
+                <div class="p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg terrain-effect">
+                    <div class="flex items-center mb-4">
+                        <div class="bg-sitework-100 dark:bg-sitework-900 p-3 rounded-lg mr-4">
+                            <i class="ri-file-chart-line text-sitework-600 dark:text-sitework-400 text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold">Project Portfolio</h3>
+                    </div>
+                    <p class="text-gray-600 dark:text-gray-400 text-sm">Comprehensive project portfolio management and reporting.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="mb-16 excavation-pattern p-8 rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Why Choose Construct Estimates?</h2>
+                
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="text-center p-6">
+                        <div class="text-green-500 text-4xl mb-4">
+                            <i class="ri-money-dollar-circle-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Cost-effective</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Competitive pricing that fits your budget</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="text-sitework-600 text-4xl mb-4">
+                            <i class="ri-check-double-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Efficiency & Accuracy</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Precise estimates with fast turnaround</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="text-blue-500 text-4xl mb-4">
+                            <i class="ri-time-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Fast Turnaround</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">24-48 hour delivery for most projects</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="text-purple-500 text-4xl mb-4">
+                            <i class="ri-shield-keyhole-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Confidentiality</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Secure handling of all project information</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="text-orange-500 text-4xl mb-4">
+                            <i class="ri-award-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">Certified Estimators</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Qualified and experienced professionals</p>
+                    </div>
+                    
+                    <div class="text-center p-6">
+                        <div class="text-cyan-500 text-4xl mb-4">
+                            <i class="ri-customer-service-2-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-lg mb-2">24/7 Support</h4>
+                        <p class="text-gray-600 dark:text-gray-400 text-sm">Round-the-clock customer assistance</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Earthwork & Landscaping -->
+        <section class="mb-16">
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Earthwork Section -->
+                <div class="bg-gradient-to-br from-sitework-600 to-purple-700 text-white p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-white/20 p-4 rounded-lg mr-4">
+                            <i class="ri-mountain-fill text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold">Earthwork Estimating Services</h2>
+                            <p class="opacity-90">The Foundation of Your Project</p>
+                        </div>
+                    </div>
+                    
+                    <p class="mb-6">
+                        Excavators, site engineers, and specialized contractors require reliable earthwork estimating services to gauge the total cost of land preparation before commencing construction.
+                    </p>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="bg-white/20 p-4 rounded-lg">
+                            <div class="font-bold">Bluebeam & Civil 3D</div>
+                            <div class="text-sm opacity-90">Advanced Software Tools</div>
+                        </div>
+                        <div class="bg-white/20 p-4 rounded-lg">
+                            <div class="font-bold">Volume Reports</div>
+                            <div class="text-sm opacity-90">Cut/Fill Quantities</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Landscaping Section -->
+                <div class="bg-white dark:bg-gray-800 p-8 rounded-xl shadow-lg">
+                    <div class="flex items-center mb-6">
+                        <div class="bg-sitework-100 dark:bg-sitework-900 p-4 rounded-lg mr-4">
+                            <i class="ri-tree-fill text-sitework-600 dark:text-sitework-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h2 class="text-2xl font-bold text-gray-900 dark:text-white">Landscaping Services</h2>
+                            <p class="text-gray-600 dark:text-gray-400">Transforming Outdoor Spaces with Precision</p>
+                        </div>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-bold mb-2">Hardscape & Softscape</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Complete landscape estimating</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <h4 class="font-bold mb-2">Irrigation Systems</h4>
+                            <p class="text-sm text-gray-600 dark:text-gray-400">Sprinkler and water budget plans</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="mb-16 text-center">
+            <div class="bg-gradient-to-r from-green-600 to-emerald-700 text-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-3xl font-bold mb-6">Elevate Your Construction Projects</h3>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Fuel Your Success with Professional SiteWork Estimating Services and Unlock 50% Savings!
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                    <button class="bg-white text-emerald-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                        <i class="ri-upload-cloud-2-line mr-2"></i>
+                        Upload Your Plans for Quick Evaluation
+                    </button>
+                    <button class="bg-transparent border-2 border-white hover:bg-white/10 px-8 py-4 rounded-lg font-bold text-lg transition duration-300">
+                        Request a Quote from Construct Estimates!
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Simple Process</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm">
+                    <div class="w-20 h-20 bg-sitework-100 dark:bg-sitework-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-upload-cloud-2-fill text-sitework-600 dark:text-sitework-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Upload Plans</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Submit your PDF drawings for evaluation</p>
+                    <div class="text-sitework-600 dark:text-sitework-400 text-sm font-semibold">Secure Transfer</div>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm">
+                    <div class="w-20 h-20 bg-sitework-100 dark:bg-sitework-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-price-tag-3-fill text-sitework-600 dark:text-sitework-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Receive Quote</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Get a customized quote for your project</p>
+                    <div class="text-sitework-600 dark:text-sitework-400 text-sm font-semibold">Transparent Pricing</div>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-700 rounded-xl shadow-sm">
+                    <div class="w-20 h-20 bg-sitework-100 dark:bg-sitework-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-file-download-fill text-sitework-600 dark:text-sitework-400 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Get Estimates</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Receive detailed site work estimates</p>
+                    <div class="text-sitework-600 dark:text-sitework-400 text-sm font-semibold">24-48 Hour Delivery</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Complete site work estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-sitework-600 dark:text-sitework-400 font-semibold">Sydney</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-sitework-600 dark:text-sitework-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-sitework-600 dark:text-sitework-400 font-semibold">Brisbane</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Western Australia</span>
+                            <span class="text-sitework-600 dark:text-sitework-400 font-semibold">Perth</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-red-600 dark:text-red-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Nationwide site work estimation</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-sitework-600 dark:text-sitework-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Earthwork Projects</span>
+                            <span class="text-sitework-600 dark:text-sitework-400 font-semibold">Expertise</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Land Development</span>
+                            <span class="text-sitework-600 dark:text-sitework-400 font-semibold">Specialized</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Site Improvements</span>
+                            <span class="text-sitework-600 dark:text-sitework-400 font-semibold">Detailed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-12 text-center bg-gradient-to-r from-sitework-700 to-purple-800 dark:from-sitework-800 dark:to-purple-900 text-white p-8 rounded-2xl shadow-xl">
+            <h2 class="text-3xl font-bold mb-6">Experience Precision in SiteWork Estimating</h2>
+            <div class="text-2xl font-bold mb-6">
+                Get Professional Site Work Estimates<br>
+                <span class="text-lg opacity-90">Accurate Estimates for Earthwork, Landscaping, and Site Improvements</span>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6 mb-8 max-w-2xl mx-auto">
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">Earthwork</div>
+                    <div class="text-sm opacity-90">Cut & Fill Volumes</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">Landscaping</div>
+                    <div class="text-sm opacity-90">Hardscape & Irrigation</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">Site Improvements</div>
+                    <div class="text-sm opacity-90">Fences & Retaining Walls</div>
+                </div>
+            </div>
+            
+            <button class="bg-white text-sitework-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                <i class="ri-landscape-fill mr-2"></i>
+                Get Your Site Work Estimate
+            </button>
+        </section>
+
+    </main>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+        
+        // Add ground shift animation
+        document.querySelectorAll('.animate-ground-shift').forEach(element => {
+            element.style.animationPlayState = 'running';
+        });
+        
+        // Add rise up animation to cards
+        let riseDelay = 0;
+        document.querySelectorAll('.animate-rise-up').forEach(card => {
+            card.style.animationDelay = `${riseDelay}s`;
+            riseDelay += 0.2;
+            
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-10px)';
+                this.style.boxShadow = '0 20px 50px rgba(147, 51, 234, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 15px 40px rgba(147, 51, 234, 0.15)';
+            });
+        });
+        
+        // Add terrain effect to service cards
+        document.querySelectorAll('.terrain-effect').forEach(element => {
+            element.style.animation = 'riseUp 0.5s ease-out';
+        });
+        
+        // Add interactive effect to upload button
+        document.querySelector('button:contains("Upload Your Plans")')?.addEventListener('click', function() {
+            const originalText = this.innerHTML;
+            this.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i> Processing...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                this.innerHTML = '<i class="ri-check-line mr-2"></i> Plans Uploaded!';
+                this.classList.remove('bg-white', 'text-emerald-700', 'hover:bg-gray-100');
+                this.classList.add('bg-green-500', 'text-white', 'hover:bg-green-600');
+                
+                setTimeout(() => {
+                    this.innerHTML = originalText;
+                    this.disabled = false;
+                    this.classList.remove('bg-green-500', 'text-white', 'hover:bg-green-600');
+                    this.classList.add('bg-white', 'text-emerald-700', 'hover:bg-gray-100');
+                }, 2000);
+            }, 1500);
+        });
+    </script>
+</body>
+</html>

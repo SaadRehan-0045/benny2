@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Takeoff Services - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <!-- Add Tailwind Config for Dark Mode -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Smooth transitions for theme switching */
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Hide scrollbars for consistency */
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Custom theme transitions */
+        .theme-transition {
+            transition: all 0.3s ease-in-out;
+        }
+        
+        /* Hover effects for cards */
+        .service-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        /* Fade in animation */
+        .fade-in {
+            animation: fadeIn 0.5s ease-in-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .service-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen fade-in">
+   
+    <%- include('../../header.ejs') %>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8 pt-20">
+
+        <!-- Hero Section -->
+        <section class="mb-16">
+            <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+                Construction Takeoff Services
+            </h1>
+            <p class="text-xl text-gray-600 dark:text-gray-300 mb-8 max-w-4xl">
+                Boost Your Construction Projects with Expert Takeoff Services
+            </p>
+            
+            <div class="relative rounded-2xl overflow-hidden shadow-2xl mb-8">
+                <!-- Hero Image from Unsplash (Takeoff/Blueprint theme) -->
+                <img 
+                    src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                    alt="Construction blueprint and takeoff analysis" 
+                    class="w-full h-64 md:h-96 object-cover"
+                >
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end">
+                    <div class="p-6 md:p-8">
+                        <p class="text-lg md:text-xl text-white mb-6 max-w-3xl">
+                            Are you looking for accurate and comprehensive construction takeoff services to streamline your projects and enhance your bottom line?
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="openModal(1)" class="px-6 py-3 bg-primary-600 hover:bg-primary-700 text-white font-semibold rounded-lg transition-colors cursor-pointer">
+                                Get Estimate & Uncover Hidden Profits
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
+                <p class="text-gray-600 dark:text-gray-300">
+                    At Benny Estimates, we specialize in providing professional quantity estimating solutions tailored to meet the unique needs of construction professionals like you. Our expertise and advanced technology enable us to deliver precise material quantities, cost estimations, and takeoff data, empowering you to make informed business decisions and win more projects.
+                </p>
+            </div>
+        </section>
+
+        <!-- Why Choose Us Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8">
+                Why Choose Our Construction Takeoff Services?
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- Feature 1 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-green-100 dark:bg-green-900/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-check-double-line text-2xl text-green-600 dark:text-green-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        Accurate Material Takeoffs for Confident Bidding
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our professional estimators excel in producing accurate takeoffs that form a solid foundation for your bidding process. By meticulously analyzing construction drawings, sketches, and project specifications, we ensure that every material quantity is calculated precisely. This accuracy helps you avoid costly overruns and ensures your bids are competitive yet profitable.
+                    </p>
+                    <button onclick="openModal(2)" class="mt-4 text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                
+                <!-- Feature 2 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-blue-100 dark:bg-blue-900/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-computer-line text-2xl text-blue-600 dark:text-blue-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        Enhanced Efficiency with Digital Takeoff Technology
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        We utilize state-of-the-art digital takeoff software to enhance efficiency and accuracy. Our technology allows for faster processing, reduced errors, and seamless integration with your existing systems. Digital takeoffs enable quick revisions, instant quantity updates, and collaborative review processes that save time and improve project outcomes.
+                    </p>
+                    <button onclick="openModal(3)" class="mt-4 text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                
+                <!-- Feature 3 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-purple-100 dark:bg-purple-900/20 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-team-line text-2xl text-purple-600 dark:text-purple-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        Experienced Estimators at Your Service
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our team consists of certified estimators with years of industry experience. They bring deep knowledge of construction methodologies, materials, and regional pricing variations. Their expertise ensures that your takeoffs account for local market conditions, labor rates, and material availability, providing you with realistic and reliable estimates.
+                    </p>
+                    <button onclick="openModal(4)" class="mt-4 text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+                
+                <!-- Feature 4 -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 service-card transition-all duration-300">
+                    <div class="w-14 h-14 bg-orange-100 dark:bg-orange-900/20 rounded-lg flex items-center justify-center mb-4">
+                        <!-- Changed from ri-handshake-line to ri-shake-hands-line -->
+                        <i class="ri-shake-hands-line text-2xl text-orange-600 dark:text-orange-400"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">
+                        Valuable Negotiating Tool for Contractors
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300">
+                        Our detailed takeoffs provide you with solid data for negotiations with suppliers and subcontractors, giving you a competitive edge in securing better prices and terms. With accurate quantity data in hand, you can confidently negotiate material costs, compare subcontractor quotes, and make informed procurement decisions that protect your profit margins.
+                    </p>
+                    <button onclick="openModal(5)" class="mt-4 text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 inline-flex items-center cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trades Section -->
+        <section class="mb-16 bg-gradient-to-r from-primary-50 to-blue-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 md:p-8">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">
+                Tailored Solutions for Various Construction Projects
+            </h2>
+            
+            <p class="text-gray-600 dark:text-gray-300 text-center mb-8 max-w-3xl mx-auto">
+                Whether you're involved in residential, commercial, or industrial projects, our accurate construction takeoff services can cater to your specific needs. The trades include:
+            </p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                <!-- Trade Items -->
+                <div onclick="openModal(6)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer">
+                    <i class="ri-road-map-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Civil</span>
+                </div>
+                <div onclick="openModal(7)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer">
+                    <i class="ri-building-4-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Structural</span>
+                </div>
+                <div onclick="openModal(8)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer">
+                    <i class="ri-tools-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">MEP</span>
+                </div>
+                <div onclick="openModal(9)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer">
+                    <i class="ri-home-gear-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Architectural</span>
+                </div>
+                <div onclick="openModal(10)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer">
+                    <i class="ri-barricade-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Steel takeoffs</span>
+                </div>
+                <div onclick="openModal(11)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer">
+                    <i class="ri-landscape-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Sitework</span>
+                </div>
+                <div onclick="openModal(12)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer">
+                    <i class="ri-layout-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Drywall</span>
+                </div>
+                <div onclick="openModal(13)" class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700 hover:border-primary-500 dark:hover:border-primary-400 transition-colors cursor-pointer">
+                    <i class="ri-tree-line text-2xl text-primary-600 dark:text-primary-400 mb-2"></i>
+                    <span class="font-medium text-gray-900 dark:text-white">Lumber</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA Section -->
+        <section class="bg-gradient-to-r from-primary-600 to-primary-800 dark:from-primary-700 dark:to-primary-900 rounded-2xl p-8 md:p-12 text-center text-white mb-16">
+            <h2 class="text-3xl font-bold mb-4">Accurate Quantity Takeoffs for Your Construction Success</h2>
+            <p class="text-lg mb-8 opacity-90 max-w-3xl mx-auto">
+                When you choose Benny Estimates as your construction material takeoff service provider, you gain a trusted partner committed to your success. We combine the expertise of our experienced estimators with advanced technology to deliver accurate and comprehensive quantity takeoffs that give you a competitive edge.
+            </p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button onclick="openModal(1)" class="px-8 py-3 bg-white text-primary-600 font-bold rounded-lg hover:bg-gray-100 transition-colors cursor-pointer">
+                    Act Now & Get 30% Off
+                </button>
+                <a href="/contact-us" class="px-8 py-3 bg-transparent border-2 border-white text-white font-bold rounded-lg hover:bg-white/10 transition-colors">
+                    Contact Us Today
+                </a>
+            </div>
+            <p class="mt-6 text-lg">
+                Don't let inaccurate or incomplete takeoffs hinder your construction projects. Contact us today to request a consultation and experience the difference our construction takeoff services can make.
+            </p>
+        </section>
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Service Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content
+        const serviceData = {
+            1: {
+                title: "Get Your Free Construction Estimate",
+                content: `<p class="mb-4">Ready to uncover hidden profits in your construction projects? Our professional estimating services provide accurate, detailed cost breakdowns that help you bid confidently and maximize your margins.</p>
+                <p class="mb-4">With our comprehensive takeoff services, you'll receive detailed material quantities, labor estimates, equipment requirements, and subcontractor pricing recommendations. We analyze every aspect of your project to ensure nothing is overlooked.</p>
+                <p class="mb-4">Our estimators have decades of combined experience across residential, commercial, and industrial construction. We stay current with local material pricing, labor rates, and market conditions to provide estimates you can trust.</p>
+                <p>Contact us today at <a href="mailto:Ben@bennyestimates.com" class="text-primary-600 dark:text-primary-400">Ben@bennyestimates.com</a> or call <a href="tel:+12898017224" class="text-primary-600 dark:text-primary-400">+1 (289) 801-7224</a> to get started with your free consultation.</p>`
+            },
+            2: {
+                title: "Accurate Material Takeoffs for Confident Bidding",
+                content: `<p class="mb-4">Our professional estimators excel in producing accurate takeoffs that form a solid foundation for your bidding process. By meticulously analyzing construction drawings, sketches, and project specifications, we ensure that every material quantity is calculated precisely.</p>
+                <p class="mb-4">Accuracy in material takeoffs is critical for successful bidding. Underestimating quantities leads to profit erosion through change orders and material shortages. Overestimating makes your bids uncompetitive and reduces your win rate.</p>
+                <p class="mb-4">Our detailed takeoffs include comprehensive breakdowns of all materials by type, grade, and quantity. We account for waste factors, overlaps, and industry standards to provide realistic numbers that reflect actual job site requirements.</p>
+                <p>With our accurate takeoffs, you can bid with confidence knowing your numbers are reliable. Contact us to learn how our takeoff services can improve your bidding success.</p>`
+            },
+            3: {
+                title: "Enhanced Efficiency with Digital Takeoff Technology",
+                content: `<p class="mb-4">We utilize state-of-the-art digital takeoff software to enhance efficiency and accuracy. Our technology allows for faster processing, reduced errors, and seamless integration with your existing systems.</p>
+                <p class="mb-4">Digital takeoffs enable quick revisions when project changes occur, instant quantity updates that propagate through all related documents, and collaborative review processes that save time and improve project outcomes.</p>
+                <p class="mb-4">Our estimators are proficient in leading takeoff software including Bluebeam, PlanSwift, and Stack. We can work with digital plans in PDF, CAD, or BIM formats, extracting quantities directly from your project files.</p>
+                <p>The efficiency gained through digital takeoffs translates to faster bid turnaround, allowing you to pursue more opportunities while maintaining high accuracy standards.</p>`
+            },
+            4: {
+                title: "Experienced Estimators at Your Service",
+                content: `<p class="mb-4">Our team consists of certified estimators with years of industry experience. They bring deep knowledge of construction methodologies, materials, and regional pricing variations.</p>
+                <p class="mb-4">Each estimator on our team has worked in the construction industry before transitioning to estimating, giving them practical knowledge of how projects are actually built. This real-world experience informs their takeoffs with insights that software alone cannot provide.</p>
+                <p class="mb-4">We continuously invest in professional development, ensuring our team stays current with new materials, construction techniques, and industry standards. Many of our estimators hold certifications from professional estimating organizations.</p>
+                <p>Their expertise ensures that your takeoffs account for local market conditions, labor rates, and material availability, providing you with realistic and reliable estimates that stand up to scrutiny.</p>`
+            },
+            5: {
+                title: "Valuable Negotiating Tool for Contractors",
+                content: `<p class="mb-4">Our detailed takeoffs provide you with solid data for negotiations with suppliers and subcontractors, giving you a competitive edge in securing better prices and terms.</p>
+                <p class="mb-4">With accurate quantity data in hand, you can confidently negotiate material costs, compare subcontractor quotes, and make informed procurement decisions that protect your profit margins.</p>
+                <p class="mb-4">When suppliers and subcontractors know you have precise quantities, they provide their best pricing upfront. Our detailed breakdowns also help you identify opportunities for bulk purchasing or alternative materials that offer cost savings.</p>
+                <p>Your detailed takeoff serves as a valuable reference throughout the project, helping you track actual usage against estimates and identify areas for improvement in future bids.</p>`
+            },
+            6: {
+                title: "Civil Construction Takeoff Services",
+                content: `<p class="mb-4">Civil construction projects require specialized takeoff expertise for earthwork, utilities, roads, and site development. Our civil estimators understand the complexities of grading, drainage, and infrastructure work.</p>
+                <p class="mb-4">We provide detailed earthwork calculations including cut/fill analysis, compaction factors, and material import/export quantities. Our takeoffs cover all civil components from site preparation through final grading.</p>
+                <p class="mb-4">Whether you're bidding on residential subdivisions, commercial site development, or municipal infrastructure projects, our civil takeoffs provide the accuracy you need for competitive bidding.</p>
+                <p>Contact us to discuss your civil project requirements and learn how our specialized takeoff services can support your success.</p>`
+            },
+            7: {
+                title: "Structural Takeoff Services",
+                content: `<p class="mb-4">Structural takeoffs require precise calculation of concrete, rebar, structural steel, and connections. Our estimators have extensive experience with all structural systems and materials.</p>
+                <p class="mb-4">We provide detailed concrete quantities including footings, foundations, columns, beams, and slabs with proper allowances for waste and laps. Our rebar takeoffs include bending schedules and tonnage calculations.</p>
+                <p class="mb-4">For structural steel, we quantify all members by type, size, and grade, including connections, bolts, and welding requirements. We work from structural drawings and can coordinate with steel detailers.</p>
+                <p>Accurate structural takeoffs ensure you have the right materials on site when needed, avoiding costly delays and expediting charges.</p>`
+            },
+            8: {
+                title: "MEP Takeoff Services",
+                content: `<p class="mb-4">Mechanical, Electrical, and Plumbing (MEP) systems are among the most complex and costly components of any building. Our MEP estimators provide comprehensive takeoffs for all trades.</p>
+                <p class="mb-4">For mechanical systems, we quantify HVAC equipment, ductwork, piping, and controls. Electrical takeoffs include wiring, conduit, panels, fixtures, and devices. Plumbing takeoffs cover pipe, fittings, fixtures, and specialties.</p>
+                <p class="mb-4">Our MEP estimators understand the coordination required between trades and account for sleeving, supports, and access requirements in their quantities. We work from MEP drawings and specifications.</p>
+                <p>Detailed MEP takeoffs help you identify potential conflicts before construction, reducing change orders and coordination issues in the field.</p>`
+            },
+            9: {
+                title: "Architectural Takeoff Services",
+                content: `<p class="mb-4">Architectural takeoffs cover the visible finishes and features that define a building's appearance and functionality. Our estimators provide detailed quantities for all architectural elements.</p>
+                <p class="mb-4">We quantify exterior cladding, roofing, windows, doors, and storefront systems. Interior finishes including drywall, ceilings, flooring, painting, and specialties are calculated with attention to detail.</p>
+                <p class="mb-4">Our takeoffs account for all components of architectural systems including trim, accessories, and installation materials. We work from architectural drawings and finish schedules.</p>
+                <p>Accurate architectural takeoffs ensure you have the right quantities for ordering and help you manage material costs effectively throughout your project.</p>`
+            },
+            10: {
+                title: "Steel Takeoff Services",
+                content: `<p class="mb-4">Structural steel requires precise quantification for fabrication and erection. Our steel estimators provide comprehensive takeoffs including all members, connections, and accessories.</p>
+                <p class="mb-4">We quantify steel by type, size, and grade, calculating weights and lengths for ordering purposes. Our takeoffs include all connection materials, bolts, weld requirements, and miscellaneous steel.</p>
+                <p class="mb-4">Whether your project uses traditional steel framing, joists and deck, or specialized structural systems, our estimators have the expertise to provide accurate quantities that support fabrication and erection.</p>
+                <p>Detailed steel takeoffs help you secure competitive pricing from fabricators and ensure you have the materials needed to maintain your construction schedule.</p>`
+            },
+            11: {
+                title: "Sitework Takeoff Services",
+                content: `<p class="mb-4">Sitework encompasses all activities required to prepare a site for construction. Our estimators provide comprehensive takeoffs for site utilities, paving, grading, and landscaping.</p>
+                <p class="mb-4">We quantify underground utilities including water, sewer, storm drainage, and electrical duct banks. Paving quantities include base materials, asphalt or concrete, and striping.</p>
+                <p class="mb-4">Our sitework takeoffs also include site grading, erosion control measures, landscaping materials, and site amenities. We account for the unique challenges of site development including rock excavation and dewatering.</p>
+                <p>Accurate sitework takeoffs are essential for competitive bidding and successful project execution. Contact us for your next site development project.</p>`
+            },
+            12: {
+                title: "Drywall Takeoff Services",
+                content: `<p class="mb-4">Drywall takeoffs require detailed calculation of wall areas, ceiling areas, and all associated materials. Our estimators provide comprehensive drywall quantities including board footage by type and thickness.</p>
+                <p class="mb-4">We quantify all framing materials including metal studs, track, and accessories. Our takeoffs include joint compound, tape, fasteners, and corner beads required for complete installation.</p>
+                <p class="mb-4">Special drywall applications including fire-rated assemblies, sound-rated walls, and curved surfaces are handled with appropriate allowances and details. We work from architectural and interior drawings.</p>
+                <p>Accurate drywall takeoffs ensure you have the right materials for efficient installation and help you manage material costs effectively on every project.</p>`
+            },
+            13: {
+                title: "Lumber Takeoff Services",
+                content: `<p class="mb-4">Lumber takeoffs require careful calculation of framing quantities accounting for spans, spacing, and waste factors. Our estimators provide detailed lumber quantities for all structural wood components.</p>
+                <p class="mb-4">We quantify dimensional lumber, engineered wood products, sheathing, and specialty wood materials. Our takeoffs include all framing members, blocking, and connections.</p>
+                <p class="mb-4">Whether your project uses conventional stick framing, trusses, or panelized construction, our estimators provide accurate quantities that support efficient material ordering and installation.</p>
+                <p>With lumber prices fluctuating significantly, accurate takeoffs help you lock in pricing and avoid costly overruns. Contact us for your next wood-framed project.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(serviceId) {
+            console.log('Opening modal for service:', serviceId);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const service = serviceData[serviceId];
+            if (service) {
+                modalTitle.textContent = service.title;
+                modalBody.innerHTML = service.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Service not found:', serviceId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme Toggle Functionality - Fixed Version
+        document.addEventListener('DOMContentLoaded', function() {
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            function applyTheme(theme) {
+                if (theme === 'dark') {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark', themeIcon, themeText);
+                    console.log('Applied Dark Theme');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light', themeIcon, themeText);
+                    console.log('Applied Light Theme');
+                }
+            }
+            
+            // Apply the theme immediately
+            applyTheme(currentTheme);
+            
+            // Update theme UI elements
+            function updateThemeUI(theme, themeIcon, themeText) {
+                if (themeIcon && themeText) {
+                    if (theme === 'dark') {
+                        themeIcon.className = 'ri-sun-line mr-2';
+                        themeText.textContent = 'Light';
+                    } else {
+                        themeIcon.className = 'ri-moon-line mr-2';
+                        themeText.textContent = 'Dark';
+                    }
+                }
+            }
+            
+            // Toggle theme function
+            window.toggleTheme = function() {
+                const isDark = document.documentElement.classList.contains('dark');
+                
+                if (isDark) {
+                    // Switch to Light Mode
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('theme', 'light');
+                    updateThemeUI('light', themeIcon, themeText);
+                    console.log('Switched to Light Mode');
+                } else {
+                    // Switch to Dark Mode
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('theme', 'dark');
+                    updateThemeUI('dark', themeIcon, themeText);
+                    console.log('Switched to Dark Mode');
+                }
+                
+                // Force a reflow to ensure transitions work
+                document.body.offsetHeight;
+            }
+            
+            // Add event listener for theme toggle
+            if (themeToggle) {
+                themeToggle.addEventListener('click', toggleTheme);
+            }
+            
+            // Listen for system theme changes
+            window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+                if (!localStorage.getItem('theme')) {
+                    const newTheme = e.matches ? 'dark' : 'light';
+                    applyTheme(newTheme);
+                    console.log('System theme changed to:', newTheme);
+                }
+            });
+            
+            console.log('Theme system initialized');
+        });
+    </script>
+</body>
+</html>

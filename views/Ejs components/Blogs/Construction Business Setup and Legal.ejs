@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Business Setup and Legal Aspects - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .article-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .article-card:hover {
+            transform: translateY(-4px);
+        }
+        .theme-toggle {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .article-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+ <%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+   
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Construction Business Setup and Legal Aspects
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Essential guides and resources for setting up your construction business and navigating legal requirements
+            </p>
+        </div>
+
+        <!-- Hero Section -->
+        <div class="rounded-2xl overflow-hidden mb-12 shadow-xl">
+            <img src="https://images.unsplash.com/photo-1503387769-00f7c6f348c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Construction Business Setup" 
+                 class="w-full h-64 md:h-80 object-cover">
+        </div>
+
+        <!-- Articles Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Article 1 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="NDA for Confidential Business Projects" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300 text-xs font-semibold rounded-full">
+                            Legal
+                        </span>
+                        <!-- Removed "min read" span -->
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 line-clamp-2">
+                        NDA for Confidential Business Projects – Secure Sensitive Data
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm line-clamp-3">
+                        Whether you're in construction, technology, or any other industry, protecting sensitive business information is essential. It helps ensure that your company's competitive edge and intellectual property remain secure. A well-drafted Non-Disclosure Agreement (NDA) establishes legal boundaries for how confidential information can be used and shared, preventing unauthorized disclosure to competitors or the public.
+                    </p>
+                    <button onclick="openModal(1)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Full Article <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Site Preparation for Construction" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-300 text-xs font-semibold rounded-full">
+                            Planning
+                        </span>
+                        <!-- Removed "min read" span -->
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 line-clamp-2">
+                        Essential Steps to Site Preparation for Construction
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm line-clamp-3">
+                        Before any building can rise from the ground, there's a crucial process that sets the stage for everything that follows—this is called site preparation. This phase involves clearing the land, grading, soil testing, and ensuring proper drainage. Proper site preparation prevents future structural issues, reduces construction delays, and ensures compliance with local building codes and environmental regulations.
+                    </p>
+                    <button onclick="openModal(2)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Full Article <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Tier 1 Construction Companies Sydney" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-xs font-semibold rounded-full">
+                            Industry
+                        </span>
+                        <!-- Removed "min read" span -->
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 line-clamp-2">
+                        Tier 1 Construction Companies in Sydney – Everything You Need to Know
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm line-clamp-3">
+                        The construction industry is vital to Sydney's growth, constantly shaping the city's skyline and infrastructure. Tier 1 construction companies are the largest and most experienced firms, handling major projects worth hundreds of millions of dollars. These companies have extensive resources, sophisticated project management systems, and proven track records delivering complex developments including high-rise buildings, hospitals, and transportation infrastructure.
+                    </p>
+                    <button onclick="openModal(3)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Full Article <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Feasibility Study in Construction" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs font-semibold rounded-full">
+                            Analysis
+                        </span>
+                        <!-- Removed "min read" span -->
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 line-clamp-2">
+                        The Feasibility Study You Can't Afford to Ignore in Construction
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm line-clamp-3">
+                        Before breaking ground on any construction project, it's essential to know if the idea is truly viable. A feasibility study does exactly that; it evaluates the technical, financial, and operational aspects of a proposed project to determine whether it should proceed. This comprehensive analysis examines site conditions, market demand, regulatory requirements, construction costs, and potential return on investment, helping stakeholders make informed decisions and avoid costly mistakes.
+                    </p>
+                    <button onclick="openModal(4)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Full Article <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1503387769-00f7c6f348c5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Building Estimating Department" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300 text-xs font-semibold rounded-full">
+                            Management
+                        </span>
+                        <!-- Removed "min read" span -->
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 line-clamp-2">
+                        How to Build an Effective Estimating Department
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm line-clamp-3">
+                        In the construction industry, where every project depends on precision and efficiency, having a successful and well-built estimating department is crucial for business growth. An effective estimating department combines experienced professionals, modern software tools, and standardized processes to produce accurate bids consistently. Key elements include hiring qualified estimators, investing in training, implementing quality control procedures, and maintaining databases of material costs and labor rates.
+                    </p>
+                    <button onclick="openModal(5)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Full Article <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="article-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl border border-gray-200 dark:border-gray-700">
+                <div class="h-56 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600585154340-043788447eb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Contractor Licensing Requirements" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-105">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300 text-xs font-semibold rounded-full">
+                            Legal
+                        </span>
+                        <!-- Removed "min read" span -->
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3 line-clamp-2">
+                        Contractor Licensing Requirements in All 50 States and DC
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 mb-4 text-sm line-clamp-3">
+                        Being a contractor is big business. Combine that with the safety concerns surrounding work sites or buildings, and it isn't surprising that many states regulate the construction industry through licensing requirements. Contractor licensing ensures that professionals meet minimum standards of competency, experience, and financial responsibility. Requirements vary significantly by state, including exams, background checks, bonding, and continuing education. Understanding these requirements is essential for legal operation and client trust.
+                    </p>
+                    <button onclick="openModal(6)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Full Article <i class="ri-arrow-right-line ml-1"></i>
+                    </button>
+                </div>
+            </article>
+        </div>
+
+        <!-- Additional Articles Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">
+                More Legal & Setup Guides
+            </h2>
+            <div class="space-y-6">
+                <!-- Article 7 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow hover:shadow-md transition-shadow border border-gray-200 dark:border-gray-700">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                How to Hire a Construction Estimator: Building Success Step by Step
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Are you gearing up for a construction project and wondering how to hire a construction estimator who can make your vision a reality? The right estimator brings technical knowledge, experience with similar projects, and strong analytical skills. Look for candidates with relevant certifications, proven track records, and familiarity with modern estimating software.
+                            </p>
+                        </div>
+                        <button onclick="openModal(7)" class="md:w-32 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-center rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors font-medium cursor-pointer">
+                            Read Guide
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Article 8 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow hover:shadow-md transition-shadow border border-gray-200 dark:border-gray-700">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                Why You Need Qualified Civil Engineers To Get Your Estimates
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Calculating expenses is crucial for forecasting and managing future project costs when constructing a building. Qualified civil engineers bring expertise in structural analysis, material behavior, and construction methods that directly impact estimate accuracy. They identify potential challenges, recommend cost-effective solutions, and ensure estimates account for all technical requirements.
+                            </p>
+                        </div>
+                        <button onclick="openModal(8)" class="md:w-32 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-center rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors font-medium cursor-pointer">
+                            Read Guide
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Article 9 -->
+                <div class="bg-white dark:bg-gray-800 rounded-lg p-6 shadow hover:shadow-md transition-shadow border border-gray-200 dark:border-gray-700">
+                    <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+                        <div class="flex-1">
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                How to Start a Construction Company: A Step-by-Step Guide
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                So you want to fire "the man" and be your own boss in construction? Congratulations! Starting a construction company requires careful planning, including business registration, licensing, insurance, equipment acquisition, and client development. This comprehensive guide walks through each step, from creating a business plan to winning your first contracts and building a reputation for quality work.
+                            </p>
+                        </div>
+                        <button onclick="openModal(9)" class="md:w-32 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-center rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors font-medium cursor-pointer">
+                            Read Guide
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Tips Section -->
+        <div class="bg-gradient-to-r from-gray-50 to-primary-50 dark:from-gray-800 dark:to-primary-900/20 rounded-2xl p-8 mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6">Quick Legal Tips</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-800/50 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-primary-100 dark:bg-primary-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-file-text-line text-primary-600 dark:text-primary-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Proper Documentation</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Always maintain detailed records of all contracts, permits, and communications.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800/50 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mb-4">
+                        <i class="ri-shield-check-line text-green-600 dark:text-green-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Insurance Coverage</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Ensure adequate liability and workers' compensation insurance.</p>
+                </div>
+                <div class="bg-white dark:bg-gray-800/50 p-6 rounded-xl border border-gray-200 dark:border-gray-700">
+                    <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mb-4">
+                        <!-- Fixed icon to match the image - using ri-government-line for legal/compliance -->
+                        <i class="ri-government-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                    </div>
+                    <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-2">Local Compliance</h4>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm">Stay updated with local building codes and zoning regulations.</p>
+                </div>
+            </div>
+        </div>
+
+        
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Article Title</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Article content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content - MUST be defined before functions
+        const articleData = {
+            1: {
+                title: "NDA for Confidential Business Projects – Secure Sensitive Data",
+                content: `<p class="mb-4">Whether you're in construction, technology, or any other industry, protecting sensitive business information is essential. It helps ensure that your company's competitive edge and intellectual property remain secure. A well-drafted Non-Disclosure Agreement (NDA) establishes legal boundaries for how confidential information can be used and shared, preventing unauthorized disclosure to competitors or the public.</p>
+                <p class="mb-4">In the construction industry, NDAs are particularly important when sharing project plans, proprietary methods, client lists, or financial information with subcontractors, suppliers, or potential partners. A comprehensive NDA should clearly define what constitutes confidential information, the duration of the agreement, and the consequences of breach.</p>
+                <p class="mb-4">Key elements of an effective construction NDA include: identification of parties, definition of confidential information, exclusions from confidentiality, obligations of receiving party, time period, and jurisdiction for dispute resolution. Both parties should have the agreement reviewed by legal counsel before signing.</p>
+                <p>Remember that NDAs are just one part of a comprehensive information protection strategy. Combine them with employee training, secure document management systems, and cybersecurity measures for maximum protection of your sensitive business data.</p>`
+            },
+            2: {
+                title: "Essential Steps to Site Preparation for Construction",
+                content: `<p class="mb-4">Before any building can rise from the ground, there's a crucial process that sets the stage for everything that follows—this is called site preparation. This phase involves clearing the land, grading, soil testing, and ensuring proper drainage. Proper site preparation prevents future structural issues, reduces construction delays, and ensures compliance with local building codes and environmental regulations.</p>
+                <p class="mb-4">The site preparation process typically begins with surveying and marking boundaries, followed by clearing vegetation, debris, and existing structures. Soil testing determines bearing capacity and identifies any contamination or stability issues. Grading establishes proper drainage slopes and creates level building pads.</p>
+                <p class="mb-4">Additional steps may include erosion control measures, utility connections, and addressing any environmental concerns such as protected habitats or wetlands. Professional site preparation requires coordination between surveyors, geotechnical engineers, and excavation contractors.</p>
+                <p>Investing in thorough site preparation saves significant time and money by preventing problems during construction. Issues discovered after building begins are much more expensive and difficult to correct than those addressed during preparation.</p>`
+            },
+            3: {
+                title: "Tier 1 Construction Companies in Sydney – Everything You Need to Know",
+                content: `<p class="mb-4">The construction industry is vital to Sydney's growth, constantly shaping the city's skyline and infrastructure. Tier 1 construction companies are the largest and most experienced firms, handling major projects worth hundreds of millions of dollars. These companies have extensive resources, sophisticated project management systems, and proven track records delivering complex developments including high-rise buildings, hospitals, and transportation infrastructure.</p>
+                <p class="mb-4">Major Tier 1 contractors in Sydney include Lendlease, Multiplex, CPB Contractors, John Holland, and Laing O'Rourke. These companies typically self-perform critical elements while managing extensive networks of subcontractors and suppliers. They maintain large workforces, substantial equipment fleets, and in-house design and engineering capabilities.</p>
+                <p class="mb-4">Working with Tier 1 contractors offers advantages including financial stability, safety excellence, and quality assurance. However, subcontractors and suppliers must meet rigorous prequalification requirements including financial capacity, safety records, and demonstrated experience on similar projects.</p>
+                <p>For construction professionals seeking careers with Tier 1 companies, relevant qualifications, experience on complex projects, and strong safety records are essential. These employers offer excellent training, career progression, and exposure to landmark projects.</p>`
+            },
+            4: {
+                title: "The Feasibility Study You Can't Afford to Ignore in Construction",
+                content: `<p class="mb-4">Before breaking ground on any construction project, it's essential to know if the idea is truly viable. A feasibility study does exactly that; it evaluates the technical, financial, and operational aspects of a proposed project to determine whether it should proceed. This comprehensive analysis examines site conditions, market demand, regulatory requirements, construction costs, and potential return on investment, helping stakeholders make informed decisions and avoid costly mistakes.</p>
+                <p class="mb-4">A thorough feasibility study includes market analysis to confirm demand for the proposed development, technical assessment of site conditions and construction requirements, financial modeling of costs and returns, and regulatory review of zoning and permitting requirements. The study should identify potential risks and propose mitigation strategies.</p>
+                <p class="mb-4">For developers and investors, feasibility studies are essential for securing financing and making sound investment decisions. Lenders typically require independent feasibility studies before approving construction loans. The study's conclusions directly influence project scope, timing, and budget.</p>
+                <p>While feasibility studies require investment of time and money, they provide essential information for project success. They prevent proceeding with projects that cannot succeed and provide confidence for those that demonstrate strong potential.</p>`
+            },
+            5: {
+                title: "How to Build an Effective Estimating Department",
+                content: `<p class="mb-4">In the construction industry, where every project depends on precision and efficiency, having a successful and well-built estimating department is crucial for business growth. An effective estimating department combines experienced professionals, modern software tools, and standardized processes to produce accurate bids consistently. Key elements include hiring qualified estimators, investing in training, implementing quality control procedures, and maintaining databases of material costs and labor rates.</p>
+                <p class="mb-4">Start by defining clear roles and responsibilities within the department. Senior estimators oversee complex projects and mentor junior staff, while junior estimators handle quantity takeoffs and database maintenance. Establish standardized procedures for bid review, subcontractor solicitation, and proposal preparation.</p>
+                <p class="mb-4">Invest in estimating software that integrates with your project management and accounting systems. Modern tools improve accuracy, speed, and consistency while reducing manual errors. Maintain comprehensive cost databases updated with current material prices, labor rates, and productivity factors.</p>
+                <p>Regular training keeps estimators current with industry trends, new materials, and evolving construction methods. Encourage professional development through industry associations, certifications, and continuing education programs.</p>`
+            },
+            6: {
+                title: "Contractor Licensing Requirements in All 50 States and DC",
+                content: `<p class="mb-4">Being a contractor is big business. Combine that with the safety concerns surrounding work sites or buildings, and it isn't surprising that many states regulate the construction industry through licensing requirements. Contractor licensing ensures that professionals meet minimum standards of competency, experience, and financial responsibility. Requirements vary significantly by state, including exams, background checks, bonding, and continuing education.</p>
+                <p class="mb-4">Some states require licensing for all contractors, while others license only specific trades or projects above certain value thresholds. Common license classifications include general contractor, electrical, plumbing, HVAC, and specialty trades. Many states require passing trade and business law examinations.</p>
+                <p class="mb-4">Licensing typically requires proof of experience, financial statements, bonding, and liability insurance. Some states have reciprocal agreements recognizing licenses from other jurisdictions. Maintaining licenses often requires continuing education and regular renewal fees.</p>
+                <p>Operating without required licenses can result in fines, stop-work orders, and inability to enforce contracts. Clients increasingly verify contractor licensing before hiring, making proper licensing essential for business credibility and growth.</p>`
+            },
+            7: {
+                title: "How to Hire a Construction Estimator: Building Success Step by Step",
+                content: `<p class="mb-4">Are you gearing up for a construction project and wondering how to hire a construction estimator who can make your vision a reality? The right estimator brings technical knowledge, experience with similar projects, and strong analytical skills. Look for candidates with relevant certifications, proven track records, and familiarity with modern estimating software.</p>
+                <p class="mb-4">Start by defining your specific needs. Are you seeking an estimator for residential, commercial, or industrial projects? What project sizes and complexity levels will they handle? These factors determine required experience levels and technical expertise.</p>
+                <p class="mb-4">During interviews, evaluate candidates' understanding of construction methods, material costs, and local market conditions. Review sample estimates and ask about their estimating process, including how they handle uncertainty and risk. Check references from previous employers or clients.</p>
+                <p>Consider both technical skills and cultural fit. Estimators work closely with project managers, field supervision, and clients. Strong communication skills and collaborative approach contribute to project success as much as technical accuracy.</p>`
+            },
+            8: {
+                title: "Why You Need Qualified Civil Engineers To Get Your Estimates",
+                content: `<p class="mb-4">Calculating expenses is crucial for forecasting and managing future project costs when constructing a building. Qualified civil engineers bring expertise in structural analysis, material behavior, and construction methods that directly impact estimate accuracy. They identify potential challenges, recommend cost-effective solutions, and ensure estimates account for all technical requirements.</p>
+                <p class="mb-4">Civil engineers evaluate site conditions, soil characteristics, and environmental factors that affect construction costs. They design foundations and structural systems that balance safety, functionality, and economy. Their input ensures estimates reflect actual project requirements rather than assumptions.</p>
+                <p class="mb-4">Engineers also identify value engineering opportunities—alternative approaches that maintain quality while reducing costs. They stay current with new materials and construction techniques that may offer better performance or lower costs than traditional methods.</p>
+                <p>Including qualified engineers in the estimating process reduces risk of costly surprises during construction. Their expertise helps ensure projects are properly scoped, realistically budgeted, and successfully delivered.</p>`
+            },
+            9: {
+                title: "How to Start a Construction Company: A Step-by-Step Guide",
+                content: `<p class="mb-4">So you want to fire "the man" and be your own boss in construction? Congratulations! Starting a construction company requires careful planning, including business registration, licensing, insurance, equipment acquisition, and client development. This comprehensive guide walks through each step, from creating a business plan to winning your first contracts and building a reputation for quality work.</p>
+                <p class="mb-4">Begin with a solid business plan defining your market focus, services, target clients, and growth strategy. Research local competition and identify opportunities for differentiation. Determine your legal structure (sole proprietorship, LLC, corporation) and register your business.</p>
+                <p class="mb-4">Obtain required licenses and permits at federal, state, and local levels. Secure appropriate insurance including general liability, workers' compensation, and commercial auto coverage. Establish banking relationships and secure financing for equipment and working capital.</p>
+                <p>Develop marketing materials, build a professional website, and network with potential clients and industry partners. Start with smaller projects to build experience and reputation before pursuing larger contracts. Focus on quality work, clear communication, and client satisfaction to build lasting relationships.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(articleId) {
+            console.log('Opening modal for article:', articleId); // Debug log
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const article = articleData[articleId];
+            if (article) {
+                modalTitle.textContent = article.title;
+                modalBody.innerHTML = article.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Article not found:', articleId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+            } else {
+                document.documentElement.classList.remove('dark');
+                if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+            }
+            
+            // Add event listener for theme toggle if exists
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    toggleTheme(themeIcon, themeText);
+                });
+            }
+        });
+
+        // Update theme UI elements
+        function updateThemeUI(theme, themeIcon, themeText) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme(themeIcon, themeText) {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light', themeIcon, themeText);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark', themeIcon, themeText);
+            }
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+                }
+            }
+        });
+
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

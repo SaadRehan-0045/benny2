@@ -1,0 +1,1918 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metal Estimating Services | BENNY ESTIMATES</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        metal: {
+                            50: '#fafafa',
+                            100: '#f5f5f5',
+                            200: '#e5e5e5',
+                            300: '#d4d4d4',
+                            400: '#a3a3a3',
+                            500: '#737373',
+                            600: '#525252',
+                            700: '#404040',
+                            800: '#262626',
+                            900: '#171717',
+                        },
+                        orange: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'metal-shine': 'metalShine 2s ease-in-out infinite',
+                        'spark': 'spark 1s ease-in-out infinite',
+                        'modal-enter': 'modalEnter 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        metalShine: {
+                            '0%, 100%': { opacity: '1' },
+                            '50%': { opacity: '0.8' },
+                        },
+                        spark: {
+                            '0%, 100%': { opacity: '0' },
+                            '50%': { opacity: '1' },
+                        },
+                        modalEnter: {
+                            '0%': { opacity: '0', transform: 'scale(0.95) translateY(-10px)' },
+                            '100%': { opacity: '1', transform: 'scale(1) translateY(0)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        /* Metal theme styling */
+        .metal-gradient {
+            background: linear-gradient(135deg, #525252 0%, #404040 100%);
+        }
+        
+        .dark .metal-gradient {
+            background: linear-gradient(135deg, #737373 0%, #525252 100%);
+        }
+        
+        /* Steel grid pattern */
+        .steel-pattern {
+            background-image: 
+                linear-gradient(90deg, rgba(82, 82, 82, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(82, 82, 82, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        .dark .steel-pattern {
+            background-image: 
+                linear-gradient(90deg, rgba(115, 115, 115, 0.1) 1px, transparent 1px),
+                linear-gradient(rgba(115, 115, 115, 0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+        
+        /* Metal card effect */
+        .metal-card {
+            border: 1px solid #d4d4d4;
+            border-left: 6px solid #525252;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .metal-card:before {
+            content: '';
+            position: absolute;
+            top: -100%;
+            left: -100%;
+            width: 300%;
+            height: 300%;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+            transition: transform 0.6s ease;
+            transform: translate(100%, 100%);
+        }
+        
+        .metal-card:hover:before {
+            transform: translate(-100%, -100%);
+        }
+        
+        .metal-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 15px 40px rgba(82, 82, 82, 0.15);
+            border-color: #a3a3a3;
+        }
+        
+        .dark .metal-card {
+            border-color: #404040;
+        }
+        
+        .dark .metal-card:hover {
+            box-shadow: 0 15px 40px rgba(115, 115, 115, 0.2);
+            border-color: #737373;
+        }
+        
+        /* Welding spark effect */
+        .weld-spark {
+            position: relative;
+        }
+        
+        .weld-spark:after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: -8px;
+            width: 4px;
+            height: 4px;
+            background: #f59e0b;
+            border-radius: 50%;
+            box-shadow: 0 0 10px #f59e0b;
+        }
+        
+        /* Bolt pattern */
+        .bolt-pattern {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(115, 115, 115, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(115, 115, 115, 0.1) 2px, transparent 2px);
+            background-size: 40px 40px;
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px) scale(0.95);
+            transition: all 0.3s ease;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            margin: 1rem;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            border: 1px solid #374151;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0) scale(1);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .modal-body p {
+            margin-bottom: 1rem;
+        }
+
+        .modal-body ul {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .modal-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Custom scrollbar for modal */
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: #f97316;
+            border-radius: 10px;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-track {
+            background: #374151;
+        }
+
+        .dark .modal-content::-webkit-scrollbar-thumb {
+            background: #fb923c;
+        }
+
+        /* Ensure buttons are clickable */
+        button, .cursor-pointer, [onclick] {
+            cursor: pointer;
+        }
+
+        /* Button color override - Orange theme for all CTAs */
+        .btn-estimate {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+            border: none !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-estimate:hover {
+            background: linear-gradient(135deg, #ea580c, #c2410c) !important;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(249, 115, 22, 0.4) !important;
+        }
+        
+        .dark .btn-estimate {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+        
+        .dark .btn-estimate:hover {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+        }
+        
+        .btn-estimate i {
+            color: white !important;
+        }
+
+        /* Orange theme for secondary buttons */
+        .btn-secondary {
+            background: transparent !important;
+            color: white !important;
+            border: 2px solid white !important;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255,255,255,0.1) !important;
+            transform: translateY(-2px);
+        }
+        
+        .dark .btn-secondary {
+            border-color: #fb923c !important;
+            color: #fb923c !important;
+        }
+        
+        .dark .btn-secondary:hover {
+            background: rgba(249, 115, 22, 0.1) !important;
+        }
+
+        /* Orange gradient for featured cards */
+        .orange-gradient-card {
+            background: linear-gradient(135deg, #f97316, #ea580c) !important;
+            color: white !important;
+        }
+        
+        .dark .orange-gradient-card {
+            background: linear-gradient(135deg, #fb923c, #f97316) !important;
+        }
+
+        /* Orange text for highlights */
+        .text-orange-highlight {
+            color: #f97316 !important;
+        }
+        
+        .dark .text-orange-highlight {
+            color: #fb923c !important;
+        }
+
+        /* Orange border for cards */
+        .border-orange-highlight {
+            border-color: #f97316 !important;
+        }
+        
+        .dark .border-orange-highlight {
+            border-color: #fb923c !important;
+        }
+
+        /* Orange background for icons */
+        .bg-orange-light {
+            background-color: #fff7ed !important;
+        }
+        
+        .dark .bg-orange-light {
+            background-color: #7c2d12 !important;
+        }
+
+        /* Responsive typography */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 1.75rem !important;
+                line-height: 1.2 !important;
+            }
+            
+            .section-title {
+                font-size: 1.5rem !important;
+            }
+            
+            .card-title {
+                font-size: 1.1rem !important;
+            }
+        }
+
+        /* Header spacing fix */
+        .main-content {
+            padding-top: 5rem;
+        }
+
+        @media (min-width: 1024px) {
+            .main-content {
+                padding-top: 6rem;
+            }
+        }
+    </style>
+</head>
+<%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen flex flex-col">
+    <!-- Main Content with header padding -->
+    <main class="main-content flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 sm:py-6 lg:py-8">
+        
+        <!-- Hero Section -->
+        <section class="mb-6 sm:mb-8 lg:mb-12">
+            <div class="text-center mb-4 sm:mb-6 lg:mb-8">
+                <h1 class="hero-title text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3 lg:mb-4 animate-fade-in leading-tight">
+                    Metal Estimating Services
+                </h1>
+                <h2 class="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold text-metal-600 dark:text-metal-400 px-2">
+                    Steel Takeoffs and Expert Detailing for Construction Projects
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-4 sm:gap-6 lg:gap-8 items-center mb-4 sm:mb-6 lg:mb-8">
+                <div>
+                    <div class="metal-gradient text-white p-4 sm:p-5 lg:p-6 rounded-xl sm:rounded-2xl shadow-lg sm:shadow-xl mb-3 sm:mb-4 lg:mb-6">
+                        <h3 class="text-lg sm:text-xl lg:text-2xl font-bold mb-2 sm:mb-3 lg:mb-4">Upload Plans & Minimize Your Expenses Now!</h3>
+                        <p class="mb-2 sm:mb-3 lg:mb-4 text-xs sm:text-sm lg:text-base">
+                            Are you grappling with the complexities of metal estimation? BENNY ESTIMATES is your dedicated partner in providing reliable, affordable, and timely metal estimating services.
+                        </p>
+                        <button onclick="openModal('estimate')" class="btn-estimate px-4 sm:px-6 lg:px-8 py-2 sm:py-3 lg:py-4 rounded-lg sm:rounded-xl font-bold text-sm sm:text-base lg:text-lg shadow-md sm:shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 cursor-pointer w-full sm:w-auto">
+                            <span class="flex items-center justify-center gap-1 sm:gap-2">
+                                <i class="ri-tools-fill"></i>
+                                Get Your Metal Estimate
+                            </span>
+                        </button>
+                    </div>
+                    
+                    <div onclick="openModal('precision')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-l-4 hover:border-orange-500">
+                        <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                            <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                                <i class="ri-ruler-2-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl lg:text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-sm sm:text-base lg:text-lg">Precise and Detailed Estimating</h4>
+                                <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Best practices with cutting-edge software</p>
+                            </div>
+                        </div>
+                        <p class="text-xs sm:text-sm lg:text-base text-gray-700 dark:text-gray-300">
+                            Our team of expert steel estimators and engineers specializes in metal estimating and detailing, ensuring precise calculations for projects of any size and complexity.
+                        </p>
+                        <div class="mt-2 sm:mt-3 lg:mt-4 text-orange-600 dark:text-orange-400 font-semibold flex items-center text-xs sm:text-sm lg:text-base">
+                            Read More <i class="ri-arrow-right-line ml-1 text-xs sm:text-sm"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-3 sm:mt-4 lg:mt-0">
+                    <!-- Metal Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1599256629441-47704bb20c55?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Metal construction and steel fabrication" 
+                         class="w-full h-auto rounded-xl sm:rounded-2xl shadow-md sm:shadow-lg object-cover max-h-[250px] sm:max-h-[300px] lg:max-h-none">
+                </div>
+            </div>
+        </section>
+
+        <!-- Clients Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 steel-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Serving a Diverse Range of Clients</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('steelManufacturers')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm metal-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-factory-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">Steel Manufacturers</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Precision estimating for manufacturing processes</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('framingContractors')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm metal-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-hammer-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">Framing Contractors</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Accurate framing material calculations</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('fabricators')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm metal-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-tools-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">Fabricators</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Piping, duct, and sheet metal specialists</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('structuralSteel')" class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm metal-card">
+                    <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3 lg:mb-4">
+                        <i class="ri-building-2-fill"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white mb-1 sm:mb-2">Structural Steel</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Rebar and structural steel specialists</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Included -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">What's Included in Our Metal Estimating Services</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('accurateTakeoffs')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-ruler-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Accurate Takeoffs</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Detailed and accurate takeoffs covering decks, trusses, railings, stud framing, joists, gratings, and castings.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('costControl')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-money-dollar-circle-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Cost Control</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Transparent pricing and budget management for optimal project financial control.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('shopDrawings')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-file-copy-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Shop Drawings</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Structural steel detailing and precise shop drawings for fabrication.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('rebarEstimation')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-settings-5-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Rebar Estimation</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Bar bending schedules and detailed rebar quantity calculations.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('changeOrders')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-file-edit-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Change Orders</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Management of change orders and project consulting services.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('industryStandards')" class="p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-l-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3 lg:mb-4">
+                        <div class="bg-orange-light p-2 sm:p-2.5 lg:p-3 rounded-lg mr-2 sm:mr-3 lg:mr-4">
+                            <i class="ri-award-fill text-orange-600 dark:text-orange-400 text-lg sm:text-xl"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base lg:text-lg font-bold">Industry Standards</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Compliance with AASHTO, ASTM, CRSI, and other industry standards.</p>
+                    <div class="mt-2 sm:mt-3 text-orange-600 dark:text-orange-400 font-semibold text-xs sm:text-sm">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Range -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 bolt-pattern p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-8 rounded-lg sm:rounded-xl shadow-md">
+                <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Range of Steel Estimating Services</h2>
+                
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-3 sm:gap-4 lg:gap-6">
+                    <div onclick="openModal('preciseSteelTakeoffs')" class="text-center p-4 sm:p-5 lg:p-6 border border-metal-200 dark:border-metal-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3 animate-metal-shine">
+                            <i class="ri-ruler-2-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Precise Steel Takeoffs</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Structural steel, rebar, and framing estimation</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('rebarEstimationService')" class="text-center p-4 sm:p-5 lg:p-6 border border-metal-200 dark:border-metal-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-settings-5-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Rebar Estimation</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Detailed rebar quantity and placement</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('steelDetailing')" class="text-center p-4 sm:p-5 lg:p-6 border border-metal-200 dark:border-metal-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3 weld-spark">
+                            <i class="ri-tools-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Steel Detailing</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Structural and light steel detailing services</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                    
+                    <div onclick="openModal('shopDrawingsService')" class="text-center p-4 sm:p-5 lg:p-6 border border-metal-200 dark:border-metal-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-700 transition-colors">
+                        <div class="text-orange-600 dark:text-orange-400 text-2xl sm:text-3xl mb-2 sm:mb-3">
+                            <i class="ri-file-copy-fill"></i>
+                        </div>
+                        <h4 class="font-bold text-sm sm:text-base mb-1">Shop Drawings</h4>
+                        <p class="text-xs text-gray-600 dark:text-gray-400">Bar bending schedules and fabrication drawings</p>
+                        <div class="mt-2 text-orange-600 dark:text-orange-400 text-xs">
+                            Read More <i class="ri-arrow-right-line ml-1"></i>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Software & Standards -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Software Expertise & Industry Standards</h2>
+            
+            <div class="grid md:grid-cols-2 gap-3 sm:gap-4 lg:gap-8">
+                <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="bg-orange-light p-3 sm:p-4 rounded-lg mr-3 sm:mr-4">
+                            <i class="ri-computer-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Software Expertise</h3>
+                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Advanced tools for precision estimating</p>
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-2 gap-2 sm:gap-3">
+                        <div onclick="openModal('planswift')" class="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors">
+                            <div class="font-medium text-xs sm:text-sm">Planswift</div>
+                        </div>
+                        <div onclick="openModal('autocad')" class="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors">
+                            <div class="font-medium text-xs sm:text-sm">AutoCAD</div>
+                        </div>
+                        <div onclick="openModal('tekla')" class="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors">
+                            <div class="font-medium text-xs sm:text-sm">Tekla Structures</div>
+                        </div>
+                        <div onclick="openModal('rebarCAD')" class="p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg text-center cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors">
+                            <div class="font-medium text-xs sm:text-sm">Rebar CAD</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="bg-orange-light p-3 sm:p-4 rounded-lg mr-3 sm:mr-4">
+                            <i class="ri-award-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white">Industry Standards</h3>
+                            <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Compliance with international standards</p>
+                        </div>
+                    </div>
+                    <div class="space-y-2 sm:space-y-3">
+                        <div onclick="openModal('aashto')" class="flex items-center justify-between p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">AASHTO</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Highway Standards</span>
+                        </div>
+                        <div onclick="openModal('astm')" class="flex items-center justify-between p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">ASTM</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Testing Standards</span>
+                        </div>
+                        <div onclick="openModal('crsi')" class="flex items-center justify-between p-2 sm:p-3 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">CRSI</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Rebar Standards</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="mb-8 sm:mb-12 lg:mb-16 bg-gradient-to-r from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-900 p-3 sm:p-5 lg:p-8 rounded-xl sm:rounded-2xl">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Why Choose Us For Metal Estimating?</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('experience')" class="bg-white dark:bg-gray-700 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3">
+                        <div class="text-orange-600 text-lg sm:text-xl mr-2">
+                            <i class="ri-user-star-fill"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-bold">Experience & Expertise</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Skilled estimators, engineers, and detailers with extensive experience and deep understanding of materials.</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('fastTurnaround')" class="bg-white dark:bg-gray-700 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3">
+                        <div class="text-orange-600 text-lg sm:text-xl mr-2">
+                            <i class="ri-time-fill"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-bold">Fast Turnaround</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Estimates delivered within 24-48 hours to help you quote quickly and stay ahead of competition.</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('saveExpenses')" class="bg-white dark:bg-gray-700 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3">
+                        <div class="text-orange-600 text-lg sm:text-xl mr-2">
+                            <i class="ri-money-dollar-circle-fill"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-bold">Save 60% Expenses</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Monthly takeoff packages help you save up to 60% on estimating expenses.</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('wasteReduction')" class="bg-white dark:bg-gray-700 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3">
+                        <div class="text-orange-600 text-lg sm:text-xl mr-2">
+                            <i class="ri-leaf-fill"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-bold">Waste Reduction</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Minimize material waste and contribute to sustainable construction processes.</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('support')" class="bg-white dark:bg-gray-700 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3">
+                        <div class="text-orange-600 text-lg sm:text-xl mr-2">
+                            <i class="ri-customer-service-2-fill"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-bold">24/7 Support</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Dedicated customer support through live chat and email, available round the clock.</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('customizableFormats')" class="bg-white dark:bg-gray-700 p-4 sm:p-5 lg:p-6 rounded-lg sm:rounded-xl shadow-sm cursor-pointer hover:shadow-md transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="flex items-center mb-2 sm:mb-3">
+                        <div class="text-orange-600 text-lg sm:text-xl mr-2">
+                            <i class="ri-settings-5-fill"></i>
+                        </div>
+                        <h3 class="text-sm sm:text-base font-bold">Customizable Formats</h3>
+                    </div>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Tailored estimating formats to meet your specific project requirements.</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Process Section -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our Simple Process To Get Structural Steel Estimates</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4 lg:gap-6">
+                <div onclick="openModal('submitDrawings')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-upload-cloud-2-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Submit Drawing Plans</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400 mb-3">Share your plans and drawings with us effortlessly</p>
+                    <button onclick="event.stopPropagation(); openModal('submitDrawings')" class="btn-estimate text-xs sm:text-sm px-3 sm:px-4 py-1.5 sm:py-2 rounded-lg">
+                        Upload Plans Here!
+                    </button>
+                </div>
+                
+                <div onclick="openModal('getQuote')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-b-4 hover:border-orange-500">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-price-tag-3-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Get A Quote</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Receive comprehensive pricing within minutes of submission</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+                
+                <div onclick="openModal('receiveEstimate')" class="text-center p-4 sm:p-5 lg:p-6 bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl shadow-md cursor-pointer hover:shadow-lg transition-all hover:border-b-4 hover:border-orange-500 sm:col-span-2 lg:col-span-1">
+                    <div class="w-16 h-16 sm:w-20 sm:h-20 bg-orange-light rounded-full flex items-center justify-center mx-auto mb-3 sm:mb-4">
+                        <i class="ri-file-download-fill text-orange-600 dark:text-orange-400 text-xl sm:text-2xl"></i>
+                    </div>
+                    <h3 class="text-sm sm:text-base lg:text-lg font-bold mb-2">Receive an Estimate</h3>
+                    <p class="text-xs sm:text-sm text-gray-600 dark:text-gray-400">Get detailed metal estimate with precise calculations</p>
+                    <div class="mt-2 text-orange-600 dark:text-orange-400 font-semibold text-xs">
+                        Read More <i class="ri-arrow-right-line ml-1"></i>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-4 sm:mt-6 lg:mt-8">
+                <a href="#" onclick="openModal('samples'); return false;" class="inline-flex items-center text-orange-600 dark:text-orange-400 hover:text-orange-700 dark:hover:text-orange-300 font-semibold text-xs sm:text-sm">
+                    <i class="ri-file-list-3-line mr-2"></i>
+                    Check Steel Estimating & Detailing Samples
+                </a>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-8 sm:mb-12 lg:mb-16">
+            <h2 class="section-title text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 dark:text-white mb-4 sm:mb-6 lg:mb-8 text-center px-2">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-3 sm:gap-4 lg:gap-8">
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-light rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Complete metal estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div onclick="openModal('sydney')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Sydney</span>
+                        </div>
+                        <div onclick="openModal('melbourne')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div onclick="openModal('brisbane')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Brisbane</span>
+                        </div>
+                        <div onclick="openModal('perth')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Western Australia</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Perth</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-3 sm:p-4 lg:p-6 rounded-lg sm:rounded-xl shadow-sm">
+                    <div class="flex items-center mb-3 sm:mb-4 lg:mb-6">
+                        <div class="w-8 h-8 sm:w-10 sm:h-10 lg:w-12 lg:h-12 bg-orange-light rounded-lg flex items-center justify-center mr-2 sm:mr-3 lg:mr-4 flex-shrink-0">
+                            <i class="ri-flag-fill text-orange-600 dark:text-orange-400 text-base sm:text-lg lg:text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-xs sm:text-xs lg:text-sm text-gray-600 dark:text-gray-400">Nationwide metal estimation</p>
+                        </div>
+                    </div>
+                    <div class="space-y-1.5 sm:space-y-2">
+                        <div onclick="openModal('allStates')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div onclick="openModal('structuralSteelService')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Structural Steel</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Expertise</span>
+                        </div>
+                        <div onclick="openModal('rebarEstimationUS')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Rebar Estimation</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Specialized</span>
+                        </div>
+                        <div onclick="openModal('fabrication')" class="flex items-center justify-between p-1.5 sm:p-2 bg-gray-50 dark:bg-gray-700 rounded-lg cursor-pointer hover:bg-orange-50 dark:hover:bg-gray-600 transition-colors text-xs sm:text-sm">
+                            <span class="font-medium">Fabrication</span>
+                            <span class="text-orange-600 dark:text-orange-400 font-semibold">Detailed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-4 sm:mb-6 lg:mb-8 text-center orange-gradient-card p-4 sm:p-6 lg:p-8 rounded-xl sm:rounded-2xl shadow-xl">
+            <h2 class="text-lg sm:text-xl lg:text-2xl xl:text-3xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">Experience Precision in Metal Estimating</h2>
+            <div class="text-sm sm:text-base lg:text-lg xl:text-xl font-bold mb-2 sm:mb-3 lg:mb-4 text-white">
+                Get Professional Metal Estimates<br>
+                <span class="text-xs sm:text-sm lg:text-base text-white/80">Accurate Estimates for Structural Steel, Rebar, and Metal Fabrication</span>
+            </div>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-3 lg:gap-4 mb-4 sm:mb-5 lg:mb-6 max-w-2xl mx-auto">
+                <div onclick="openModal('structuralSteel')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Structural Steel</div>
+                    <div class="text-xs text-white/80">Beams, Columns, Trusses</div>
+                </div>
+                <div onclick="openModal('rebarEstimation')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Rebar Estimation</div>
+                    <div class="text-xs text-white/80">Reinforcement Steel</div>
+                </div>
+                <div onclick="openModal('metalFabrication')" class="bg-white/10 backdrop-blur-sm p-2 sm:p-3 rounded-lg cursor-pointer hover:bg-white/20 transition-colors border border-white/20">
+                    <div class="text-sm sm:text-base font-bold text-white">Metal Fabrication</div>
+                    <div class="text-xs text-white/80">Custom Metal Work</div>
+                </div>
+            </div>
+            
+            <button onclick="openModal('estimate')" class="bg-white text-orange-600 hover:bg-gray-100 px-4 sm:px-5 lg:px-6 py-2 sm:py-2.5 lg:py-3 rounded-lg font-bold text-sm sm:text-base lg:text-lg shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+                <i class="ri-tools-fill mr-1 sm:mr-2"></i>
+                Get Your Metal Estimate
+            </button>
+        </section>
+
+    </main>
+    
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-2 sm:mb-3">
+                <h2 id="modalTitle" class="text-base sm:text-lg lg:text-xl font-bold text-orange-600 dark:text-orange-400">Metal Estimating Details</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-lg sm:text-xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-xs sm:text-sm text-gray-700 dark:text-gray-300">
+                <!-- Content will be inserted here dynamically -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-3">
+                    <div class="flex items-center space-x-2">
+                        <i class="ri-tools-fill text-orange-600 dark:text-orange-400 text-sm sm:text-base"></i>
+                        <div>
+                            <span class="text-xs sm:text-sm font-semibold text-gray-900 dark:text-white">BENNY ESTIMATES</span>
+                            <p class="text-xs text-gray-600 dark:text-gray-400">96 Jones Street, New York, USA</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap gap-1.5 sm:gap-2">
+                        <a href="mailto:Ben@bennyestimates.com" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-orange-600 text-white rounded-lg hover:bg-orange-700 transition-colors text-xs">
+                            <i class="ri-mail-send-line mr-1"></i>Email
+                        </a>
+                        <a href="tel:+12898017224" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors text-xs">
+                            <i class="ri-phone-line mr-1"></i>Call
+                        </a>
+                        <button onclick="closeModal()" class="px-2 sm:px-3 py-1 sm:py-1.5 bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors text-xs">
+                            Close
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // BENNY ESTIMATES contact information template
+        const bennyInfo = `
+            <div class="bg-orange-50 dark:bg-gray-700 p-3 sm:p-4 rounded-lg mt-3 border-l-4 border-orange-600">
+                <p class="font-semibold text-orange-700 dark:text-orange-400 flex items-center text-xs sm:text-sm">
+                    <i class="ri-tools-fill mr-2"></i>
+                    BENNY ESTIMATES
+                </p>
+                <p class="mt-2 text-xs"><i class="ri-map-pin-line mr-2 text-orange-600"></i>96 Jones Street, New York, USA</p>
+                <p class="text-xs"><i class="ri-mail-line mr-2 text-orange-600"></i><a href="mailto:Ben@bennyestimates.com" class="hover:underline">Ben@bennyestimates.com</a></p>
+                <p class="text-xs"><i class="ri-phone-line mr-2 text-orange-600"></i><a href="tel:+12898017224" class="hover:underline">+1 (289) 801-7224</a></p>
+                <p class="text-xs mt-2 text-gray-600 dark:text-gray-400"><i class="ri-time-line mr-1"></i>Call us any time</p>
+            </div>
+        `;
+
+        // Modal content data structure
+        const metalData = {
+            estimate: {
+                title: 'Get Your Metal Estimate',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Ready to Get Started?</p>
+                        <p class="text-xs sm:text-sm">Contact BENNY ESTIMATES today for a free consultation and quote for your metal estimating needs. Our team of certified estimators is ready to help you with accurate, detailed estimates for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">What We Need From You:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project plans and specifications (PDF, CAD, or digital formats)</li>
+                            <li>Steel and metal requirements</li>
+                            <li>Scope of work details</li>
+                            <li>Project timeline and delivery requirements</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            precision: {
+                title: 'Precise and Detailed Estimating',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Excellence in Metal Estimation</p>
+                        <p class="text-xs sm:text-sm">Our team of expert steel estimators and engineers specializes in metal estimating and detailing, ensuring precise calculations for projects of any size and complexity. We use cutting-edge software and industry best practices to deliver accurate results.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Approach:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Detailed quantity takeoffs for all metal components</li>
+                            <li>Advanced software tools for precision</li>
+                            <li>Engineer-reviewed calculations</li>
+                            <li>Industry standard compliance</li>
+                            <li>Comprehensive documentation</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            steelManufacturers: {
+                title: 'Steel Manufacturers',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precision Estimating for Manufacturing</p>
+                        <p class="text-xs sm:text-sm">We provide steel manufacturers with accurate material takeoffs and cost estimates to optimize production planning and inventory management. Our estimates help streamline manufacturing processes and reduce waste.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Services for Manufacturers:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Raw material quantity calculations</li>
+                            <li>Production cost analysis</li>
+                            <li>Inventory optimization</li>
+                            <li>Waste reduction strategies</li>
+                            <li>Supply chain integration</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            framingContractors: {
+                title: 'Framing Contractors',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Accurate Framing Material Calculations</p>
+                        <p class="text-xs sm:text-sm">Our metal estimating services help framing contractors get precise quantities for all steel framing components. We account for every stud, track, joist, and connector to ensure accurate material ordering and cost control.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Framing Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Steel studs and tracks</li>
+                            <li>Floor and roof joists</li>
+                            <li>Bridging and bracing</li>
+                            <li>Connectors and fasteners</li>
+                            <li>Headers and beams</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fabricators: {
+                title: 'Metal Fabricators',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Specialized Estimates for Fabricators</p>
+                        <p class="text-xs sm:text-sm">We provide detailed estimates for metal fabricators working with piping, ductwork, sheet metal, and custom fabrications. Our estimates help fabricators bid competitively and manage material costs effectively.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fabrication Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Piping systems and fittings</li>
+                            <li>HVAC ductwork</li>
+                            <li>Sheet metal components</li>
+                            <li>Custom fabrications</li>
+                            <li>Welding and assembly costs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            structuralSteel: {
+                title: 'Structural Steel Specialists',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Expert Structural Steel Estimates</p>
+                        <p class="text-xs sm:text-sm">Our structural steel estimating service provides accurate quantity takeoffs and cost projections for all types of steel structures. From simple beams to complex trusses, we ensure precise calculations for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Structural Components:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Steel beams and columns</li>
+                            <li>Trusses and joists</li>
+                            <li>Bracing systems</li>
+                            <li>Connections and plates</li>
+                            <li>Base plates and anchors</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            accurateTakeoffs: {
+                title: 'Accurate Metal Takeoffs',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed and Accurate Takeoffs</p>
+                        <p class="text-xs sm:text-sm">Our metal takeoff service provides detailed and accurate quantification of all metal components for your projects. We cover everything from structural steel to miscellaneous metals.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Takeoff Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Steel decks and floor plates</li>
+                            <li>Metal trusses and rafters</li>
+                            <li>Railings and handrails</li>
+                            <li>Stud framing systems</li>
+                            <li>Joists and beams</li>
+                            <li>Gratings and castings</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            costControl: {
+                title: 'Cost Control for Metal Projects',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Transparent Pricing and Budget Management</p>
+                        <p class="text-xs sm:text-sm">Our cost control services help you manage your metal project budgets effectively. We provide transparent pricing, detailed cost breakdowns, and ongoing budget monitoring to keep your project on track.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Cost Control Features:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Detailed cost breakdowns by component</li>
+                            <li>Material price tracking</li>
+                            <li>Labor cost analysis</li>
+                            <li>Budget variance reporting</li>
+                            <li>Cost optimization recommendations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            shopDrawings: {
+                title: 'Shop Drawings for Metal Fabrication',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Precise Shop Drawings</p>
+                        <p class="text-xs sm:text-sm">Our shop drawing service provides detailed fabrication drawings for structural steel and metal components. We ensure that every detail is captured for accurate fabrication and erection.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Drawing Features:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Single part drawings</li>
+                            <li>Assembly drawings</li>
+                            <li>Erection plans</li>
+                            <li>Connection details</li>
+                            <li>Material lists and BOMs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            rebarEstimation: {
+                title: 'Rebar Estimation',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Rebar Quantity Calculations</p>
+                        <p class="text-xs sm:text-sm">Our rebar estimation service provides accurate quantity takeoffs and bar bending schedules for reinforced concrete projects. We ensure that all reinforcing steel is properly quantified and scheduled.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Rebar Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Bar bending schedules</li>
+                            <li>Rebar quantity takeoffs</li>
+                            <li>Spacing and placement details</li>
+                            <li>Lap splice calculations</li>
+                            <li>Weight and cost estimates</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            changeOrders: {
+                title: 'Change Order Management',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Expert Change Order Management</p>
+                        <p class="text-xs sm:text-sm">We help you manage change orders effectively, ensuring that all project modifications are properly documented, priced, and incorporated into your estimates. Our change order services keep your project on track financially.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Change Order Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Change order pricing</li>
+                            <li>Scope change analysis</li>
+                            <li>Impact assessment</li>
+                            <li>Documentation management</li>
+                            <li>Negotiation support</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            industryStandards: {
+                title: 'Industry Standards Compliance',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Compliance with International Standards</p>
+                        <p class="text-xs sm:text-sm">Our estimates comply with all major industry standards including AASHTO, ASTM, and CRSI. We ensure that your metal projects meet all regulatory requirements and industry best practices.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Standards We Follow:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>AASHTO - Highway and transportation</li>
+                            <li>ASTM - Material testing and specifications</li>
+                            <li>CRSI - Rebar and concrete reinforcement</li>
+                            <li>AISC - Steel construction</li>
+                            <li>AWS - Welding standards</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            preciseSteelTakeoffs: {
+                title: 'Precise Steel Takeoffs',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Accurate Steel Quantity Takeoffs</p>
+                        <p class="text-xs sm:text-sm">Our precise steel takeoff service provides detailed quantification of all steel components for your projects. We ensure that every piece of steel is accurately counted and measured.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Steel Takeoff Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Structural steel members</li>
+                            <li>Miscellaneous steel</li>
+                            <li>Connections and plates</li>
+                            <li>Fasteners and hardware</li>
+                            <li>Welding and fabrication</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            rebarEstimationService: {
+                title: 'Rebar Estimation Service',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Comprehensive Rebar Estimation</p>
+                        <p class="text-xs sm:text-sm">Our rebar estimation service provides detailed quantity takeoffs and bar bending schedules for all types of reinforced concrete structures. We ensure accurate placement and spacing for optimal structural performance.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Rebar Estimation Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Foundation reinforcement</li>
+                            <li>Column and beam rebar</li>
+                            <li>Slab and wall reinforcement</li>
+                            <li>Stirrups and ties</li>
+                            <li>Development lengths</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            steelDetailing: {
+                title: 'Steel Detailing Services',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Expert Steel Detailing</p>
+                        <p class="text-xs sm:text-sm">Our steel detailing service provides comprehensive detailing for structural and light steel framing. We create detailed models and drawings that ensure accurate fabrication and erection.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Detailing Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>3D modeling of steel structures</li>
+                            <li>Connection design and detailing</li>
+                            <li>Clash detection and coordination</li>
+                            <li>Shop drawing preparation</li>
+                            <li>Erection planning</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            shopDrawingsService: {
+                title: 'Shop Drawings Service',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Shop Drawings</p>
+                        <p class="text-xs sm:text-sm">Our shop drawing service provides detailed fabrication drawings for steel and metal components. We ensure that all dimensions, materials, and connections are clearly documented for accurate fabrication.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Shop Drawing Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Single part drawings</li>
+                            <li>Assembly drawings</li>
+                            <li>General arrangement drawings</li>
+                            <li>Bar bending schedules</li>
+                            <li>Material takeoff lists</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            planswift: {
+                title: 'Planswift Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Advanced Planswift Estimating</p>
+                        <p class="text-xs sm:text-sm">Our estimators are experts in Planswift, one of the industry's leading digital takeoff and estimating software. We leverage its powerful features to deliver accurate and efficient metal estimates.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Planswift Capabilities:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Digital plan takeoffs</li>
+                            <li>Automated measurements</li>
+                            <li>Conditional formulas</li>
+                            <li>Custom assemblies</li>
+                            <li>Integration with spreadsheets</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            autocad: {
+                title: 'AutoCAD Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">AutoCAD Design and Drafting</p>
+                        <p class="text-xs sm:text-sm">Our team is proficient in AutoCAD for creating detailed drawings and extracting quantities directly from design files. We use AutoCAD to ensure accuracy in our metal estimates.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">AutoCAD Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>2D and 3D modeling</li>
+                            <li>Quantity extraction</li>
+                            <li>Shop drawing creation</li>
+                            <li>Design coordination</li>
+                            <li>File format conversion</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            tekla: {
+                title: 'Tekla Structures Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Advanced Tekla Modeling</p>
+                        <p class="text-xs sm:text-sm">We use Tekla Structures for detailed 3D modeling of steel structures. This BIM software allows us to create accurate models that generate precise material quantities and detect potential issues before construction.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Tekla Capabilities:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>3D steel modeling</li>
+                            <li>Connection design</li>
+                            <li>Clash detection</li>
+                            <li>Automatic drawing generation</li>
+                            <li>Material takeoff reports</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            rebarCAD: {
+                title: 'Rebar CAD Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Specialized Rebar CAD</p>
+                        <p class="text-xs sm:text-sm">Our estimators are proficient in Rebar CAD software for detailed reinforcement steel detailing. We create accurate bar bending schedules and rebar placement drawings for concrete structures.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Rebar CAD Features:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Bar bending schedules</li>
+                            <li>Rebar placement drawings</li>
+                            <li>Quantity takeoffs</li>
+                            <li>Spacing calculations</li>
+                            <li>Lap splice detailing</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            aashto: {
+                title: 'AASHTO Standards',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Highway and Transportation Standards</p>
+                        <p class="text-xs sm:text-sm">Our estimates comply with AASHTO (American Association of State Highway and Transportation Officials) standards for highway and transportation projects. We ensure that your metal components meet all requirements for bridges and infrastructure.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">AASHTO Compliance:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Bridge design specifications</li>
+                            <li>Load and resistance factor design</li>
+                            <li>Construction specifications</li>
+                            <li>Material requirements</li>
+                            <li>Quality assurance standards</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            astm: {
+                title: 'ASTM Standards',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Material Testing and Specifications</p>
+                        <p class="text-xs sm:text-sm">Our estimates follow ASTM (American Society for Testing and Materials) standards for material specifications and testing. We ensure that all metal materials meet the required ASTM standards for your project.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">ASTM Standards:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>A36 - Structural steel</li>
+                            <li>A615 - Rebar specifications</li>
+                            <li>A500 - Hollow structural sections</li>
+                            <li>A992 - Wide flange beams</li>
+                            <li>A53 - Pipe specifications</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            crsi: {
+                title: 'CRSI Standards',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Concrete Reinforcing Steel Institute</p>
+                        <p class="text-xs sm:text-sm">Our rebar estimates comply with CRSI (Concrete Reinforcing Steel Institute) standards for reinforcing steel. We follow their guidelines for detailing, fabrication, and placement of rebar.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">CRSI Standards:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Manual of Standard Practice</li>
+                            <li>Placing drawings</li>
+                            <li>Bar bending details</li>
+                            <li>Splice and development lengths</li>
+                            <li>Epoxy coating specifications</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            experience: {
+                title: 'Experience & Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Skilled Estimators and Engineers</p>
+                        <p class="text-xs sm:text-sm">Our team brings years of experience and deep technical expertise to every metal estimating project. We combine engineering knowledge with practical estimating skills to deliver accurate, reliable results.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Our Team Qualifications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Certified professional estimators</li>
+                            <li>Structural engineering backgrounds</li>
+                            <li>Steel detailing expertise</li>
+                            <li>Fabrication knowledge</li>
+                            <li>Continuing education</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fastTurnaround: {
+                title: 'Fast Turnaround',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Quick, Reliable Service</p>
+                        <p class="text-xs sm:text-sm">We understand that construction projects run on tight schedules. That's why BENNY ESTIMATES delivers most metal estimates within 24-48 hours of receiving complete project information.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Turnaround Times:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Standard projects: 24-48 hours</li>
+                            <li>Complex projects: 3-5 days</li>
+                            <li>Rush service available upon request</li>
+                            <li>Same-day quotes for urgent needs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            saveExpenses: {
+                title: 'Save 60% on Estimating Expenses',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Cost-Effective Solutions</p>
+                        <p class="text-xs sm:text-sm">Our monthly takeoff packages help you save up to 60% on estimating expenses compared to in-house estimating. You get professional metal estimates without the overhead of dedicated staff and software.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Savings Breakdown:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>No software licensing costs</li>
+                            <li>No estimator training expenses</li>
+                            <li>Pay only for estimates you need</li>
+                            <li>Scalable to your project volume</li>
+                            <li>Save up to 60% vs. in-house</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            wasteReduction: {
+                title: 'Waste Reduction',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Minimize Material Waste</p>
+                        <p class="text-xs sm:text-sm">Our accurate estimates help minimize material waste in your metal projects. By providing precise quantities, we help you order the right amount of materials and reduce costly overages and shortages.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Waste Reduction Strategies:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Optimized cut lists</li>
+                            <li>Accurate quantity takeoffs</li>
+                            <li>Efficient material ordering</li>
+                            <li>Remnant management</li>
+                            <li>Sustainable practices</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            support: {
+                title: '24/7 Customer Support',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">We're Here When You Need Us</p>
+                        <p class="text-xs sm:text-sm">Our customer support team is available 24/7 to answer questions and provide assistance. We understand that construction never sleeps, and neither do we.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Support Channels:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Phone: +1 (289) 801-7224</li>
+                            <li>Email: Ben@bennyestimates.com</li>
+                            <li>Live chat on our website</li>
+                            <li>Video consultations available</li>
+                            <li>Emergency support for urgent needs</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            customizableFormats: {
+                title: 'Customizable Formats',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Tailored to Your Needs</p>
+                        <p class="text-xs sm:text-sm">We provide estimates in formats that work for you. Whether you need detailed Excel spreadsheets, PDF reports, or integration with your existing systems, we can customize our deliverables to match your requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Available Formats:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Excel spreadsheets with formulas</li>
+                            <li>PDF reports for sharing</li>
+                            <li>CSV files for data import</li>
+                            <li>Custom templates</li>
+                            <li>Integration with your software</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            submitDrawings: {
+                title: 'Submit Your Metal Drawings',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Easy Plan Submission</p>
+                        <p class="text-xs sm:text-sm">Getting started with BENNY ESTIMATES is simple. Upload your plans through our secure platform in PDF, CAD, or other digital formats.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Supported Formats:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>PDF drawings and specifications</li>
+                            <li>CAD files (DWG, DXF)</li>
+                            <li>Bluebeam files</li>
+                            <li>Revit/BIM models</li>
+                            <li>Tekla models</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Email your plans to <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a></p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            getQuote: {
+                title: 'Get Your Metal Quote',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Transparent, Competitive Pricing</p>
+                        <p class="text-xs sm:text-sm">After reviewing your project, we provide a clear, competitive quote for our estimating services. Our pricing is transparent with no hidden fees or surprises.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Quote Includes:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Project scope and deliverables</li>
+                            <li>Timeline for completion</li>
+                            <li>Total cost breakdown</li>
+                            <li>Payment terms and options</li>
+                            <li>Revision and support policy</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            receiveEstimate: {
+                title: 'Receive Your Metal Estimate',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Metal Takeoff Report</p>
+                        <p class="text-xs sm:text-sm">Upon completion, you receive a comprehensive metal estimate with all the details you need for successful project planning and execution.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Deliverables Include:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Complete material quantity list</li>
+                            <li>Steel weights and lengths</li>
+                            <li>Rebar bending schedules</li>
+                            <li>Cost breakdown by category</li>
+                            <li>Shop drawing references</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            samples: {
+                title: 'Steel Estimating & Detailing Samples',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Review Our Work</p>
+                        <p class="text-xs sm:text-sm">We invite you to review samples of our steel estimating and detailing work. Our portfolio demonstrates the quality and accuracy you can expect from BENNY ESTIMATES.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Sample Types Available:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Structural steel takeoffs</li>
+                            <li>Rebar estimates</li>
+                            <li>Shop drawing examples</li>
+                            <li>Cost breakdown reports</li>
+                            <li>Fabrication details</li>
+                        </ul>
+                        
+                        <p class="mt-3 text-xs">Contact us at <a href="mailto:Ben@bennyestimates.com" class="text-orange-600 hover:underline">Ben@bennyestimates.com</a> to request samples.</p>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            sydney: {
+                title: 'Sydney - New South Wales',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Metal Estimating Services in Sydney</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides comprehensive metal estimating services throughout Sydney and New South Wales. Our team understands local building codes, material suppliers, and market conditions.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Services in Sydney:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Structural steel estimates</li>
+                            <li>Commercial building steel</li>
+                            <li>Industrial facilities</li>
+                            <li>Infrastructure projects</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            melbourne: {
+                title: 'Melbourne - Victoria',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Metal Estimating Services in Melbourne</p>
+                        <p class="text-xs sm:text-sm">Serving Melbourne and all of Victoria with professional metal estimating services. From residential to commercial projects, we deliver accurate, reliable estimates.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Local Expertise:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Victorian building code compliance</li>
+                            <li>Local material pricing knowledge</li>
+                            <li>Quick turnaround times</li>
+                            <li>Personalized customer service</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            brisbane: {
+                title: 'Brisbane - Queensland',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Metal Estimating Services in Brisbane</p>
+                        <p class="text-xs sm:text-sm">Complete metal estimating services for Brisbane and throughout Queensland. Trust BENNY ESTIMATES for accurate, timely takeoffs for your projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Queensland Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Commercial building steel</li>
+                            <li>Industrial facility structures</li>
+                            <li>Infrastructure projects</li>
+                            <li>Mining and resource sector</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            perth: {
+                title: 'Perth - Western Australia',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Metal Estimating Services in Perth</p>
+                        <p class="text-xs sm:text-sm">Professional metal estimating for Perth and Western Australia. Accurate, reliable estimates for all project types across the region.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">WA Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Mining and resource projects</li>
+                            <li>Oil and gas facilities</li>
+                            <li>Commercial developments</li>
+                            <li>Industrial infrastructure</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            allStates: {
+                title: 'Nationwide US Coverage',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Metal Estimating Across All 50 States</p>
+                        <p class="text-xs sm:text-sm">BENNY ESTIMATES provides metal estimating services across all 50 United States. We understand regional variations in building codes, material costs, and construction practices.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">US Coverage:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>All 50 states - full coverage</li>
+                            <li>IBC and local code compliance</li>
+                            <li>Regional material pricing</li>
+                            <li>Climate-specific considerations</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            structuralSteelService: {
+                title: 'Structural Steel Expertise',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Specialized Structural Steel Estimates</p>
+                        <p class="text-xs sm:text-sm">Our structural steel estimating service provides specialized estimates for all types of steel structures. We have extensive experience with commercial, industrial, and institutional projects.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Structural Steel Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Building frames and columns</li>
+                            <li>Roof trusses and joists</li>
+                            <li>Bridge structures</li>
+                            <li>Industrial platforms</li>
+                            <li>Crane systems</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            rebarEstimationUS: {
+                title: 'Rebar Estimation - US',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Specialized Rebar Estimation</p>
+                        <p class="text-xs sm:text-sm">Our rebar estimation service provides detailed quantity takeoffs and bar bending schedules for all types of reinforced concrete structures across the United States.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Rebar Applications:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Foundations and footings</li>
+                            <li>Columns and beams</li>
+                            <li>Slabs on grade</li>
+                            <li>Elevated decks</li>
+                            <li>Shear walls</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            fabrication: {
+                title: 'Metal Fabrication Estimates',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Detailed Fabrication Estimates</p>
+                        <p class="text-xs sm:text-sm">Our fabrication estimating service provides accurate cost projections for custom metal fabrications. We account for material, labor, equipment, and finishing requirements.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fabrication Services:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Custom steel fabrications</li>
+                            <li>Architectural metalwork</li>
+                            <li>Stairs and railings</li>
+                            <li>Canopies and awnings</li>
+                            <li>Miscellaneous metals</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            },
+            metalFabrication: {
+                title: 'Metal Fabrication',
+                content: `
+                    <div class="space-y-3">
+                        <p class="text-sm sm:text-base font-semibold text-orange-600 dark:text-orange-400">Custom Metal Fabrication Estimates</p>
+                        <p class="text-xs sm:text-sm">Our metal fabrication estimating service provides accurate cost projections for custom metal work. We account for all aspects of fabrication including material, labor, equipment, and finishing.</p>
+                        
+                        <p class="font-semibold mt-3 text-xs sm:text-sm">Fabrication Types:</p>
+                        <ul class="list-disc pl-4 space-y-1 text-xs sm:text-sm">
+                            <li>Architectural metalwork</li>
+                            <li>Custom steel fabrications</li>
+                            <li>Stairs and railings</li>
+                            <li>Canopies and awnings</li>
+                            <li>Ornamental metal</li>
+                        </ul>
+                        
+                        ${bennyInfo}
+                    </div>
+                `
+            }
+        };
+
+        // Initialize the page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Page loaded, modal functionality ready');
+            
+            // Add metal shine animation
+            document.querySelectorAll('.animate-metal-shine').forEach(element => {
+                element.style.animationPlayState = 'running';
+            });
+            
+            // Add welding spark animation
+            document.querySelectorAll('.weld-spark').forEach(element => {
+                element.style.animation = 'spark 1s ease-in-out infinite';
+            });
+            
+            // Add shimmer effect to metal cards on page load
+            setTimeout(() => {
+                document.querySelectorAll('.metal-card').forEach((card, index) => {
+                    setTimeout(() => {
+                        card.style.transition = 'box-shadow 0.3s ease';
+                        card.style.boxShadow = '0 0 20px rgba(82, 82, 82, 0.3)';
+                        setTimeout(() => {
+                            card.style.boxShadow = '';
+                        }, 300);
+                    }, index * 100);
+                });
+            }, 500);
+        });
+
+        // Open modal function - defined globally
+        window.openModal = function(modalKey) {
+            console.log('Opening modal for:', modalKey);
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            // Check if data exists
+            if (metalData[modalKey]) {
+                modalTitle.textContent = metalData[modalKey].title;
+                modalBody.innerHTML = metalData[modalKey].content;
+            } else {
+                console.warn('Data not found for key:', modalKey, 'using fallback');
+                modalTitle.textContent = 'Metal Estimating Services';
+                modalBody.innerHTML = `
+                    <p class="text-xs sm:text-sm">Detailed information about this metal estimating service is available. Contact BENNY ESTIMATES for more information.</p>
+                    ${bennyInfo}
+                `;
+            }
+            
+            // Show modal
+            modalOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                const modalOverlay = document.getElementById('modalOverlay');
+                if (modalOverlay.classList.contains('active')) {
+                    closeModal();
+                }
+            }
+        });
+
+        // Make sure all clickable elements work even if they have nested elements
+        document.querySelectorAll('[onclick]').forEach(element => {
+            element.addEventListener('click', function(e) {
+                // Prevent event from bubbling up if clicked on a child
+                if (e.target !== this && e.target.closest('[onclick]') !== this) {
+                    return;
+                }
+                // The onclick attribute will handle the rest
+            });
+        });
+        
+        console.log('Metal Estimating page loaded with orange theme and modal functionality');
+    </script>
+</body>
+</html>

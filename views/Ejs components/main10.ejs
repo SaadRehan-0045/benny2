@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <title>Benny Estimates - Our Projects</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.6s ease-in-out',
+                        'slide-up': 'slideUp 0.6s ease-out',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Theme transition */
+        * {
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+        }
+        
+        /* Project card hover effects */
+        .project-card {
+            transition: all 0.3s ease;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-8px);
+        }
+        
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+        
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        /* Project image overlay */
+        .project-image-container {
+            position: relative;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+        
+        .project-image {
+            transition: transform 0.5s ease;
+        }
+        
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, transparent 50%);
+            opacity: 0.7;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* Section background */
+        .projects-bg {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        }
+        
+        .dark .projects-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+
+        /* Line clamp for text */
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+
+    <!-- Projects Portfolio Section -->
+    <section class="projects-bg py-8 lg:py-16 animate-fade-in">
+        <div class="container mx-auto px-3 sm:px-4">
+            <!-- Header Section -->
+            <div class="mb-8 lg:mb-12 animate-slide-up">
+                <!-- Section Label -->
+                <div class="inline-flex items-center mb-3">
+                    <div class="w-8 h-0.5 bg-primary-500 dark:bg-primary-400 mr-2"></div>
+                    <span class="text-primary-600 dark:text-primary-400 font-semibold uppercase tracking-wider text-xs flex items-center">
+                        <i class="ri-tools-fill mr-1"></i>
+                        BENNY ESTIMATES PORTFOLIO
+                    </span>
+                </div>
+
+                <!-- Main Heading -->
+                <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white mb-3">
+                    Construction Estimating Projects
+                    <span class="text-primary-600 dark:text-primary-400 block sm:inline">We've Delivered</span>
+                </h1>
+
+                <!-- Description - Expanded with more lines -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-5 sm:p-6 border border-gray-200 dark:border-gray-700 shadow-sm">
+                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
+                        At <span class="font-bold text-primary-600 dark:text-primary-400">Benny Estimates</span>, our mission is to deliver precise and reliable cost assessments, 
+                        enabling informed decision-making, optimal budgeting, and seamless project execution for contractors and developers worldwide.
+                    </p>
+                    
+                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed mb-3">
+                        With over a decade of experience in the construction industry, we've helped hundreds of clients 
+                        win more bids and complete projects on time and within budget. Our team of certified estimators 
+                        uses advanced software and local market data to ensure every estimate is accurate and competitive.
+                    </p>
+                    
+                    <p class="text-sm sm:text-base text-gray-600 dark:text-gray-300 leading-relaxed">
+                        From residential developments to commercial complexes, industrial facilities to civil infrastructure, 
+                        we handle projects of all sizes and complexities. Our comprehensive takeoff services cover every trade 
+                        including concrete, steel, MEP, lumber, finishes, and site work.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Projects Grid - 4 cards showing Residential, Commercial, Industrial, Civil -->
+            <div class="grid grid-cols-4 gap-1 sm:gap-2 md:gap-3 lg:gap-4 animate-slide-up">
+                <!-- Project 1: Residential -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm sm:shadow">
+                    <div class="project-image-container h-16 xs:h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36">
+                        <div class="project-image w-full h-full bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/585419/pexels-photo-585419.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2');"></div>
+                        <div class="project-overlay"></div>
+                        <!-- Project Badge -->
+                        <div class="absolute top-1 left-1 sm:top-2 sm:left-2">
+                            <span class="bg-green-500 text-white text-[8px] xs:text-[10px] sm:text-xs font-bold px-1 sm:px-2 py-0.5 rounded-full">
+                                Residential
+                            </span>
+                        </div>
+                        <!-- Project Stats -->
+                        <div class="absolute bottom-1 left-1 right-1 flex justify-between text-white text-[8px] xs:text-[10px]">
+                            <div>
+                                <div class="opacity-90 hidden xs:inline">Value</div>
+                                <div class="font-bold">$2.4M</div>
+                            </div>
+                            <div>
+                                <div class="opacity-90 hidden xs:inline">Timeline</div>
+                                <div class="font-bold">6m</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-1 sm:p-2 lg:p-3">
+                        <h3 class="text-[10px] xs:text-xs sm:text-sm lg:text-base font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1 truncate">Luxury Villa Complex</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-[8px] xs:text-[10px] sm:text-xs mb-1 sm:mb-2 line-clamp-2">12-unit luxury development with pool, landscaping, and premium finishes</p>
+                        
+                        <!-- Project Details -->
+                        <div class="space-y-0.5 mb-1">
+                            <div class="flex items-center">
+                                <i class="ri-map-pin-line text-primary-600 dark:text-primary-400 text-[6px] xs:text-[8px] sm:text-xs mr-0.5"></i>
+                                <span class="text-gray-600 dark:text-gray-400 text-[6px] xs:text-[8px] sm:text-xs">Houston, TX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2: Commercial -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm sm:shadow">
+                    <div class="project-image-container h-16 xs:h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36">
+                        <div class="project-image w-full h-full bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/323780/pexels-photo-323780.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2');"></div>
+                        <div class="project-overlay"></div>
+                        <!-- Project Badge -->
+                        <div class="absolute top-1 left-1 sm:top-2 sm:left-2">
+                            <span class="bg-blue-500 text-white text-[8px] xs:text-[10px] sm:text-xs font-bold px-1 sm:px-2 py-0.5 rounded-full">
+                                Commercial
+                            </span>
+                        </div>
+                        <!-- Project Stats -->
+                        <div class="absolute bottom-1 left-1 right-1 flex justify-between text-white text-[8px] xs:text-[10px]">
+                            <div>
+                                <div class="opacity-90 hidden xs:inline">Value</div>
+                                <div class="font-bold">$8.7M</div>
+                            </div>
+                            <div>
+                                <div class="opacity-90 hidden xs:inline">Timeline</div>
+                                <div class="font-bold">14m</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-1 sm:p-2 lg:p-3">
+                        <h3 class="text-[10px] xs:text-xs sm:text-sm lg:text-base font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1 truncate">Office Tower Renovation</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-[8px] xs:text-[10px] sm:text-xs mb-1 sm:mb-2 line-clamp-2">25-story building MEP renovation with modern office spaces</p>
+                        
+                        <!-- Project Details -->
+                        <div class="space-y-0.5 mb-1">
+                            <div class="flex items-center">
+                                <i class="ri-map-pin-line text-primary-600 dark:text-primary-400 text-[6px] xs:text-[8px] sm:text-xs mr-0.5"></i>
+                                <span class="text-gray-600 dark:text-gray-400 text-[6px] xs:text-[8px] sm:text-xs">Chicago, IL</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3: Industrial -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm sm:shadow">
+                    <div class="project-image-container h-16 xs:h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36">
+                        <div class="project-image w-full h-full bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/259966/pexels-photo-259966.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2');"></div>
+                        <div class="project-overlay"></div>
+                        <!-- Project Badge -->
+                        <div class="absolute top-1 left-1 sm:top-2 sm:left-2">
+                            <span class="bg-purple-500 text-white text-[8px] xs:text-[10px] sm:text-xs font-bold px-1 sm:px-2 py-0.5 rounded-full">
+                                Industrial
+                            </span>
+                        </div>
+                        <!-- Project Stats -->
+                        <div class="absolute bottom-1 left-1 right-1 flex justify-between text-white text-[8px] xs:text-[10px]">
+                            <div>
+                                <div class="opacity-90 hidden xs:inline">Value</div>
+                                <div class="font-bold">$12.5M</div>
+                            </div>
+                            <div>
+                                <div class="opacity-90 hidden xs:inline">Timeline</div>
+                                <div class="font-bold">18m</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-1 sm:p-2 lg:p-3">
+                        <h3 class="text-[10px] xs:text-xs sm:text-sm lg:text-base font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1 truncate">Manufacturing Facility</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-[8px] xs:text-[10px] sm:text-xs mb-1 sm:mb-2 line-clamp-2">Structural steel and concrete plant with assembly lines</p>
+                        
+                        <!-- Project Details -->
+                        <div class="space-y-0.5 mb-1">
+                            <div class="flex items-center">
+                                <i class="ri-map-pin-line text-primary-600 dark:text-primary-400 text-[6px] xs:text-[8px] sm:text-xs mr-0.5"></i>
+                                <span class="text-gray-600 dark:text-gray-400 text-[6px] xs:text-[8px] sm:text-xs">Detroit, MI</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4: Civil -->
+                <div class="project-card bg-white dark:bg-gray-800 rounded-lg sm:rounded-xl lg:rounded-2xl overflow-hidden border border-gray-200 dark:border-gray-700 shadow-sm sm:shadow">
+                    <div class="project-image-container h-16 xs:h-20 sm:h-24 md:h-28 lg:h-32 xl:h-36">
+                        <div class="project-image w-full h-full bg-cover bg-center" style="background-image: url('https://images.pexels.com/photos/414550/pexels-photo-414550.jpeg?auto=compress&cs=tinysrgb&w=600&h=400&dpr=2');"></div>
+                        <div class="project-overlay"></div>
+                        <!-- Project Badge -->
+                        <div class="absolute top-1 left-1 sm:top-2 sm:left-2">
+                            <span class="bg-amber-500 text-white text-[8px] xs:text-[10px] sm:text-xs font-bold px-1 sm:px-2 py-0.5 rounded-full">
+                                Civil
+                            </span>
+                        </div>
+                        <!-- Project Stats -->
+                        <div class="absolute bottom-1 left-1 right-1 flex justify-between text-white text-[8px] xs:text-[10px]">
+                            <div>
+                                <div class="opacity-90 hidden xs:inline">Value</div>
+                                <div class="font-bold">$5.2M</div>
+                            </div>
+                            <div>
+                                <div class="opacity-90 hidden xs:inline">Timeline</div>
+                                <div class="font-bold">8m</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="p-1 sm:p-2 lg:p-3">
+                        <h3 class="text-[10px] xs:text-xs sm:text-sm lg:text-base font-bold text-gray-900 dark:text-white mb-0.5 sm:mb-1 truncate">Community Center</h3>
+                        <p class="text-gray-600 dark:text-gray-300 text-[8px] xs:text-[10px] sm:text-xs mb-1 sm:mb-2 line-clamp-2">Multi-purpose facility with sports amenities and gathering spaces</p>
+                        
+                        <!-- Project Details -->
+                        <div class="space-y-0.5 mb-1">
+                            <div class="flex items-center">
+                                <i class="ri-map-pin-line text-primary-600 dark:text-primary-400 text-[6px] xs:text-[8px] sm:text-xs mr-0.5"></i>
+                                <span class="text-gray-600 dark:text-gray-400 text-[6px] xs:text-[8px] sm:text-xs">Austin, TX</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+          
+        </div>
+    </section>
+
+    <script>
+        // Theme functionality
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+
+        // Project card hover effects
+        document.querySelectorAll('.project-card').forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                const image = card.querySelector('.project-image');
+                if (image) {
+                    image.style.transform = 'scale(1.05)';
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                const image = card.querySelector('.project-image');
+                if (image) {
+                    image.style.transform = 'scale(1)';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

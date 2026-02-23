@@ -1,0 +1,751 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construction Materials and Procurement - Benny Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.3s ease-in-out',
+                        'slide-up': 'slideUp 0.3s ease-out',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' },
+                        },
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+        }
+        *::-webkit-scrollbar {
+            display: none;
+        }
+        .dark body {
+            color-scheme: dark;
+        }
+        .material-card {
+            transition: all 0.3s ease;
+        }
+        .material-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        .theme-btn {
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Modal styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+
+        .dark .modal-content {
+            background-color: #1f2937;
+            color: #f3f4f6;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-body {
+            margin-top: 1rem;
+            line-height: 1.6;
+        }
+
+        .modal-footer {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .dark .modal-footer {
+            border-top-color: #374151;
+        }
+
+        /* Responsive text adjustments */
+        @media (max-width: 640px) {
+            .hero-title {
+                font-size: 2rem !important;
+                line-height: 1.2 !important;
+            }
+            .material-card {
+                padding: 1rem !important;
+            }
+        }
+
+        /* Ensure buttons are clickable */
+        button {
+            cursor: pointer;
+        }
+    </style>
+</head>
+ <%- include('../header.ejs') %>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-900 dark:text-gray-100 min-h-screen">
+  
+   
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-4 py-8">
+        <!-- Page Header -->
+        <div class="text-center mb-12">
+            <h1 class="hero-title text-4xl md:text-5xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+                Construction Materials & Procurement
+            </h1>
+            <p class="text-gray-600 dark:text-gray-300 text-lg max-w-3xl mx-auto">
+                Complete guides on construction materials, costs, installation, and procurement strategies for successful projects
+            </p>
+        </div>
+
+        <!-- Hero Image -->
+        <div class="rounded-2xl overflow-hidden mb-12 shadow-2xl">
+            <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" 
+                 alt="Construction Materials" 
+                 class="w-full h-64 md:h-96 object-cover">
+        </div>
+
+        <!-- Materials Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
+            <!-- Brick Masonry -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Brick Masonry" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-red-100 dark:bg-red-900 text-red-800 dark:text-red-300 text-xs font-semibold rounded-full">
+                            Masonry
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        Brick Masonry Guide – Types, Uses, Cost, & Benefits
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Brick masonry is one of the most enduring and widely adopted construction methods in the world. From traditional housing to modern architectural facades, brick remains a popular choice due to its durability, aesthetic appeal, and thermal properties. Different types of bricks include clay bricks, concrete bricks, and engineering bricks, each suited for specific applications.
+                    </p>
+                    <button onclick="openModal(1)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Concrete Slab -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Concrete Slab" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-gray-100 dark:bg-gray-700 text-gray-800 dark:text-gray-300 text-xs font-semibold rounded-full">
+                            Concrete
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        How Much Does a Concrete Slab Cost?
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Concrete slabs are foundational elements in residential and commercial construction, forming the base for patios, garages, sheds, and homes. The cost of a concrete slab depends on factors like thickness, reinforcement, site preparation, and local labor rates. On average, expect to pay between $4 and $8 per square foot for a standard 4-inch slab, with additional costs for finishing and curing.
+                    </p>
+                    <button onclick="openModal(2)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Metal Roof -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Metal Roof Installation" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-blue-100 dark:bg-blue-900 text-blue-800 dark:text-blue-300 text-xs font-semibold rounded-full">
+                            Roofing
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        How to Install a Metal Roof – Step-by-Step DIY Guide
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Installing a metal roof might sound like a big job and it is. But with the right tools, guidance, and planning, many homeowners successfully tackle this project. Metal roofing offers longevity (50+ years), energy efficiency, and fire resistance. The installation process involves measuring, preparing the roof deck, installing underlayment, and securing metal panels with appropriate fasteners.
+                    </p>
+                    <button onclick="openModal(3)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Drywall Problems -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1600585154340-043788447eb5?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Drywall Problems" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-yellow-100 dark:bg-yellow-900 text-yellow-800 dark:text-yellow-300 text-xs font-semibold rounded-full">
+                            Drywall
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        10 Signs of Drywall Problems And How to Fix Them
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Drywall is one of the most common materials used in modern homes to create smooth interior walls and ceilings. However, it can develop problems over time including cracks, nail pops, water damage, mold, and sagging. Most issues stem from moisture, settling, or improper installation. Early detection and proper repair techniques prevent more extensive damage and maintain your home's appearance.
+                    </p>
+                    <button onclick="openModal(4)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- What is Drywall -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1507136566006-cfc505b114fc?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="What is Drywall" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-purple-100 dark:bg-purple-900 text-purple-800 dark:text-purple-300 text-xs font-semibold rounded-full">
+                            Materials
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        What is Drywall? A Guide on Types, Uses & Installation
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        Have you ever wondered what's behind the smooth walls in your house? Most likely, it's drywall-a building material that covers the inside of homes and buildings. Drywall consists of gypsum plaster pressed between two layers of paper. It's fire-resistant, relatively inexpensive, and easy to install. Types include standard, moisture-resistant (green board), and fire-rated (Type X) drywall.
+                    </p>
+                    <button onclick="openModal(5)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+
+            <!-- Built Up Roof -->
+            <article class="material-card bg-white dark:bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700">
+                <div class="h-48 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1558036117-15e82a2c9a9a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                         alt="Built Up Roof" 
+                         class="w-full h-full object-cover transition-transform duration-500 hover:scale-110">
+                </div>
+                <div class="p-6">
+                    <div class="flex items-center justify-between mb-3">
+                        <span class="px-3 py-1 bg-indigo-100 dark:bg-indigo-900 text-indigo-800 dark:text-indigo-300 text-xs font-semibold rounded-full">
+                            Roofing
+                        </span>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-3">
+                        What is a Built Up Roof? Why It Still Works Best
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-300 text-sm mb-4">
+                        When it comes to protecting large commercial buildings from the elements, few systems have stood the test of time like the built-up roof, or BUR. This roofing system consists of multiple layers of bitumen and reinforcing fabrics creating a durable, waterproof membrane. BUR systems offer excellent durability, fire resistance, and are relatively easy to repair compared to single-ply membranes.
+                    </p>
+                    <button onclick="openModal(6)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Read Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </article>
+        </div>
+
+        <!-- Procurement Section -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">
+                Procurement Guides
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Procurement Article -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-green-100 dark:bg-green-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-shopping-cart-line text-green-600 dark:text-green-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                What is Procurement in Construction?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Construction procurement is the strategic process of acquiring goods and services essential for the successful execution of a construction project. It involves selecting contractors, suppliers, and establishing contracts that define scope, cost, and timeline. Effective procurement minimizes risks, controls costs, and ensures quality throughout the project lifecycle.
+                            </p>
+                        </div>
+                    </div>
+                    <button onclick="openModal(7)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Learn More <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+
+                <!-- Online Resources -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-global-line text-blue-600 dark:text-blue-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                Top 10 Online Sources for Building Materials in the US
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                These days, it seems like everyone buys things online, and this trend extends to online sources for building materials in the US. Major suppliers include Home Depot, Lowe's, Menards, and specialized sites like BuildDirect, Material Bank, and 84 Lumber. Online purchasing offers convenience, competitive pricing, and access to specialty products not available locally.
+                            </p>
+                        </div>
+                    </div>
+                    <button onclick="openModal(8)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        View Sources <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+
+                <!-- Save Money -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-yellow-100 dark:bg-yellow-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-money-dollar-circle-line text-yellow-600 dark:text-yellow-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                How to Save Money on Construction Materials?
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Construction materials take up a significant part of the construction cost. Higher the cost of construction materials, higher will be the building cost. Strategies to save include bulk purchasing, buying during off-season, using standard sizes, comparing multiple suppliers, considering recycled materials, and establishing long-term relationships with vendors for better pricing.
+                            </p>
+                        </div>
+                    </div>
+                    <button onclick="openModal(9)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Save Money <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+
+                <!-- Buy Online -->
+                <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 hover:shadow-md transition-shadow">
+                    <div class="flex items-start mb-4">
+                        <div class="w-12 h-12 bg-purple-100 dark:bg-purple-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-shopping-bag-line text-purple-600 dark:text-purple-400 text-xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 dark:text-gray-100 mb-2">
+                                How to Buy Construction Materials Online
+                            </h3>
+                            <p class="text-gray-600 dark:text-gray-300 text-sm">
+                                Ordering construction materials can be an intimidating process, especially if you're new to the construction industry. Start by researching reputable suppliers, comparing prices, reading reviews, and understanding shipping costs and return policies. Create detailed material lists with exact specifications to ensure you receive correct items, and consider ordering samples when possible.
+                            </p>
+                        </div>
+                    </div>
+                    <button onclick="openModal(10)" class="inline-flex items-center text-primary-600 dark:text-primary-400 font-medium hover:text-primary-800 dark:hover:text-primary-300 text-sm cursor-pointer">
+                        Buy Guide <i class="ri-arrow-right-line ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Additional Articles -->
+        <div class="mb-12">
+            <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-6 pb-3 border-b border-gray-200 dark:border-gray-700">
+                More Material Guides
+            </h2>
+            <div class="space-y-4">
+                <!-- Modified Bitumen -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-1">What is Modified Bitumen Roofing and Why Do Flat Roofs Love It?</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Modified bitumen roofing is a key component in the construction of commercial properties. It combines asphalt with polymer modifiers for enhanced flexibility and durability, making it ideal for low-slope roofs. Installation can be done by torch-application, cold adhesive, or self-adhering methods.</p>
+                    </div>
+                    <button onclick="openModal(11)" class="mt-2 md:mt-0 md:ml-4 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-sm font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors whitespace-nowrap cursor-pointer">
+                        Read Article
+                    </button>
+                </div>
+
+                <!-- ADU Cost -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-1">How Much Does it Cost to Build an Accessory Dwelling Unit?</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Wondering how much it costs to build an ADU? On average, building an Accessory Dwelling Unit costs between $100,000 and $300,000 depending on size, location, and finishes. Factors affecting cost include foundation type, utilities connections, kitchen and bathroom installations, and local permitting fees.</p>
+                    </div>
+                    <button onclick="openModal(12)" class="mt-2 md:mt-0 md:ml-4 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-sm font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors whitespace-nowrap cursor-pointer">
+                        Read Article
+                    </button>
+                </div>
+
+                <!-- Concrete Setting -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-1">How Long Does It Take for Concrete to Set?</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Concrete is one of the most widely used materials in construction due to its strength and durability. Initial setting time typically takes 24-48 hours, but concrete reaches about 70% of its full strength within 7 days and achieves full cure after 28 days. Factors affecting curing include temperature, humidity, and concrete mix design.</p>
+                    </div>
+                    <button onclick="openModal(13)" class="mt-2 md:mt-0 md:ml-4 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-sm font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors whitespace-nowrap cursor-pointer">
+                        Read Article
+                    </button>
+                </div>
+
+                <!-- Cutting and Filling -->
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between bg-white dark:bg-gray-800 rounded-lg p-4 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-750 transition-colors">
+                    <div>
+                        <h4 class="font-bold text-gray-800 dark:text-gray-100 mb-1">Cutting and Filling in Construction Earthwork – Explained Clearly</h4>
+                        <p class="text-gray-600 dark:text-gray-300 text-sm">Cutting and filling are essential techniques in earthwork: moving and shaping soil and rock to prepare land for construction. Cut refers to removing material from high areas, while fill adds material to low areas to achieve desired grades. Proper calculations ensure balanced earthwork minimizing material import/export costs.</p>
+                    </div>
+                    <button onclick="openModal(14)" class="mt-2 md:mt-0 md:ml-4 px-4 py-2 bg-primary-600 dark:bg-primary-700 text-white text-sm font-medium rounded-lg hover:bg-primary-700 dark:hover:bg-primary-600 transition-colors whitespace-nowrap cursor-pointer">
+                        Read Article
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Material Comparison Table -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow border border-gray-200 dark:border-gray-700 mb-12">
+            <h3 class="text-xl font-bold text-gray-800 dark:text-gray-100 mb-6">Common Materials Comparison</h3>
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead class="bg-gray-100 dark:bg-gray-700">
+                        <tr>
+                            <th class="p-3 text-left text-gray-800 dark:text-gray-200 font-semibold">Material</th>
+                            <th class="p-3 text-left text-gray-800 dark:text-gray-200 font-semibold">Cost Range</th>
+                            <th class="p-3 text-left text-gray-800 dark:text-gray-200 font-semibold">Durability</th>
+                            <th class="p-3 text-left text-gray-800 dark:text-gray-200 font-semibold">Best For</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750">
+                            <td class="p-3">Concrete</td>
+                            <td class="p-3">$$-$$$</td>
+                            <td class="p-3">High</td>
+                            <td class="p-3">Foundations, Slabs</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750">
+                            <td class="p-3">Brick</td>
+                            <td class="p-3">$$$</td>
+                            <td class="p-3">Very High</td>
+                            <td class="p-3">Walls, Facades</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750">
+                            <td class="p-3">Drywall</td>
+                            <td class="p-3">$</td>
+                            <td class="p-3">Medium</td>
+                            <td class="p-3">Interior Walls</td>
+                        </tr>
+                        <tr class="hover:bg-gray-50 dark:hover:bg-gray-750">
+                            <td class="p-3">Metal Roofing</td>
+                            <td class="p-3">$$$-$$$$</td>
+                            <td class="p-3">Very High</td>
+                            <td class="p-3">Roofing</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+     
+    </main>
+
+    <!-- Footer - Include after main content -->
+    <%- include('../footer.ejs') %>
+
+    <!-- Modal Overlay -->
+    <div id="modalOverlay" class="modal-overlay" onclick="closeModalOnOutsideClick(event)">
+        <div id="modalContent" class="modal-content" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-start mb-4">
+                <h2 id="modalTitle" class="text-2xl font-bold text-gray-900 dark:text-white">Article Title</h2>
+                <button onclick="closeModal()" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                    <i class="ri-close-line text-2xl"></i>
+                </button>
+            </div>
+            <div id="modalBody" class="modal-body text-gray-700 dark:text-gray-300">
+                <!-- Article content will be inserted here -->
+            </div>
+            <div class="modal-footer">
+                <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-4">
+                        <i class="ri-tools-fill text-primary-600 dark:text-primary-400 text-xl"></i>
+                        <span class="text-sm text-gray-600 dark:text-gray-400">Benny Estimates</span>
+                    </div>
+                    <button onclick="closeModal()" class="px-4 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition-colors text-sm">
+                        Close
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Article data for modal content - MUST be defined before functions
+        const articleData = {
+            1: {
+                title: "Brick Masonry Guide – Types, Uses, Cost, & Benefits",
+                content: `<p class="mb-4">Brick masonry is one of the most enduring and widely adopted construction methods in the world. From traditional housing to modern architectural facades, brick remains a popular choice due to its durability, aesthetic appeal, and thermal properties.</p>
+                <p class="mb-4">Different types of bricks include clay bricks, concrete bricks, and engineering bricks, each suited for specific applications. Clay bricks are most common for residential construction, while engineering bricks offer higher strength for structural applications. Concrete bricks provide cost-effective alternatives with consistent quality.</p>
+                <p class="mb-4">Brick masonry costs typically range from $10 to $20 per square foot installed, depending on brick type, pattern complexity, and regional labor rates. Benefits include excellent fire resistance, sound insulation, low maintenance, and longevity exceeding 100 years with proper construction.</p>
+                <p>Common brick bonds include running bond, Flemish bond, English bond, and stack bond, each offering different structural and aesthetic characteristics. Proper mortar selection and workmanship are essential for durable, weather-resistant brickwork.</p>`
+            },
+            2: {
+                title: "How Much Does a Concrete Slab Cost?",
+                content: `<p class="mb-4">Concrete slabs are foundational elements in residential and commercial construction, forming the base for patios, garages, sheds, and homes. The cost of a concrete slab depends on factors like thickness, reinforcement, site preparation, and local labor rates.</p>
+                <p class="mb-4">On average, expect to pay between $4 and $8 per square foot for a standard 4-inch slab, with additional costs for finishing and curing. A 20x20 garage slab might cost $1,600 to $3,200, while a full house foundation runs considerably higher.</p>
+                <p class="mb-4">Reinforcement with rebar or wire mesh adds $0.50 to $1.50 per square foot but significantly improves strength and crack resistance. Site preparation including grading, compaction, and formwork can add 20-30% to base costs.</p>
+                <p>Special finishes like stamped, stained, or polished concrete increase costs to $8-15 per square foot but provide decorative appeal. Always obtain multiple quotes and verify contractor licensing and insurance before proceeding.</p>`
+            },
+            3: {
+                title: "How to Install a Metal Roof – Step-by-Step DIY Guide",
+                content: `<p class="mb-4">Installing a metal roof might sound like a big job and it is. But with the right tools, guidance, and planning, many homeowners successfully tackle this project. Metal roofing offers longevity (50+ years), energy efficiency, and fire resistance.</p>
+                <p class="mb-4">The installation process involves measuring, preparing the roof deck, installing underlayment, and securing metal panels with appropriate fasteners. Start by calculating material needs accurately, accounting for overlaps and waste.</p>
+                <p class="mb-4">Proper underlayment is crucial for moisture protection. Use synthetic underlayment for better durability than traditional felt. Install starter strips at eaves, then work upward installing panels, ensuring proper alignment and fastening at recommended spacing.</p>
+                <p>Ridge caps, flashings, and trims complete the installation, providing weatherproofing at peaks, valleys, and edges. Safety equipment including harnesses and proper ladder setup is essential. Consider professional installation for steep roofs or complex designs.</p>`
+            },
+            4: {
+                title: "10 Signs of Drywall Problems And How to Fix Them",
+                content: `<p class="mb-4">Drywall is one of the most common materials used in modern homes to create smooth interior walls and ceilings. However, it can develop problems over time including cracks, nail pops, water damage, mold, and sagging.</p>
+                <p class="mb-4">Most issues stem from moisture, settling, or improper installation. Early detection and proper repair techniques prevent more extensive damage and maintain your home's appearance. Hairline cracks often result from normal settling and can be filled with joint compound.</p>
+                <p class="mb-4">Nail pops occur when fasteners loosen due to framing movement. Fix by driving new screws nearby, removing popped nails, and patching. Water stains indicate leaks requiring source repair before replacing damaged drywall.</p>
+                <p>Mold growth requires addressing moisture sources and replacing affected material. Sagging ceilings may indicate structural issues or improper fastening. For extensive damage, consult professional drywall contractors for proper assessment and repair.</p>`
+            },
+            5: {
+                title: "What is Drywall? A Guide on Types, Uses & Installation",
+                content: `<p class="mb-4">Have you ever wondered what's behind the smooth walls in your house? Most likely, it's drywall-a building material that covers the inside of homes and buildings. Drywall consists of gypsum plaster pressed between two layers of paper.</p>
+                <p class="mb-4">It's fire-resistant, relatively inexpensive, and easy to install. Types include standard, moisture-resistant (green board), and fire-rated (Type X) drywall. Standard drywall works for most interior applications, while green board suits bathrooms and kitchens.</p>
+                <p class="mb-4">Type X drywall contains glass fibers for enhanced fire resistance, required in garages and between units in multi-family construction. Thickness options range from 1/4 inch for curved walls to 5/8 inch for fire-rated assemblies.</p>
+                <p>Installation involves cutting panels to size, securing to studs with drywall screws, taping joints, applying joint compound, and sanding smooth. Professional finishing creates seamless walls ready for paint or wallpaper.</p>`
+            },
+            6: {
+                title: "What is a Built Up Roof? Why It Still Works Best",
+                content: `<p class="mb-4">When it comes to protecting large commercial buildings from the elements, few systems have stood the test of time like the built-up roof, or BUR. This roofing system consists of multiple layers of bitumen and reinforcing fabrics creating a durable, waterproof membrane.</p>
+                <p class="mb-4">BUR systems offer excellent durability, fire resistance, and are relatively easy to repair compared to single-ply membranes. Traditional hot-applied BUR uses asphalt heated on-site, while cold-applied systems use adhesives for safer installation.</p>
+                <p class="mb-4">Typical BUR construction includes four or more plies of reinforcing felt embedded in bitumen, topped with gravel or coating for UV protection. This redundancy provides exceptional waterproofing and resistance to foot traffic.</p>
+                <p>Modern modified bitumen membranes combine BUR principles with polymer-modified asphalt for enhanced flexibility and performance. While labor-intensive to install, BUR systems often last 20-30 years with proper maintenance.</p>`
+            },
+            7: {
+                title: "What is Procurement in Construction?",
+                content: `<p class="mb-4">Construction procurement is the strategic process of acquiring goods and services essential for the successful execution of a construction project. It involves selecting contractors, suppliers, and establishing contracts that define scope, cost, and timeline.</p>
+                <p class="mb-4">Effective procurement minimizes risks, controls costs, and ensures quality throughout the project lifecycle. Traditional procurement separates design and construction, while design-build combines both under single responsibility.</p>
+                <p class="mb-4">Key procurement methods include competitive bidding, negotiated contracts, and construction management. Each approach offers different advantages depending on project complexity, timeline, and owner requirements.</p>
+                <p>Successful procurement requires clear specifications, thorough vendor evaluation, and well-drafted contracts addressing payment terms, change orders, warranties, and dispute resolution. Professional procurement advice can significantly improve project outcomes.</p>`
+            },
+            8: {
+                title: "Top 10 Online Sources for Building Materials in the US",
+                content: `<p class="mb-4">These days, it seems like everyone buys things online, and this trend extends to online sources for building materials in the US. Major suppliers include Home Depot, Lowe's, Menards, and specialized sites like BuildDirect, Material Bank, and 84 Lumber.</p>
+                <p class="mb-4">Online purchasing offers convenience, competitive pricing, and access to specialty products not available locally. Home improvement giants provide extensive inventories with local pickup options, while specialty suppliers offer unique materials like reclaimed wood or imported tile.</p>
+                <p class="mb-4">For contractor supplies, sites like Ferguson, HD Supply, and Grainger offer professional-grade products with volume pricing. Lumber and structural materials are often best purchased locally due to shipping costs, but online quotes help compare prices.</p>
+                <p>Always verify shipping costs, return policies, and delivery timelines when ordering materials online. Order samples when possible, and read reviews to assess supplier reliability and product quality.</p>`
+            },
+            9: {
+                title: "How to Save Money on Construction Materials?",
+                content: `<p class="mb-4">Construction materials take up a significant part of the construction cost. Higher the cost of construction materials, higher will be the building cost. Strategies to save include bulk purchasing, buying during off-season, using standard sizes, comparing multiple suppliers, considering recycled materials, and establishing long-term relationships with vendors for better pricing.</p>
+                <p class="mb-4">Bulk purchasing for large projects reduces per-unit costs but requires adequate storage and careful quantity planning. Off-season buying (winter in cold climates) often yields discounts as suppliers seek business during slow periods.</p>
+                <p class="mb-4">Using standard material sizes minimizes waste and labor costs for cutting. Compare quotes from multiple suppliers including local lumber yards, big-box stores, and online retailers. Recycled and reclaimed materials offer character and sustainability at reduced cost.</p>
+                <p>Building relationships with suppliers leads to better pricing, priority service, and advance notice of sales. Consider joining contractor loyalty programs for additional discounts and benefits.</p>`
+            },
+            10: {
+                title: "How to Buy Construction Materials Online",
+                content: `<p class="mb-4">Ordering construction materials can be an intimidating process, especially if you're new to the construction industry. Start by researching reputable suppliers, comparing prices, reading reviews, and understanding shipping costs and return policies.</p>
+                <p class="mb-4">Create detailed material lists with exact specifications to ensure you receive correct items, and consider ordering samples when possible. Include quantities, dimensions, grades, and any special requirements in your specifications.</p>
+                <p class="mb-4">Calculate shipping costs carefully as heavy or bulky items may have substantial delivery fees. Some suppliers offer free shipping above certain order values. Verify delivery timelines align with your project schedule.</p>
+                <p>Understand return policies before ordering, especially for custom or special-order items. Keep all documentation including order confirmations, shipping notices, and receipts. Inspect deliveries promptly and document any damage for claims.</p>`
+            },
+            11: {
+                title: "What is Modified Bitumen Roofing and Why Do Flat Roofs Love It?",
+                content: `<p class="mb-4">Modified bitumen roofing is a key component in the construction of commercial properties. It combines asphalt with polymer modifiers for enhanced flexibility and durability, making it ideal for low-slope roofs.</p>
+                <p class="mb-4">Installation can be done by torch-application, cold adhesive, or self-adhering methods. Torch-applied systems use heat to bond layers, creating a monolithic membrane. Cold adhesive systems eliminate open flames for safer installation on combustible substrates.</p>
+                <p class="mb-4">Modified bitumen offers excellent waterproofing, puncture resistance, and UV stability. It handles building movement better than traditional BUR and repairs easily. Available in smooth or granulated surfaces, with granules providing additional UV protection.</p>
+                <p>Typical lifespan ranges from 15-25 years depending on installation quality, climate, and maintenance. Regular inspections and prompt repairs extend service life significantly.</p>`
+            },
+            12: {
+                title: "How Much Does it Cost to Build an Accessory Dwelling Unit?",
+                content: `<p class="mb-4">Wondering how much it costs to build an ADU? On average, building an Accessory Dwelling Unit costs between $100,000 and $300,000 depending on size, location, and finishes. Factors affecting cost include foundation type, utilities connections, kitchen and bathroom installations, and local permitting fees.</p>
+                <p class="mb-4">Studio or one-bedroom ADUs typically cost less than larger units. Detached ADUs cost more than attached or garage conversion options due to separate foundation and utility runs.</p>
+                <p class="mb-4">Major cost components include site work and foundation (15-20%), framing and exterior (20-25%), interior finishes (20-30%), and mechanical systems (15-20%). Permits and design fees add 5-10% to total costs.</p>
+                <p>Financing options include construction loans, home equity lines of credit, and specialized ADU loans. Some areas offer grants or low-interest loans to encourage ADU development for affordable housing.</p>`
+            },
+            13: {
+                title: "How Long Does It Take for Concrete to Set?",
+                content: `<p class="mb-4">Concrete is one of the most widely used materials in construction due to its strength and durability. Initial setting time typically takes 24-48 hours, but concrete reaches about 70% of its full strength within 7 days and achieves full cure after 28 days.</p>
+                <p class="mb-4">Factors affecting curing include temperature, humidity, and concrete mix design. Cold weather slows curing and may require insulation or heating. Hot weather accelerates setting but can cause cracking without proper moisture control.</p>
+                <p class="mb-4">Proper curing maintains moisture and temperature for optimal strength development. Methods include water curing, curing compounds, or covering with plastic sheeting. Inadequate curing reduces strength and durability significantly.</p>
+                <p>For most residential applications, concrete can support light traffic after 3-4 days and heavy loads after 7 days. Always follow specific recommendations from your concrete supplier based on mix design and conditions.</p>`
+            },
+            14: {
+                title: "Cutting and Filling in Construction Earthwork – Explained Clearly",
+                content: `<p class="mb-4">Cutting and filling are essential techniques in earthwork: moving and shaping soil and rock to prepare land for construction. Cut refers to removing material from high areas, while fill adds material to low areas to achieve desired grades.</p>
+                <p class="mb-4">Proper calculations ensure balanced earthwork minimizing material import/export costs. Cut and fill volumes are calculated from site surveys and grading plans, with adjustments for soil shrinkage and compaction.</p>
+                <p class="mb-4">Equipment used includes excavators, bulldozers, scrapers, and compactors. Sequencing matters - cuts should be completed before fills to allow material movement directly from cut to fill areas when possible.</p>
+                <p>Compaction requirements vary by project type, with structural fills requiring higher density than landscape areas. Soil testing verifies achieved compaction meets specifications. Proper drainage consideration prevents future settlement or erosion problems.</p>`
+            }
+        };
+
+        // Open modal function - defined globally
+        window.openModal = function(articleId) {
+            console.log('Opening modal for article:', articleId); // Debug log
+            const modalOverlay = document.getElementById('modalOverlay');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalBody = document.getElementById('modalBody');
+            
+            const article = articleData[articleId];
+            if (article) {
+                modalTitle.textContent = article.title;
+                modalBody.innerHTML = article.content;
+                modalOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            } else {
+                console.error('Article not found:', articleId);
+            }
+        }
+
+        // Close modal function
+        window.closeModal = function() {
+            const modalOverlay = document.getElementById('modalOverlay');
+            modalOverlay.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on outside click
+        window.closeModalOnOutsideClick = function(event) {
+            if (event.target === document.getElementById('modalOverlay')) {
+                closeModal();
+            }
+        }
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+            }
+        });
+
+        // Theme functionality - wait for DOM to be fully loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM fully loaded');
+            
+            const themeToggle = document.getElementById('themeToggle');
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            
+            // Check for saved theme preference or use default
+            const savedTheme = localStorage.getItem('theme');
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+            
+            // Apply theme on page load
+            if (currentTheme === 'dark') {
+                document.documentElement.classList.add('dark');
+                if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+            } else {
+                document.documentElement.classList.remove('dark');
+                if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+            }
+            
+            // Add event listener for theme toggle if exists
+            if (themeToggle) {
+                themeToggle.addEventListener('click', function() {
+                    toggleTheme(themeIcon, themeText);
+                });
+            }
+        });
+
+        // Update theme UI elements
+        function updateThemeUI(theme, themeIcon, themeText) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme(themeIcon, themeText) {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light', themeIcon, themeText);
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark', themeIcon, themeText);
+            }
+        }
+
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            const themeIcon = document.getElementById('themeIcon');
+            const themeText = document.getElementById('themeText');
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    if (themeIcon && themeText) updateThemeUI('dark', themeIcon, themeText);
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    if (themeIcon && themeText) updateThemeUI('light', themeIcon, themeText);
+                }
+            }
+        });
+
+        console.log('Script loaded successfully');
+    </script>
+</body>
+</html>

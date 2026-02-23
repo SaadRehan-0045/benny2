@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Estimating Services | Construct Estimates</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            50: '#eff6ff',
+                            100: '#dbeafe',
+                            200: '#bfdbfe',
+                            300: '#93c5fd',
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                            800: '#1e40af',
+                            900: '#1e3a8a',
+                        },
+                        electric: {
+                            50: '#f0f9ff',
+                            100: '#e0f2fe',
+                            200: '#bae6fd',
+                            300: '#7dd3fc',
+                            400: '#38bdf8',
+                            500: '#0ea5e9',
+                            600: '#0284c7',
+                            700: '#0369a1',
+                            800: '#075985',
+                            900: '#0c4a6e',
+                        }
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 0.5s ease-in-out',
+                        'spark': 'spark 2s infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' },
+                        },
+                        spark: {
+                            '0%, 100%': { opacity: '1', transform: 'scale(1)' },
+                            '50%': { opacity: '0.7', transform: 'scale(1.05)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-10px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * {
+            transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+        }
+        
+        /* Electrical theme styling */
+        .electric-gradient {
+            background: linear-gradient(135deg, #0ea5e9 0%, #0369a1 100%);
+        }
+        
+        .dark .electric-gradient {
+            background: linear-gradient(135deg, #38bdf8 0%, #0284c7 100%);
+        }
+        
+        .spark-border {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .spark-border:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #0ea5e9, transparent);
+            animation: sparkLine 3s infinite;
+        }
+        
+        @keyframes sparkLine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+        
+        /* Electric card hover effect */
+        .electric-card {
+            border-left: 4px solid #0ea5e9;
+            transition: all 0.3s ease;
+        }
+        
+        .electric-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.15);
+        }
+        
+        .dark .electric-card:hover {
+            box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3);
+        }
+        
+        /* Circuit pattern background */
+        .circuit-bg {
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(14, 165, 233, 0.1) 2px, transparent 2px),
+                radial-gradient(circle at 75% 75%, rgba(14, 165, 233, 0.1) 2px, transparent 2px);
+            background-size: 50px 50px;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-100 min-h-screen">
+
+    <!-- Theme Toggle Button (Top Right) -->
+    <div class="fixed top-4 right-4 z-50">
+        <button id="themeToggle" class="flex items-center px-4 py-3 rounded-full bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 dark:border-gray-700 hover:scale-105 spark-border">
+            <i id="themeIcon" class="ri-moon-line mr-2"></i>
+            <span id="themeText" class="font-medium text-sm">Dark Mode</span>
+        </button>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-20">
+        
+        <!-- Breadcrumb -->
+        <nav class="mb-8 text-sm text-gray-600 dark:text-gray-400">
+            <a href="#" class="hover:text-electric-600 dark:hover:text-electric-400">Home</a>
+            <span class="mx-2">»</span>
+            <span class="text-gray-800 dark:text-gray-300 font-medium">Electrical Estimating Services</span>
+        </nav>
+
+        <!-- Hero Section -->
+        <section class="mb-12">
+            <div class="text-center mb-8">
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4 animate-fade-in">
+                    Electrical Estimating Services
+                </h1>
+                <h2 class="text-2xl md:text-3xl font-semibold text-electric-600 dark:text-electric-400">
+                    Professional Electrical Cost Estimation Solutions
+                </h2>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 items-center mb-8">
+                <div>
+                    <div class="electric-gradient text-white p-6 rounded-2xl shadow-xl mb-6">
+                        <h3 class="text-2xl font-bold mb-4">Uplead Plan & Get 30% Off Estimate!</h3>
+                        <p class="mb-4">
+                            Our team of experienced estimators is dedicated to providing accurate cost estimates for your electrical projects. With our expertise and attention to detail, we ensure that your estimates are precise.
+                        </p>
+                        <button class="bg-white text-electric-700 hover:bg-gray-100 px-6 py-3 rounded-lg font-semibold transition duration-300 mt-4 animate-spark">
+                            Upload Your Plans Now
+                        </button>
+                    </div>
+                    
+                    <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                        <div class="flex items-center mb-4">
+                            <div class="bg-electric-100 dark:bg-electric-900 p-3 rounded-lg mr-4">
+                                <i class="ri-flashlight-fill text-electric-600 dark:text-electric-400 text-2xl"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Industry-Leading Software</h4>
+                                <p class="text-sm text-gray-600 dark:text-gray-400">ConEst, Planswift, Accubid & Bluebeam</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700 dark:text-gray-300">
+                            We specialize in providing exceptional Electrical Estimating Services to contractors, engineers, vendors, and homeowners across residential, commercial, and industrial projects.
+                        </p>
+                    </div>
+                </div>
+                <div>
+                    <!-- Electrical Construction Image -->
+                    <img src="https://images.unsplash.com/photo-1621905252507-b35492cc74b4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80" 
+                         alt="Electrical estimating and construction" 
+                         class="w-full h-auto rounded-2xl shadow-lg object-cover">
+                </div>
+            </div>
+        </section>
+
+        <!-- Residential Electrical Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Residential Electrical Estimating</h2>
+            
+            <div class="grid lg:grid-cols-2 gap-8">
+                <div>
+                    <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
+                        For electricians and electrical traders involved in residential projects, our services offer invaluable support. We provide detailed estimates for everything from improvements and additions to new homes, apartments, eco-homes, and smart homes.
+                    </p>
+                    
+                    <div class="bg-electric-50 dark:bg-gray-800 p-6 rounded-xl border-l-4 border-electric-500 mb-6">
+                        <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-4">We Cover All Electrical Systems:</h3>
+                        <div class="grid grid-cols-2 gap-3">
+                            <div class="flex items-center">
+                                <i class="ri-check-line text-electric-600 dark:text-electric-400 mr-2"></i>
+                                <span class="text-gray-700 dark:text-gray-300">Lighting Systems</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="ri-check-line text-electric-600 dark:text-electric-400 mr-2"></i>
+                                <span class="text-gray-700 dark:text-gray-300">Home Security</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="ri-check-line text-electric-600 dark:text-electric-400 mr-2"></i>
+                                <span class="text-gray-700 dark:text-gray-300">Solar Panels</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="ri-check-line text-electric-600 dark:text-electric-400 mr-2"></i>
+                                <span class="text-gray-700 dark:text-gray-300">HVAC Systems</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg">
+                    <div class="text-electric-600 dark:text-electric-400 text-4xl mb-4">
+                        <i class="ri-home-wifi-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Complete Coverage</h3>
+                    <p class="text-gray-700 dark:text-gray-300 mb-4">
+                        We cover all aspects including power transmission lines, service panels, electric meters, wiring, switches, lighting, and more.
+                    </p>
+                    <div class="space-y-2">
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-electric-500 rounded-full mr-3"></div>
+                            <span>Building Automation Systems</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-electric-500 rounded-full mr-3"></div>
+                            <span>Network & Communication Systems</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-2 h-2 bg-electric-500 rounded-full mr-3"></div>
+                            <span>Electric Heating Systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Expert Estimators Section -->
+        <section class="mb-16 circuit-bg p-8 rounded-2xl">
+            <div class="text-center mb-10">
+                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-4">Expert Electrical Estimators</h2>
+                <p class="text-xl text-gray-700 dark:text-gray-300">
+                    Quick, Accurate, and Detailed Estimates for Winning More Bids
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm electric-card">
+                    <div class="text-electric-600 dark:text-electric-400 text-4xl mb-4">
+                        <i class="ri-award-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Industry Expertise</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Our team stands out with expertise, proficiency, and up-to-date electrical estimating software.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm electric-card">
+                    <div class="text-electric-600 dark:text-electric-400 text-4xl mb-4">
+                        <i class="ri-user-star-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Independent Estimators</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Unbiased evaluations ensuring accurate, reliable estimates tailored to your specific project.
+                    </p>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm electric-card">
+                    <div class="text-electric-600 dark:text-electric-400 text-4xl mb-4">
+                        <i class="ri-line-chart-fill"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white mb-3">Increased Win Rate</h3>
+                    <p class="text-gray-700 dark:text-gray-300">
+                        Gain an edge in the industry, increasing your chances of winning more bids and securing projects.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- How To Outsource Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">How To Outsource Your Electrical Projects?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="w-20 h-20 bg-electric-100 dark:bg-electric-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-upload-cloud-2-fill text-electric-600 dark:text-electric-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Start with Ease</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Upload Your Plans in multiple formats</p>
+                    <button class="bg-electric-600 hover:bg-electric-700 text-white px-4 py-2 rounded-lg text-sm transition duration-300">
+                        Upload Plans Here!
+                    </button>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="w-20 h-20 bg-electric-100 dark:bg-electric-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-price-tag-3-fill text-electric-600 dark:text-electric-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Get Quick Quote</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Receive transparent, competitive pricing</p>
+                    <div class="text-electric-600 dark:text-electric-400 font-bold text-lg">24-48 Hour Turnaround</div>
+                </div>
+                
+                <div class="text-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg">
+                    <div class="w-20 h-20 bg-electric-100 dark:bg-electric-900 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="ri-file-text-fill text-electric-600 dark:text-electric-400 text-3xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Professional Proposals</h3>
+                    <p class="text-gray-600 dark:text-gray-400 mb-4">Detailed bids for your success</p>
+                    <div class="text-electric-600 dark:text-electric-400 font-bold text-lg">Win More Projects</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Benefits Section -->
+        <section class="mb-16 bg-gradient-to-r from-electric-600 to-blue-600 dark:from-electric-700 dark:to-blue-800 text-white p-8 rounded-2xl">
+            <h2 class="text-3xl font-bold mb-8 text-center">Experience the Benefits of Professional Electrical Estimating</h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <div class="text-center p-6 bg-white/20 backdrop-blur-sm rounded-xl">
+                    <div class="text-3xl mb-4">
+                        <i class="ri-check-double-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Accuracy & Reliability</h4>
+                    <p class="text-sm opacity-90">Precise estimates you can trust</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white/20 backdrop-blur-sm rounded-xl">
+                    <div class="text-3xl mb-4">
+                        <i class="ri-time-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Timely Delivery</h4>
+                    <p class="text-sm opacity-90">48-hour top-notch services</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white/20 backdrop-blur-sm rounded-xl">
+                    <div class="text-3xl mb-4">
+                        <i class="ri-money-dollar-circle-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">Cost-Effective</h4>
+                    <p class="text-sm opacity-90">Save up to 50% on estimates</p>
+                </div>
+                
+                <div class="text-center p-6 bg-white/20 backdrop-blur-sm rounded-xl">
+                    <div class="text-3xl mb-4">
+                        <i class="ri-customer-service-2-fill"></i>
+                    </div>
+                    <h4 class="font-bold text-lg mb-2">24/7 Support</h4>
+                    <p class="text-sm opacity-90">Exceptional customer service</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- We Work With Section -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">We Work With</h2>
+            
+            <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-building-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">General Contractors</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-flashlight-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Electrical Contractors</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-battery-low-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Low Voltage Contractors</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-temp-hot-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">HVAC Contractors</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-cpu-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">EPC Contractors</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-settings-5-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Instrumentation Contractors</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-tools-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Electricians</span>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-4 rounded-lg text-center border border-gray-200 dark:border-gray-700">
+                    <div class="text-electric-600 dark:text-electric-400 text-2xl mb-2">
+                        <i class="ri-store-fill"></i>
+                    </div>
+                    <span class="font-medium text-sm">Electrical Vendors</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Transform CTA -->
+        <section class="mb-16 text-center">
+            <div class="bg-gradient-to-r from-purple-600 to-pink-600 dark:from-purple-700 dark:to-pink-800 text-white p-8 rounded-2xl shadow-xl">
+                <h3 class="text-3xl font-bold mb-6">Transform Your Construction Game</h3>
+                <p class="text-xl mb-8 max-w-2xl mx-auto">
+                    Partner with us for accurate and comprehensive Electrical Estimating Services. Make informed decisions, optimize budgets, and successfully complete your projects.
+                </p>
+                <button class="bg-white text-purple-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1">
+                    Request a Quote Now!
+                </button>
+            </div>
+        </section>
+
+        <!-- Service Areas -->
+        <section class="mb-16">
+            <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-8 text-center">Our Services Areas</h2>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-blue-100 dark:bg-blue-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-blue-600 dark:text-blue-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">Australia</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Complete electrical estimating coverage</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">New South Wales</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Sydney</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Victoria</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Melbourne</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Queensland</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Brisbane</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 bg-red-100 dark:bg-red-900 rounded-lg flex items-center justify-center mr-4">
+                            <i class="ri-flag-fill text-red-600 dark:text-red-400 text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white">United States</h3>
+                            <p class="text-gray-600 dark:text-gray-400">Nationwide electrical estimating</p>
+                        </div>
+                    </div>
+                    <div class="space-y-3">
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">All 50 States</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Full Coverage</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Commercial Projects</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Expertise</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
+                            <span class="font-medium">Industrial Systems</span>
+                            <span class="text-electric-600 dark:text-electric-400 font-semibold">Specialized</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center mt-8">
+                <a href="#" class="inline-flex items-center text-electric-600 dark:text-electric-400 hover:text-electric-700 dark:hover:text-electric-300 font-semibold">
+                    <i class="ri-folder-open-fill mr-2"></i>
+                    Explore our diverse portfolio to gain an understanding of our project exposure
+                </a>
+            </div>
+        </section>
+
+        <!-- Final CTA -->
+        <section class="mb-12 text-center bg-gradient-to-r from-electric-700 to-blue-800 dark:from-electric-800 dark:to-blue-900 text-white p-8 rounded-2xl shadow-xl">
+            <h2 class="text-3xl font-bold mb-6">Experience the Difference with Construct Estimates Now!</h2>
+            <div class="text-2xl font-bold mb-6">
+                Get Estimate At 50% OFF<br>
+                <span class="text-lg opacity-90">TURNAROUND TIME: 24-48 hrs!</span>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-8 max-w-2xl mx-auto">
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">(737) 273-3314</div>
+                    <div class="text-sm opacity-90">Call Now for Estimate</div>
+                </div>
+                <div class="bg-white/20 backdrop-blur-sm p-4 rounded-lg">
+                    <div class="text-lg font-bold">info@constructestimates.com</div>
+                    <div class="text-sm opacity-90">Email for Quote</div>
+                </div>
+            </div>
+            
+            <button class="bg-white text-electric-700 hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg shadow-lg hover:shadow-2xl transition duration-300 transform hover:-translate-y-1 animate-float">
+                <i class="ri-flashlight-fill mr-2"></i>
+                Get Your Electrical Estimate
+            </button>
+        </section>
+
+    </main>
+
+    <script>
+        // Theme functionality
+        const themeToggle = document.getElementById('themeToggle');
+        const themeIcon = document.getElementById('themeIcon');
+        const themeText = document.getElementById('themeText');
+        
+        // Check for saved theme preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply theme on page load
+        if (currentTheme === 'dark') {
+            document.documentElement.classList.add('dark');
+            updateThemeUI('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+            updateThemeUI('light');
+        }
+        
+        // Update theme UI elements
+        function updateThemeUI(theme) {
+            if (theme === 'dark') {
+                themeIcon.className = 'ri-sun-line mr-2';
+                themeText.textContent = 'Light Mode';
+            } else {
+                themeIcon.className = 'ri-moon-line mr-2';
+                themeText.textContent = 'Dark Mode';
+            }
+        }
+        
+        // Toggle theme function
+        function toggleTheme() {
+            if (document.documentElement.classList.contains('dark')) {
+                document.documentElement.classList.remove('dark');
+                localStorage.setItem('theme', 'light');
+                updateThemeUI('light');
+            } else {
+                document.documentElement.classList.add('dark');
+                localStorage.setItem('theme', 'dark');
+                updateThemeUI('dark');
+            }
+        }
+        
+        // Add event listener for theme toggle
+        themeToggle.addEventListener('click', toggleTheme);
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                if (e.matches) {
+                    document.documentElement.classList.add('dark');
+                    updateThemeUI('dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    updateThemeUI('light');
+                }
+            }
+        });
+        
+        // Add electrical spark effects
+        document.querySelectorAll('.animate-spark').forEach(element => {
+            setInterval(() => {
+                element.classList.add('spark');
+                setTimeout(() => {
+                    element.classList.remove('spark');
+                }, 2000);
+            }, 4000);
+        });
+        
+        // Add hover effects to electric cards
+        document.querySelectorAll('.electric-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px)';
+                this.style.boxShadow = '0 20px 50px rgba(14, 165, 233, 0.2)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-5px)';
+                this.style.boxShadow = '0 15px 40px rgba(14, 165, 233, 0.15)';
+            });
+        });
+        
+        // Add click effects to CTA buttons
+        document.querySelectorAll('button').forEach(button => {
+            if (button.textContent.includes('Upload') || button.textContent.includes('Request') || button.textContent.includes('Get')) {
+                button.addEventListener('click', function() {
+                    const originalText = this.innerHTML;
+                    this.innerHTML = '<i class="ri-loader-4-line animate-spin mr-2"></i> Processing...';
+                    this.disabled = true;
+                    
+                    setTimeout(() => {
+                        this.innerHTML = originalText;
+                        this.disabled = false;
+                        this.classList.add('animate-pulse');
+                        setTimeout(() => {
+                            this.classList.remove('animate-pulse');
+                        }, 1000);
+                    }, 1500);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
